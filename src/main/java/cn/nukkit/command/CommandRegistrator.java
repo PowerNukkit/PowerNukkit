@@ -9,7 +9,7 @@ import lombok.NonNull;
 @PowerNukkitOnly @PowerNukkitDifference(info = "An easiest way to register commands on PowerNukkit")
 
 /**
- * @apiNote Works only on PowerNukkit newer versions.
+ * @apiNote Works only on newer PowerNukkit versions.
  * @implSpec To implement this on your plugin, create a new Instance (by "new CommandRegistrator(this, commandName)"), and, set an executor by "setExecutor(CommandExecutor)", and register, using the "register()" void method.
  * @example new CommandRegistrator(this, "vanish").setExecutor(new VanishCommand()).register();
  * */
