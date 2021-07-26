@@ -47,6 +47,7 @@ import cn.nukkit.math.NukkitMath;
 import cn.nukkit.metadata.EntityMetadataStore;
 import cn.nukkit.metadata.LevelMetadataStore;
 import cn.nukkit.metadata.PlayerMetadataStore;
+import cn.nukkit.metrics.NukkitMetrics;
 import cn.nukkit.nbt.NBTIO;
 import cn.nukkit.nbt.tag.CompoundTag;
 import cn.nukkit.nbt.tag.DoubleTag;
@@ -241,7 +242,7 @@ public class Server {
         }
     };
 
-    private Level[] levelArray = Level.EMPTY_ARRAY;
+    private Level[] levelArray;
 
     private final ServiceManager serviceManager = new NKServiceManager();
 
@@ -250,6 +251,8 @@ public class Server {
     private boolean allowNether;
 
     private final Thread currentThread;
+    
+    private final long launchTime;
 
     private Watchdog watchdog;
 
@@ -276,9 +279,13 @@ public class Server {
             throw new IOException("Failed to delete " + tempDir);
         }
         instance = this;
-        CraftingManager.packet = new BatchPacket();
-        CraftingManager.packet.payload = EmptyArrays.EMPTY_BYTES;
-        
+        config = new Config();
+        levelArray = Level.EMPTY_ARRAY;
+        launchTime = System.currentTimeMillis();
+        BatchPacket batchPacket = new BatchPacket();
+        batchPacket.payload = EmptyArrays.EMPTY_BYTES;
+        CraftingManager.packet = batchPacket;
+
         currentThread = Thread.currentThread();
         File abs = tempDir.getAbsoluteFile();
         filePath = abs.getPath();
@@ -295,7 +302,6 @@ public class Server {
         
         console = new NukkitConsole(this);
         consoleThread = new ConsoleThread();
-        config = new Config();
         properties = new Config();
         banByName = new BanList(dataPath + "banned-players.json");
         banByIP = new BanList(dataPath + "banned-ips.json");
@@ -311,6 +317,7 @@ public class Server {
 
     Server(final String filePath, String dataPath, String pluginPath, String predefinedLanguage) {
         Preconditions.checkState(instance == null, "Already initialized!");
+        launchTime = System.currentTimeMillis();
         currentThread = Thread.currentThread(); // Saves the current thread instance as a reference, used in Server#isPrimaryThread()
         instance = this;
 
@@ -490,6 +497,7 @@ public class Server {
 
         log.info("Loading {} ...", TextFormat.GREEN + "nukkit.yml" + TextFormat.WHITE);
         this.config = new Config(this.dataPath + "nukkit.yml", Config.YAML);
+        levelArray = Level.EMPTY_ARRAY;
 
         Nukkit.DEBUG = NukkitMath.clamp(this.getConfig("debug.level", 1), 1, 3);
 
@@ -626,6 +634,9 @@ public class Server {
 
         this.consoleSender = new ConsoleCommandSender();
         this.commandMap = new SimpleCommandMap(this);
+
+        // Initialize metrics
+        NukkitMetrics.startNow(this);
 
         this.registerEntities();
         this.registerBlockEntities();
@@ -848,14 +859,14 @@ public class Server {
         }
     }
 
-    @DeprecationDetails(since = "1.3.2.0-PN", by = "Cloudburst Nukkit", 
+    @DeprecationDetails(since = "1.4.0.0-PN", by = "Cloudburst Nukkit", 
             reason = "Packet management was refactored, batching is done automatically near the RakNet layer")
     @Deprecated
     public void batchPackets(Player[] players, DataPacket[] packets) {
         this.batchPackets(players, packets, false);
     }
 
-    @DeprecationDetails(since = "1.3.2.0-PN", by = "Cloudburst Nukkit",
+    @DeprecationDetails(since = "1.4.0.0-PN", by = "Cloudburst Nukkit",
             reason = "Packet management was refactored, batching is done automatically near the RakNet layer")
     @Deprecated
     public void batchPackets(Player[] players, DataPacket[] packets, boolean forceSync) {
@@ -1229,7 +1240,7 @@ public class Server {
         Server.broadcastPacket(players, pk);
     }
 
-    @Since("1.3.2.0-PN")
+    @Since("1.4.0.0-PN")
     public void removePlayerListData(UUID uuid, Player player) {
         PlayerListPacket pk = new PlayerListPacket();
         pk.type = PlayerListPacket.TYPE_REMOVE;
@@ -1261,15 +1272,8 @@ public class Server {
     }
 
     private void checkTickUpdates(int currentTick, long tickTime) {
-        for (Player p : new ArrayList<>(this.players.values())) {
-            /*if (!p.loggedIn && (tickTime - p.creationTime) >= 10000 && p.kick(PlayerKickEvent.Reason.LOGIN_TIMEOUT, "Login timeout")) {
-                continue;
-            }
-
-            client freezes when applying resource packs
-            todo: fix*/
-
-            if (this.alwaysTickPlayers) {
+        if (this.alwaysTickPlayers) {
+            for (Player p : new ArrayList<>(this.players.values())) {
                 p.onUpdate(currentTick);
             }
         }
@@ -1670,11 +1674,15 @@ public class Server {
     }
 
     public String getMotd() {
-        return this.getPropertyString("motd", "A Nukkit Powered Server");
+        return this.getPropertyString("motd", "PowerNukkit Server");
     }
 
     public String getSubMotd() {
-        return this.getPropertyString("sub-motd", "https://nukkitx.com");
+        String subMotd = this.getPropertyString("sub-motd", "https://powernukkit.org");
+        if (subMotd.isEmpty()) {
+            subMotd = "https://powernukkit.org"; // The client doesn't allow empty sub-motd in 1.16.210
+        }
+        return subMotd;
     }
 
     public boolean getForceResources() {
@@ -1682,7 +1690,7 @@ public class Server {
     }
 
     @Deprecated
-    @DeprecationDetails(since = "1.3.2.0-PN", by = "PowerNukkit", reason = "Use your own logger, sharing loggers makes bug analyses harder.",
+    @DeprecationDetails(since = "1.4.0.0-PN", by = "PowerNukkit", reason = "Use your own logger, sharing loggers makes bug analyses harder.",
             replaceWith = "@Log4j2 annotation in the class and use the `log` static field that is generated by lombok, " +
                     "also make sure to log the exception as the last argument, don't concatenate it or use it as parameter replacement. " +
                     "Just put it as last argument and SLF4J will understand that the log message was caused by that exception/throwable.")
@@ -2504,6 +2512,7 @@ public class Server {
         Entity.registerEntity("Silverfish", EntitySilverfish.class);
         Entity.registerEntity("Skeleton", EntitySkeleton.class);
         Entity.registerEntity("Slime", EntitySlime.class);
+        Entity.registerEntity("IronGolem", EntityIronGolem.class);
         Entity.registerEntity("SnowGolem", EntitySnowGolem.class);
         Entity.registerEntity("Spider", EntitySpider.class);
         Entity.registerEntity("Stray", EntityStray.class);
@@ -2559,6 +2568,7 @@ public class Server {
         Entity.registerEntity("ThrownPotion", EntityPotion.class);
         Entity.registerEntity("ThrownTrident", EntityThrownTrident.class);
         Entity.registerEntity("XpOrb", EntityXPOrb.class);
+        Entity.registerEntity("ArmorStand", EntityArmorStand.class);
 
         Entity.registerEntity("Human", EntityHuman.class, true);
         //Vehicle
@@ -2653,6 +2663,12 @@ public class Server {
     @Since("1.4.0.0-PN")
     public boolean isCheckMovement(){
         return checkMovement;
+    }
+
+    @PowerNukkitOnly
+    @Since("1.4.0.0-PN")
+    public long getLaunchTime() {
+        return launchTime;
     }
 
     private class ConsoleThread extends Thread implements InterruptibleThread {

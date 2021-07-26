@@ -1,6 +1,7 @@
 package cn.nukkit.entity.mob;
 
 import cn.nukkit.Player;
+import cn.nukkit.api.PowerNukkitOnly;
 import cn.nukkit.api.Since;
 import cn.nukkit.entity.Entity;
 import cn.nukkit.entity.EntityAgeable;
@@ -37,11 +38,13 @@ public class EntityPiglin extends EntityMob implements EntityAgeable {
 
     @Override
     public float getHeight() {
-        return 1.95f;
+        return 1.9f;
     }
 
+    @PowerNukkitOnly
+    @Since("1.5.1.0-PN")
     @Override
-    public String getName() {
+    public String getOriginalName() {
         return "Piglin";
     }
 
