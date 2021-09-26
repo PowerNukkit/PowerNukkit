@@ -21,7 +21,7 @@ public class CompoundTag extends Tag implements Cloneable {
     }
 
     public CompoundTag(String name) {
-        this(name, new HashMap<>());
+        this(name, new LinkedHashMap<>());
     }
 
     public CompoundTag(Map<String, Tag> tags) {

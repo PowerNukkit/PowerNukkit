@@ -2,10 +2,13 @@ package cn.nukkit.block;
 
 import cn.nukkit.Player;
 import cn.nukkit.api.*;
+import cn.nukkit.blockentity.BlockEntity;
+import cn.nukkit.blockentity.BlockEntityCustomDataStorage;
 import cn.nukkit.blockproperty.BlockProperties;
 import cn.nukkit.blockproperty.CommonBlockProperties;
 import cn.nukkit.blockstate.*;
 import cn.nukkit.blockstate.exception.InvalidBlockStateException;
+import cn.nukkit.customdata.CustomDataHolder;
 import cn.nukkit.entity.Entity;
 import cn.nukkit.event.player.PlayerInteractEvent;
 import cn.nukkit.item.Item;
@@ -15,17 +18,22 @@ import cn.nukkit.item.enchantment.Enchantment;
 import cn.nukkit.level.Level;
 import cn.nukkit.level.MovingObjectPosition;
 import cn.nukkit.level.Position;
+import cn.nukkit.level.format.FullChunk;
 import cn.nukkit.math.AxisAlignedBB;
 import cn.nukkit.math.BlockFace;
 import cn.nukkit.math.NukkitMath;
 import cn.nukkit.math.Vector3;
 import cn.nukkit.metadata.MetadataValue;
 import cn.nukkit.metadata.Metadatable;
+import cn.nukkit.nbt.tag.CompoundTag;
 import cn.nukkit.plugin.Plugin;
 import cn.nukkit.potion.Effect;
 import cn.nukkit.utils.BlockColor;
 import cn.nukkit.utils.InvalidBlockDamageException;
+import cn.nukkit.utils.LevelException;
 import com.google.common.base.Preconditions;
+import it.unimi.dsi.fastutil.ints.IntArrayList;
+import it.unimi.dsi.fastutil.ints.IntList;
 import lombok.extern.log4j.Log4j2;
 
 import javax.annotation.Nonnegative;
@@ -49,7 +57,7 @@ import static cn.nukkit.utils.Utils.dynamic;
 @PowerNukkitDifference(info = "Implements IMutableBlockState only on PowerNukkit", since = "1.4.0.0-PN")
 @SuppressWarnings({"java:S2160", "java:S3400"})
 @Log4j2
-public abstract class Block extends Position implements Metadatable, Cloneable, AxisAlignedBB, BlockID, IMutableBlockState {
+public abstract class Block extends Position implements Metadatable, Cloneable, AxisAlignedBB, BlockID, IMutableBlockState, CustomDataHolder {
     
     @PowerNukkitOnly
     @Since("1.4.0.0-PN")
@@ -2201,5 +2209,123 @@ public abstract class Block extends Position implements Metadatable, Cloneable, 
             }
         }
         return this.level.isBlockPowered(this.getLocation());
+    }
+
+    private BlockEntity getCurrentBlockEntity() {
+        Level level = getLevel();
+        if (level == null) {
+            throw new LevelException("Undefined Level reference");
+        }
+
+        return level.getBlockEntity(this);
+    }
+
+    @Nonnull
+    private BlockEntity getOrCreateCustomStorageBlockEntity() {
+        Block levelBlock = getLevelBlock();
+        if (levelBlock instanceof BlockEntityHolder<?>) {
+            return ((BlockEntityHolder<?>) levelBlock).getOrCreateBlockEntity();
+        }
+        BlockEntity blockEntity = getCurrentBlockEntity();
+        if (blockEntity != null) {
+            return blockEntity;
+        }
+        String typeName = BlockEntity.CUSTOM_STORAGE;
+        FullChunk chunk = getChunk();
+        if (chunk == null) {
+            throw new LevelException("Undefined Level or chunk reference");
+        }
+        CompoundTag initialData = new CompoundTag();
+        BlockEntity created = BlockEntity.createBlockEntity(typeName, chunk,
+                initialData
+                        .putCompound(BlockEntity.CUSTOM_STORAGE, new CompoundTag().putIntArray("ValidBlockIds", new int[]{getId()}))
+                        .putString("id", typeName)
+                        .putInt("x", getFloorX())
+                        .putInt("y", getFloorY())
+                        .putInt("z", getFloorZ()));
+
+        if (!(created instanceof BlockEntityCustomDataStorage)) {
+            String error = "Failed to create the block entity " + typeName + " of class BlockEntityCustomDataStorage at " + getLocation() + ", " +
+                    "the created type is not an instance of the requested class. Created: " + created;
+            if (created != null) {
+                created.close();
+            }
+            throw new IllegalStateException(error);
+        }
+        return created;
+    }
+
+    @PowerNukkitOnly
+    @Since("FUTURE")
+    @Nonnull
+    @Override
+    public CompoundTag getRootCustomDataStorageTag() {
+        return getOrCreateCustomStorageBlockEntity().namedTag.getCompound(BlockEntity.CUSTOM_STORAGE).copy();
+    }
+
+    @Since("FUTURE")
+    @PowerNukkitOnly
+    @Override
+    public void setRootCustomDataStorageTag(@Nonnull CompoundTag root) {
+        getOrCreateCustomStorageBlockEntity().namedTag.putCompound(BlockEntity.CUSTOM_STORAGE, root.copy());
+    }
+
+    @Since("FUTURE")
+    @PowerNukkitOnly
+    public void setCustomDataAlwaysValid(boolean alwaysValid) {
+        CompoundTag root = getOrCreateCustomStorageBlockEntity().namedTag.getCompound(BlockEntity.CUSTOM_STORAGE);
+        if (!alwaysValid) {
+            root.remove("AlwaysValid");
+        } else {
+            root.putBoolean("AlwaysValid", true);
+        }
+        getOrCreateCustomStorageBlockEntity().namedTag.put(BlockEntity.CUSTOM_STORAGE, root);
+    }
+
+    @Since("FUTURE")
+    @PowerNukkitOnly
+    public boolean isCustomDataAlwaysValid() {
+        return getOrCreateCustomStorageBlockEntity().namedTag.getCompound(BlockEntity.CUSTOM_STORAGE).getBoolean("AlwaysValid");
+    }
+
+    @Since("FUTURE")
+    @PowerNukkitOnly
+    @Nonnull
+    public int[] getCustomDataValidBlockIds() {
+        return getOrCreateCustomStorageBlockEntity().namedTag.getCompound(BlockEntity.CUSTOM_STORAGE).getIntArray("ValidBlockIds");
+    }
+
+    @Since("FUTURE")
+    @PowerNukkitOnly
+    public void setCustomDataValidBlockIds(@Nullable int... validBlockIds) {
+        CompoundTag root = getOrCreateCustomStorageBlockEntity().namedTag.getCompound(BlockEntity.CUSTOM_STORAGE);
+        if (validBlockIds == null || validBlockIds.length == 0) {
+            root.remove("ValidBlockIds");
+        } else {
+            root.putIntArray("ValidBlockIds", validBlockIds);
+        }
+        getOrCreateCustomStorageBlockEntity().namedTag.put(BlockEntity.CUSTOM_STORAGE, root);
+    }
+
+    @Since("FUTURE")
+    @PowerNukkitOnly
+    public void addToValidCustomDataHolder(int... validIds) {
+        IntList list = new IntArrayList(getCustomDataValidBlockIds());
+        boolean modified = false;
+        for (int validId : validIds) {
+            if (!list.contains(validId)) {
+                modified = true;
+                list.add(validId);
+            }
+        }
+        if (modified) {
+            setCustomDataValidBlockIds(list.toIntArray());
+        }
+    }
+
+    @Since("FUTURE")
+    @PowerNukkitOnly
+    public void addCurrentBlockAsValidCustomDataHolder() {
+        addToValidCustomDataHolder(getId());
     }
 }

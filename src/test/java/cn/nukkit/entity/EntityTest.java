@@ -22,8 +22,10 @@ import cn.nukkit.level.Level;
 import cn.nukkit.level.format.FullChunk;
 import cn.nukkit.level.format.LevelProvider;
 import cn.nukkit.math.Vector3;
+import cn.nukkit.plugin.Plugin;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -36,7 +38,7 @@ import java.util.Objects;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.lenient;
+import static org.mockito.Mockito.*;
 
 /**
  * @author joserobjr
@@ -88,6 +90,15 @@ class EntityTest {
             assertNotEquals(entity.getName(), entity.getOriginalName());
             assertEquals(entity.getOriginalName(), entity.getVisibleName());
         }
+    }
+
+    @Test
+    void testCustomData() {
+        Plugin plugin = mock(Plugin.class);
+        when(plugin.getName()).thenReturn("plugin");
+        entity = createEntity("Creeper");
+        entity.setCustomData(plugin, "MyData", 5f);
+        assertEquals(5f, entity.getCustomData(plugin).getFloat("MyData"));
     }
 
     Entity createEntity(String id) {

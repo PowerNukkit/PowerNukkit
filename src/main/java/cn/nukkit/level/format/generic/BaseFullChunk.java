@@ -7,6 +7,7 @@ import cn.nukkit.api.PowerNukkitOnly;
 import cn.nukkit.api.Since;
 import cn.nukkit.block.Block;
 import cn.nukkit.blockentity.BlockEntity;
+import cn.nukkit.blockentity.BlockEntityCustomDataStorage;
 import cn.nukkit.blockstate.BlockState;
 import cn.nukkit.entity.Entity;
 import cn.nukkit.level.ChunkManager;
@@ -417,6 +418,17 @@ public abstract class BaseFullChunk implements FullChunk, ChunkManager {
             this.tiles.remove(blockEntity.getId());
             int index = ((blockEntity.getFloorZ() & 0x0f) << 12) | ((blockEntity.getFloorX() & 0x0f) << 8) | (blockEntity.getFloorY() & 0xff);
             this.tileList.remove(index);
+            CompoundTag customRoot = blockEntity.namedTag.getCompound(BlockEntity.CUSTOM_STORAGE);
+            if (!customRoot.isEmpty() && !(blockEntity instanceof BlockEntityCustomDataStorage)) {
+                BlockEntity.createBlockEntity(BlockEntity.CUSTOM_STORAGE, this,
+                        new CompoundTag()
+                                .putCompound(BlockEntity.CUSTOM_STORAGE, customRoot)
+                                .putString("id", BlockEntity.CUSTOM_STORAGE)
+                                .putInt("x", blockEntity.getFloorX())
+                                .putInt("y", blockEntity.getFloorY())
+                                .putInt("z", blockEntity.getFloorZ())
+                );
+            }
             if (this.isInit) {
                 this.setChanged();
             }

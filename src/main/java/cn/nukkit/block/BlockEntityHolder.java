@@ -3,6 +3,7 @@ package cn.nukkit.block;
 import cn.nukkit.api.PowerNukkitOnly;
 import cn.nukkit.api.Since;
 import cn.nukkit.blockentity.BlockEntity;
+import cn.nukkit.blockentity.BlockEntityCustomDataStorage;
 import cn.nukkit.level.Level;
 import cn.nukkit.level.Location;
 import cn.nukkit.level.Position;
@@ -23,6 +24,18 @@ public interface BlockEntityHolder<E extends BlockEntity> {
     @Since("1.4.0.0-PN")
     @Nullable
     default E getBlockEntity() {
+        BlockEntity blockEntity = getAnyBlockEntity();
+
+        Class<? extends E> blockEntityClass = getBlockEntityClass();
+        if (blockEntityClass.isInstance(blockEntity)) {
+            return blockEntityClass.cast(blockEntity);
+        }
+        return null;
+    }
+
+    @PowerNukkitOnly
+    @Since("FUTURE")
+    default BlockEntity getAnyBlockEntity() {
         Level level = getLevel();
         if (level == null) {
             throw new LevelException("Undefined Level reference");
@@ -35,19 +48,19 @@ public interface BlockEntityHolder<E extends BlockEntity> {
         } else {
             blockEntity = level.getBlockEntity(new BlockVector3(getFloorX(), getFloorY(), getFloorZ()));
         }
-
-        Class<? extends E> blockEntityClass = getBlockEntityClass();
-        if (blockEntityClass.isInstance(blockEntity)) {
-            return blockEntityClass.cast(blockEntity);
-        }
-        return null;
+        return blockEntity;
     }
     
     @PowerNukkitOnly
     @Since("1.4.0.0-PN")
     @Nonnull
     default E createBlockEntity() {
-        return createBlockEntity(null);
+        BlockEntity current = getAnyBlockEntity();
+        CompoundTag initialData = null;
+        if (current instanceof BlockEntityCustomDataStorage && current.isBlockEntityValid()) {
+            initialData = new CompoundTag().putCompound(BlockEntity.CUSTOM_STORAGE, current.namedTag.getCompound(BlockEntity.CUSTOM_STORAGE).copy());
+        }
+        return createBlockEntity(initialData);
     }
 
     @PowerNukkitOnly
