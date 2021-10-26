@@ -32,13 +32,15 @@ public class EntityDamageEvent extends EntityEvent implements Cancellable {
     private final Map<DamageModifier, Float> originals;
 
     private SideEffect[] sideEffects = SideEffect.EMPTY_ARRAY;
-
+    
+    private static Map<DamageModifier, Float> createDamageModifierMap(float baseDamage) {
+        Map<DamageModifier, Float> modifiers = new EnumMap<>(DamageModifier.class);
+        modifiers.put(DamageModifier.BASE, baseDamage);
+        return modifiers;
+    }
+    
     public EntityDamageEvent(Entity entity, DamageCause cause, float damage) {
-        this(entity, cause, new EnumMap<DamageModifier, Float>(DamageModifier.class) {
-            {
-                put(DamageModifier.BASE, damage);
-            }
-        });
+        this(entity, cause, createDamageModifierMap(damage));
     }
 
     public EntityDamageEvent(Entity entity, DamageCause cause, Map<DamageModifier, Float> modifiers) {
@@ -52,8 +54,8 @@ public class EntityDamageEvent extends EntityEvent implements Cancellable {
             throw new EventException("BASE Damage modifier missing");
         }
 
-        if (entity.hasEffect(Effect.DAMAGE_RESISTANCE)) {
-            this.setDamage((float) -(this.getDamage(DamageModifier.BASE) * 0.20 * (entity.getEffect(Effect.DAMAGE_RESISTANCE).getAmplifier() + 1)), DamageModifier.RESISTANCE);
+        if (entity.hasEffect(Effect.RESISTANCE)) {
+            this.setDamage((float) -(this.getDamage(DamageModifier.BASE) * 0.20 * (entity.getEffect(Effect.RESISTANCE).getAmplifier() + 1)), DamageModifier.RESISTANCE);
         }
     }
 
@@ -117,21 +119,21 @@ public class EntityDamageEvent extends EntityEvent implements Cancellable {
     }
 
     @PowerNukkitOnly
-    @Since("FUTURE")
+    @Since("1.5.1.0-PN")
     @Nonnull
     public SideEffect[] getSideEffects() {
-        SideEffect[] sideEffects = this.sideEffects;
-        if (sideEffects.length == 0) {
-            return sideEffects;
+        SideEffect[] sideEffectsArray = this.sideEffects;
+        if (sideEffectsArray.length == 0) {
+            return sideEffectsArray;
         }
-        return Arrays.stream(sideEffects)
+        return Arrays.stream(sideEffectsArray)
                 .map(SideEffect::clone)
                 .toArray(SideEffect[]::new)
         ;
     }
 
     @PowerNukkitOnly
-    @Since("FUTURE")
+    @Since("1.5.1.0-PN")
     public void setSideEffects(@Nonnull SideEffect... sideEffects) {
         this.sideEffects = Arrays.stream(sideEffects)
                 .filter(Objects::nonNull)
@@ -141,13 +143,13 @@ public class EntityDamageEvent extends EntityEvent implements Cancellable {
     }
 
     @PowerNukkitOnly
-    @Since("FUTURE")
+    @Since("1.5.1.0-PN")
     public void setSideEffects(@Nonnull Collection<SideEffect> sideEffects) {
         this.setSideEffects(sideEffects.toArray(SideEffect.EMPTY_ARRAY));
     }
 
     @PowerNukkitOnly
-    @Since("FUTURE")
+    @Since("1.5.1.0-PN")
     public void addSideEffects(@Nonnull SideEffect... sideEffects) {
         var safeStream = Arrays.stream(sideEffects)
                 .filter(Objects::nonNull)
@@ -157,7 +159,7 @@ public class EntityDamageEvent extends EntityEvent implements Cancellable {
     }
 
     @PowerNukkitOnly
-    @Since("FUTURE")
+    @Since("1.5.1.0-PN")
     public void addSideEffects(@Nonnull Collection<SideEffect> sideEffects) {
         this.addSideEffects(sideEffects.toArray(SideEffect.EMPTY_ARRAY));
     }
@@ -209,6 +211,16 @@ public class EntityDamageEvent extends EntityEvent implements Cancellable {
     }
 
     public enum DamageCause {
+        /**
+         * Plugins
+         */
+        CUSTOM,
+        /**
+         * Damage caused by /kill command
+         */
+        @PowerNukkitOnly
+        @Since("FUTURE")
+        OVERRIDE,
         /**
          * Damage caused by contact with a block such as a Cactus
          */
@@ -266,16 +278,78 @@ public class EntityDamageEvent extends EntityEvent implements Cancellable {
          */
         MAGIC,
         /**
-         * Plugins
+         * Damage caused by Wither
          */
-        CUSTOM,
+        @PowerNukkitOnly
+        @Since("FUTURE")
+        WITHER,
+        /**
+         * Damage caused by hunger
+         */
+        HUNGER,
+        /**
+         * Damage caused by anvil
+         */
+        @PowerNukkitOnly
+        @Since("FUTURE")
+        ANVIL,
+        /**
+         * Damage caused by thorns
+         */
+        @PowerNukkitOnly
+        @Since("FUTURE")
+        THORNS,
+        /**
+         * Damage caused by falling block
+         */
+        @PowerNukkitOnly
+        @Since("FUTURE")
+        FALLING_BLOCK,
+        /**
+         * Damage caused by piston
+         */
+        @PowerNukkitOnly
+        @Since("FUTURE")
+        PISTON,
+        /**
+         * Damage caused by flying into wall
+         */
+        @PowerNukkitOnly
+        @Since("FUTURE")
+        FLYING_INTO_WALL,
+        /**
+         * Damage caused by magma
+         */
+        @PowerNukkitOnly
+        @Since("FUTURE")
+        MAGMA,
+        /**
+         * Damage caused by fireworks
+         */
+        @PowerNukkitOnly
+        @Since("FUTURE")
+        FIREWORKS,
         /**
          * Damage caused by being struck by lightning
          */
         LIGHTNING,
         /**
-         * Damage caused by hunger
+         * Damage caused by charging
          */
-        HUNGER
+        @PowerNukkitOnly
+        @Since("FUTURE")
+        CHARGING,
+        /**
+         * Damage caused by temperature
+         */
+        @PowerNukkitOnly
+        @Since("FUTURE")
+        TEMPERATURE,
+        /**
+         * Damage caused by all
+         */
+        @PowerNukkitOnly
+        @Since("FUTURE")
+        ALL
     }
 }
