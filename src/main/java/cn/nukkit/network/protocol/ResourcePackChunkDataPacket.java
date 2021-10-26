@@ -1,5 +1,6 @@
 package cn.nukkit.network.protocol;
 
+import cn.nukkit.api.DeprecationDetails;
 import cn.nukkit.api.PowerNukkitOnly;
 import cn.nukkit.api.Since;
 
@@ -13,6 +14,7 @@ public class ResourcePackChunkDataPacket extends DataPacket {
     public static final byte NETWORK_ID = ProtocolInfo.RESOURCE_PACK_CHUNK_DATA_PACKET;
 
     @Deprecated
+    @DeprecationDetails(since = "FUTURE", reason = "The format has been changed from '(uuid of pack)' to '(uuid of pack)_(version of pack)'", replaceWith = "packInfo")
     public UUID packId;
     @PowerNukkitOnly
     @Since("FUTURE")
