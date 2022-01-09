@@ -11,6 +11,7 @@ import cn.nukkit.level.Position;
 import cn.nukkit.level.format.FullChunk;
 import cn.nukkit.math.Vector3;
 import cn.nukkit.nbt.tag.CompoundTag;
+import cn.nukkit.scheduler.Task;
 import cn.nukkit.utils.ChunkException;
 import co.aikar.timings.Timing;
 import co.aikar.timings.Timings;
@@ -121,10 +122,12 @@ public abstract class BlockEntity extends Position {
 
     }
 
+    @PowerNukkitOnly
     public static BlockEntity createBlockEntity(String type, Position position, Object... args) {
         return createBlockEntity(type, position, BlockEntity.getDefaultCompound(position, type), args);
     }
 
+    @PowerNukkitOnly
     public static BlockEntity createBlockEntity(String type, Position pos, CompoundTag nbt, Object... args) {
         return createBlockEntity(type, pos.getLevel().getChunk(pos.getFloorX() >> 4, pos.getFloorZ() >> 4), nbt, args);
     }
@@ -249,7 +252,8 @@ public abstract class BlockEntity extends Position {
     public void onBreak() {
 
     }
-    
+
+    @PowerNukkitOnly
     public void onBreak(boolean isSilkTouch) {
         onBreak();
     }
@@ -258,7 +262,14 @@ public abstract class BlockEntity extends Position {
         chunk.setChanged();
 
         if (this.getLevelBlock().getId() != BlockID.AIR) {
-            this.level.updateComparatorOutputLevelSelective(this, isObservable());
+            getLevel().getServer().getScheduler().scheduleTask(new Task() {
+                @Override
+                public void onRun(int currentTick) {
+                    if (isValid() && isBlockEntityValid()) {
+                        getLevel().updateComparatorOutputLevelSelective(BlockEntity.this, isObservable());
+                    }
+                }
+            });
         }
     }
 
@@ -287,6 +298,7 @@ public abstract class BlockEntity extends Position {
                 .putInt("z", pos.getFloorZ());
     }
 
+    @PowerNukkitOnly
     @Nullable
     @Override
     public final BlockEntity getLevelBlockEntity() {

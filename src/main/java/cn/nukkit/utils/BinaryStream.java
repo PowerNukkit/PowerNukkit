@@ -7,10 +7,7 @@ import cn.nukkit.blockstate.BlockState;
 import cn.nukkit.blockstate.BlockStateRegistry;
 import cn.nukkit.entity.Attribute;
 import cn.nukkit.entity.data.Skin;
-import cn.nukkit.item.Item;
-import cn.nukkit.item.ItemDurable;
-import cn.nukkit.item.ItemID;
-import cn.nukkit.item.RuntimeItems;
+import cn.nukkit.item.*;
 import cn.nukkit.level.GameRule;
 import cn.nukkit.level.GameRules;
 import cn.nukkit.math.BlockFace;
@@ -320,6 +317,7 @@ public class BinaryStream {
                 this.putString(color);
             }
         }
+
         this.putBoolean(skin.isPremium());
         this.putBoolean(skin.isPersona());
         this.putBoolean(skin.isCapeOnClassic());
@@ -371,6 +369,7 @@ public class BinaryStream {
             }
             skin.getTintColors().add(new PersonaPieceTint(pieceType, colors));
         }
+
         skin.setPremium(this.getBoolean());
         skin.setPersona(this.getBoolean());
         skin.setCapeOnClassic(this.getBoolean());
@@ -400,21 +399,12 @@ public class BinaryStream {
         int count = getLShort();
         int damage = (int) getUnsignedVarInt();
 
-        Integer id = null;
-        String stringId = null;
-        try {
-            int fullId = RuntimeItems.getRuntimeMapping().getLegacyFullId(networkId);
-            id = RuntimeItems.getId(fullId);
+        int fullId = RuntimeItems.getRuntimeMapping().getLegacyFullId(networkId);
+        int id = RuntimeItems.getId(fullId);
 
-            boolean hasData = RuntimeItems.hasData(fullId);
-            if (hasData) {
-                damage = RuntimeItems.getData(fullId);
-            }
-        } catch (IllegalArgumentException unknownMapping) {
-            stringId = RuntimeItems.getRuntimeMapping().getNamespacedIdByNetworkId(networkId);
-            if (stringId == null) {
-                throw unknownMapping;
-            }
+        boolean hasData = RuntimeItems.hasData(fullId);
+        if (hasData) {
+            damage = RuntimeItems.getData(fullId);
         }
 
         if (getBoolean()) { // hasNetId
@@ -474,7 +464,7 @@ public class BinaryStream {
                 canBreak[i] = stream.readUTF();
             }
 
-            if (id != null && id == ItemID.SHIELD) {
+            if (id == ItemID.SHIELD) {
                 stream.readLong();
             }
         } catch (IOException e) {
@@ -512,12 +502,12 @@ public class BinaryStream {
 
         return item;
     }
-    
+
     private Item readUnknownItem(Item item) {
         if (item.getId() != FALLBACK_ID || !item.hasCompoundTag()) {
             return item;
         }
-        
+
         CompoundTag tag = item.getNamedTag();
         if (!tag.containsCompound("PowerNukkitUnknown")) {
             return item;
@@ -530,7 +520,7 @@ public class BinaryStream {
         boolean hasCompound = pnTag.getBoolean("HasCompound");
         boolean hasDisplayTag = pnTag.getBoolean("HasDisplayTag");
         String customName = pnTag.getString("OriginalCustomName");
-        
+
         item = Item.get(itemId, meta, item.getCount());
         if (hasCompound) {
             tag.remove("PowerNukkitUnknown");
@@ -545,10 +535,10 @@ public class BinaryStream {
             }
             item.setNamedTag(tag);
         }
-        
+
         return item;
     }
-    
+
     private Item createFakeUnknownItem(Item item) {
         boolean hasCompound = item.hasCompoundTag();
         Item fallback = Item.getBlock(FALLBACK_ID, 0, item.getCount());
@@ -624,7 +614,7 @@ public class BinaryStream {
         ByteBuf userDataBuf = ByteBufAllocator.DEFAULT.ioBuffer();
         try (LittleEndianByteBufOutputStream stream = new LittleEndianByteBufOutputStream(userDataBuf)) {
             if (data != 0) {
-                byte[] nbt = item.getCustomCompoundTag();
+                byte[] nbt = item.getCompoundTag();
                 CompoundTag tag;
                 if (nbt == null || nbt.length == 0) {
                     tag = new CompoundTag();
@@ -638,10 +628,10 @@ public class BinaryStream {
                 stream.writeShort(-1);
                 stream.writeByte(1); // Hardcoded in current version
                 stream.write(NBTIO.write(tag, ByteOrder.LITTLE_ENDIAN));
-            } else if (item.hasCustomCompoundTag()) {
+            } else if (item.hasCompoundTag()) {
                 stream.writeShort(-1);
                 stream.writeByte(1); // Hardcoded in current version
-                stream.write(item.getCustomCompoundTag());
+                stream.write(item.getCompoundTag());
             } else {
                 userDataBuf.writeShortLE(0);
             }
@@ -823,10 +813,10 @@ public class BinaryStream {
     }
 
     public void putGameRules(GameRules gameRules) {
-        // LinkedHashMap gives mutability and is faster in iteration 
+        // LinkedHashMap gives mutability and is faster in iteration
         val rules = new LinkedHashMap<>(gameRules.getGameRules());
         rules.keySet().removeIf(GameRule::isDeprecated);
-        
+
         this.putUnsignedVarInt(rules.size());
         rules.forEach((gameRule, value) -> {
             this.putString(gameRule.getName().toLowerCase());
@@ -891,7 +881,7 @@ public class BinaryStream {
     }
 
     @PowerNukkitOnly
-    @Since("FUTURE")
+    @Since("1.5.2.0-PN")
     public <T> void putArray(Collection<T> collection, Consumer<T> writer) {
         if (collection == null) {
             putUnsignedVarInt(0);
@@ -902,7 +892,7 @@ public class BinaryStream {
     }
 
     @PowerNukkitOnly
-    @Since("FUTURE")
+    @Since("1.5.2.0-PN")
     public <T> void putArray(T[] collection, Consumer<T> writer) {
         if (collection == null) {
             putUnsignedVarInt(0);

@@ -40,7 +40,7 @@ public class BlockItemFrame extends BlockTransparentMeta implements BlockEntityH
     public static final BooleanBlockProperty HAS_MAP = new BooleanBlockProperty("item_frame_map_bit", false);
 
     @PowerNukkitOnly
-    @Since("FUTURE")
+    @Since("1.5.2.0-PN")
     public static final BooleanBlockProperty HAS_PHOTO = new BooleanBlockProperty("item_frame_photo_bit", false);
 
     @PowerNukkitOnly
@@ -96,13 +96,13 @@ public class BlockItemFrame extends BlockTransparentMeta implements BlockEntityH
     }
 
     @PowerNukkitOnly
-    @Since("FUTURE")
+    @Since("1.5.2.0-PN")
     public boolean isStoringPhoto() {
         return getBooleanValue(HAS_PHOTO);
     }
 
     @PowerNukkitOnly
-    @Since("FUTURE")
+    @Since("1.5.2.0-PN")
     public void setStoringPhoto(boolean hasPhoto) {
         setBooleanValue(HAS_PHOTO, hasPhoto);
     }
@@ -281,17 +281,18 @@ public class BlockItemFrame extends BlockTransparentMeta implements BlockEntityH
     }
 
     @Override
+    @PowerNukkitOnly
     public boolean breaksWhenMoved() {
         return true;
     }
 
     @Override
-    public boolean sticksToPiston() {
+    @PowerNukkitOnly
+    public  boolean sticksToPiston() {
         return false;
     }
 
-    @PowerNukkitOnly("Will calculate the correct AABB")
-    @Since("1.3.0.0-PN")
+    @PowerNukkitDifference(since = "1.3.0.0-PN", info = "Will calculate the correct AABB")
     @Override
     protected AxisAlignedBB recalculateBoundingBox() {
         double[][] aabb = {

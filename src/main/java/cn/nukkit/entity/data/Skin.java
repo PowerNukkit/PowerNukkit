@@ -4,10 +4,10 @@ import cn.nukkit.api.Since;
 import cn.nukkit.nbt.stream.FastByteArrayOutputStream;
 import cn.nukkit.utils.*;
 import com.google.common.base.Preconditions;
+import com.nimbusds.jose.shaded.json.JSONObject;
+import com.nimbusds.jose.shaded.json.JSONValue;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
-import net.minidev.json.JSONObject;
-import net.minidev.json.JSONValue;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -239,22 +239,22 @@ public class Skin {
         this.capeOnClassic = capeOnClassic;
     }
 
-    @Since("FUTURE")
+    @Since("1.5.2.0-PN")
     public void setPrimaryUser(boolean primaryUser) {
         this.primaryUser = primaryUser;
     }
 
-    @Since("FUTURE")
+    @Since("1.5.2.0-PN")
     public boolean isPrimaryUser() {
         return primaryUser;
     }
 
-    @Since("FUTURE")
+    @Since("1.5.2.0-PN")
     public void setGeometryDataEngineVersion(String geometryDataEngineVersion) {
         this.geometryDataEngineVersion = geometryDataEngineVersion;
     }
 
-    @Since("FUTURE")
+    @Since("1.5.2.0-PN")
     public String getGeometryDataEngineVersion() {
         return geometryDataEngineVersion;
     }

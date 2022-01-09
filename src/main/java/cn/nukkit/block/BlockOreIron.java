@@ -6,6 +6,7 @@ import cn.nukkit.api.Since;
 import cn.nukkit.item.MinecraftItemID;
 
 import javax.annotation.Nullable;
+import cn.nukkit.item.ItemTool;
 
 /**
  * @author MagicDroidX (Nukkit Project)
@@ -20,6 +21,27 @@ public class BlockOreIron extends BlockOre {
     @Override
     public int getId() {
         return IRON_ORE;
+    }
+
+    @Override
+    public double getHardness() {
+        return 3;
+    }
+
+    @Override
+    public double getResistance() {
+        return 5;
+    }
+
+    @Override
+    public int getToolType() {
+        return ItemTool.TYPE_PICKAXE;
+    }
+
+    @Override
+    @PowerNukkitOnly
+    public int getToolTier() {
+        return ItemTool.TIER_STONE;
     }
 
     @Override

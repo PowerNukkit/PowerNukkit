@@ -2,6 +2,7 @@ package cn.nukkit.utils;
 
 import cn.nukkit.api.PowerNukkitOnly;
 import cn.nukkit.api.Since;
+import lombok.NoArgsConstructor;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import java.util.List;
 
 @PowerNukkitOnly
 @Since("1.4.0.0-PN")
+@NoArgsConstructor(onConstructor = @__(@PowerNukkitOnly))
 public class HumanStringComparator implements Comparator<String> {
     private static final HumanStringComparator INSTANCE = new HumanStringComparator();
     private static final int LEFT = -1;
@@ -54,7 +56,7 @@ public class HumanStringComparator implements Comparator<String> {
                         result.set(i, Character.toString(c));
                         indexToAddLast = i + 1;
                     }
-                    if (j + 2 < length) {
+                    if (j + 2 <= length) {
                         result.add(indexToAddLast, str.substring(j + 1, lastPart));
                     }
                     lastPart = j;
@@ -73,8 +75,10 @@ public class HumanStringComparator implements Comparator<String> {
             String str2 = l2.get(i);
             int strLen1 = str1.length();
             int strLen2 = str2.length();
-            boolean isNum1 = !str1.isEmpty() && Character.isDigit(str1.charAt(strLen1 - 1));
-            boolean isNum2 = !str2.isEmpty() && Character.isDigit(str2.charAt(strLen2 - 1));
+            assert strLen1 > 0;
+            assert strLen2 > 0;
+            boolean isNum1 = Character.isDigit(str1.charAt(strLen1 - 1));
+            boolean isNum2 = Character.isDigit(str2.charAt(strLen2 - 1));
             if (isNum1) {
                 if (isNum2) {
                     int i1 = Integer.parseInt(str1);
@@ -108,7 +112,7 @@ public class HumanStringComparator implements Comparator<String> {
                         return result;
                     }
 
-                    // Detect ommitted number
+                    // Detect omitted number
                     if (strLen1 < strLen2) {
                         if (detectOmittedNumber(l1, len1, i, str2, strLen2, minStrLen, commonPart1)) {
                             return RIGHT;

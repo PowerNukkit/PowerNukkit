@@ -31,6 +31,22 @@ public class BlockOreRedstone extends BlockOre {
     }
 
     @Override
+    public double getHardness() {
+        return 3;
+    }
+
+    @Override
+    public double getResistance() {
+        return 15;
+    }
+
+    @Override
+    public int getToolType() {
+        return ItemTool.TYPE_PICKAXE;
+    }
+
+    @Override
+    @PowerNukkitOnly
     public int getToolTier() {
         return ItemTool.TIER_IRON;
     }

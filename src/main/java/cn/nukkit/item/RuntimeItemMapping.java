@@ -3,24 +3,25 @@ package cn.nukkit.item;
 import cn.nukkit.api.API;
 import cn.nukkit.api.PowerNukkitOnly;
 import cn.nukkit.api.Since;
-import com.google.common.base.Preconditions;
 import it.unimi.dsi.fastutil.ints.Int2IntMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
-import lombok.SneakyThrows;
-import lombok.extern.log4j.Log4j2;
+import lombok.Data;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.lang.reflect.Constructor;
-import java.util.*;
-import java.util.function.Supplier;
+import java.util.AbstractMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.OptionalInt;
 import java.util.stream.Collectors;
 
 /**
  * Responsible for mapping item full ids, item network ids and item namespaced ids between each other.
  * <ul>
- * <li>A <b>full id</b> is a combination of <b>item id</b> and <b>item damage</b>. 
+ * <li>A <b>full id</b> is a combination of <b>item id</b> and <b>item damage</b>.
  * The way they are combined may change in future, so you should not combine them by yourself and neither store them
  * permanently. It's mainly used to preserve backward compatibility with plugins that don't support <em>namespaced ids</em>.
  * <li>A <b>network id</b> is an id that is used to communicated with the client, it may change between executions of the
@@ -28,7 +29,6 @@ import java.util.stream.Collectors;
  * <li>A <b>namespaced id</b> is the new way Mojang saves the ids, a string like <code>minecraft:stone</code>. It may change
  * in Minecraft updates but tends to be permanent, unless Mojang decides to change them for some random reasons...
  */
-@Log4j2
 @Since("1.4.0.0-PN")
 public class RuntimeItemMapping {
 
@@ -39,9 +39,8 @@ public class RuntimeItemMapping {
     private final Map<String, OptionalInt> namespaceNetworkMap;
     private final Int2ObjectMap<String> networkNamespaceMap;
 
-    private final Map<String, Supplier<Item>> namespacedIdItem = new LinkedHashMap<>();
-
     @Since("1.4.0.0-PN")
+    @PowerNukkitOnly
     public RuntimeItemMapping(byte[] itemDataPalette, Int2IntMap legacyNetworkMap, Int2IntMap networkLegacyMap) {
         this.itemDataPalette = itemDataPalette;
         this.legacyNetworkMap = legacyNetworkMap;
@@ -67,7 +66,6 @@ public class RuntimeItemMapping {
         this.namespaceNetworkMap = namespaceNetworkMap.entrySet().stream()
                 .map(e-> new AbstractMap.SimpleEntry<>(e.getKey(), OptionalInt.of(e.getValue())))
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
-        //this.namespaceNetworkMap.keySet().forEach(key-> this.namespacedIdItem.put(key, ()-> new StringItemUnknown(key)));
     }
 
     /**
@@ -76,26 +74,22 @@ public class RuntimeItemMapping {
      * @return The <b>network id</b>
      * @throws IllegalArgumentException If the mapping of the <b>full id</b> to the <b>network id</b> is unknown
      */
+    @PowerNukkitOnly
     @Since("1.4.0.0-PN")
     public int getNetworkFullId(Item item) {
-        if (item instanceof StringItem) {
-            return namespaceNetworkMap.getOrDefault(item.getNamespaceId(), OptionalInt.empty())
-                    .orElseThrow(()-> new IllegalArgumentException("Unknown item mapping " + item)) << 1;
-        }
-
         int fullId = RuntimeItems.getFullId(item.getId(), item.hasMeta() ? item.getDamage() : -1);
-        int networkFullId = this.legacyNetworkMap.get(fullId);
-        if (networkFullId == -1 && !item.hasMeta() && item.getDamage() != 0) { // Fuzzy crafting recipe of a remapped item, like charcoal
-            networkFullId = this.legacyNetworkMap.get(RuntimeItems.getFullId(item.getId(), item.getDamage()));
+        int networkId = this.legacyNetworkMap.get(fullId);
+        if (networkId == -1 && !item.hasMeta() && item.getDamage() != 0) { // Fuzzy crafting recipe of a remapped item, like charcoal
+            networkId = this.legacyNetworkMap.get(RuntimeItems.getFullId(item.getId(), item.getDamage()));
         }
-        if (networkFullId == -1) {
-            networkFullId = this.legacyNetworkMap.get(RuntimeItems.getFullId(item.getId(), 0));
+        if (networkId == -1) {
+            networkId = this.legacyNetworkMap.get(RuntimeItems.getFullId(item.getId(), 0));
         }
-        if (networkFullId == -1) {
+        if (networkId == -1) {
             throw new IllegalArgumentException("Unknown item mapping " + item);
         }
 
-        return networkFullId;
+        return networkId;
     }
 
     /**
@@ -104,6 +98,7 @@ public class RuntimeItemMapping {
      * @return The <b>full id</b>
      * @throws IllegalArgumentException If the mapping of the <b>full id</b> to the <b>network id</b> is unknown
      */
+    @PowerNukkitOnly
     @Since("1.4.0.0-PN")
     public int getLegacyFullId(int networkId) {
         int fullId = networkLegacyMap.get(networkId);
@@ -113,6 +108,7 @@ public class RuntimeItemMapping {
         return fullId;
     }
 
+    @PowerNukkitOnly
     @Since("1.4.0.0-PN")
     public byte[] getItemDataPalette() {
         return this.itemDataPalette;
@@ -147,36 +143,16 @@ public class RuntimeItemMapping {
      * @param namespaceId The namespaced id
      * @param amount How many items will be in the stack.
      * @return The correct {@link Item} instance with the write <b>item id</b> and <b>item damage</b> values.
-     * @throws IllegalArgumentException If there are unknown mappings in the process. 
+     * @throws IllegalArgumentException If there are unknown mappings in the process.
      */
     @PowerNukkitOnly
     @Since("1.4.0.0-PN")
     @Nonnull
     public Item getItemByNamespaceId(@Nonnull String namespaceId, int amount) {
-        Supplier<Item> constructor = this.namespacedIdItem.get(namespaceId.toLowerCase(Locale.ENGLISH));
-        if (constructor != null) {
-            try {
-                Item item = constructor.get();
-                item.setCount(amount);
-                return item;
-            } catch (Exception e) {
-                log.warn("Could not create a new instance of {} using the namespaced id {}", constructor, namespaceId, e);
-            }
-        }
-
-        int legacyFullId;
-        try {
-            legacyFullId = getLegacyFullId(
-                    getNetworkIdByNamespaceId(namespaceId)
-                            .orElseThrow(() -> new IllegalArgumentException("The network id of \"" + namespaceId + "\" is unknown"))
-            );
-        } catch (IllegalArgumentException e) {
-            log.debug("Found an unknown item {}", namespaceId, e);
-            Item item = new StringItem(namespaceId, Item.UNKNOWN_STR);
-            item.setCount(amount);
-            return item;
-        }
-
+        int legacyFullId = getLegacyFullId(
+                getNetworkIdByNamespaceId(namespaceId)
+                        .orElseThrow(()-> new IllegalArgumentException("The network id of \""+namespaceId+"\" is unknown"))
+        );
         if (RuntimeItems.hasData(legacyFullId)) {
             return Item.get(RuntimeItems.getId(legacyFullId), RuntimeItems.getData(legacyFullId), amount);
         } else {
@@ -186,36 +162,27 @@ public class RuntimeItemMapping {
         }
     }
 
-    @PowerNukkitOnly
+    @Data
+    @Getter(onMethod = @__(@Since("FUTURE")))
+    @RequiredArgsConstructor(onConstructor = @__(@Since("FUTURE")))
     @Since("FUTURE")
-    public void registerNamespacedIdItem(@Nonnull String namespacedId, @Nonnull Constructor<? extends Item> constructor) {
-        Preconditions.checkNotNull(namespacedId, "namespacedId is null");
-        Preconditions.checkNotNull(constructor, "constructor is null");
-        this.namespacedIdItem.put(namespacedId.toLowerCase(Locale.ENGLISH), itemSupplier(constructor));
+    public static class LegacyEntry {
+        private final int legacyId;
+        private final boolean hasDamage;
+        private final int damage;
+
+        public int getDamage() {
+            return this.hasDamage ? this.damage : 0;
+        }
     }
 
-    @SneakyThrows
-    @PowerNukkitOnly
+    @Data
+    @Getter(onMethod = @__(@Since("FUTURE")))
+    @RequiredArgsConstructor(onConstructor = @__(@Since("FUTURE")))
     @Since("FUTURE")
-    public void registerNamespacedIdItem(@Nonnull StringItem item) {
-        registerNamespacedIdItem(item.getNamespaceId(), item.getClass().getConstructor());
-    }
-
-    @SneakyThrows
-    @PowerNukkitOnly
-    @Since("FUTURE")
-    public void registerNamespacedIdItem(@Nonnull Class<? extends StringItem> item) {
-        registerNamespacedIdItem(item.newInstance());
-    }
-
-    @Nonnull
-    private static Supplier<Item> itemSupplier(@Nonnull Constructor<? extends Item> constructor) {
-        return ()-> {
-            try {
-                return constructor.newInstance();
-            } catch (ReflectiveOperationException e) {
-                throw new UnsupportedOperationException(e);
-            }
-        };
+    public static class RuntimeEntry {
+        private final String identifier;
+        private final int runtimeId;
+        private final boolean hasDamage;
     }
 }

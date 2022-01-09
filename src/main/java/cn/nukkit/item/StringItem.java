@@ -41,20 +41,6 @@ public class StringItem extends Item {
         return true;
     }
 
-    @Since("FUTURE")
-    @PowerNukkitOnly
-    @Override
-    public boolean hasCustomCompoundTag() {
-        return customCompound != null && customCompound.length > 0;
-    }
-
-    @Since("FUTURE")
-    @PowerNukkitOnly
-    @Override
-    public byte[] getCustomCompoundTag() {
-        return customCompound;
-    }
-
     @Override
     public CompoundTag getNamedTag() {
         if (!super.hasCompoundTag()) {

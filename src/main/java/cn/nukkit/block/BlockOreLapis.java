@@ -4,6 +4,7 @@ import cn.nukkit.api.PowerNukkitDifference;
 import cn.nukkit.api.PowerNukkitOnly;
 import cn.nukkit.api.Since;
 import cn.nukkit.item.Item;
+import cn.nukkit.item.ItemTool;
 import cn.nukkit.item.MinecraftItemID;
 import cn.nukkit.item.enchantment.Enchantment;
 
@@ -24,6 +25,27 @@ public class BlockOreLapis extends BlockOre {
     @Override
     public int getId() {
         return LAPIS_ORE;
+    }
+
+    @Override
+    public double getHardness() {
+        return 3;
+    }
+
+    @Override
+    public double getResistance() {
+        return 5;
+    }
+
+    @Override
+    public int getToolType() {
+        return ItemTool.TYPE_PICKAXE;
+    }
+
+    @Override
+    @PowerNukkitOnly
+    public int getToolTier() {
+        return ItemTool.TIER_STONE;
     }
 
     @Override
