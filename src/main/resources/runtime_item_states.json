@@ -65,11 +65,7 @@
     },
     {
         "name" : "minecraft:amethyst_shard",
-<<<<<<< HEAD
-        "id" : 623
-=======
         "id" : 624
->>>>>>> 47e7289c184935fd38a933005e1d41371294f3d7
     },
     {
         "name" : "minecraft:ancient_debris",
@@ -137,11 +133,7 @@
     },
     {
         "name" : "minecraft:banner_pattern",
-<<<<<<< HEAD
-        "id" : 627
-=======
         "id" : 629
->>>>>>> 47e7289c184935fd38a933005e1d41371294f3d7
     },
     {
         "name" : "minecraft:barrel",
@@ -248,8 +240,6 @@
         "id" : -187
     },
     {
-<<<<<<< HEAD
-=======
         "name" : "minecraft:black_candle",
         "id" : -428
     },
@@ -258,7 +248,6 @@
         "id" : -445
     },
     {
->>>>>>> 47e7289c184935fd38a933005e1d41371294f3d7
         "name" : "minecraft:black_dye",
         "id" : 395
     },
@@ -307,8 +296,6 @@
         "id" : 595
     },
     {
-<<<<<<< HEAD
-=======
         "name" : "minecraft:blue_candle",
         "id" : -424
     },
@@ -317,7 +304,6 @@
         "id" : -441
     },
     {
->>>>>>> 47e7289c184935fd38a933005e1d41371294f3d7
         "name" : "minecraft:blue_dye",
         "id" : 399
     },
@@ -331,11 +317,7 @@
     },
     {
         "name" : "minecraft:boat",
-<<<<<<< HEAD
-        "id" : 625
-=======
         "id" : 627
->>>>>>> 47e7289c184935fd38a933005e1d41371294f3d7
     },
     {
         "name" : "minecraft:bone",
@@ -398,8 +380,6 @@
         "id" : 108
     },
     {
-<<<<<<< HEAD
-=======
         "name" : "minecraft:brown_candle",
         "id" : -425
     },
@@ -408,7 +388,6 @@
         "id" : -442
     },
     {
->>>>>>> 47e7289c184935fd38a933005e1d41371294f3d7
         "name" : "minecraft:brown_dye",
         "id" : 398
     },
@@ -457,8 +436,6 @@
         "id" : 588
     },
     {
-<<<<<<< HEAD
-=======
         "name" : "minecraft:candle",
         "id" : -412
     },
@@ -467,7 +444,6 @@
         "id" : -429
     },
     {
->>>>>>> 47e7289c184935fd38a933005e1d41371294f3d7
         "name" : "minecraft:carpet",
         "id" : 171
     },
@@ -517,11 +493,7 @@
     },
     {
         "name" : "minecraft:chain",
-<<<<<<< HEAD
-        "id" : 617
-=======
         "id" : 618
->>>>>>> 47e7289c184935fd38a933005e1d41371294f3d7
     },
     {
         "name" : "minecraft:chain_command_block",
@@ -604,13 +576,10 @@
         "id" : 384
     },
     {
-<<<<<<< HEAD
-=======
         "name" : "minecraft:client_request_placeholder_block",
         "id" : -465
     },
     {
->>>>>>> 47e7289c184935fd38a933005e1d41371294f3d7
         "name" : "minecraft:clock",
         "id" : 393
     },
@@ -828,11 +797,7 @@
     },
     {
         "name" : "minecraft:crimson_door",
-<<<<<<< HEAD
-        "id" : 614
-=======
         "id" : 615
->>>>>>> 47e7289c184935fd38a933005e1d41371294f3d7
     },
     {
         "name" : "minecraft:crimson_double_slab",
@@ -872,11 +837,7 @@
     },
     {
         "name" : "minecraft:crimson_sign",
-<<<<<<< HEAD
-        "id" : 612
-=======
         "id" : 613
->>>>>>> 47e7289c184935fd38a933005e1d41371294f3d7
     },
     {
         "name" : "minecraft:crimson_slab",
@@ -923,8 +884,6 @@
         "id" : -354
     },
     {
-<<<<<<< HEAD
-=======
         "name" : "minecraft:cyan_candle",
         "id" : -422
     },
@@ -933,7 +892,6 @@
         "id" : -439
     },
     {
->>>>>>> 47e7289c184935fd38a933005e1d41371294f3d7
         "name" : "minecraft:cyan_dye",
         "id" : 401
     },
@@ -1215,11 +1173,7 @@
     },
     {
         "name" : "minecraft:dye",
-<<<<<<< HEAD
-        "id" : 626
-=======
         "id" : 628
->>>>>>> 47e7289c184935fd38a933005e1d41371294f3d7
     },
     {
         "name" : "minecraft:egg",
@@ -1747,11 +1701,7 @@
     },
     {
         "name" : "minecraft:end_crystal",
-<<<<<<< HEAD
-        "id" : 629
-=======
         "id" : 631
->>>>>>> 47e7289c184935fd38a933005e1d41371294f3d7
     },
     {
         "name" : "minecraft:end_gateway",
@@ -1947,19 +1897,11 @@
     },
     {
         "name" : "minecraft:glow_berries",
-<<<<<<< HEAD
-        "id" : 630
-    },
-    {
-        "name" : "minecraft:glow_frame",
-        "id" : 621
-=======
         "id" : 632
     },
     {
         "name" : "minecraft:glow_frame",
         "id" : 622
->>>>>>> 47e7289c184935fd38a933005e1d41371294f3d7
     },
     {
         "name" : "minecraft:glow_ink_sac",
@@ -1975,11 +1917,7 @@
     },
     {
         "name" : "minecraft:glow_stick",
-<<<<<<< HEAD
-        "id" : 166
-=======
         "id" : 600
->>>>>>> 47e7289c184935fd38a933005e1d41371294f3d7
     },
     {
         "name" : "minecraft:glowingobsidian",
@@ -1995,11 +1933,7 @@
     },
     {
         "name" : "minecraft:goat_horn",
-<<<<<<< HEAD
-        "id" : 622
-=======
         "id" : 623
->>>>>>> 47e7289c184935fd38a933005e1d41371294f3d7
     },
     {
         "name" : "minecraft:goat_spawn_egg",
@@ -2090,8 +2024,6 @@
         "id" : 13
     },
     {
-<<<<<<< HEAD
-=======
         "name" : "minecraft:gray_candle",
         "id" : -420
     },
@@ -2100,7 +2032,6 @@
         "id" : -437
     },
     {
->>>>>>> 47e7289c184935fd38a933005e1d41371294f3d7
         "name" : "minecraft:gray_dye",
         "id" : 403
     },
@@ -2109,8 +2040,6 @@
         "id" : 227
     },
     {
-<<<<<<< HEAD
-=======
         "name" : "minecraft:green_candle",
         "id" : -426
     },
@@ -2119,7 +2048,6 @@
         "id" : -443
     },
     {
->>>>>>> 47e7289c184935fd38a933005e1d41371294f3d7
         "name" : "minecraft:green_dye",
         "id" : 397
     },
@@ -2552,8 +2480,6 @@
         "id" : -215
     },
     {
-<<<<<<< HEAD
-=======
         "name" : "minecraft:light_blue_candle",
         "id" : -416
     },
@@ -2562,7 +2488,6 @@
         "id" : -433
     },
     {
->>>>>>> 47e7289c184935fd38a933005e1d41371294f3d7
         "name" : "minecraft:light_blue_dye",
         "id" : 407
     },
@@ -2571,8 +2496,6 @@
         "id" : 223
     },
     {
-<<<<<<< HEAD
-=======
         "name" : "minecraft:light_gray_candle",
         "id" : -421
     },
@@ -2581,7 +2504,6 @@
         "id" : -438
     },
     {
->>>>>>> 47e7289c184935fd38a933005e1d41371294f3d7
         "name" : "minecraft:light_gray_dye",
         "id" : 402
     },
@@ -2594,8 +2516,6 @@
         "id" : -312
     },
     {
-<<<<<<< HEAD
-=======
         "name" : "minecraft:lime_candle",
         "id" : -418
     },
@@ -2604,7 +2524,6 @@
         "id" : -435
     },
     {
->>>>>>> 47e7289c184935fd38a933005e1d41371294f3d7
         "name" : "minecraft:lime_dye",
         "id" : 405
     },
@@ -2654,11 +2573,7 @@
     },
     {
         "name" : "minecraft:lodestone_compass",
-<<<<<<< HEAD
-        "id" : 600
-=======
         "id" : 601
->>>>>>> 47e7289c184935fd38a933005e1d41371294f3d7
     },
     {
         "name" : "minecraft:log",
@@ -2673,8 +2588,6 @@
         "id" : -204
     },
     {
-<<<<<<< HEAD
-=======
         "name" : "minecraft:magenta_candle",
         "id" : -415
     },
@@ -2683,7 +2596,6 @@
         "id" : -432
     },
     {
->>>>>>> 47e7289c184935fd38a933005e1d41371294f3d7
         "name" : "minecraft:magenta_dye",
         "id" : 408
     },
@@ -2816,17 +2728,12 @@
         "id" : 540
     },
     {
-<<<<<<< HEAD
-        "name" : "minecraft:music_disc_pigstep",
-        "id" : 618
-=======
         "name" : "minecraft:music_disc_otherside",
         "id" : 626
     },
     {
         "name" : "minecraft:music_disc_pigstep",
         "id" : 619
->>>>>>> 47e7289c184935fd38a933005e1d41371294f3d7
     },
     {
         "name" : "minecraft:music_disc_stal",
@@ -2853,8 +2760,6 @@
         "id" : 110
     },
     {
-<<<<<<< HEAD
-=======
         "name" : "minecraft:mysterious_frame",
         "id" : -466
     },
@@ -2863,7 +2768,6 @@
         "id" : -467
     },
     {
->>>>>>> 47e7289c184935fd38a933005e1d41371294f3d7
         "name" : "minecraft:name_tag",
         "id" : 548
     },
@@ -2889,11 +2793,7 @@
     },
     {
         "name" : "minecraft:nether_sprouts",
-<<<<<<< HEAD
-        "id" : 619
-=======
         "id" : 620
->>>>>>> 47e7289c184935fd38a933005e1d41371294f3d7
     },
     {
         "name" : "minecraft:nether_star",
@@ -2913,11 +2813,7 @@
     },
     {
         "name" : "minecraft:netherite_axe",
-<<<<<<< HEAD
-        "id" : 605
-=======
         "id" : 606
->>>>>>> 47e7289c184935fd38a933005e1d41371294f3d7
     },
     {
         "name" : "minecraft:netherite_block",
@@ -2925,45 +2821,6 @@
     },
     {
         "name" : "minecraft:netherite_boots",
-<<<<<<< HEAD
-        "id" : 610
-    },
-    {
-        "name" : "minecraft:netherite_chestplate",
-        "id" : 608
-    },
-    {
-        "name" : "minecraft:netherite_helmet",
-        "id" : 607
-    },
-    {
-        "name" : "minecraft:netherite_hoe",
-        "id" : 606
-    },
-    {
-        "name" : "minecraft:netherite_ingot",
-        "id" : 601
-    },
-    {
-        "name" : "minecraft:netherite_leggings",
-        "id" : 609
-    },
-    {
-        "name" : "minecraft:netherite_pickaxe",
-        "id" : 604
-    },
-    {
-        "name" : "minecraft:netherite_scrap",
-        "id" : 611
-    },
-    {
-        "name" : "minecraft:netherite_shovel",
-        "id" : 603
-    },
-    {
-        "name" : "minecraft:netherite_sword",
-        "id" : 602
-=======
         "id" : 611
     },
     {
@@ -3001,7 +2858,6 @@
     {
         "name" : "minecraft:netherite_sword",
         "id" : 603
->>>>>>> 47e7289c184935fd38a933005e1d41371294f3d7
     },
     {
         "name" : "minecraft:netherrack",
@@ -3048,8 +2904,6 @@
         "id" : 451
     },
     {
-<<<<<<< HEAD
-=======
         "name" : "minecraft:orange_candle",
         "id" : -414
     },
@@ -3058,7 +2912,6 @@
         "id" : -431
     },
     {
->>>>>>> 47e7289c184935fd38a933005e1d41371294f3d7
         "name" : "minecraft:orange_dye",
         "id" : 409
     },
@@ -3135,8 +2988,6 @@
         "id" : 491
     },
     {
-<<<<<<< HEAD
-=======
         "name" : "minecraft:pink_candle",
         "id" : -419
     },
@@ -3145,7 +2996,6 @@
         "id" : -436
     },
     {
->>>>>>> 47e7289c184935fd38a933005e1d41371294f3d7
         "name" : "minecraft:pink_dye",
         "id" : 404
     },
@@ -3354,8 +3204,6 @@
         "id" : 104
     },
     {
-<<<<<<< HEAD
-=======
         "name" : "minecraft:purple_candle",
         "id" : -423
     },
@@ -3364,7 +3212,6 @@
         "id" : -440
     },
     {
->>>>>>> 47e7289c184935fd38a933005e1d41371294f3d7
         "name" : "minecraft:purple_dye",
         "id" : 400
     },
@@ -3473,8 +3320,6 @@
         "id" : -168
     },
     {
-<<<<<<< HEAD
-=======
         "name" : "minecraft:red_candle",
         "id" : -427
     },
@@ -3483,7 +3328,6 @@
         "id" : -444
     },
     {
->>>>>>> 47e7289c184935fd38a933005e1d41371294f3d7
         "name" : "minecraft:red_dye",
         "id" : 396
     },
@@ -3600,8 +3444,6 @@
         "id" : -165
     },
     {
-<<<<<<< HEAD
-=======
         "name" : "minecraft:sculk",
         "id" : -458
     },
@@ -3610,13 +3452,10 @@
         "id" : -460
     },
     {
->>>>>>> 47e7289c184935fd38a933005e1d41371294f3d7
         "name" : "minecraft:sculk_sensor",
         "id" : -307
     },
     {
-<<<<<<< HEAD
-=======
         "name" : "minecraft:sculk_shrieker",
         "id" : -461
     },
@@ -3625,7 +3464,6 @@
         "id" : -459
     },
     {
->>>>>>> 47e7289c184935fd38a933005e1d41371294f3d7
         "name" : "minecraft:scute",
         "id" : 572
     },
@@ -3755,11 +3593,7 @@
     },
     {
         "name" : "minecraft:soul_campfire",
-<<<<<<< HEAD
-        "id" : 620
-=======
         "id" : 621
->>>>>>> 47e7289c184935fd38a933005e1d41371294f3d7
     },
     {
         "name" : "minecraft:soul_fire",
@@ -3787,11 +3621,7 @@
     },
     {
         "name" : "minecraft:spawn_egg",
-<<<<<<< HEAD
-        "id" : 628
-=======
         "id" : 630
->>>>>>> 47e7289c184935fd38a933005e1d41371294f3d7
     },
     {
         "name" : "minecraft:spider_eye",
@@ -3855,11 +3685,7 @@
     },
     {
         "name" : "minecraft:spyglass",
-<<<<<<< HEAD
-        "id" : 624
-=======
         "id" : 625
->>>>>>> 47e7289c184935fd38a933005e1d41371294f3d7
     },
     {
         "name" : "minecraft:squid_spawn_egg",
@@ -4167,11 +3993,7 @@
     },
     {
         "name" : "minecraft:warped_door",
-<<<<<<< HEAD
-        "id" : 615
-=======
         "id" : 616
->>>>>>> 47e7289c184935fd38a933005e1d41371294f3d7
     },
     {
         "name" : "minecraft:warped_double_slab",
@@ -4191,11 +4013,7 @@
     },
     {
         "name" : "minecraft:warped_fungus_on_a_stick",
-<<<<<<< HEAD
-        "id" : 616
-=======
         "id" : 617
->>>>>>> 47e7289c184935fd38a933005e1d41371294f3d7
     },
     {
         "name" : "minecraft:warped_hyphae",
@@ -4219,11 +4037,7 @@
     },
     {
         "name" : "minecraft:warped_sign",
-<<<<<<< HEAD
-        "id" : 613
-=======
         "id" : 614
->>>>>>> 47e7289c184935fd38a933005e1d41371294f3d7
     },
     {
         "name" : "minecraft:warped_slab",
@@ -4382,8 +4196,6 @@
         "id" : 291
     },
     {
-<<<<<<< HEAD
-=======
         "name" : "minecraft:white_candle",
         "id" : -413
     },
@@ -4392,7 +4204,6 @@
         "id" : -430
     },
     {
->>>>>>> 47e7289c184935fd38a933005e1d41371294f3d7
         "name" : "minecraft:white_dye",
         "id" : 410
     },
@@ -4469,8 +4280,6 @@
         "id" : 511
     },
     {
-<<<<<<< HEAD
-=======
         "name" : "minecraft:yellow_candle",
         "id" : -417
     },
@@ -4479,7 +4288,6 @@
         "id" : -434
     },
     {
->>>>>>> 47e7289c184935fd38a933005e1d41371294f3d7
         "name" : "minecraft:yellow_dye",
         "id" : 406
     },
@@ -4511,8 +4319,4 @@
         "name" : "minecraft:zombie_villager_spawn_egg",
         "id" : 477
     }
-<<<<<<< HEAD
 ]
-=======
-]
->>>>>>> 47e7289c184935fd38a933005e1d41371294f3d7
