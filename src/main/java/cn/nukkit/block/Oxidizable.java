@@ -64,7 +64,7 @@ public interface Oxidizable {
                     }
                     mutableLocation.setComponents(block.x + x, block.y + y, block.z + z);
                     if (block.distanceManhattan(mutableLocation) > 4) {
-                        continue ;
+                        continue;
                     }
                     Block relative = mutableLocation.getLevelBlock();
                     if (!(relative instanceof Oxidizable)) {
