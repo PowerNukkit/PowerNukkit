@@ -1,12 +1,14 @@
 package cn.nukkit.block;
 
-import cn.nukkit.item.Item;
+import cn.nukkit.api.PowerNukkitOnly;
 import cn.nukkit.item.ItemTool;
 import cn.nukkit.utils.BlockColor;
 
+@SuppressWarnings("deprecation")
 public class BlockBricksRedNether extends BlockNetherBrick {
 
     public BlockBricksRedNether() {
+        // Does nothing
     }
 
     @Override
@@ -25,6 +27,7 @@ public class BlockBricksRedNether extends BlockNetherBrick {
     }
 
     @Override
+    @PowerNukkitOnly
     public int getToolTier() {
         return ItemTool.TIER_WOODEN;
     }

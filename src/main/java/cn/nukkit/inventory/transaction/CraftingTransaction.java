@@ -1,6 +1,7 @@
 package cn.nukkit.inventory.transaction;
 
 import cn.nukkit.Player;
+import cn.nukkit.api.DeprecationDetails;
 import cn.nukkit.api.PowerNukkitDifference;
 import cn.nukkit.api.PowerNukkitOnly;
 import cn.nukkit.api.Since;
@@ -12,6 +13,7 @@ import cn.nukkit.inventory.transaction.action.SlotChangeAction;
 import cn.nukkit.inventory.transaction.action.TakeLevelAction;
 import cn.nukkit.item.Item;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
@@ -29,8 +31,16 @@ public class CraftingTransaction extends InventoryTransaction {
 
     protected Item primaryOutput;
 
-    protected Recipe recipe;
+    @Deprecated
+    @DeprecationDetails(since = "FUTURE", reason = "When the recipe is not a CraftingRecipe, this is set to null instead of the recipe",
+            by = "PowerNukkit", replaceWith = "getTransactionRecipe()")
+    @Nullable
+    @Since("FUTURE")
+    protected CraftingRecipe recipe;
 
+    private Recipe transactionRecipe;
+
+    @PowerNukkitOnly
     protected int craftingType;
     
     private boolean readyToExecute;
@@ -94,64 +104,103 @@ public class CraftingTransaction extends InventoryTransaction {
         }
     }
 
-    public Recipe getRecipe() {
+    @Deprecated
+    @DeprecationDetails(since = "FUTURE", reason = "When the recipe is not a CraftingRecipe, returns null instead of the recipe",
+        by = "PowerNukkit", replaceWith = "getTransactionRecipe()")
+    @Since("FUTURE")
+    @Nullable
+    public CraftingRecipe getRecipe() {
         return recipe;
     }
 
-    public boolean canExecute() {
-        CraftingManager craftingManager = source.getServer().getCraftingManager();
-        if (craftingType == Player.CRAFTING_STONECUTTER) {
-            recipe = craftingManager.matchStonecutterRecipe(this.primaryOutput);
-        } else if (craftingType == Player.CRAFTING_CARTOGRAPHY) {
-            recipe = craftingManager.matchCartographyRecipe(inputs, this.primaryOutput, this.secondaryOutputs);
-        } else if (craftingType == Player.CRAFTING_ANVIL) {
-            Inventory inventory = source.getWindowById(Player.ANVIL_WINDOW_ID);
-            if (inventory instanceof AnvilInventory) {
-                AnvilInventory anvil = (AnvilInventory) inventory;
-                addInventory(anvil);
-                if (this.primaryOutput.equalsIgnoringEnchantmentOrder(anvil.getResult(), true)) {
-                    actions.removeIf(action-> action instanceof TakeLevelAction);
-                    TakeLevelAction takeLevel = new TakeLevelAction(anvil.getLevelCost());
-                    addAction(takeLevel);
-                    if (takeLevel.isValid(source)) {
-                        recipe = new RepairRecipe(InventoryType.ANVIL, this.primaryOutput, this.inputs);
-                        PlayerUIInventory uiInventory = source.getUIInventory();
-                        actions.add(new DamageAnvilAction(anvil, !source.isCreative() && ThreadLocalRandom.current().nextFloat() < 0.12F, this));
-                        actions.stream()
-                                .filter(a -> a instanceof SlotChangeAction)
-                                .map(a-> (SlotChangeAction) a)
-                                .filter(a -> a.getInventory() == uiInventory)
-                                .filter(a -> a.getSlot() == 50)
-                                .findFirst()
-                                .ifPresent(a -> {
-                                    // Move the set result action to the end, otherwise the result would be cleared too early
-                                    actions.remove(a);
-                                    actions.add(a);
-                                });
-                    }
-                }
-            }
-            if (recipe == null) {
-                source.sendExperienceLevel();
-            }
-            source.getUIInventory().setItem(AnvilInventory.RESULT, Item.get(0), false);
-        } else if (craftingType == Player.CRAFTING_GRINDSTONE) {
-            Inventory inventory = source.getWindowById(Player.GRINDSTONE_WINDOW_ID);
-            if (inventory instanceof GrindstoneInventory) {
-                GrindstoneInventory grindstone = (GrindstoneInventory) inventory;
-                addInventory(grindstone);
-                if (grindstone.updateResult(false) && this.primaryOutput.equals(grindstone.getResult(), true, true)) {
-                    recipe = new RepairRecipe(InventoryType.GRINDSTONE, this.primaryOutput, this.inputs);
-                    grindstone.setResult(Item.get(0), false);
-                }
-            }
-        } else {
-            recipe = craftingManager.matchRecipe(inputs, this.primaryOutput, this.secondaryOutputs);
-        }
-
-        return this.recipe != null && super.canExecute();
+    @PowerNukkitOnly
+    @Since("FUTURE")
+    public Recipe getTransactionRecipe() {
+        return transactionRecipe;
     }
 
+    @PowerNukkitOnly
+    @Since("FUTURE")
+    protected void setTransactionRecipe(Recipe recipe) {
+        this.transactionRecipe = recipe;
+        this.recipe = (recipe instanceof CraftingRecipe)? (CraftingRecipe) recipe: null;
+    }
+
+    @Override
+    public boolean canExecute() {
+        CraftingManager craftingManager = source.getServer().getCraftingManager();
+        Inventory inventory;
+        switch (craftingType) {
+            case Player.CRAFTING_STONECUTTER:
+                setTransactionRecipe(craftingManager.matchStonecutterRecipe(this.primaryOutput));
+                break;
+            case Player.CRAFTING_CARTOGRAPHY:
+                setTransactionRecipe(craftingManager.matchCartographyRecipe(inputs, this.primaryOutput, this.secondaryOutputs));
+                break;
+            case Player.CRAFTING_SMITHING:
+                inventory = source.getWindowById(Player.SMITHING_WINDOW_ID);
+                if (inventory instanceof SmithingInventory) {
+                    addInventory(inventory);
+                    SmithingInventory smithingInventory = (SmithingInventory) inventory;
+                    SmithingRecipe smithingRecipe = smithingInventory.matchRecipe();
+                    if (smithingRecipe != null && this.primaryOutput.equals(smithingRecipe.getFinalResult(smithingInventory.getEquipment()), true, true)) {
+                        setTransactionRecipe(smithingRecipe);
+                    }
+                }
+                
+                break;
+            case Player.CRAFTING_ANVIL:
+                inventory = source.getWindowById(Player.ANVIL_WINDOW_ID);
+                if (inventory instanceof AnvilInventory) {
+                    AnvilInventory anvil = (AnvilInventory) inventory;
+                    addInventory(anvil);
+                    if (this.primaryOutput.equalsIgnoringEnchantmentOrder(anvil.getResult(), true)) {
+                        actions.removeIf(action -> action instanceof TakeLevelAction);
+                        TakeLevelAction takeLevel = new TakeLevelAction(anvil.getLevelCost());
+                        addAction(takeLevel);
+                        if (takeLevel.isValid(source)) {
+                            setTransactionRecipe(new RepairRecipe(InventoryType.ANVIL, this.primaryOutput, this.inputs));
+                            PlayerUIInventory uiInventory = source.getUIInventory();
+                            actions.add(new DamageAnvilAction(anvil, !source.isCreative() && ThreadLocalRandom.current().nextFloat() < 0.12F, this));
+                            actions.stream()
+                                    .filter(a -> a instanceof SlotChangeAction)
+                                    .map(a -> (SlotChangeAction) a)
+                                    .filter(a -> a.getInventory() == uiInventory)
+                                    .filter(a -> a.getSlot() == 50)
+                                    .findFirst()
+                                    .ifPresent(a -> {
+                                        // Move the set result action to the end, otherwise the result would be cleared too early
+                                        actions.remove(a);
+                                        actions.add(a);
+                                    });
+                        }
+                    }
+                }
+                if (getTransactionRecipe() == null) {
+                    source.sendExperienceLevel();
+                }
+                source.getUIInventory().setItem(AnvilInventory.RESULT, Item.get(0), false);
+                break;
+            case Player.CRAFTING_GRINDSTONE:
+                inventory = source.getWindowById(Player.GRINDSTONE_WINDOW_ID);
+                if (inventory instanceof GrindstoneInventory) {
+                    GrindstoneInventory grindstone = (GrindstoneInventory) inventory;
+                    addInventory(grindstone);
+                    if (grindstone.updateResult(false) && this.primaryOutput.equals(grindstone.getResult(), true, true)) {
+                        setTransactionRecipe(new RepairRecipe(InventoryType.GRINDSTONE, this.primaryOutput, this.inputs));
+                        grindstone.setResult(Item.get(0), false);
+                    }
+                }
+                break;
+            default:
+                setTransactionRecipe(craftingManager.matchRecipe(inputs, this.primaryOutput, this.secondaryOutputs));
+                break;
+        }
+
+        return this.getTransactionRecipe() != null && super.canExecute();
+    }
+
+    @Override
     protected boolean callExecuteEvent() {
         CraftItemEvent ev;
 
@@ -159,11 +208,13 @@ public class CraftingTransaction extends InventoryTransaction {
         return !ev.isCancelled();
     }
 
+    @Override
     @PowerNukkitDifference(since = "1.4.0.0-PN", info = "No longer closes the inventory")
     protected void sendInventories() {
         super.sendInventories();
     }
 
+    @Override
     public boolean execute() {
         if (super.execute()) {
             switch (this.primaryOutput.getId()) {

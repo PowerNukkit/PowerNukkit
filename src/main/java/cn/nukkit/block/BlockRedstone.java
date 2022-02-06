@@ -3,6 +3,9 @@ package cn.nukkit.block;
 import cn.nukkit.Player;
 import cn.nukkit.api.PowerNukkitDifference;
 import cn.nukkit.api.PowerNukkitOnly;
+import cn.nukkit.api.Since;
+import cn.nukkit.blockproperty.BlockProperties;
+import cn.nukkit.blockproperty.CommonBlockProperties;
 import cn.nukkit.item.Item;
 import cn.nukkit.item.ItemTool;
 import cn.nukkit.math.BlockFace;
@@ -32,6 +35,14 @@ public class BlockRedstone extends BlockSolidMeta implements RedstoneComponent {
         return REDSTONE_BLOCK;
     }
 
+    @Since("1.4.0.0-PN")
+    @PowerNukkitOnly
+    @Nonnull
+    @Override
+    public BlockProperties getProperties() {
+        return CommonBlockProperties.EMPTY_PROPERTIES;
+    }
+
     @Override
     public double getResistance() {
         return 10;
@@ -53,6 +64,7 @@ public class BlockRedstone extends BlockSolidMeta implements RedstoneComponent {
     }
 
     @Override
+    @PowerNukkitOnly
     public int getToolTier() {
         return ItemTool.TIER_WOODEN;
     }
@@ -63,7 +75,6 @@ public class BlockRedstone extends BlockSolidMeta implements RedstoneComponent {
     }
 
     @Override
-    @PowerNukkitOnly
     @PowerNukkitDifference(info = "Update around redstone", since = "1.4.0.0-PN")
     public boolean place(@Nonnull Item item, @Nonnull Block block, @Nonnull Block target, @Nonnull BlockFace face, double fx, double fy, double fz, @Nullable Player player) {
         if (super.place(item, block, target, face, fx, fy, fz, player)) {
@@ -75,7 +86,6 @@ public class BlockRedstone extends BlockSolidMeta implements RedstoneComponent {
     }
 
     @Override
-    @PowerNukkitOnly
     @PowerNukkitDifference(info = "Update around redstone", since = "1.4.0.0-PN")
     public boolean onBreak(Item item) {
         if (!super.onBreak(item)) {

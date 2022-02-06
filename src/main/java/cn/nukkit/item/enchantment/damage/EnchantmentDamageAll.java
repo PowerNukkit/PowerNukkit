@@ -28,10 +28,11 @@ public class EnchantmentDamageAll extends EnchantmentDamage {
 
     @Override
     public double getDamageBonus(Entity entity) {
-        if (this.getLevel() <= 0) {
+        int level = getLevel();
+        if (level <= 0) {
             return 0;
         }
 
-        return 0.5 + getLevel() * 0.5;
+        return level * 1.25;
     }
 }

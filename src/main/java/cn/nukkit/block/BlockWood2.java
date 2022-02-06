@@ -15,10 +15,14 @@ import static cn.nukkit.blockproperty.CommonBlockProperties.PILLAR_AXIS;
  * @author MagicDroidX (Nukkit Project)
  */
 public class BlockWood2 extends BlockWood {
+    @PowerNukkitOnly
+    @Since("1.4.0.0-PN")
     public static final BlockProperty<WoodType> NEW_LOG_TYPE = new ArrayBlockProperty<>("new_log_type", true, new WoodType[]{
             WoodType.ACACIA, WoodType.DARK_OAK
     }, 2);
 
+    @PowerNukkitOnly
+    @Since("1.4.0.0-PN")
     public static final BlockProperties PROPERTIES = new BlockProperties(NEW_LOG_TYPE, PILLAR_AXIS);
 
     public static final int ACACIA = 0;
@@ -45,11 +49,13 @@ public class BlockWood2 extends BlockWood {
         return PROPERTIES;
     }
 
+    @PowerNukkitOnly
     @Override
     public WoodType getWoodType() {
         return getPropertyValue(NEW_LOG_TYPE);
     }
 
+    @PowerNukkitOnly
     @Override
     public void setWoodType(WoodType woodType) {
         setPropertyValue(NEW_LOG_TYPE, woodType);

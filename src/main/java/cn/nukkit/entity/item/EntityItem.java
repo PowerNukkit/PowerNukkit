@@ -1,8 +1,9 @@
 package cn.nukkit.entity.item;
 
-import cn.nukkit.Player;
 import cn.nukkit.Server;
 import cn.nukkit.api.PowerNukkitDifference;
+import cn.nukkit.api.PowerNukkitOnly;
+import cn.nukkit.api.Since;
 import cn.nukkit.block.BlockID;
 import cn.nukkit.entity.Entity;
 import cn.nukkit.event.entity.EntityDamageEvent;
@@ -21,9 +22,8 @@ import cn.nukkit.network.protocol.EntityEventPacket;
  * @author MagicDroidX
  */
 public class EntityItem extends Entity {
-    public static final int NETWORK_ID = 64;
 
-    public static final int DATA_SOURCE_ID = 17;
+    public static final int NETWORK_ID = 64;
 
     public EntityItem(FullChunk chunk, CompoundTag nbt) {
         super(chunk, nbt);
@@ -118,12 +118,12 @@ public class EntityItem extends Entity {
     @Override
     public boolean attack(EntityDamageEvent source) {
         if (item != null && item.isLavaResistant() && (
-                source.getCause() == DamageCause.LAVA || 
-                        source.getCause() == DamageCause.FIRE || 
+                source.getCause() == DamageCause.LAVA ||
+                        source.getCause() == DamageCause.FIRE ||
                         source.getCause() == DamageCause.FIRE_TICK)) {
             return false;
         }
-        
+
         return (source.getCause() == DamageCause.VOID ||
                 source.getCause() == DamageCause.CONTACT ||
                 source.getCause() == DamageCause.FIRE_TICK ||
@@ -193,7 +193,7 @@ public class EntityItem extends Entity {
                 if (this.pickupDelay < 0) {
                     this.pickupDelay = 0;
                 }
-            } else {
+            }/* else { // Done in Player#checkNearEntities
                 for (Entity entity : this.level.getNearbyEntities(this.boundingBox.grow(1, 0.5, 1), this)) {
                     if (entity instanceof Player) {
                         if (((Player) entity).pickupEntity(this, true)) {
@@ -201,12 +201,12 @@ public class EntityItem extends Entity {
                         }
                     }
                 }
-            }
-            
-            if (this.level.getBlockIdAt((int) this.x, (int) this.boundingBox.getMaxY(), (int) this.z, 0) == BlockID.WATER 
-                || this.level.getBlockIdAt((int) this.x, (int) this.boundingBox.getMaxY(), (int) this.z, 0) == BlockID.STILL_WATER
-                || this.level.getBlockIdAt((int) this.x, (int) this.boundingBox.getMaxY(), (int) this.z, 1) == BlockID.WATER
-                || this.level.getBlockIdAt((int) this.x, (int) this.boundingBox.getMaxY(), (int) this.z, 1) == BlockID.STILL_WATER
+            }*/
+
+            int bid = this.level.getBlockIdAt((int) this.x, (int) this.boundingBox.getMaxY(), (int) this.z, 0);
+            if (bid == BlockID.WATER || bid == BlockID.STILL_WATER
+                || (bid = this.level.getBlockIdAt((int) this.x, (int) this.boundingBox.getMaxY(), (int) this.z, 1)) == BlockID.WATER
+                || bid == BlockID.STILL_WATER
             ) {
                 //item is fully in water or in still water
                 this.motionY -= this.getGravity() * -0.015;
@@ -289,9 +289,22 @@ public class EntityItem extends Entity {
         }
     }
 
+    @Since("1.5.1.0-PN")
+    @PowerNukkitOnly
+    @Override
+    public String getOriginalName() {
+        return "Item";
+    }
+
     @Override
     public String getName() {
-        return this.hasCustomName() ? this.getNameTag() : (this.item.hasCustomName() ? this.item.getCustomName() : this.item.getName());
+        if (this.hasCustomName()) {
+            return getNameTag();
+        }
+        if (item == null) {
+            return getOriginalName();
+        }
+        return item.count + "x " + (this.item.hasCustomName() ? this.item.getCustomName() : this.item.getName());
     }
 
     public Item getItem() {

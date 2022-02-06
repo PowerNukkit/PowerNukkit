@@ -407,6 +407,8 @@ public abstract class EntityLiving extends Entity implements EntityDamageable {
         this.setDataProperty(new ShortEntityData(DATA_AIR, ticks));
     }
 
+    @PowerNukkitOnly
+    @Since("1.4.0.0-PN")
     protected boolean blockedByShield(EntityDamageEvent source) {
         Entity damager = null;
         if (source instanceof EntityDamageByChildEntityEvent) {
@@ -446,16 +448,19 @@ public abstract class EntityLiving extends Entity implements EntityDamageable {
         return true;
     }
 
+    @PowerNukkitOnly
     protected void onBlock(Entity entity, boolean animate) {
         if (animate) {
             getLevel().addSound(this, Sound.ITEM_SHIELD_BLOCK);
         }
     }
 
+    @PowerNukkitOnly
     public boolean isBlocking() {
         return this.getDataFlag(DATA_FLAGS_EXTENDED, DATA_FLAG_BLOCKING);
     }
 
+    @PowerNukkitOnly
     public void setBlocking(boolean value) {
         this.setDataFlag(DATA_FLAGS_EXTENDED, DATA_FLAG_BLOCKING, value);
     }

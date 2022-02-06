@@ -18,16 +18,20 @@ import cn.nukkit.nbt.tag.CompoundTag;
 
 import static cn.nukkit.math.CompassRoseDirection.Precision.PRIMARY_INTER_CARDINAL;
 
+@Since("1.4.0.0-PN")
 public class ItemArmorStand extends Item {
 
+    @Since("1.4.0.0-PN")
     public ItemArmorStand() {
         this(0);
     }
 
+    @Since("1.4.0.0-PN")
     public ItemArmorStand(Integer meta) {
         this(meta, 1);
     }
 
+    @Since("1.4.0.0-PN")
     public ItemArmorStand(Integer meta, int count) {
         super(ARMOR_STAND, meta, count, "Armor Stand");
     }

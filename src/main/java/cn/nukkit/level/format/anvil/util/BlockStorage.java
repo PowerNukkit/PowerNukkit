@@ -49,8 +49,8 @@ public class BlockStorage {
     private static final int BLOCK_ID_MASK          = 0x00FF;
     private static final int BLOCK_ID_EXTRA_MASK    = 0xFF00;
     private static final int BLOCK_ID_FULL          = BLOCK_ID_MASK | BLOCK_ID_EXTRA_MASK;
-    
-    public static final int SECTION_SIZE = 4096;
+
+    @PowerNukkitOnly public static final int SECTION_SIZE = 4096;
     
     private static final BlockState[] EMPTY = new BlockState[SECTION_SIZE];
     static {
@@ -68,7 +68,6 @@ public class BlockStorage {
         palette = new PalettedBlockStorage();
     }
 
-    @PowerNukkitOnly
     @Since("1.4.0.0-PN")
     @API(definition = INTERNAL, usage = BLEEDING)
     BlockStorage(BlockState[] states, byte flags, PalettedBlockStorage palette, @Nullable BitSet denyStates) {
@@ -79,9 +78,20 @@ public class BlockStorage {
     }
 
     private static int getIndex(int x, int y, int z) {
+        checkArg(x, "x");
+        checkArg(x, "y");
+        checkArg(x, "z");
         int index = (x << 8) + (z << 4) + y; // XZY = Bedrock format
         Preconditions.checkArgument(index >= 0 && index < SECTION_SIZE, "Invalid index");
         return index;
+    }
+
+    private static void checkArg(int pos, String arg) {
+        try {
+            Preconditions.checkElementIndex(pos, 16, arg);
+        } catch (IndexOutOfBoundsException e) {
+            throw new IllegalArgumentException(e);
+        }
     }
 
     @Deprecated
@@ -185,6 +195,8 @@ public class BlockStorage {
         setBlockState(index, state);
     }
 
+    @PowerNukkitOnly
+    @Since("1.4.0.0-PN")
     protected BlockState setBlockState(int index, BlockState state) {
         if (log.isTraceEnabled() && !state.isCachedValidationValid()) {
             try {
@@ -429,7 +441,6 @@ public class BlockStorage {
     }
 
     @Since("1.4.0.0-PN")
-    @PowerNukkitOnly
     public BlockStorage copy() {
         BitSet deny = denyStates;
         return new BlockStorage(states.clone(), flags, palette.copy(), (BitSet) (deny != null? deny.clone() : null));
@@ -454,14 +465,17 @@ public class BlockStorage {
         }
     }
 
+    @PowerNukkitOnly
     public boolean hasBlockIds() {
         return getFlag(FLAG_HAS_ID);
     }
 
+    @PowerNukkitOnly
     public boolean hasBlockIdExtras() {
         return getFlag(FLAG_HAS_ID_EXTRA);
     }
 
+    @PowerNukkitOnly
     public boolean hasBlockDataExtras() {
         return getFlag(FLAG_HAS_DATA_EXTRA);
     }
@@ -482,6 +496,7 @@ public class BlockStorage {
         return getFlag(FLAG_PALETTE_UPDATED);
     }
 
+    @Since("1.4.0.0-PN")
     public void writeTo(BinaryStream stream) {
         if (!isPaletteUpdated()) {
             for (int i = 0; i < states.length; i++) {
@@ -492,6 +507,8 @@ public class BlockStorage {
         palette.writeTo(stream);
     }
 
+    @PowerNukkitOnly
+    @Since("1.4.0.0-PN")
     public void iterateStates(BlockPositionDataConsumer<BlockState> consumer) {
         for (int i = 0; i < states.length; i++) {
             // XZY = Bedrock format
@@ -503,6 +520,8 @@ public class BlockStorage {
         }
     }
 
+    @PowerNukkitOnly
+    @Since("1.4.0.0-PN")
     public int getBlockChangeStateAbove(int x, int y, int z) {
         BitSet denyFlags = this.denyStates;
         if (denyFlags == null) {

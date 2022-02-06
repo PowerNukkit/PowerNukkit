@@ -23,7 +23,7 @@ public abstract class ItemTool extends Item implements ItemDurable {
     public static final int TIER_STONE = 3;
     public static final int TIER_IRON = 4;
     public static final int TIER_DIAMOND = 5;
-    @Since("1.3.2.0-PN") public static final int TIER_NETHERITE = 6;
+    @Since("1.4.0.0-PN") public static final int TIER_NETHERITE = 6;
 
     public static final int TYPE_NONE = 0;
     public static final int TYPE_SWORD = 1;
@@ -31,8 +31,8 @@ public abstract class ItemTool extends Item implements ItemDurable {
     public static final int TYPE_PICKAXE = 3;
     public static final int TYPE_AXE = 4;
     public static final int TYPE_SHEARS = 5;
-    @Since("1.3.2.0-PN") public static final int TYPE_HOE = 6;
-    
+    @Since("1.4.0.0-PN") public static final int TYPE_HOE = 6;
+
     /**
      * Same breaking speed independent of the tool.
      */
@@ -44,14 +44,17 @@ public abstract class ItemTool extends Item implements ItemDurable {
     public static final int DURABILITY_STONE = dynamic(132);
     public static final int DURABILITY_IRON = dynamic(251);
     public static final int DURABILITY_DIAMOND = dynamic(1562);
-    @Since("1.3.2.0-PN") public static final int DURABILITY_NETHERITE = dynamic(2032);
+    @Since("1.4.0.0-PN") public static final int DURABILITY_NETHERITE = dynamic(2032);
     public static final int DURABILITY_FLINT_STEEL = dynamic(65);
     public static final int DURABILITY_SHEARS = dynamic(239);
     public static final int DURABILITY_BOW = dynamic(385);
     public static final int DURABILITY_TRIDENT = dynamic(251);
-    public static final int DURABILITY_FISHING_ROD = dynamic(65);
-    @Since("1.4.0.0-PN") public static final int DURABILITY_CROSSBOW = dynamic(465);
-    
+    public static final int DURABILITY_FISHING_ROD = dynamic(384);
+    @Since("1.4.0.0-PN") public static final int DURABILITY_CROSSBOW = dynamic(464);
+    @Since("FUTURE") public static final int DURABILITY_CARROT_ON_A_STICK = dynamic(26);
+    @Since("FUTURE") public static final int DURABILITY_WARPED_FUNGUS_ON_A_STICK = dynamic(101);
+    @Since("FUTURE") @PowerNukkitOnly public static final int DURABILITY_SHIELD = dynamic(337);
+
     @PowerNukkitOnly
     @Since("1.4.0.0-PN")
     @Nonnull
@@ -103,7 +106,7 @@ public abstract class ItemTool extends Item implements ItemDurable {
 
     @Override
     public boolean useOn(Block block) {
-        if (this.isUnbreakable() || isDurable() || !damageWhenBreaking()) {
+        if (this.isUnbreakable() || isDurable() || noDamageOnBreak()) {
             return true;
         }
 
@@ -130,7 +133,7 @@ public abstract class ItemTool extends Item implements ItemDurable {
 
     @Override
     public boolean useOn(Entity entity) {
-        if (this.isUnbreakable() || isDurable() || !damageWhenBreaking()) {
+        if (this.isUnbreakable() || isDurable() || noDamageOnAttack()) {
             return true;
         }
 
@@ -190,16 +193,7 @@ public abstract class ItemTool extends Item implements ItemDurable {
 
     @Override
     public boolean isTool() {
-        switch (this.id) {
-            case FLINT_STEEL:
-            case SHEARS:
-            case BOW:
-            case CROSSBOW:
-            case SHIELD:
-                return true;
-            default:
-                return this.isPickaxe() || this.isAxe() || this.isShovel() || this.isSword() || this.isHoe();
-        }
+        return true;
     }
 
     @Override
@@ -216,11 +210,28 @@ public abstract class ItemTool extends Item implements ItemDurable {
             case TIER_IRON:
                 return 14;
         }
-        
+
         if (tier == TIER_NETHERITE) {
             return 15;
         }
         return 0;
     }
 
+    /**
+     * No damage to item when it's used to attack entities
+     * @return whether the item should take damage when used to attack entities
+     */
+    @Since("FUTURE")
+    public boolean noDamageOnAttack() {
+        return false;
+    }
+
+    /**
+     * No damage to item when it's used to break blocks
+     * @return whether the item should take damage when used to break blocks
+     */
+    @Since("FUTURE")
+    public boolean noDamageOnBreak() {
+        return false;
+    }
 }

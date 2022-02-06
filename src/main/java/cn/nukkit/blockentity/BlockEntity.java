@@ -11,6 +11,7 @@ import cn.nukkit.level.Position;
 import cn.nukkit.level.format.FullChunk;
 import cn.nukkit.math.Vector3;
 import cn.nukkit.nbt.tag.CompoundTag;
+import cn.nukkit.scheduler.Task;
 import cn.nukkit.utils.ChunkException;
 import co.aikar.timings.Timing;
 import co.aikar.timings.Timings;
@@ -32,8 +33,8 @@ public abstract class BlockEntity extends Position {
     public static final String CHEST = "Chest";
     public static final String ENDER_CHEST = "EnderChest";
     public static final String FURNACE = "Furnace";
-    public static final String BLAST_FURNACE = "BlastFurnace";
-    public static final String SMOKER = "Smoker";
+    @PowerNukkitOnly public static final String BLAST_FURNACE = "BlastFurnace";
+    @PowerNukkitOnly public static final String SMOKER = "Smoker";
     public static final String SIGN = "Sign";
     public static final String MOB_SPAWNER = "MobSpawner";
     public static final String ENCHANT_TABLE = "EnchantTable";
@@ -53,23 +54,17 @@ public abstract class BlockEntity extends Position {
     public static final String JUKEBOX = "Jukebox";
     public static final String SHULKER_BOX = "ShulkerBox";
     public static final String BANNER = "Banner";
-    public static final String LECTERN = "Lectern";
-    public static final String BEEHIVE = "Beehive";
-    public static final String CONDUIT = "Conduit";
-    public static final String BARREL = "Barrel";
-    public static final String CAMPFIRE = "Campfire";
-    public static final String BELL = "Bell";
-    public static final String DISPENSER = "Dispenser";
-    public static final String DROPPER = "Dropper";
-    @PowerNukkitOnly
-    @Since("1.4.0.0-PN")
-    public static final String NETHER_REACTOR = "NetherReactor";
-    @PowerNukkitOnly
-    @Since("1.4.0.0-PN")
-    public static final String LODESTONE = "Lodestone";
-    @PowerNukkitOnly
-    @Since("1.4.0.0-PN")
-    public static final String TARGET = "Target";
+    @PowerNukkitOnly public static final String LECTERN = "Lectern";
+    @PowerNukkitOnly public static final String BEEHIVE = "Beehive";
+    @PowerNukkitOnly public static final String CONDUIT = "Conduit";
+    @PowerNukkitOnly public static final String BARREL = "Barrel";
+    @PowerNukkitOnly public static final String CAMPFIRE = "Campfire";
+    @PowerNukkitOnly public static final String BELL = "Bell";
+    @PowerNukkitOnly public static final String DISPENSER = "Dispenser";
+    @PowerNukkitOnly public static final String DROPPER = "Dropper";
+    @PowerNukkitOnly @Since("1.4.0.0-PN") public static final String NETHER_REACTOR = "NetherReactor";
+    @PowerNukkitOnly @Since("1.4.0.0-PN") public static final String LODESTONE = "Lodestone";
+    @PowerNukkitOnly @Since("1.4.0.0-PN") public static final String TARGET = "Target";
 
 
     public static long count = 1;
@@ -127,10 +122,12 @@ public abstract class BlockEntity extends Position {
 
     }
 
+    @PowerNukkitOnly
     public static BlockEntity createBlockEntity(String type, Position position, Object... args) {
         return createBlockEntity(type, position, BlockEntity.getDefaultCompound(position, type), args);
     }
 
+    @PowerNukkitOnly
     public static BlockEntity createBlockEntity(String type, Position pos, CompoundTag nbt, Object... args) {
         return createBlockEntity(type, pos.getLevel().getChunk(pos.getFloorX() >> 4, pos.getFloorZ() >> 4), nbt, args);
     }
@@ -255,7 +252,8 @@ public abstract class BlockEntity extends Position {
     public void onBreak() {
 
     }
-    
+
+    @PowerNukkitOnly
     public void onBreak(boolean isSilkTouch) {
         onBreak();
     }
@@ -264,7 +262,14 @@ public abstract class BlockEntity extends Position {
         chunk.setChanged();
 
         if (this.getLevelBlock().getId() != BlockID.AIR) {
-            this.level.updateComparatorOutputLevelSelective(this, isObservable());
+            getLevel().getServer().getScheduler().scheduleTask(new Task() {
+                @Override
+                public void onRun(int currentTick) {
+                    if (isValid() && isBlockEntityValid()) {
+                        getLevel().updateComparatorOutputLevelSelective(BlockEntity.this, isObservable());
+                    }
+                }
+            });
         }
     }
 
@@ -293,6 +298,7 @@ public abstract class BlockEntity extends Position {
                 .putInt("z", pos.getFloorZ());
     }
 
+    @PowerNukkitOnly
     @Nullable
     @Override
     public final BlockEntity getLevelBlockEntity() {

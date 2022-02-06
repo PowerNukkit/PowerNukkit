@@ -4,6 +4,7 @@ import cn.nukkit.Player;
 import cn.nukkit.Server;
 import cn.nukkit.api.DeprecationDetails;
 import cn.nukkit.api.PowerNukkitDifference;
+import cn.nukkit.api.PowerNukkitOnly;
 import cn.nukkit.api.Since;
 import cn.nukkit.nbt.stream.FastByteArrayOutputStream;
 import cn.nukkit.network.protocol.*;
@@ -223,16 +224,23 @@ public class Network {
     }
 
     public void processBatch(BatchPacket packet, Player player) {
-        List<DataPacket> packets = new ObjectArrayList<>();
         try {
-            processBatch(packet.payload, packets);
+            unpackBatchedPackets(packet);
         } catch (ProtocolException e) {
             player.close("", e.getMessage());
             log.error("Unable to process player packets ", e);
         }
     }
 
-    @Since("1.3.2.0-PN")
+    @PowerNukkitOnly
+    @Since("FUTURE")
+    public List<DataPacket> unpackBatchedPackets(BatchPacket packet) throws ProtocolException {
+        List<DataPacket> packets = new ObjectArrayList<>();
+        processBatch(packet.payload, packets);
+        return packets;
+    }
+
+    @Since("1.4.0.0-PN")
     public void processBatch(byte[] payload, Collection<DataPacket> packets) throws ProtocolException {
         byte[] data;
         try {
@@ -308,14 +316,15 @@ public class Network {
     }
 
     @Deprecated
-    @DeprecationDetails(since = "1.3.2.0-PN", by = "Cloudburst Nukkit", 
+    @DeprecationDetails(since = "1.4.0.0-PN", by = "Cloudburst Nukkit", 
             reason = "Changed the id to int without backward compatibility", 
             replaceWith = "getPacket(int id)")
+    @PowerNukkitOnly
     public DataPacket getPacket(byte id) {
         return getPacket((int) id);
     }
     
-    @Since("1.3.2.0-PN")
+    @Since("1.4.0.0-PN")
     public DataPacket getPacket(int id) {
         Class<? extends DataPacket> clazz = this.packetPool[id];
         if (clazz != null) {
@@ -468,5 +477,13 @@ public class Network {
         this.registerPacket(ProtocolInfo.POS_TRACKING_SERVER_BROADCAST_PACKET, PositionTrackingDBServerBroadcastPacket.class);
         this.registerPacket(ProtocolInfo.UPDATE_PLAYER_GAME_TYPE_PACKET, UpdatePlayerGameTypePacket.class);
         this.registerPacket(ProtocolInfo.FILTER_TEXT_PACKET, FilterTextPacket.class);
+        this.registerPacket(ProtocolInfo.ITEM_COMPONENT_PACKET, ItemComponentPacket.class);
+        this.registerPacket(ProtocolInfo.ADD_VOLUME_ENTITY_PACKET, AddVolumeEntityPacket.class);
+        this.registerPacket(ProtocolInfo.REMOVE_VOLUME_ENTITY_PACKET, RemoveVolumeEntityPacket.class);
+        this.registerPacket(ProtocolInfo.SYNC_ENTITY_PROPERTY_PACKET, SyncEntityPropertyPacket.class);
+        this.registerPacket(ProtocolInfo.TICK_SYNC_PACKET, TickSyncPacket.class);
+        this.registerPacket(ProtocolInfo.ANIMATE_ENTITY_PACKET, AnimateEntityPacket.class);
+        this.registerPacket(ProtocolInfo.NPC_DIALOGUE_PACKET, NPCDialoguePacket.class);
+        this.registerPacket(ProtocolInfo.SIMULATION_TYPE_PACKET, SimulationTypePacket.class);
     }
 }

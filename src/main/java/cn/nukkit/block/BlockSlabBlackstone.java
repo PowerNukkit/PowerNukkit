@@ -12,10 +12,14 @@ import javax.annotation.Nonnull;
 @PowerNukkitOnly
 @Since("1.4.0.0-PN")
 public class BlockSlabBlackstone extends BlockSlab {
+    @PowerNukkitOnly
+    @Since("1.4.0.0-PN")
     public BlockSlabBlackstone() {
         this(0);
     }
 
+    @PowerNukkitOnly
+    @Since("1.4.0.0-PN")
     public BlockSlabBlackstone(int meta) {
         super(meta, BLACKSTONE_DOUBLE_SLAB);
     }
@@ -33,11 +37,13 @@ public class BlockSlabBlackstone extends BlockSlab {
         return SIMPLE_SLAB_PROPERTIES;
     }
 
+    @PowerNukkitOnly
     @Override
     public String getSlabName() {
         return "Blackstone Slab";
     }
 
+    @PowerNukkitOnly
     @Override
     public boolean isSameType(BlockSlab slab) {
         return slab.getId() == getId();

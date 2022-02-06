@@ -11,8 +11,16 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
+@PowerNukkitOnly
+@Since("1.4.0.0-PN")
 @ParametersAreNonnullByDefault
 public class BlockAllow extends BlockSolid {
+    @PowerNukkitOnly
+    @Since("1.4.0.0-PN")
+    public BlockAllow() {
+        // Does nothing
+    }
+
     @Override
     public int getId() {
         return ALLOW;
@@ -43,6 +51,7 @@ public class BlockAllow extends BlockSolid {
         return false;
     }
 
+    @PowerNukkitOnly
     @Override
     public boolean canBePulled() {
         return false;

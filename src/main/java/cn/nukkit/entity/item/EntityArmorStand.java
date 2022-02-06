@@ -29,7 +29,6 @@ import cn.nukkit.nbt.tag.ListTag;
 import cn.nukkit.network.protocol.SetEntityDataPacket;
 import cn.nukkit.potion.Effect;
 
-import javax.annotation.Nonnull;
 import java.util.Collection;
 
 @PowerNukkitOnly
@@ -438,10 +437,11 @@ public class EntityArmorStand extends Entity implements InventoryHolder, EntityI
         return true;
     }
 
-    @Nonnull
+    @Since("1.5.1.0-PN")
+    @PowerNukkitOnly
     @Override
-    public String getName() {
-        return this.hasCustomName() ? this.getNameTag() : "Armor Stand";
+    public String getOriginalName() {
+        return "Armor Stand";
     }
 
     @Override
@@ -512,6 +512,14 @@ public class EntityArmorStand extends Entity implements InventoryHolder, EntityI
         this.timing.stopTiming();
 
         return hasUpdate || !onGround || Math.abs(motionX) > 0.00001 || Math.abs(motionY) > 0.00001 || Math.abs(motionZ) > 0.00001;
+    }
+
+    @Override
+    protected float getDrag() {
+        if (hasWaterAt(getHeight() / 2f)) {
+            return 0.25f;
+        }
+        return 0f;
     }
 
     @Override

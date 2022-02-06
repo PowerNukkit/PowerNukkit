@@ -1,6 +1,7 @@
 package cn.nukkit.entity.passive;
 
 import cn.nukkit.Player;
+import cn.nukkit.api.PowerNukkitOnly;
 import cn.nukkit.api.Since;
 import cn.nukkit.block.Block;
 import cn.nukkit.block.BlockBeehive;
@@ -36,34 +37,38 @@ public class EntityBee extends EntityAnimal {
     @Override
     public float getWidth() {
         if (this.isBaby()) {
-            return 0.35f;
+            return 0.275f;
         }
-        return 0.7f;
+        return 0.55f;
     }
 
     @Override
     public float getHeight() {
         if (this.isBaby()) {
-            return 0.30f;
+            return 0.25f;
         }
-        return 0.6f;
+        return 0.5f;
     }
 
+    @PowerNukkitOnly
     @Since("1.1.1.0-PN")
     public boolean getHasNectar() {
         return false;
     }
 
+    @PowerNukkitOnly
     @Since("1.1.1.0-PN")
     public void setHasNectar(boolean hasNectar) {
     
     }
 
+    @PowerNukkitOnly
     @Since("1.1.1.0-PN")
     public boolean isAngry() {
         return false;
     }
 
+    @PowerNukkitOnly
     @Since("1.1.1.0-PN")
     public void setAngry(boolean angry) {
     
@@ -106,18 +111,29 @@ public class EntityBee extends EntityAnimal {
         this.setMaxHealth(10);
     }
 
+    @PowerNukkitOnly
     @Since("1.1.1.0-PN")
     public void nectarDelivered(BlockEntityBeehive blockEntityBeehive) {
 
     }
 
+    @PowerNukkitOnly
     @Since("1.1.1.0-PN")
     public void leftBeehive(BlockEntityBeehive blockEntityBeehive) {
     
     }
 
+    @PowerNukkitOnly
     @Since("1.1.1.0-PN")
     public void setAngry(Player player) {
     
+    }
+
+
+    @PowerNukkitOnly
+    @Since("1.5.1.0-PN")
+    @Override
+    public String getOriginalName() {
+        return "Bee";
     }
 }

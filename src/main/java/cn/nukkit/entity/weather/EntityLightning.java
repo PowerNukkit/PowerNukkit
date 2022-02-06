@@ -1,6 +1,8 @@
 package cn.nukkit.entity.weather;
 
 import cn.nukkit.api.PowerNukkitDifference;
+import cn.nukkit.api.PowerNukkitOnly;
+import cn.nukkit.api.Since;
 import cn.nukkit.block.Block;
 import cn.nukkit.block.BlockFire;
 import cn.nukkit.block.BlockID;
@@ -71,10 +73,12 @@ public class EntityLightning extends Entity implements EntityLightningStrike {
         }
     }
 
+    @Override
     public boolean isEffect() {
         return this.isEffect;
     }
 
+    @Override
     public void setEffect(boolean e) {
         this.isEffect = e;
     }
@@ -150,4 +154,10 @@ public class EntityLightning extends Entity implements EntityLightningStrike {
     }
 
 
+    @PowerNukkitOnly
+    @Since("1.5.1.0-PN")
+    @Override
+    public String getOriginalName() {
+        return "Lightning Bolt";
+    }
 }

@@ -1,5 +1,7 @@
 package cn.nukkit.entity.passive;
 
+import cn.nukkit.api.PowerNukkitOnly;
+import cn.nukkit.api.Since;
 import cn.nukkit.entity.Entity;
 import cn.nukkit.entity.EntityAgeable;
 import cn.nukkit.entity.EntityCreature;
@@ -35,13 +37,15 @@ public class EntityVillagerV1 extends EntityCreature implements EntityNPC, Entit
     @Override
     public float getHeight() {
         if (this.isBaby()) {
-            return 0.9f;
+            return 0.95f;
         }
-        return 1.8f;
+        return 1.9f;
     }
 
+    @PowerNukkitOnly
+    @Since("1.5.1.0-PN")
     @Override
-    public String getName() {
+    public String getOriginalName() {
         return "Villager";
     }
 

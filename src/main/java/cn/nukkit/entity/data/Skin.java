@@ -4,9 +4,10 @@ import cn.nukkit.api.Since;
 import cn.nukkit.nbt.stream.FastByteArrayOutputStream;
 import cn.nukkit.utils.*;
 import com.google.common.base.Preconditions;
+import com.nimbusds.jose.shaded.json.JSONObject;
+import com.nimbusds.jose.shaded.json.JSONValue;
+import lombok.EqualsAndHashCode;
 import lombok.ToString;
-import net.minidev.json.JSONObject;
-import net.minidev.json.JSONValue;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -20,6 +21,7 @@ import java.util.UUID;
  * @author MagicDroidX (Nukkit Project)
  */
 @ToString(exclude = {"geometryData", "animationData"})
+@EqualsAndHashCode(exclude = {"fullSkinId", "trusted"})
 public class Skin {
     private static final int PIXEL_SIZE = 4;
 
@@ -45,10 +47,12 @@ public class Skin {
     private boolean premium;
     private boolean persona;
     private boolean capeOnClassic;
+    private boolean primaryUser = true;
     private String capeId;
     private String skinColor = "#0";
     private String armSize = "wide";
     private boolean trusted = false;
+    private String geometryDataEngineVersion = "";
 
     public boolean isValid() {
         return isValidSkin() && isValidResourcePatch();
@@ -235,6 +239,26 @@ public class Skin {
         this.capeOnClassic = capeOnClassic;
     }
 
+    @Since("1.5.2.0-PN")
+    public void setPrimaryUser(boolean primaryUser) {
+        this.primaryUser = primaryUser;
+    }
+
+    @Since("1.5.2.0-PN")
+    public boolean isPrimaryUser() {
+        return primaryUser;
+    }
+
+    @Since("1.5.2.0-PN")
+    public void setGeometryDataEngineVersion(String geometryDataEngineVersion) {
+        this.geometryDataEngineVersion = geometryDataEngineVersion;
+    }
+
+    @Since("1.5.2.0-PN")
+    public String getGeometryDataEngineVersion() {
+        return geometryDataEngineVersion;
+    }
+
     public boolean isTrusted() {
         return trusted;
     }
@@ -270,6 +294,13 @@ public class Skin {
 
     @Since("1.4.0.0-PN")
     public String getPlayFabId() {
+        if (this.persona && (this.playFabId == null || this.playFabId.isEmpty())) {
+            try {
+                this.playFabId = this.skinId.split("-")[5];
+            } catch (Exception e) {
+                this.playFabId = this.fullSkinId.replace("-", "").substring(16);
+            }
+        }
         return this.playFabId;
     }
 

@@ -1,5 +1,6 @@
 package cn.nukkit.item;
 
+import cn.nukkit.api.PowerNukkitOnly;
 import cn.nukkit.block.Block;
 import cn.nukkit.block.BlockUnknown;
 import cn.nukkit.blockstate.BlockState;
@@ -24,6 +25,7 @@ public class ItemBlock extends Item {
         this.block = block;
     }
 
+    @Override
     public void setDamage(Integer meta) {
         int blockMeta;
         if (meta != null) {
@@ -40,11 +42,13 @@ public class ItemBlock extends Item {
                 log.info("An invalid ItemBlock for {} was set to a valid meta {} and it is now safe again", block.getPersistenceName(), meta);
             } else {
                 block.setDataStorageFromItemBlockMeta(blockMeta);
+                name = block.getName();
             }
         } catch (InvalidBlockStateException e) {
             log.warn("An ItemBlock for {} was set to have meta {}"+
                     " but this value is not valid. The item stack is now unsafe.", block.getPersistenceName(), meta, e);
             block = new BlockUnknown(blockId, blockMeta);
+            name = block.getName();
             return;
         }
 
@@ -63,10 +67,12 @@ public class ItemBlock extends Item {
         return block;
     }
 
+    @Override
     public Block getBlock() {
         return this.block;
     }
 
+    @PowerNukkitOnly
     @Override
     public boolean isLavaResistant() {
         return block.isLavaResistant();
