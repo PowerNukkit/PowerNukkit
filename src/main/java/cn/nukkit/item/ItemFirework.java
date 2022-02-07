@@ -33,7 +33,7 @@ public class ItemFirework extends Item {
     
     @PowerNukkitDifference(info = "Will not add compound tag automatically")
     public ItemFirework(Integer meta, int count) {
-        super(FIREWORKS, meta, count, "Fireworks");
+        super(FIREWORKS, meta, count, "Firework Rocket");
     }
 
     @Override
@@ -43,6 +43,10 @@ public class ItemFirework extends Item {
 
     @Override
     public boolean onActivate(Level level, Player player, Block block, Block target, BlockFace face, double fx, double fy, double fz) {
+        if (player.isAdventure()) {
+            return false;
+        }
+
         if (block.canPassThrough()) {
             this.spawnFirework(level, block);
 

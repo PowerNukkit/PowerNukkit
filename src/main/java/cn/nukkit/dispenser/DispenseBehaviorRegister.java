@@ -1,5 +1,6 @@
 package cn.nukkit.dispenser;
 
+import cn.nukkit.api.PowerNukkitOnly;
 import cn.nukkit.block.BlockID;
 import cn.nukkit.item.ItemID;
 
@@ -26,6 +27,7 @@ public final class DispenseBehaviorRegister {
         behaviors.remove(id);
     }
 
+    @PowerNukkitOnly
     public static void init() {
         registerBehavior(ItemID.BOAT, new BoatDispenseBehavior());
         registerBehavior(ItemID.BUCKET, new BucketDispenseBehavior());
@@ -33,6 +35,7 @@ public final class DispenseBehaviorRegister {
         registerBehavior(ItemID.FIREWORKS, new FireworksDispenseBehavior());
         registerBehavior(ItemID.FLINT_AND_STEEL, new FlintAndSteelDispenseBehavior());
         registerBehavior(BlockID.SHULKER_BOX, new ShulkerBoxDispenseBehavior());
+        registerBehavior(BlockID.UNDYED_SHULKER_BOX, new ShulkerBoxDispenseBehavior());
         registerBehavior(ItemID.SPAWN_EGG, new SpawnEggDispenseBehavior());
         registerBehavior(BlockID.TNT, new TNTDispenseBehavior());
         registerBehavior(ItemID.ARROW, new ProjectileDispenseBehavior("Arrow") {

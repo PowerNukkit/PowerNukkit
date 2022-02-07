@@ -8,7 +8,6 @@ import cn.nukkit.api.Unsigned;
 import cn.nukkit.block.Block;
 import cn.nukkit.blockproperty.BlockProperties;
 import cn.nukkit.blockproperty.BlockProperty;
-import cn.nukkit.blockproperty.UnknownRuntimeIdException;
 import cn.nukkit.blockproperty.exception.InvalidBlockPropertyException;
 import cn.nukkit.blockproperty.exception.InvalidBlockPropertyMetaException;
 import cn.nukkit.blockproperty.exception.InvalidBlockPropertyValueException;
@@ -30,6 +29,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.*;
+import java.util.AbstractMap.SimpleEntry;
 import java.util.function.Consumer;
 
 import static cn.nukkit.blockstate.Loggers.logIBlockState;
@@ -38,6 +38,8 @@ import static cn.nukkit.blockstate.Loggers.logIBlockState;
 @Since("1.4.0.0-PN")
 @ParametersAreNonnullByDefault
 public interface IBlockState {
+    @PowerNukkitOnly
+    @Since("1.4.0.0-PN")
     @Nonnegative
     int getBlockId();
 
@@ -205,10 +207,33 @@ public interface IBlockState {
     }
 
     @PowerNukkitOnly
+    @Since("1.5.2.0-PN")
+    default String getMinimalistStateId() {
+        if (isDefaultState()) {
+            return getPersistenceName();
+        }
+        BlockProperties properties = getProperties();
+        Map<String, String> propertyMap = new TreeMap<>(HumanStringComparator.getInstance());
+        try {
+            properties.getNames().stream()
+                    .map(name -> new SimpleEntry<>(properties.getBlockProperty(name), getPersistenceValue(name)))
+                    .filter(entry -> !entry.getKey().isDefaultPersistentValue(entry.getValue()))
+                    .forEach(entry -> propertyMap.put(entry.getKey().getPersistenceName(), entry.getValue()));
+        } catch (InvalidBlockPropertyException e) {
+            logIBlockState.debug("Attempted to get the stateId of an invalid state {}:{}\nProperties: {}", getBlockId(), getDataStorage(), properties, e);
+            return getLegacyStateId();
+        }
+
+        StringBuilder stateId = new StringBuilder(getPersistenceName());
+        propertyMap.forEach((name, value) -> stateId.append(';').append(name).append('=').append(value));
+        return stateId.toString();
+    }
+
+    @PowerNukkitOnly
     @Since("1.4.0.0-PN")
     @Nonnull
     default String getLegacyStateId() {
-        return getPersistenceName()+";nukkit-legacy="+getDataStorage();
+        return getPersistenceName()+";nukkit-unknown="+getDataStorage();
     }
 
     @PowerNukkitOnly
@@ -224,8 +249,7 @@ public interface IBlockState {
     @Nonnull
     default Block getBlock() {
         Block block = Block.get(getBlockId());
-        block.setState(this);
-        return block;
+        return block.forState(this);
     }
 
     /**
@@ -274,8 +298,7 @@ public interface IBlockState {
         BlockState currentState = getCurrentState();
         try {
             if (currentState.isCachedValidationValid()) {
-                block.setState(currentState);
-                return block;
+                return block.forState(currentState);
             }
         } catch (Exception e) {
             logIBlockState.error("Unexpected error while trying to set the cached valid state to the block. State: {}, Block: {}", currentState, block, e);
@@ -419,6 +442,7 @@ public interface IBlockState {
         return (getBlockId() << Block.DATA_BITS) | (getLegacyDamage() & Block.DATA_MASK);
     }
 
+    @PowerNukkitOnly
     @Deprecated
     @DeprecationDetails(reason = "Can't store all data, exists for backward compatibility reasons", since = "1.4.0.0-PN", replaceWith = "the BlockState itself")
     default long getBigId() {
@@ -484,13 +508,6 @@ public interface IBlockState {
     @Since("1.4.0.0-PN")
     @Nonnull
     default ItemBlock asItemBlock(int count) {
-        BlockState currentState = getCurrentState();
-        BlockState itemState = currentState.forItem();
-        int runtimeId = itemState.getRuntimeId();
-        if (runtimeId == BlockStateRegistry.getUpdateBlockRegistration() && !"minecraft:info_update".equals(itemState.getPersistenceName())) {
-            throw new UnknownRuntimeIdException("The current block state can't be represented as an item. State: "+currentState+", Item: "+itemState);
-        }
-        Block block = itemState.getBlock();
-        return new ItemBlock(block, itemState.getExactIntStorage(), count);
+        return getCurrentState().asItemBlock(count);
     }
 }

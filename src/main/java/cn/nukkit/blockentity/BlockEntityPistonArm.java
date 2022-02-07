@@ -2,6 +2,8 @@ package cn.nukkit.blockentity;
 
 import cn.nukkit.Player;
 import cn.nukkit.api.PowerNukkitDifference;
+import cn.nukkit.api.PowerNukkitOnly;
+import cn.nukkit.api.Since;
 import cn.nukkit.block.Block;
 import cn.nukkit.block.BlockAir;
 import cn.nukkit.block.BlockID;
@@ -17,9 +19,12 @@ import cn.nukkit.nbt.tag.CompoundTag;
 import cn.nukkit.nbt.tag.IntTag;
 import cn.nukkit.nbt.tag.ListTag;
 import cn.nukkit.utils.Faceable;
+import cn.nukkit.utils.RedstoneComponent;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static cn.nukkit.utils.Utils.dynamic;
 
 /**
  * @author CreeperFace
@@ -27,17 +32,32 @@ import java.util.List;
 @PowerNukkitDifference(info = "The piston will work as close as possible to vanilla")
 public class BlockEntityPistonArm extends BlockEntitySpawnable {
 
-    public static final float MOVE_STEP = Float.valueOf(0.5f);
+    @PowerNukkitOnly
+    public static final float MOVE_STEP = dynamic(0.5f);
 
     public float progress;
     public float lastProgress = 1;
+
     public BlockFace facing;
+
     public boolean extending;
+
     public boolean sticky;
-    public int state;
-    public int newState = 1;
+
+    @Since("FUTURE")
+    public byte state;
+
+    @Since("FUTURE")
+    public byte newState = 1;
+
+    @PowerNukkitOnly
     public List<BlockVector3> attachedBlocks;
+
     public boolean powered;
+
+    @PowerNukkitOnly
+    @Since("1.4.0.0-PN")
+    public boolean finished = true;
 
     public BlockEntityPistonArm(FullChunk chunk, CompoundTag nbt) {
         super(chunk, nbt);
@@ -142,20 +162,25 @@ public class BlockEntityPistonArm extends BlockEntitySpawnable {
         }
     }
 
+    @PowerNukkitOnly
     public void move(boolean extending, List<BlockVector3> attachedBlocks) {
         this.extending = extending;
         this.lastProgress = this.progress = extending ? 0 : 1;
-        this.state = this.newState = extending ? 1 : 3;
+        this.state = this.newState = (byte) (extending ? 1 : 3);
         this.attachedBlocks = attachedBlocks;
         this.movable = false;
+        this.finished = false;
 
         this.level.addChunkPacket(getChunkX(), getChunkZ(), getSpawnPacket());
         this.lastProgress = extending ? -MOVE_STEP : 1 + MOVE_STEP;
+        this.setDirty();
         this.moveCollidedEntities();
         this.scheduleUpdate();
     }
 
     @Override
+    @PowerNukkitDifference(info = "Add option to see if blockentity is currently handling piston move (var finished)" +
+            "+ update around redstone directly after moved block set", since = "1.4.0.0-PN")
     public boolean onUpdate() {
         boolean hasUpdate = true;
 
@@ -170,7 +195,7 @@ public class BlockEntityPistonArm extends BlockEntitySpawnable {
         this.moveCollidedEntities();
 
         if (this.progress == this.lastProgress) {
-            this.state = this.newState = extending ? 2 : 0;
+            this.state = this.newState = (byte) (extending ? 2 : 0);
 
             BlockFace pushDir = this.extending ? facing : facing.getOpposite();
 
@@ -192,6 +217,7 @@ public class BlockEntityPistonArm extends BlockEntitySpawnable {
 
                     if (this.level.setBlock(movingBlock, moved)) {
                         moved.onUpdate(Level.BLOCK_UPDATE_MOVED);
+                        RedstoneComponent.updateAroundRedstone(moved);
                     }
                 }
             }
@@ -206,6 +232,7 @@ public class BlockEntityPistonArm extends BlockEntitySpawnable {
             this.level.scheduleUpdate(this.getLevelBlock(), 1);
             this.attachedBlocks.clear();
             hasUpdate = false;
+            this.finished = true;
         }
 
         this.level.addChunkPacket(getChunkX(), getChunkZ(), getSpawnPacket());
@@ -217,11 +244,13 @@ public class BlockEntityPistonArm extends BlockEntitySpawnable {
         return this.extending ? progress - 1 : 1 - progress;
     }
 
+    @Override
     public boolean isBlockEntityValid() {
         int id = getLevelBlock().getId();
         return id == BlockID.PISTON || id == BlockID.STICKY_PISTON; 
     }
 
+    @Override
     public void saveNBT() {
         super.saveNBT();
         this.namedTag.putByte("State", this.state);
@@ -233,6 +262,7 @@ public class BlockEntityPistonArm extends BlockEntitySpawnable {
         this.namedTag.putInt("facing", this.facing.getIndex());
     }
 
+    @Override
     public CompoundTag getSpawnCompound() {
         return new CompoundTag()
                 .putString("id", BlockEntity.PISTON_ARM)

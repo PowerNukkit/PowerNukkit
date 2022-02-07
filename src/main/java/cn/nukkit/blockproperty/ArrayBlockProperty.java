@@ -3,6 +3,7 @@ package cn.nukkit.blockproperty;
 import cn.nukkit.api.PowerNukkitOnly;
 import cn.nukkit.api.Since;
 import cn.nukkit.blockproperty.exception.InvalidBlockPropertyMetaException;
+import cn.nukkit.blockproperty.exception.InvalidBlockPropertyPersistenceValueException;
 import cn.nukkit.blockproperty.exception.InvalidBlockPropertyValueException;
 import cn.nukkit.math.NukkitMath;
 import com.google.common.base.Preconditions;
@@ -24,7 +25,10 @@ public final class ArrayBlockProperty<E extends Serializable> extends BlockPrope
     
     @Nonnull
     private final E[] universe;
-    
+
+    /**
+     * Nullable when {@link #ordinal} is {@code true.
+     */
     private final String[] persistenceNames;
     
     private final Class<E> eClass;
@@ -98,7 +102,23 @@ public final class ArrayBlockProperty<E extends Serializable> extends BlockPrope
     public ArrayBlockProperty(String name, boolean exportedToItem, Class<E> enumClass) {
         this(name, exportedToItem, enumClass.getEnumConstants());
     }
-    
+
+    @Since("1.4.0.0-PN")
+    @PowerNukkitOnly
+    @Override
+    public ArrayBlockProperty<E> copy() {
+        return new ArrayBlockProperty<>(getName(), isExportedToItem(), universe, getBitSize(), getPersistenceName(), isOrdinal(), persistenceNames);
+    }
+
+    @Since("1.4.0.0-PN")
+    @PowerNukkitOnly
+    @Override
+    public ArrayBlockProperty<E> exportingToItems(boolean exportedToItem) {
+        return new ArrayBlockProperty<>(getName(), exportedToItem, universe, getBitSize(), getPersistenceName(), isOrdinal(), persistenceNames);
+    }
+
+    @Since("1.4.0.0-PN")
+    @PowerNukkitOnly
     public ArrayBlockProperty<E> ordinal(boolean ordinal) {
         if (ordinal == this.ordinal) {
             return this;
@@ -106,6 +126,7 @@ public final class ArrayBlockProperty<E extends Serializable> extends BlockPrope
         return new ArrayBlockProperty<>(getName(), isExportedToItem(), universe, getBitSize(), getPersistenceName(), ordinal);
     }
 
+    @PowerNukkitOnly
     @Override
     public int getMetaForValue(@Nullable E value) {
         if (value == null) {
@@ -120,11 +141,13 @@ public final class ArrayBlockProperty<E extends Serializable> extends BlockPrope
     }
 
     @Nonnull
+    @PowerNukkitOnly
     @Override
     public E getValueForMeta(int meta) {
         return universe[meta];
     }
 
+    @PowerNukkitOnly
     @Override
     public int getIntValueForMeta(int meta) {
         try {
@@ -136,6 +159,7 @@ public final class ArrayBlockProperty<E extends Serializable> extends BlockPrope
     }
     
     @Nonnull
+    @PowerNukkitOnly
     @Override
     public String getPersistenceValueForMeta(int meta) {
         try {
@@ -149,6 +173,33 @@ public final class ArrayBlockProperty<E extends Serializable> extends BlockPrope
         return persistenceNames[meta];
     }
 
+    @Since("1.4.0.0-PN")
+    @PowerNukkitOnly
+    @Override
+    public int getMetaForPersistenceValue(String persistenceValue) {
+        int meta;
+        if (isOrdinal()) {
+            try {
+                meta = Integer.parseInt(persistenceValue);
+                validateMetaDirectly(meta);
+            } catch (IndexOutOfBoundsException|IllegalArgumentException e) {
+                throw new InvalidBlockPropertyPersistenceValueException(this, null, persistenceValue, 
+                        "Expected a number from 0 to " + (universe.length - 1), e);
+            }
+            return meta;
+        }
+        for (int index = 0; index < persistenceNames.length; index++) {
+            if (persistenceNames[index].equals(persistenceValue)) {
+                return index;
+            }
+        }
+        throw new InvalidBlockPropertyPersistenceValueException(
+                this, null, persistenceValue,
+                "The value does not exists in this property."
+        );
+    }
+
+    @PowerNukkitOnly
     @Override
     protected void validateDirectly(@Nullable E value) {
         for (E object : universe) {
@@ -159,22 +210,27 @@ public final class ArrayBlockProperty<E extends Serializable> extends BlockPrope
         throw new IllegalArgumentException(value+" is not valid for this property");
     }
 
+    @PowerNukkitOnly
     @Override
     protected void validateMetaDirectly(int meta) {
         Preconditions.checkElementIndex(meta, universe.length);
     }
 
+    @PowerNukkitOnly
     @Nonnull
     @Override
     public Class<E> getValueClass() {
         return eClass;
     }
 
+    @PowerNukkitOnly
     @Nonnull
     public E[] getUniverse() {
         return universe.clone();
     }
 
+    @PowerNukkitOnly
+    @Since("1.4.0.0-PN")
     public boolean isOrdinal() {
         return ordinal;
     }

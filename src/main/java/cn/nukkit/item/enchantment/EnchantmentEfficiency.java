@@ -1,5 +1,6 @@
 package cn.nukkit.item.enchantment;
 
+import cn.nukkit.api.PowerNukkitOnly;
 import cn.nukkit.item.Item;
 
 /**
@@ -7,7 +8,7 @@ import cn.nukkit.item.Item;
  */
 public class EnchantmentEfficiency extends Enchantment {
     protected EnchantmentEfficiency() {
-        super(ID_EFFICIENCY, "digging", 10, EnchantmentType.DIGGER);
+        super(ID_EFFICIENCY, "digging", Rarity.COMMON, EnchantmentType.DIGGER);
     }
 
     @Override
@@ -17,7 +18,7 @@ public class EnchantmentEfficiency extends Enchantment {
 
     @Override
     public int getMaxEnchantAbility(int level) {
-        return this.getMinEnchantAbility(level) + 50;
+        return super.getMinEnchantAbility(level) + 50;
     }
 
     @Override
@@ -29,7 +30,8 @@ public class EnchantmentEfficiency extends Enchantment {
     public boolean canEnchant(Item item) {
         return item.isShears() || super.canEnchant(item);
     }
-    
+
+    @PowerNukkitOnly
     @Override
     public boolean isItemAcceptable(Item item) {
         if (item.isShears()) {

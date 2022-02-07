@@ -3,6 +3,7 @@ package cn.nukkit.blockproperty;
 import cn.nukkit.api.PowerNukkitOnly;
 import cn.nukkit.api.Since;
 import cn.nukkit.blockproperty.exception.InvalidBlockPropertyMetaException;
+import cn.nukkit.blockproperty.exception.InvalidBlockPropertyPersistenceValueException;
 import com.google.common.base.Preconditions;
 
 import javax.annotation.Nonnull;
@@ -26,12 +27,28 @@ public final class BooleanBlockProperty extends BlockProperty<Boolean> {
         super(name, exportedToItem, 1, name);
     }
 
+    @Since("1.4.0.0-PN")
+    @PowerNukkitOnly
+    @Override
+    public BooleanBlockProperty copy() {
+        return new BooleanBlockProperty(getName(), isExportedToItem(), getPersistenceName());
+    }
+
+    @Since("1.4.0.0-PN")
+    @PowerNukkitOnly
+    @Override
+    public BooleanBlockProperty exportingToItems(boolean exportedToItem) {
+        return new BooleanBlockProperty(getName(), exportedToItem, getPersistenceName());
+    }
+
+    @PowerNukkitOnly
     @Override
     public int setValue(int currentMeta, int bitOffset, @Nullable Boolean newValue) {
         boolean value = newValue != null && newValue;
         return setValue(currentMeta, bitOffset, value);
     }
 
+    @PowerNukkitOnly
     @Override
     public long setValue(long currentBigMeta, int bitOffset, @Nullable Boolean newValue) {
         boolean value = newValue != null && newValue;
@@ -53,11 +70,13 @@ public final class BooleanBlockProperty extends BlockProperty<Boolean> {
     }
 
     @Nonnull
+    @PowerNukkitOnly
     @Override
     public Boolean getValue(int currentMeta, int bitOffset) {
         return getBooleanValue(currentMeta, bitOffset);
     }
 
+    @PowerNukkitOnly
     @Nonnull
     @Override
     public Boolean getValue(long currentBigMeta, int bitOffset) {
@@ -85,6 +104,7 @@ public final class BooleanBlockProperty extends BlockProperty<Boolean> {
         return mask.equals(currentHugeData.and(mask));
     }
 
+    @PowerNukkitOnly
     @Override
     public int getIntValue(int currentMeta, int bitOffset) {
         return getBooleanValue(currentMeta, bitOffset)? 1 : 0;
@@ -93,6 +113,7 @@ public final class BooleanBlockProperty extends BlockProperty<Boolean> {
     /**
      * @throws InvalidBlockPropertyMetaException If the meta contains invalid data
      */
+    @PowerNukkitOnly
     @Override
     public int getIntValueForMeta(int meta) {
         if (meta == 1 || meta == 0) {
@@ -101,6 +122,7 @@ public final class BooleanBlockProperty extends BlockProperty<Boolean> {
         throw new InvalidBlockPropertyMetaException(this, meta, meta, "Only 1 or 0 was expected");
     }
 
+    @PowerNukkitOnly
     @Override
     public int getMetaForValue(@Nullable Boolean value) {
         return Boolean.TRUE.equals(value)? 1 : 0;
@@ -110,6 +132,7 @@ public final class BooleanBlockProperty extends BlockProperty<Boolean> {
      * @throws InvalidBlockPropertyMetaException If the meta contains invalid data
      */
     @Nonnull
+    @PowerNukkitOnly
     @Override
     public Boolean getValueForMeta(int meta) {
         return getBooleanValueForMeta(meta);
@@ -130,6 +153,7 @@ public final class BooleanBlockProperty extends BlockProperty<Boolean> {
         }
     }
 
+    @Override
     @PowerNukkitOnly
     @Since("1.4.0.0-PN")
     @Nonnull
@@ -144,17 +168,20 @@ public final class BooleanBlockProperty extends BlockProperty<Boolean> {
         return value == null || Boolean.FALSE.equals(value);
     }
 
+    @PowerNukkitOnly
     @Override
     protected void validateMetaDirectly(int meta) {
         Preconditions.checkArgument(meta == 1 || meta == 0, "Must be 1 or 0");
     }
 
+    @PowerNukkitOnly
     @Nonnull
     @Override
     public Class<Boolean> getValueClass() {
         return Boolean.class;
     }
 
+    @PowerNukkitOnly
     @Override
     public String getPersistenceValueForMeta(int meta) {
         if (meta == 1) {
@@ -163,6 +190,19 @@ public final class BooleanBlockProperty extends BlockProperty<Boolean> {
             return "0";
         } else {
             throw new InvalidBlockPropertyMetaException(this, meta, meta, "Only 1 or 0 was expected");
+        }
+    }
+
+    @Since("1.4.0.0-PN")
+    @PowerNukkitOnly
+    @Override
+    public int getMetaForPersistenceValue(@Nonnull String persistenceValue) {
+        if ("1".equals(persistenceValue)) {
+            return 1;
+        } else if ("0".equals(persistenceValue)){
+            return 0;
+        } else {
+            throw new InvalidBlockPropertyPersistenceValueException(this, null, persistenceValue, "Only 1 or 0 was expected");
         }
     }
 }

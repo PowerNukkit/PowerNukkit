@@ -13,14 +13,21 @@ import javax.annotation.Nonnull;
 @Since("1.4.0.0-PN")
 public class BlockSlabBlackstonePolished extends BlockSlab {
 
+    @PowerNukkitOnly
+    @Since("1.4.0.0-PN")
     public BlockSlabBlackstonePolished() {
         this(0);
     }
 
+    @PowerNukkitOnly
+    @Since("1.4.0.0-PN")
     public BlockSlabBlackstonePolished(int meta) {
         super(meta, POLISHED_BLACKSTONE_DOUBLE_SLAB);
     }
 
+
+    @PowerNukkitOnly
+    @Since("1.4.0.0-PN")
     protected BlockSlabBlackstonePolished(int meta, int doubleSlab) {
         super(meta, doubleSlab);
     }
@@ -38,11 +45,13 @@ public class BlockSlabBlackstonePolished extends BlockSlab {
         return SIMPLE_SLAB_PROPERTIES;
     }
 
+    @PowerNukkitOnly
     @Override
     public String getSlabName() {
         return "Polished Blackstone";
     }
 
+    @PowerNukkitOnly
     @Override
     public boolean isSameType(BlockSlab slab) {
         return getId() == slab.getId();

@@ -1,13 +1,21 @@
 package cn.nukkit.block;
 
+import cn.nukkit.api.PowerNukkitOnly;
+import cn.nukkit.api.Since;
 import cn.nukkit.blockstate.BlockState;
 import cn.nukkit.utils.BlockColor;
 
+@Since("1.4.0.0-PN")
+@PowerNukkitOnly
 public class BlockHyphaeCrimson extends BlockStem {
+    @Since("1.4.0.0-PN")
+    @PowerNukkitOnly
     public BlockHyphaeCrimson() {
         this(0);
     }
-    
+
+    @Since("1.4.0.0-PN")
+    @PowerNukkitOnly
     public BlockHyphaeCrimson(int meta) {
         super(meta);
     }
@@ -22,6 +30,7 @@ public class BlockHyphaeCrimson extends BlockStem {
         return "Crimson Hyphae";
     }
 
+    @PowerNukkitOnly
     @Override
     protected BlockState getStrippedState() {
         return getCurrentState().withBlockId(STRIPPED_CRIMSON_HYPHAE);

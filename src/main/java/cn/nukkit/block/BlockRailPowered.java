@@ -1,15 +1,23 @@
 package cn.nukkit.block;
 
-import cn.nukkit.item.Item;
+import cn.nukkit.api.PowerNukkitDifference;
+import cn.nukkit.api.PowerNukkitOnly;
+import cn.nukkit.api.Since;
+import cn.nukkit.blockproperty.BlockProperties;
 import cn.nukkit.level.Level;
 import cn.nukkit.math.Vector3;
+import cn.nukkit.utils.OptionalBoolean;
 import cn.nukkit.utils.Rail;
+import cn.nukkit.utils.RedstoneComponent;
+
+import javax.annotation.Nonnull;
 
 /**
  * @author Snake1999, larryTheCoder (Nukkit Project, Minecart and Riding Project)
  * @since 2016/1/11
  */
-public class BlockRailPowered extends BlockRail {
+@PowerNukkitDifference(info = "Implements RedstoneComponent.", since = "1.4.0.0-PN")
+public class BlockRailPowered extends BlockRail implements RedstoneComponent {
 
     public BlockRailPowered() {
         this(0);
@@ -25,12 +33,21 @@ public class BlockRailPowered extends BlockRail {
         return POWERED_RAIL;
     }
 
+    @Since("1.4.0.0-PN")
+    @PowerNukkitOnly
+    @Nonnull
+    @Override
+    public BlockProperties getProperties() {
+        return ACTIVABLE_PROPERTIES;
+    }
+
     @Override
     public String getName() {
         return "Powered Rail";
     }
 
     @Override
+    @PowerNukkitDifference(info = "Using new method for checking if powered", since = "1.4.0.0-PN")
     public int onUpdate(int type) {
         // Warning: I din't recommended this on slow networks server or slow client
         //          Network below 86Kb/s. This will became unresponsive to clients 
@@ -45,21 +62,32 @@ public class BlockRailPowered extends BlockRail {
                 return 0;
             }
             boolean wasPowered = isActive();
-            boolean isPowered = level.isBlockPowered(this.getLocation())
+            boolean isPowered = this.isGettingPower()
                     || checkSurrounding(this, true, 0)
                     || checkSurrounding(this, false, 0);
 
-            // Avoid Block minstake
+            // Avoid Block mistake
             if (wasPowered != isPowered) {
                 setActive(isPowered);
-                level.updateAround(down());
+                RedstoneComponent.updateAroundRedstone(down());
                 if (getOrientation().isAscending()) {
-                    level.updateAround(up());
+                    RedstoneComponent.updateAroundRedstone(up());
                 }
             }
             return type;
         }
         return 0;
+    }
+
+    @Since("1.5.2.0-PN")
+    @PowerNukkitOnly
+    @Override
+    public void afterRemoval(Block newBlock, boolean update) {
+        RedstoneComponent.updateAroundRedstone(down());
+        if (getOrientation().isAscending()) {
+            RedstoneComponent.updateAroundRedstone(up());
+        }
+        super.afterRemoval(newBlock, update);
     }
 
     /**
@@ -91,10 +119,10 @@ public class BlockRailPowered extends BlockRail {
         }
 
         // Used to check if the next ascending rail should be what
-        Rail.Orientation base = null;
+        Rail.Orientation base = block.getOrientation();
         boolean onStraight = true;
         // Third: Recalculate the base position
-        switch (block.getOrientation()) {
+        switch (base) {
             case STRAIGHT_NORTH_SOUTH:
                 if (relative) {
                     dz++;
@@ -117,7 +145,6 @@ public class BlockRailPowered extends BlockRail {
                     dy++;
                     onStraight = false;
                 }
-                base = Rail.Orientation.STRAIGHT_EAST_WEST;
                 break;
             case ASCENDING_WEST:
                 if (relative) {
@@ -127,7 +154,6 @@ public class BlockRailPowered extends BlockRail {
                 } else {
                     dx++;
                 }
-                base = Rail.Orientation.STRAIGHT_EAST_WEST;
                 break;
             case ASCENDING_NORTH:
                 if (relative) {
@@ -137,7 +163,6 @@ public class BlockRailPowered extends BlockRail {
                     dy++;
                     onStraight = false;
                 }
-                base = Rail.Orientation.STRAIGHT_NORTH_SOUTH;
                 break;
             case ASCENDING_SOUTH:
                 if (relative) {
@@ -147,7 +172,6 @@ public class BlockRailPowered extends BlockRail {
                 } else {
                     dz--;
                 }
-                base = Rail.Orientation.STRAIGHT_NORTH_SOUTH;
                 break;
             default:
                 // Unable to determinate the rail orientation
@@ -156,9 +180,10 @@ public class BlockRailPowered extends BlockRail {
         }
         // Next check the if rail is on power state
         return canPowered(new Vector3(dx, dy, dz), base, power, relative)
-                || onStraight && canPowered(new Vector3(dx, dy - 1, dz), base, power, relative);
+                || onStraight && canPowered(new Vector3(dx, dy - 1.0D, dz), base, power, relative);
     }
 
+    @PowerNukkitDifference(info = "Using new method for checking if powered", since = "1.4.0.0-PN")
     protected boolean canPowered(Vector3 pos, Rail.Orientation state, int power, boolean relative) {
         Block block = level.getBlock(pos);
         // What! My block is air??!! Impossible! XD
@@ -170,7 +195,7 @@ public class BlockRailPowered extends BlockRail {
         Rail.Orientation base = ((BlockRailPowered) block).getOrientation();
 
         // Possible way how to know when the rail is activated is rail were directly powered
-        // OR recheck the surrounding... Which will returns here =w=        
+        // OR recheck the surrounding... Which will returns here =w=
         return (state != Rail.Orientation.STRAIGHT_EAST_WEST
                 || base != Rail.Orientation.STRAIGHT_NORTH_SOUTH
                 && base != Rail.Orientation.ASCENDING_NORTH
@@ -179,13 +204,26 @@ public class BlockRailPowered extends BlockRail {
                 || base != Rail.Orientation.STRAIGHT_EAST_WEST
                 && base != Rail.Orientation.ASCENDING_EAST
                 && base != Rail.Orientation.ASCENDING_WEST)
-                && (level.isBlockPowered(pos) || checkSurrounding(pos, relative, power + 1));
+                && (block.isGettingPower() || checkSurrounding(pos, relative, power + 1));
+
     }
 
     @Override
-    public Item[] getDrops(Item item) {
-        return new Item[]{
-                Item.get(Item.POWERED_RAIL, 0, 1)
-        };
+    public boolean isActive() {
+        return getBooleanValue(ACTIVE);
+    }
+
+    @Since("1.4.0.0-PN")
+    @PowerNukkitOnly
+    @Override
+    public OptionalBoolean isRailActive() {
+        return OptionalBoolean.of(getBooleanValue(ACTIVE));
+    }
+
+    @Since("1.4.0.0-PN")
+    @PowerNukkitOnly
+    @Override
+    public void setRailActive(boolean active) {
+        setBooleanValue(ACTIVE, active);
     }
 }

@@ -2,10 +2,12 @@ package cn.nukkit.inventory.transaction.action;
 
 import cn.nukkit.Player;
 import cn.nukkit.item.Item;
+import lombok.ToString;
 
 /**
  * @author CreeperFace
  */
+@ToString(callSuper = true)
 public class CreativeInventoryAction extends InventoryAction {
     /**
      * Player put an item into the creative window to destroy it.
@@ -28,6 +30,7 @@ public class CreativeInventoryAction extends InventoryAction {
      * @param source player
      * @return valid
      */
+    @Override
     public boolean isValid(Player source) {
         return source.isCreative() &&
                 (this.actionType == TYPE_DELETE_ITEM || Item.getCreativeItemIndex(this.sourceItem) != -1);
@@ -48,14 +51,17 @@ public class CreativeInventoryAction extends InventoryAction {
      * @param source playere
      * @return successfully executed
      */
+    @Override
     public boolean execute(Player source) {
         return true;
     }
 
+    @Override
     public void onExecuteSuccess(Player source) {
 
     }
 
+    @Override
     public void onExecuteFail(Player source) {
 
     }

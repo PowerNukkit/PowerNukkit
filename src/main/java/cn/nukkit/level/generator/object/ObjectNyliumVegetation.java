@@ -1,11 +1,19 @@
 package cn.nukkit.level.generator.object;
 
+import cn.nukkit.api.PowerNukkitOnly;
+import cn.nukkit.api.Since;
 import cn.nukkit.block.BlockID;
 import cn.nukkit.level.ChunkManager;
 import cn.nukkit.math.NukkitRandom;
 import cn.nukkit.math.Vector3;
+import lombok.experimental.UtilityClass;
 
+@PowerNukkitOnly
+@Since("1.4.0.0-PN")
+@UtilityClass
 public class ObjectNyliumVegetation {
+    @PowerNukkitOnly
+    @Since("1.4.0.0-PN")
     public static void growVegetation(ChunkManager level, Vector3 pos, NukkitRandom random) {
         for (int i = 0; i < 128; ++i) {
             int num = 0;

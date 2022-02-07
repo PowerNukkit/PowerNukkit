@@ -1,7 +1,9 @@
-![nukkit](https://raw.githubusercontent.com/PowerNukkit/PowerNukkit/master/.github/images/banner.png)
+[<img alt="PowerNukkit" width="838" src="https://raw.githubusercontent.com/PowerNukkit/PowerNukkit/master/.github/images/banner.png" />](https://powernukkit.org)
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](LICENSE)
-[![PowerNukkit v1.X](https://github.com/PowerNukkit/PowerNukkit/workflows/PowerNukkit%20v1.X/badge.svg?branch=master)](https://github.com/PowerNukkit/PowerNukkit/actions?query=branch%3Amaster)
+[![PowerNukkit v1.X](https://github.com/PowerNukkit/PowerNukkit/workflows/PowerNukkit%20v1.X/badge.svg?branch=master)](https://builds.powernukkit.org/buildConfiguration/PowerNukkit_Releases#all-projects)
+[![TeamCity Build Status](https://builds.powernukkit.org/app/rest/builds/buildType:(id:PowerNukkit_Snapshots)/statusIcon)](https://builds.powernukkit.org/buildConfiguration/PowerNukkit_Snapshots)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=PowerNukkit_PowerNukkit&metric=coverage)](https://sonarcloud.io/dashboard?id=PowerNukkit_PowerNukkit)
 [![Discord](https://img.shields.io/discord/728280425255927879)](https://powernukkit.org/discord)
 
 Introduction
@@ -13,7 +15,7 @@ It has a few key advantages over other server software:
 * Written in Java, Nukkit is faster and more stable.
 * Having a friendly structure, it's easy to contribute to Nukkit's development and rewrite plugins from other platforms into Nukkit plugins.
 
-Nukkit is **under improvement** yet, we welcome contributions. 
+Nukkit is **under improvement** yet, we welcome contributions.
 
 **PowerNukkit** is a modified version of Nukkit that adds support to a huge amount of features like water-logging, all new blocks, more plugin events, offhand slot, bug fixes and many more.
 
@@ -26,12 +28,16 @@ Most Cloudburst Nukkit plugins are supported but they may not understand the new
 Links
 --------------------
 
-* __[PowerNukkit Website](https://powernukkit.org/)__
-* __[PowerNukkit Forum and Guides](https://discuss.powernukkit.org/)__
-* __[Download PowerNukkit Releases](https://powernukkit.org/releases)__
-* __[Download PowerNukkit Snapshots](https://powernukkit.org/snapshots)__
-* __[PowerNukkit Discord](https://powernukkit.org/discord)__
-* __[Cloudburst Nukkit Plugins](https://cloudburstmc.org/resources/categories/nukkit-plugins.1/)__
+- __[🌐 PowerNukkit Website](https://powernukkit.org/)__
+- __[👩🏽‍💻 PowerNukkit Website for Plugin Developers](https://devs.powernukkit.org/)__
+- __[💬 PowerNukkit Forum and Guides](https://discuss.powernukkit.org/)__
+- __[💬 PowerNukkit Discord](https://powernukkit.org/discord)__
+- __[💾 Download PowerNukkit Recommended Build](https://powernukkit.org/recommended)__
+- __[💾 Download PowerNukkit Releases](https://powernukkit.org/releases)__
+- __[💾 Download PowerNukkit Snapshots](https://powernukkit.org/snapshots)__
+- __[🔌 Cloudburst Nukkit Plugins](https://cloudburstmc.org/resources/categories/nukkit-plugins.1/)__
+- __[🔌 PowerNukkit Plugins](https://discuss.powernukkit.org/c/plugins/powernukkit-plugins/14/)__
+- __[🧩 PowerNukkit Plugin Requests](https://discuss.powernukkit.org/c/plugins/plugin-requests/13)__
 
 Creating Plugins
 ----------------
@@ -44,7 +50,7 @@ repositories {
 }
 
 dependencies {
-    compile group: 'org.powernukkit', name: 'powernukkit', version: '1.4.0.0-PN-ALPHA.2'
+    compile group: 'org.powernukkit', name: 'powernukkit', version: '1.5.2.1-PN'
 }
 ```
 
@@ -54,7 +60,7 @@ dependencies {
     <dependency>
         <groupId>org.powernukkit</groupId>
         <artifactId>powernukkit</artifactId>
-        <version>1.4.0.0-PN-ALPHA.2</version>
+        <version>1.5.2.1-PN</version>
     </dependency>
 </dependencies>
 ```
@@ -126,8 +132,12 @@ docker rm powernukkit
 Check the [docker-compose.yml](docker-compose.yml) file for more details.
 
 ### Supported tags
-* _bleeding_ (⚠️ **use with care, may contains unstable code!** ⚠️)
-* 1.3.1.5, 1.3.1, 1.3, 1, latest
+* _bleeding_ (⚠️ **use with care, may contain unstable code!** ⚠️)
+* 1.5.2.0, 1.5.2, 1.5, 1, latest
+* 1.5.1.0, 1.5.1
+* 1.5.0.0, 1.5.0
+* 1.4.0.0, 1.4.0, 1.4
+* 1.3.1.5, 1.3.1, 1.3
 * 1.3.1.4
 * 1.3.1.3
 * 1.3.1.2
@@ -138,9 +148,57 @@ Check the [docker-compose.yml](docker-compose.yml) file for more details.
 * 1.1.1.1, 1.1.1, 1.1
 * 1.1.1.0
 
+Kubernetes & Helm
+-------------
+
+Validate the chart:
+
+`helm lint charts/nukkit`
+
+Dry run and print out rendered YAML:
+
+`helm install --dry-run --debug nukkit charts/nukkit`
+
+Install the chart:
+
+`helm install nukkit charts/nukkit`
+
+Or, with some different values:
+
+```
+helm install nukkit \
+  --set image.tag="arm64" \
+  --set service.type="LoadBalancer" \
+    charts/nukkit
+```
+
+Or, the same but with a custom values from a file:
+
+```
+helm install nukkit \
+  -f helm-values.local.yaml \
+    charts/nukkit
+```
+
+Upgrade the chart:
+
+`helm upgrade nukkit charts/nukkit`
+
+Testing after deployment:
+
+`helm test nukkit`
+
+Completely remove the chart:
+
+`helm uninstall nukkit`
+
+
 Contributing
 ------------
-Please read the [CONTRIBUTING](.github/CONTRIBUTING.md) guide before submitting any issue. Issues with insufficient information or in the wrong format will be closed and will not be reviewed.
+Please read the [CONTRIBUTING](CONTRIBUTING.md) guide before submitting any issue. Issues with insufficient information or in the wrong format will be closed and will not be reviewed.
+
+---------
+[![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-white.svg)](https://sonarcloud.io/dashboard?id=PowerNukkit_PowerNukkit)
 
 ---------
 

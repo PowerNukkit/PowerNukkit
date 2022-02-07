@@ -1,5 +1,6 @@
 package cn.nukkit.item;
 
+import cn.nukkit.api.PowerNukkitOnly;
 import cn.nukkit.block.Block;
 import cn.nukkit.block.BlockUnknown;
 import cn.nukkit.blockstate.BlockState;
@@ -24,6 +25,7 @@ public class ItemBlock extends Item {
         this.block = block;
     }
 
+    @Override
     public void setDamage(Integer meta) {
         int blockMeta;
         if (meta != null) {
@@ -37,21 +39,24 @@ public class ItemBlock extends Item {
         try {
             if (block instanceof BlockUnknown) {
                 block = BlockState.of(blockId, blockMeta).getBlock();
-                log.info("An invalid ItemBlock for "+block.getPersistenceName()+" was set to a valid meta "+meta+" and it is now safe again");
+                log.info("An invalid ItemBlock for {} was set to a valid meta {} and it is now safe again", block.getPersistenceName(), meta);
             } else {
-                block.setDataStorageFromInt(blockMeta);
+                block.setDataStorageFromItemBlockMeta(blockMeta);
+                name = block.getName();
             }
         } catch (InvalidBlockStateException e) {
-            log.warn("An ItemBlock for "+block.getPersistenceName()+" was set to have meta "+meta+
-                    " but this value is not valid. The item stack is now unsafe.", e);
+            log.warn("An ItemBlock for {} was set to have meta {}"+
+                    " but this value is not valid. The item stack is now unsafe.", block.getPersistenceName(), meta, e);
             block = new BlockUnknown(blockId, blockMeta);
+            name = block.getName();
             return;
         }
 
         int expected = block.asItemBlock().getDamage();
         if (expected != blockMeta) {
-            log.warn("An invalid ItemBlock for "+block.getPersistenceName()+" was set to an valid meta "+meta+" for item blocks, " +
-                    "it was expected to have meta "+expected+" the stack is now unsafe.\nProperties: "+block.getProperties());
+            log.warn("An invalid ItemBlock for {} was set to an valid meta {} for item blocks, " +
+                    "it was expected to have meta {} the stack is now unsafe.\nProperties: {}",
+                    block.getPersistenceName(), meta, expected, block.getProperties());
         }
     }
 
@@ -62,10 +67,12 @@ public class ItemBlock extends Item {
         return block;
     }
 
+    @Override
     public Block getBlock() {
         return this.block;
     }
 
+    @PowerNukkitOnly
     @Override
     public boolean isLavaResistant() {
         return block.isLavaResistant();

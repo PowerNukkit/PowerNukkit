@@ -8,9 +8,14 @@ import cn.nukkit.utils.BlockColor;
 /**
  * @author good777LUCKY
  */
+@PowerNukkitOnly
+@Since("1.4.0.0-PN")
 public class BlockObsidianCrying extends BlockSolid {
 
+    @PowerNukkitOnly
+    @Since("1.4.0.0-PN")
     public BlockObsidianCrying() {
+        // Does nothing
     }
     
     @Override
@@ -56,7 +61,8 @@ public class BlockObsidianCrying extends BlockSolid {
     }
     
     @Override
-    public boolean canBePulled() {
+    @PowerNukkitOnly
+    public  boolean canBePulled() {
         return false;
     }
     

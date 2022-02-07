@@ -1,13 +1,18 @@
 package cn.nukkit.utils;
 
 import cn.nukkit.Server;
+import cn.nukkit.api.PowerNukkitOnly;
+import cn.nukkit.api.Since;
 import cn.nukkit.scheduler.FileWriteTask;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import lombok.extern.log4j.Log4j2;
 import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.Yaml;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -18,6 +23,7 @@ import java.util.regex.Pattern;
 /**
  * @author MagicDroidX (Nukkit)
  */
+@Log4j2
 public class Config {
 
     public static final int DETECT = -1; //Detect by file extension
@@ -132,7 +138,7 @@ public class Config {
                 this.file.getParentFile().mkdirs();
                 this.file.createNewFile();
             } catch (IOException e) {
-                MainLogger.getLogger().error("Could not create Config " + this.file.toString(), e);
+                log.error("Could not create Config {}", this.file.toString(), e);
             }
             this.config = defaultMap;
             this.save();
@@ -153,7 +159,7 @@ public class Config {
                 try {
                     content = Utils.readFile(this.file);
                 } catch (IOException e) {
-                    Server.getInstance().getLogger().logException(e);
+                    log.error("An error occurred while loading the file {}", file, e);
                 }
                 this.parseContent(content);
                 if (!this.correct) return false;
@@ -174,10 +180,27 @@ public class Config {
             try {
                 content = Utils.readFile(inputStream);
             } catch (IOException e) {
-                Server.getInstance().getLogger().logException(e);
+                log.error("An error occurred while loading a config from an input stream, input: {}", inputStream, e);
                 return false;
             }
             this.parseContent(content);
+        }
+        return correct;
+    }
+
+    @PowerNukkitOnly
+    @Since("1.5.2.0-PN")
+    public boolean loadAsJson(@Nullable InputStream inputStream, @Nonnull Gson gson) {
+        if (inputStream == null) return false;
+        if (this.correct) {
+            String content;
+            try {
+                content = Utils.readFile(inputStream);
+            } catch (IOException e) {
+                log.error("An error occurred while loading a config from an input stream, input: {}", inputStream, e);
+                return false;
+            }
+            this.parseContentAsJson(content, gson);
         }
         return correct;
     }
@@ -207,8 +230,25 @@ public class Config {
         return save();
     }
 
+    @PowerNukkitOnly
+    @Since("1.5.2.0-PN")
+    public boolean saveAsJson(@Nonnull File file, boolean async, @Nonnull Gson gson) {
+        this.file = file;
+        return saveAsJson(async, gson);
+    }
+
     public boolean save() {
         return this.save(false);
+    }
+
+    @PowerNukkitOnly
+    @Since("1.5.2.0-PN")
+    public boolean saveAsJson(boolean async, @Nonnull Gson gson) {
+        if (!this.correct) {
+            return false;
+        }
+        save0(async, new StringBuilder(gson.toJson(this.config)).append('\n'));
+        return true;
     }
 
     public boolean save(Boolean async) {
@@ -235,19 +275,22 @@ public class Config {
                     }
                     break;
             }
-            if (async) {
-                Server.getInstance().getScheduler().scheduleAsyncTask(new FileWriteTask(this.file, content.toString()));
-
-            } else {
-                try {
-                    Utils.writeFile(this.file, content.toString());
-                } catch (IOException e) {
-                    Server.getInstance().getLogger().logException(e);
-                }
-            }
+            save0(async, content);
             return true;
         } else {
             return false;
+        }
+    }
+
+    private void save0(boolean async, StringBuilder content) {
+        if (async) {
+            Server.getInstance().getScheduler().scheduleAsyncTask(new FileWriteTask(this.file, content.toString()));
+        } else {
+            try {
+                Utils.writeFile(this.file, content.toString());
+            } catch (IOException e) {
+                log.error("Failed to save the config file {}", file, e);
+            }
         }
     }
 
@@ -479,7 +522,7 @@ public class Config {
                 final String value = line.substring(splitIndex + 1);
                 final String valueLower = value.toLowerCase();
                 if (this.config.containsKey(key)) {
-                    MainLogger.getLogger().debug("[Config] Repeated property " + key + " on file " + this.file.toString());
+                    log.debug("[Config] Repeated property {} on file {}", key, this.file.toString());
                 }
                 switch (valueLower) {
                     case "on":
@@ -533,6 +576,16 @@ public class Config {
         remove(key);
     }
 
+    private void parseContentAsJson(String content, Gson gson) {
+        try {
+            this.config = new ConfigSection(gson.fromJson(content, new TypeToken<LinkedHashMap<String, Object>>() {
+            }.getType()));
+        } catch (Exception e) {
+            log.warn("Failed to parse the config file {}", file, e);
+            throw e;
+        }
+    }
+
     private void parseContent(String content) {
         try {
             switch (this.type) {
@@ -559,7 +612,7 @@ public class Config {
                     this.correct = false;
             }
         } catch (Exception e) {
-          MainLogger.getLogger().warning("Failed to parse the config file "+file, e);
+          log.warn("Failed to parse the config file {}", file, e);
           throw e;
         }
     }

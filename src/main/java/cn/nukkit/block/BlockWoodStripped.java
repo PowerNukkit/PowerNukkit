@@ -11,11 +11,14 @@ import cn.nukkit.item.Item;
 
 import javax.annotation.Nonnull;
 
+@PowerNukkitOnly
 public abstract class BlockWoodStripped extends BlockWood {
+    @PowerNukkitOnly
     public BlockWoodStripped() {
         this(0);
     }
-    
+
+    @PowerNukkitOnly
     public BlockWoodStripped(int meta) {
         super(meta);
     }
@@ -31,6 +34,7 @@ public abstract class BlockWoodStripped extends BlockWood {
         return PILLAR_PROPERTIES;
     }
 
+    @PowerNukkitOnly
     @Override
     protected BlockState getStrippedState() {
         return getCurrentState();
@@ -38,9 +42,10 @@ public abstract class BlockWoodStripped extends BlockWood {
 
     @Override
     public String getName() {
-        return "Stripped " + getWoodType() + " Log";
+        return "Stripped " + super.getName();
     }
 
+    @PowerNukkitOnly
     @Override
     public void setWoodType(WoodType woodType) {
         if (!woodType.equals(getWoodType())) {

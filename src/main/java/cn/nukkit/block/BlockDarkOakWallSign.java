@@ -6,10 +6,12 @@ import cn.nukkit.item.ItemDarkOakSign;
 
 @PowerNukkitOnly
 public class BlockDarkOakWallSign extends BlockWallSign {
+    @PowerNukkitOnly
     public BlockDarkOakWallSign() {
         this(0);
     }
 
+    @PowerNukkitOnly
     public BlockDarkOakWallSign(int meta) {
         super(meta);
     }
@@ -19,6 +21,7 @@ public class BlockDarkOakWallSign extends BlockWallSign {
         return DARKOAK_WALL_SIGN;
     }
 
+    @PowerNukkitOnly
     @Override
     protected int getPostId() {
         return DARKOAK_STANDING_SIGN;

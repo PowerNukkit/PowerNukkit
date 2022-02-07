@@ -9,8 +9,12 @@ import cn.nukkit.utils.BlockColor;
 
 import javax.annotation.Nonnull;
 
+@PowerNukkitOnly
+@Since("1.4.0.0-PN")
 public class BlockDoubleSlabCrimson extends BlockDoubleSlabBase {
 
+    @PowerNukkitOnly
+    @Since("1.4.0.0-PN")
     public BlockDoubleSlabCrimson() {
         super(0);
     }
@@ -28,17 +32,20 @@ public class BlockDoubleSlabCrimson extends BlockDoubleSlabBase {
         return BlockSlab.SIMPLE_SLAB_PROPERTIES;
     }
 
+    @PowerNukkitOnly
     @Override
     public String getSlabName() {
         return "Crimson";
     }
 
+    @PowerNukkitOnly
     @Override
     public int getSingleSlabId() {
         return CRIMSON_SLAB;
     }
 
     //TODO Adjust or remove this when merging https://github.com/PowerNukkit/PowerNukkit/pull/370
+    @PowerNukkitOnly
     @Override
     protected boolean isCorrectTool(Item item) {
         return true;

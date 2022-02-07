@@ -55,7 +55,7 @@ public interface ChunkSection {
     int getFullBlock(int x, int y, int z, int layer);
     
     @PowerNukkitOnly
-    @Since("1.3.0.0-PN")
+    @Since("1.4.0.0-PN")
     @Nonnull
     default BlockState getBlockState(int x, int y, int z) {
         return getBlockState(x, y, z, 0);
@@ -100,6 +100,7 @@ public interface ChunkSection {
 
     @Deprecated
     @DeprecationDetails(reason = "The meta is limited to 32 bits", since = "1.3.0.0-PN", replaceWith = "setBlockStateAtLayer(int x, int y, int z, int layer, BlockState state)")
+    @PowerNukkitOnly
     boolean setFullBlockId(int x, int y, int z, int layer, int fullId);
 
     @PowerNukkitOnly
@@ -130,6 +131,7 @@ public interface ChunkSection {
 
     boolean isEmpty();
 
+    @Since("1.4.0.0-PN")
     void writeTo(BinaryStream stream);
 
     @PowerNukkitOnly
@@ -160,12 +162,18 @@ public interface ChunkSection {
         return !isEmpty();
     }
 
+    @PowerNukkitOnly
+    @Since("1.4.0.0-PN")
     boolean setBlockStateAtLayer(int x, int y, int z, int layer, BlockState state);
-    
+
+    @PowerNukkitOnly
+    @Since("1.4.0.0-PN")
     default boolean setBlockState(int x, int y, int z, BlockState state) {
         return setBlockStateAtLayer(x, y, z, 0, state);
     }
 
+    @PowerNukkitOnly
+    @Since("1.4.0.0-PN")
     int getBlockChangeStateAbove(int x, int y, int z);
 
     @PowerNukkitOnly
