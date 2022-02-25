@@ -116,7 +116,7 @@
         "component_based": false
     },
     "minecraft:balloon": {
-        "runtime_id": 598,
+        "runtime_id": 597,
         "component_based": false
     },
     "minecraft:bamboo": {
@@ -132,7 +132,7 @@
         "component_based": false
     },
     "minecraft:banner_pattern": {
-        "runtime_id": 628,
+        "runtime_id": 629,
         "component_based": false
     },
     "minecraft:barrel": {
@@ -292,7 +292,7 @@
         "component_based": false
     },
     "minecraft:bleach": {
-        "runtime_id": 596,
+        "runtime_id": 595,
         "component_based": false
     },
     "minecraft:blue_candle": {
@@ -316,7 +316,7 @@
         "component_based": false
     },
     "minecraft:boat": {
-        "runtime_id": 626,
+        "runtime_id": 627,
         "component_based": false
     },
     "minecraft:bone": {
@@ -428,7 +428,7 @@
         "component_based": false
     },
     "minecraft:camera": {
-        "runtime_id": 593,
+        "runtime_id": 592,
         "component_based": false
     },
     "minecraft:campfire": {
@@ -575,6 +575,10 @@
         "runtime_id": 384,
         "component_based": false
     },
+    "minecraft:client_request_placeholder_block": {
+        "runtime_id": -465,
+        "component_based": false
+    },
     "minecraft:clock": {
         "runtime_id": 393,
         "component_based": false
@@ -668,7 +672,7 @@
         "component_based": false
     },
     "minecraft:compound": {
-        "runtime_id": 594,
+        "runtime_id": 593,
         "component_based": false
     },
     "minecraft:concrete": {
@@ -1168,7 +1172,7 @@
         "component_based": false
     },
     "minecraft:dye": {
-        "runtime_id": 627,
+        "runtime_id": 628,
         "component_based": false
     },
     "minecraft:egg": {
@@ -1696,7 +1700,7 @@
         "component_based": false
     },
     "minecraft:end_crystal": {
-        "runtime_id": 630,
+        "runtime_id": 631,
         "component_based": false
     },
     "minecraft:end_gateway": {
@@ -1892,7 +1896,7 @@
         "component_based": false
     },
     "minecraft:glow_berries": {
-        "runtime_id": 631,
+        "runtime_id": 632,
         "component_based": false
     },
     "minecraft:glow_frame": {
@@ -1912,7 +1916,7 @@
         "component_based": false
     },
     "minecraft:glow_stick": {
-        "runtime_id": 166,
+        "runtime_id": 600,
         "component_based": false
     },
     "minecraft:glowingobsidian": {
@@ -2108,11 +2112,11 @@
         "component_based": false
     },
     "minecraft:honey_bottle": {
-        "runtime_id": 592,
+        "runtime_id": 591,
         "component_based": false
     },
     "minecraft:honeycomb": {
-        "runtime_id": 591,
+        "runtime_id": 590,
         "component_based": false
     },
     "minecraft:honeycomb_block": {
@@ -2140,7 +2144,7 @@
         "component_based": false
     },
     "minecraft:ice_bomb": {
-        "runtime_id": 595,
+        "runtime_id": 594,
         "component_based": false
     },
     "minecraft:infested_deepslate": {
@@ -2612,7 +2616,7 @@
         "component_based": false
     },
     "minecraft:medicine": {
-        "runtime_id": 599,
+        "runtime_id": 598,
         "component_based": false
     },
     "minecraft:medium_amethyst_bud": {
@@ -2723,6 +2727,10 @@
         "runtime_id": 540,
         "component_based": false
     },
+    "minecraft:music_disc_otherside": {
+        "runtime_id": 626,
+        "component_based": false
+    },
     "minecraft:music_disc_pigstep": {
         "runtime_id": 619,
         "component_based": false
@@ -2749,6 +2757,14 @@
     },
     "minecraft:mycelium": {
         "runtime_id": 110,
+        "component_based": false
+    },
+    "minecraft:mysterious_frame": {
+        "runtime_id": -466,
+        "component_based": false
+    },
+    "minecraft:mysterious_frame_slot": {
+        "runtime_id": -467,
         "component_based": false
     },
     "minecraft:name_tag": {
@@ -3256,7 +3272,7 @@
         "component_based": false
     },
     "minecraft:rapid_fertilizer": {
-        "runtime_id": 597,
+        "runtime_id": 596,
         "component_based": false
     },
     "minecraft:ravager_spawn_egg": {
@@ -3427,8 +3443,24 @@
         "runtime_id": -165,
         "component_based": false
     },
+    "minecraft:sculk": {
+        "runtime_id": -458,
+        "component_based": false
+    },
+    "minecraft:sculk_catalyst": {
+        "runtime_id": -460,
+        "component_based": false
+    },
     "minecraft:sculk_sensor": {
         "runtime_id": -307,
+        "component_based": false
+    },
+    "minecraft:sculk_shrieker": {
+        "runtime_id": -461,
+        "component_based": false
+    },
+    "minecraft:sculk_vein": {
+        "runtime_id": -459,
         "component_based": false
     },
     "minecraft:scute": {
@@ -3584,11 +3616,11 @@
         "component_based": false
     },
     "minecraft:sparkler": {
-        "runtime_id": 600,
+        "runtime_id": 599,
         "component_based": false
     },
     "minecraft:spawn_egg": {
-        "runtime_id": 629,
+        "runtime_id": 630,
         "component_based": false
     },
     "minecraft:spider_eye": {

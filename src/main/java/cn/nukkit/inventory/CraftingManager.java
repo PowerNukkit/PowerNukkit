@@ -5,6 +5,7 @@ import cn.nukkit.api.PowerNukkitOnly;
 import cn.nukkit.api.Since;
 import cn.nukkit.block.BlockID;
 import cn.nukkit.block.BlockUnknown;
+import cn.nukkit.blockproperty.UnknownRuntimeIdException;
 import cn.nukkit.blockproperty.exception.BlockPropertyNotFoundException;
 import cn.nukkit.blockstate.BlockState;
 import cn.nukkit.blockstate.BlockStateRegistry;
@@ -27,8 +28,11 @@ import lombok.extern.log4j.Log4j2;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.UncheckedIOException;
 import java.util.*;
+import java.util.stream.Stream;
 import java.util.zip.Deflater;
 
 /**
@@ -46,19 +50,19 @@ public class CraftingManager {
     protected final Map<Integer, Map<UUID, ShapedRecipe>> shapedRecipes = new Int2ObjectOpenHashMap<>();
 
     public final Map<Integer, FurnaceRecipe> furnaceRecipes = new Int2ObjectOpenHashMap<>();
-    public final Map<Integer, BlastFurnaceRecipe> blastFurnaceRecipes = new Int2ObjectOpenHashMap<>();
-    public final Map<Integer, SmokerRecipe> smokerRecipes = new Int2ObjectOpenHashMap<>();
-    public final Map<Integer, CampfireRecipe> campfireRecipes = new Int2ObjectOpenHashMap<>();
+    @PowerNukkitOnly public final Map<Integer, BlastFurnaceRecipe> blastFurnaceRecipes = new Int2ObjectOpenHashMap<>();
+    @PowerNukkitOnly public final Map<Integer, SmokerRecipe> smokerRecipes = new Int2ObjectOpenHashMap<>();
+    @PowerNukkitOnly public final Map<Integer, CampfireRecipe> campfireRecipes = new Int2ObjectOpenHashMap<>();
 
     @Since("1.4.0.0-PN") public final Map<UUID, MultiRecipe> multiRecipes = new HashMap<>();
 
     public final Map<Integer, BrewingRecipe> brewingRecipes = new Int2ObjectOpenHashMap<>();
     public final Map<Integer, ContainerRecipe> containerRecipes = new Int2ObjectOpenHashMap<>();
-    public final Map<Integer, StonecutterRecipe> stonecutterRecipes = new Int2ObjectOpenHashMap<>();
+    @PowerNukkitOnly public final Map<Integer, StonecutterRecipe> stonecutterRecipes = new Int2ObjectOpenHashMap<>();
 
     private static int RECIPE_COUNT = 0;
     protected final Map<Integer, Map<UUID, ShapelessRecipe>> shapelessRecipes = new Int2ObjectOpenHashMap<>();
-    protected final Map<Integer, Map<UUID, CartographyRecipe>> cartographyRecipes = new Int2ObjectOpenHashMap<>();
+    @PowerNukkitOnly protected final Map<Integer, Map<UUID, CartographyRecipe>> cartographyRecipes = new Int2ObjectOpenHashMap<>();
     
     private final Int2ObjectOpenHashMap<Map<UUID, SmithingRecipe>> smithingRecipes = new Int2ObjectOpenHashMap<>();
 
@@ -81,15 +85,15 @@ public class CraftingManager {
     }
 
     public CraftingManager() {
-        InputStream recipesStream = Server.class.getClassLoader().getResourceAsStream("recipes.json");
-        if (recipesStream == null) {
-            throw new AssertionError("Unable to find recipes.json");
-        }
-
         registerSmithingRecipes();
 
         Config recipesConfig = new Config(Config.JSON);
-        recipesConfig.load(recipesStream);
+        try(InputStream recipesStream = Server.class.getClassLoader().getResourceAsStream("recipes.json")) {
+            recipesConfig.load(Objects.requireNonNull(recipesStream, "Unable to find recipes.json"));
+        } catch (IOException e) {
+            throw new UncheckedIOException(e);
+        }
+
         this.loadRecipes(recipesConfig);
 
         String path = Server.getInstance().getDataPath() + "custom_recipes.json";
@@ -132,10 +136,16 @@ public class CraftingManager {
         toNextRecipe:
         for (Map<String, Object> recipe : recipes) {
             try {
-                switch (Utils.toInt(recipe.get("type"))) {
+                int type = Utils.toInt(recipe.get("type"));
+                switch (type) {
                     case 0:
+                    case 5:
                         String craftingBlock = (String) recipe.get("block");
-                        if (!"crafting_table".equals(craftingBlock) && !"stonecutter".equals(craftingBlock) && !"cartography_table".equalsIgnoreCase(craftingBlock)) {
+                        if (type == 5) {
+                            craftingBlock = "shulker_box";
+                        }
+                        if (!"crafting_table".equals(craftingBlock) && !"stonecutter".equals(craftingBlock)
+                                && !"cartography_table".equalsIgnoreCase(craftingBlock) && !"shulker_box".equalsIgnoreCase(craftingBlock)) {
                             // Ignore other recipes than crafting table, stonecutter and cartography table
                             continue;
                         }
@@ -166,6 +176,9 @@ public class CraftingManager {
                         switch (craftingBlock) {
                             case "crafting_table":
                                 this.registerRecipe(new ShapelessRecipe(recipeId, priority, result, sorted));
+                                break;
+                            case "shulker_box":
+                                this.registerRecipe(new ShulkerBoxRecipe(recipeId, priority, result, sorted));
                                 break;
                             case "stonecutter":
                                 this.registerRecipe(new StonecutterRecipe(recipeId, priority, result, sorted.get(0)));
@@ -304,15 +317,62 @@ public class CraftingManager {
 
     private Item parseRecipeItem(Map<String, Object> data) {
         String nbt = (String) data.get("nbt_b64");
+        boolean fuzzy = data.containsKey("fuzzy") && Boolean.parseBoolean(data.get("fuzzy").toString());
         byte[] nbtBytes = nbt != null ? Base64.getDecoder().decode(nbt) : EmptyArrays.EMPTY_BYTES;
 
         int count = data.containsKey("count")? ((Number)data.get("count")).intValue() : 1;
-        Integer legacyId = null;
-        if (data.containsKey("legacyId")) {
-            legacyId = Utils.toInt(data.get("legacyId"));
-        }
 
         Item item;
+        if (data.containsKey("blockState")) {
+            String blockStateId = data.get("blockState").toString();
+            // TODO Remove this when the support is added to these blocks
+            if (Stream.of(
+                    "minecraft:candle",
+                    "minecraft:cracked_deepslate_bricks",
+                    "minecraft:cracked_deepslate_tiles",
+                    "minecraft:smooth_basalt",
+                    "minecraft:moss_block",
+                    "minecraft:deepslate",
+                    "minecraft:copper",
+                    "minecraft:raw_",
+                    "minecraft:pointed_dripstone"
+            ).anyMatch(blockStateId::startsWith)) {
+                return Item.get(BlockID.AIR);
+            }
+            if (Stream.of(
+                    "copper", "deepslate", "deepslate_slab",
+                    "copper_slab", "copper_stairs"
+                    ).anyMatch(blockStateId.split(";", 2)[0]::endsWith)) {
+                return Item.get(BlockID.AIR);
+            }
+            try {
+                BlockState state = BlockState.of(blockStateId);
+                item = state.asItemBlock(count);
+                item.setCompoundTag(nbtBytes);
+                if (fuzzy) {
+                    item = item.createFuzzyCraftingRecipe();
+                }
+                return item;
+            } catch (BlockPropertyNotFoundException | UnknownRuntimeIdException e) {
+                int runtimeId = BlockStateRegistry.getKnownRuntimeIdByBlockStateId(blockStateId);
+                if (runtimeId == -1) {
+                    log.warn("Unsupported block found in recipes.json: {}", blockStateId);
+                    return Item.get(BlockID.AIR);
+                }
+                int blockId = BlockStateRegistry.getBlockIdByRuntimeId(runtimeId);
+                BlockState defaultBlockState = BlockState.of(blockId);
+                if (defaultBlockState.getProperties().equals(BlockUnknown.PROPERTIES)) {
+                    log.warn("Unsupported block found in recipes.json: {}", blockStateId);
+                    return Item.get(BlockID.AIR);
+                }
+                log.error("Failed to load a recipe with {}", blockStateId, e);
+                return Item.get(BlockID.AIR);
+            } catch (Exception e) {
+                log.error("Failed to load the block state {}", blockStateId, e);
+                return Item.getBlock(BlockID.AIR);
+            }
+        }
+
         if (data.containsKey("blockRuntimeId")) {
             int blockRuntimeId = Utils.toInt(data.get("blockRuntimeId"));
             try {
@@ -325,12 +385,19 @@ public class CraftingManager {
                 }
                 item = state.asItemBlock(count);
                 item.setCompoundTag(nbtBytes);
+                if (fuzzy) {
+                    item = item.createFuzzyCraftingRecipe();
+                }
                 return item;
             } catch (BlockPropertyNotFoundException e) {
                 log.debug("Failed to load the block runtime id {}", blockRuntimeId, e);
             }
         }
 
+        Integer legacyId = null;
+        if (data.containsKey("legacyId")) {
+            legacyId = Utils.toInt(data.get("legacyId"));
+        }
         if (legacyId != null && legacyId > 255) {
             try {
                 int fullId = RuntimeItems.getRuntimeMapping().getLegacyFullId(legacyId);
@@ -340,7 +407,6 @@ public class CraftingManager {
                     meta = RuntimeItems.getData(fullId);
                 }
 
-                boolean fuzzy = false;
                 if (data.containsKey("damage")) {
                     int damage = Utils.toInt(data.get("damage"));
                     if (damage == Short.MAX_VALUE) {
@@ -366,7 +432,8 @@ public class CraftingManager {
         if (data.containsKey("damage")) {
             int meta = Utils.toInt(data.get("damage"));
             if (meta == Short.MAX_VALUE) {
-                item = Item.fromString(id).createFuzzyCraftingRecipe();
+                item = Item.fromString(id);
+                fuzzy = true;
             } else {
                 item = Item.fromString(id + ":" + meta);
             }
@@ -375,6 +442,10 @@ public class CraftingManager {
         }
         item.setCount(count);
         item.setCompoundTag(nbtBytes);
+        if (fuzzy) {
+            item = item.createFuzzyCraftingRecipe();
+        }
+
         return item;
     }
 
@@ -447,18 +518,21 @@ public class CraftingManager {
         return recipe;
     }
 
+    @PowerNukkitOnly
     public CampfireRecipe matchCampfireRecipe(Item input) {
         CampfireRecipe recipe = this.campfireRecipes.get(getItemHash(input));
         if (recipe == null) recipe = this.campfireRecipes.get(getItemHash(input.getId(), 0));
         return recipe;
     }
 
+    @PowerNukkitOnly
     public BlastFurnaceRecipe matchBlastFurnaceRecipe(Item input) {
         BlastFurnaceRecipe recipe = this.blastFurnaceRecipes.get(getItemHash(input));
         if (recipe == null) recipe = this.blastFurnaceRecipes.get(getItemHash(input.getId(), 0));
         return recipe;
     }
 
+    @PowerNukkitOnly
     public SmokerRecipe matchSmokerRecipe(Item input) {
         SmokerRecipe recipe = this.smokerRecipes.get(getItemHash(input));
         if (recipe == null) recipe = this.smokerRecipes.get(getItemHash(input.getId(), 0));
@@ -477,6 +551,7 @@ public class CraftingManager {
         return 31 * getItemHash(item) + item.getCount();
     }
 
+    @PowerNukkitOnly
     public void registerStonecutterRecipe(StonecutterRecipe recipe) {
         this.stonecutterRecipes.put(getItemHash(recipe.getResult()), recipe);
     }
@@ -486,17 +561,19 @@ public class CraftingManager {
         this.furnaceRecipes.put(getItemHash(input), recipe);
     }
 
-
+    @PowerNukkitOnly
     public void registerBlastFurnaceRecipe(BlastFurnaceRecipe recipe) {
         Item input = recipe.getInput();
         this.blastFurnaceRecipes.put(getItemHash(input), recipe);
     }
 
+    @PowerNukkitOnly
     public void registerSmokerRecipe(SmokerRecipe recipe) {
         Item input = recipe.getInput();
         this.smokerRecipes.put(getItemHash(input), recipe);
     }
 
+    @PowerNukkitOnly
     public void registerCampfireRecipe(CampfireRecipe recipe) {
         Item input = recipe.getInput();
         this.campfireRecipes.put(getItemHash(input), recipe);
@@ -532,7 +609,8 @@ public class CraftingManager {
 
         recipe.registerToCraftingManager(this);
     }
-    
+
+    @PowerNukkitOnly
     public void registerCartographyRecipe(CartographyRecipe recipe) {
         List<Item> list = recipe.getIngredientList();
         list.sort(recipeComparator);
@@ -673,10 +751,12 @@ public class CraftingManager {
         return this.containerRecipes.get(getContainerHash(input.getId(), potion.getId()));
     }
 
+    @PowerNukkitOnly
     public StonecutterRecipe matchStonecutterRecipe(Item output) {
         return this.stonecutterRecipes.get(getItemHash(output));
     }
 
+    @PowerNukkitOnly
     public CartographyRecipe matchCartographyRecipe(List<Item> inputList, Item primaryOutput, List<Item> extraOutputList) {
         int outputHash = getItemHash(primaryOutput);
     

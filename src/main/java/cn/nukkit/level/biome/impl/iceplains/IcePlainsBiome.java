@@ -24,6 +24,7 @@ public class IcePlainsBiome extends SnowyBiome {
         this.setTemperature(0.0f);
     }
 
+    @Override
     public String getName() {
         return "Ice Plains";
     }

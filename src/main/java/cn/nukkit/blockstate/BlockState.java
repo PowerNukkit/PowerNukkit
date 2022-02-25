@@ -154,8 +154,86 @@ public final class BlockState implements Serializable, IBlockState {
             throw new InvalidBlockStateDataTypeException(blockData);
         }
     }
+
+    /**
+     * <p>Returns the {@link BlockState} object that represents the given {@code persistedStateId}.
+     *
+     * <p>Same as {@code of(persistedStateid, true}.
+     *
+     * @param persistedStateId Must follow the same syntax returned by {@link #getStateId()} or {@link #getLegacyStateId()}
+     * @throws InvalidBlockPropertyValueException If any property value in the given {@code persistedStateId} is not valid for the state.
+     *
+     * @return The block state, never null
+     */
+    @PowerNukkitOnly
+    @Since("1.5.2.0-PN")
+    @Nonnull
+    public static BlockState of(@Nonnull String persistedStateId) {
+        return of(persistedStateId, true);
+    }
+
+    /**
+     * Returns the {@link BlockState} object that represents the given {@code persistedStateId}.
+     *
+     * @param persistedStateId Must follow the same syntax returned by {@link #getStateId()} or {@link #getLegacyStateId()}
+     * @param useDefaultPropertyValues When {@code true}, the default value will be used for any missing {@link BlockProperty}
+     *                                in {@code persistedStateId}.
+     * @throws IllegalArgumentException If {@code useDefaultPropertyValues} is false and there are missing properties
+     * @throws InvalidBlockPropertyValueException If any property value in the given {@code persistedStateId} is not valid for the state.
+     * @throws NoSuchElementException If there are no block registered with the given id.
+     *
+     * @return The block state, never null
+     */
+    @PowerNukkitOnly
+    @Since("1.5.2.0-PN")
+    @Nonnull
+    public static BlockState of(@Nonnull String persistedStateId, boolean useDefaultPropertyValues) {
+        String[] stateParts = persistedStateId.split(";");
+        String namespacedId = stateParts[0];
+        int id = Optional.ofNullable(BlockStateRegistry.getBlockId(namespacedId))
+                .map(OptionalInt::of)
+                .orElse(OptionalInt.empty())
+                .orElseThrow(()-> new NoSuchElementException("Block " + namespacedId + " not found."));
+
+        // Fast path
+        BlockState state = BlockState.of(id);
+        if (stateParts.length == 1 && useDefaultPropertyValues) {
+            return state;
+        }
+
+        if (stateParts.length == 2 && (stateParts[1].startsWith("nukkit-unknown=") || stateParts[1].startsWith("unknown="))) {
+            BigInteger damage = new BigInteger(stateParts[1].split("=", 2)[1]);
+            return BlockState.of(id, damage);
+        }
+
+        if (stateParts.length == 1 && state.getPropertyNames().isEmpty()) {
+            return state;
+        }
+
+        if (useDefaultPropertyValues) {
+            for (int i = 1; i < stateParts.length; i++) {
+                String[] propertyKeyValue = stateParts[i].split("=", 2);
+                state = state.withProperty(propertyKeyValue[0], propertyKeyValue[1]);
+            }
+            return state;
+        } else {
+            Set<String> defined = new LinkedHashSet<>();
+            Set<String> needed = new LinkedHashSet<>(state.getPropertyNames());
+            for (int i = 1; i < stateParts.length; i++) {
+                String[] propertyKeyValue = stateParts[i].split("=", 2);
+                state = state.withProperty(propertyKeyValue[0], propertyKeyValue[1]);
+                defined.add(propertyKeyValue[0]);
+            }
+            needed.removeAll(defined);
+            if (needed.isEmpty()) {
+                return state;
+            }
+            throw new IllegalArgumentException(
+                    "The state id " + persistedStateId + " is missing the following properties: " + needed
+            );
+        }
+    }
     
-    @Getter
     @Nonnegative
     private final int blockId;
     
@@ -216,6 +294,14 @@ public final class BlockState implements Serializable, IBlockState {
         } else {
             storage = new BigIntegerStorage(blockData);
         }
+    }
+
+    @PowerNukkitOnly
+    @Since("1.4.0.0-PN")
+    @Nonnegative
+    @Override
+    public int getBlockId() {
+        return blockId;
     }
 
     @PowerNukkitOnly
@@ -397,12 +483,14 @@ public final class BlockState implements Serializable, IBlockState {
     @Nonnegative
     @Nonnull
     @Override
+    @PowerNukkitOnly
     public Number getDataStorage() {
         return storage.getNumber();
     }
 
     @Nonnull
     @Override
+    @PowerNukkitOnly
     public BlockProperties getProperties() {
         return BlockStateRegistry.getProperties(blockId);
     }
@@ -411,6 +499,7 @@ public final class BlockState implements Serializable, IBlockState {
     @Deprecated
     @DeprecationDetails(reason = "Can't store all data, exists for backward compatibility reasons", since = "1.4.0.0-PN", replaceWith = "getDataStorage()")
     @Override
+    @PowerNukkitOnly
     public int getLegacyDamage() {
         return storage.getLegacyDamage();
     }
@@ -418,6 +507,7 @@ public final class BlockState implements Serializable, IBlockState {
     @Unsigned
     @Deprecated
     @DeprecationDetails(reason = "Can't store all data, exists for backward compatibility reasons", since = "1.4.0.0-PN", replaceWith = "getDataStorage()")
+    @PowerNukkitOnly
     @Override
     public int getBigDamage() {
         return storage.getBigDamage();
@@ -444,15 +534,18 @@ public final class BlockState implements Serializable, IBlockState {
 
     @Nonnull
     @Override
+    @PowerNukkitOnly
     public Serializable getPropertyValue(String propertyName) {
         return storage.getPropertyValue(getProperties(), propertyName);
     }
 
     @Override
+    @PowerNukkitOnly
     public int getIntValue(String propertyName) {
         return storage.getIntValue(getProperties(), propertyName);
     }
 
+    @PowerNukkitOnly
     @Override
     public boolean getBooleanValue(String propertyName) {
         return storage.getBooleanValue(getProperties(), propertyName);
@@ -460,16 +553,19 @@ public final class BlockState implements Serializable, IBlockState {
 
     @Nonnull
     @Override
+    @PowerNukkitOnly
     public String getPersistenceValue(String propertyName) {
         return storage.getPersistenceValue(getProperties(), propertyName);
     }
 
     @Nonnull
     @Override
+    @PowerNukkitOnly
     public BlockState getCurrentState() {
         return this;
     }
 
+    @PowerNukkitOnly
     @Override
     public int getBitSize() {
         return storage.getBitSize();
@@ -497,7 +593,7 @@ public final class BlockState implements Serializable, IBlockState {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(@Nullable Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
@@ -580,6 +676,7 @@ public final class BlockState implements Serializable, IBlockState {
 
     @Nonnull
     @Override
+    @PowerNukkitOnly
     public Block getBlock() {
         try {
             Block block = IBlockState.super.getBlock();
@@ -593,6 +690,7 @@ public final class BlockState implements Serializable, IBlockState {
 
     @Nonnull
     @Override
+    @PowerNukkitOnly
     public Block getBlock(@Nullable Level level, int x, int y, int z, int layer, boolean repair, @Nullable Consumer<BlockStateRepair> callback) {
         if (valid == OptionalBoolean.TRUE) {
             Block block = IBlockState.super.getBlock();

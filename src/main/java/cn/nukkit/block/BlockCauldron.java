@@ -81,6 +81,7 @@ public class BlockCauldron extends BlockSolidMeta implements BlockEntityHolder<B
         return BlockEntityCauldron.class;
     }
 
+    @Override
     public String getName() {
         return "Cauldron Block";
     }
@@ -112,11 +113,13 @@ public class BlockCauldron extends BlockSolidMeta implements BlockEntityHolder<B
     public boolean isEmpty() {
         return getFillLevel() == FILL_LEVEL.getMinValue();
     }
-    
+
+    @PowerNukkitOnly
     public int getFillLevel() {
         return getIntValue(FILL_LEVEL);
     }
-    
+
+    @PowerNukkitOnly
     public void setFillLevel(int fillLevel) {
         setIntValue(FILL_LEVEL, fillLevel);
     }
@@ -455,6 +458,7 @@ public class BlockCauldron extends BlockSolidMeta implements BlockEntityHolder<B
     }
 
     @Override
+    @PowerNukkitOnly
     public int getToolTier() {
         return ItemTool.TIER_WOODEN;
     }

@@ -15,8 +15,10 @@ import lombok.ToString;
 import lombok.experimental.UtilityClass;
 import lombok.extern.log4j.Log4j2;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.UncheckedIOException;
 import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -38,13 +40,17 @@ public class RuntimeItems {
 
     static {
         log.debug("Loading runtime items...");
-        InputStream stream = Server.class.getClassLoader().getResourceAsStream("runtime_item_ids.json");
-        if (stream == null) {
-            throw new AssertionError("Unable to load runtime_item_ids.json");
-        }
+        Collection<Entry> entries;
+        try(InputStream stream = Server.class.getClassLoader().getResourceAsStream("runtime_item_ids.json")) {
+            if (stream == null) {
+                throw new AssertionError("Unable to load runtime_item_ids.json");
+            }
 
-        InputStreamReader reader = new InputStreamReader(stream, StandardCharsets.UTF_8);
-        Collection<Entry> entries = GSON.fromJson(reader, ENTRY_TYPE);
+            InputStreamReader reader = new InputStreamReader(stream, StandardCharsets.UTF_8);
+            entries = GSON.fromJson(reader, ENTRY_TYPE);
+        } catch (IOException e) {
+            throw new UncheckedIOException(e);
+        }
 
         BinaryStream paletteBuffer = new BinaryStream();
         paletteBuffer.putUnsignedVarInt(entries.size());
@@ -78,31 +84,37 @@ public class RuntimeItems {
                 namespaceNetworkMap, networkNamespaceMap);
     }
 
+    @PowerNukkitOnly
     @Since("1.4.0.0-PN")
     public static RuntimeItemMapping getRuntimeMapping() {
         return itemPalette;
     }
 
+    @PowerNukkitOnly
     @Since("1.4.0.0-PN")
     public static int getId(int fullId) {
         return (short) (fullId >> 16);
     }
 
+    @PowerNukkitOnly
     @Since("1.4.0.0-PN")
     public static int getData(int fullId) {
         return ((fullId >> 1) & 0x7fff);
     }
 
+    @PowerNukkitOnly
     @Since("1.4.0.0-PN")
     public static int getFullId(int id, int data) {
         return (((short) id) << 16) | ((data & 0x7fff) << 1);
     }
 
+    @PowerNukkitOnly
     @Since("1.4.0.0-PN")
     public static int getNetworkId(int networkFullId) {
         return networkFullId >> 1;
     }
 
+    @PowerNukkitOnly
     @Since("1.4.0.0-PN")
     public static boolean hasData(int id) {
         return (id & 0x1) != 0;

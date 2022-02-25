@@ -16,13 +16,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.powernukkit.tools;
+package org.powernukkit.updater;
 
 import cn.nukkit.Server;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
+import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import lombok.Data;
@@ -37,6 +34,11 @@ import java.util.Objects;
 
 public class RuntimeItemIdUpdater {
     public static void main(String[] args) throws IOException {
+        /*
+        Pre-requisites:
+        - Run src/test/java/org/powernukkit/updater/AllResourcesDownloader.java
+        - Run mvn clean package
+         */
         Gson gson = new GsonBuilder()
                 .setPrettyPrinting()
                 .create();
@@ -55,22 +57,22 @@ public class RuntimeItemIdUpdater {
             itemNameToNukkitRegistry.put(runtimeItem.name, runtimeItem);
         }
 
-        JsonObject requiredItems;
-        try(InputStream resourceAsStream = Server.class.getClassLoader().getResourceAsStream("required_item_list.json");
+        JsonArray requiredItems;
+        try(InputStream resourceAsStream = RuntimeItemIdUpdater.class.getClassLoader().getResourceAsStream("org/powernukkit/updater/dumps/proxypass/runtime_item_states.json");
             Reader reader = new InputStreamReader(Objects.requireNonNull(resourceAsStream), StandardCharsets.UTF_8);
             BufferedReader bufferedReader = new BufferedReader(reader);
         ) {
-            requiredItems = gson.fromJson(bufferedReader, JsonObject.class);
+            requiredItems = gson.fromJson(bufferedReader, JsonArray.class);
         }
 
-        for (Map.Entry<String, JsonElement> entry : requiredItems.entrySet()) {
-            String name = entry.getKey();
+        for (JsonElement e : requiredItems) {
+            JsonObject entry = e.getAsJsonObject();
+            String name = entry.get("name").getAsString();
             RuntimeItem runtimeItem = itemNameToNukkitRegistry.get(name);
             if (runtimeItem == null) {
                 continue;
             }
-            runtimeItem.id =
-                    entry.getValue().getAsJsonObject().getAsJsonPrimitive("runtime_id").getAsInt();
+            runtimeItem.id = entry.get("id").getAsInt();
         }
 
         try (FileWriter writer = new FileWriter("src/main/resources/runtime_item_ids.json");
@@ -78,6 +80,7 @@ public class RuntimeItemIdUpdater {
         ) {
             gson.toJson(runtimeItems, LIST, bufferedWriter);
         }
+        System.out.println("OK");
     }
 
     private static Type LIST = new TypeToken<List<RuntimeItem>>(){}.getType();

@@ -1,7 +1,8 @@
 [
   {
     "name": "minecraft:unknown",
-    "id": -305
+    "id": -305,
+    "oldId": -305
   },
   {
     "name": "minecraft:quartz_bricks",
@@ -2330,7 +2331,7 @@
   },
   {
     "name": "minecraft:glow_stick",
-    "id": 166,
+    "id": 600,
     "oldId": 166
   },
   {
@@ -3691,7 +3692,7 @@
   },
   {
     "name": "minecraft:spawn_egg",
-    "id": 629,
+    "id": 630,
     "oldId": 383
   },
   {
@@ -4521,52 +4522,52 @@
   },
   {
     "name": "minecraft:honeycomb",
-    "id": 591,
+    "id": 590,
     "oldId": 736
   },
   {
     "name": "minecraft:honey_bottle",
-    "id": 592,
+    "id": 591,
     "oldId": 737
   },
   {
     "name": "minecraft:camera",
-    "id": 593,
+    "id": 592,
     "oldId": 498
   },
   {
     "name": "minecraft:compound",
-    "id": 594,
+    "id": 593,
     "oldId": 499
   },
   {
     "name": "minecraft:ice_bomb",
-    "id": 595,
+    "id": 594,
     "oldId": 453
   },
   {
     "name": "minecraft:bleach",
-    "id": 596,
+    "id": 595,
     "oldId": 451
   },
   {
     "name": "minecraft:rapid_fertilizer",
-    "id": 597,
+    "id": 596,
     "oldId": 449
   },
   {
     "name": "minecraft:balloon",
-    "id": 598,
+    "id": 597,
     "oldId": 448
   },
   {
     "name": "minecraft:medicine",
-    "id": 599,
+    "id": 598,
     "oldId": 447
   },
   {
     "name": "minecraft:sparkler",
-    "id": 600,
+    "id": 599,
     "oldId": 442
   },
   {
@@ -4676,25 +4677,30 @@
   },
   {
     "name": "minecraft:boat",
-    "id": 626,
+    "id": 627,
     "oldId": 333,
     "deprecated": true
   },
   {
     "name": "minecraft:dye",
-    "id": 627,
+    "id": 628,
     "oldId": 351,
     "deprecated": true
   },
   {
     "name": "minecraft:banner_pattern",
-    "id": 628,
+    "id": 629,
     "oldId": 434,
     "deprecated": true
   },
   {
     "name": "minecraft:end_crystal",
-    "id": 630,
+    "id": 631,
     "oldId": 426
+  },
+  {
+    "name": "minecraft:spyglass",
+    "id": 625,
+    "oldId": 772
   }
 ]
