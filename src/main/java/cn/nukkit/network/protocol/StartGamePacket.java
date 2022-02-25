@@ -1,5 +1,6 @@
 package cn.nukkit.network.protocol;
 
+import cn.nukkit.api.DeprecationDetails;
 import cn.nukkit.api.PowerNukkitOnly;
 import cn.nukkit.api.Since;
 import cn.nukkit.item.RuntimeItems;
@@ -98,6 +99,7 @@ public class StartGamePacket extends DataPacket {
     public String multiplayerCorrelationId = "";
     @Since("1.3.0.0-PN") public boolean isInventoryServerAuthoritative;
     @Since("FUTURE") public String serverEngine = "";
+    @PowerNukkitOnly @Since("FUTURE") public long blockRegistryChecksum;
     
     @Override
     public void decode() {
@@ -190,7 +192,7 @@ public class StartGamePacket extends DataPacket {
         this.putString(this.multiplayerCorrelationId);
         this.putBoolean(this.isInventoryServerAuthoritative);
         this.putString(this.serverEngine);
-        this.putLLong(0L); // BlockRegistryChecksum
+        this.putLLong(this.blockRegistryChecksum);
     }
     
     @ToString
