@@ -1,6 +1,7 @@
 package cn.nukkit.item.enchantment.sideeffect;
 
 import cn.nukkit.Server;
+import cn.nukkit.api.DeprecationDetails;
 import cn.nukkit.api.PowerNukkitOnly;
 import cn.nukkit.api.Since;
 import cn.nukkit.entity.Entity;
@@ -12,17 +13,17 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 @PowerNukkitOnly
-@Since("FUTURE")
+@Since("1.5.1.0-PN")
 public class SideEffectCombust implements SideEffect {
     private int duration;
 
     @PowerNukkitOnly
-    @Since("FUTURE")
+    @Since("1.5.1.0-PN")
     public SideEffectCombust(int duration) {
         this.duration = duration;
     }
 
-    @Since("FUTURE")
+    @Since("1.5.1.0-PN")
     @PowerNukkitOnly
     @Override
     public void doPreHealthChange(@Nonnull Entity entity, @Nonnull EntityDamageEvent event, @Nullable Entity attacker) {
@@ -34,22 +35,35 @@ public class SideEffectCombust implements SideEffect {
         }
     }
 
-    @Since("FUTURE")
+    @Since("1.5.1.0-PN")
     @PowerNukkitOnly
     public int getDuration() {
         return duration;
     }
 
-    @Since("FUTURE")
+    @Since("1.5.1.0-PN")
     @PowerNukkitOnly
     public void setDuration(int duration) {
         this.duration = duration;
     }
 
+    @Deprecated
+    @DeprecationDetails(since = "FUTURE", reason = "clone have problems when defined in an interface", by = "PowerNukkit",
+        replaceWith = "cloneSideEffect")
+    @Since("1.5.1.0-PN")
     @SneakyThrows
     @Override
     @Nonnull
     public SideEffect clone() {
+        return (SideEffect) super.clone();
+    }
+
+    @Since("FUTURE")
+    @PowerNukkitOnly
+    @SneakyThrows
+    @Override
+    @Nonnull
+    public SideEffect cloneSideEffect() {
         return (SideEffect) super.clone();
     }
 }

@@ -102,6 +102,7 @@ public class EntitySnowball extends EntityProjectile {
         return entity instanceof EntityBlaze ? 3 : super.getResultDamage(entity);
     }
 
+    @PowerNukkitOnly
     @Override
     protected void addHitEffect() {
         int particles = nextParticleCount();
@@ -116,10 +117,11 @@ public class EntitySnowball extends EntityProjectile {
         Level level = this.level;
         level.getServer().batchPackets(level.getChunkPlayers(chunkX, chunkZ).values().toArray(Player.EMPTY_ARRAY), allPackets);
     }
-    
-    
+
+    @PowerNukkitOnly
+    @Since("1.5.1.0-PN")
     @Override
-    public String getName() {
+    public String getOriginalName() {
         return "Snowball";
     }
 }

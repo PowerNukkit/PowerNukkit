@@ -40,7 +40,10 @@ import java.util.function.BiPredicate;
 @ParametersAreNonnullByDefault
 public class ChunkSection implements cn.nukkit.level.format.ChunkSection {
 
+    @PowerNukkitOnly
     public static final int STREAM_STORAGE_VERSION = 8;
+
+    @PowerNukkitOnly
     public static final int SAVE_STORAGE_VERSION = 7;
     
     private static final String STORAGE_TAG_NAME = "Storage";
@@ -119,12 +122,13 @@ public class ChunkSection implements cn.nukkit.level.format.ChunkSection {
         }
 
         byte[] dataBytes = storageTag.getByteArray("Data");
+        NibbleArray data;
         if (dataBytes.length == 0) {
-            dataBytes = EmptyChunkSection.EMPTY_DATA_ARRAY;
+            data = NibbleArray.EMPTY_DATA_ARRAY;
         } else {
             hasBlockIds = true;
+            data = new NibbleArray(dataBytes);
         }
-        NibbleArray data = new NibbleArray(dataBytes);
 
         byte[] dataExtraBytes = storageTag.getByteArray("DataExtra");
         if (dataExtraBytes.length == 0) {
@@ -237,6 +241,7 @@ public class ChunkSection implements cn.nukkit.level.format.ChunkSection {
         return getBlockId(x, y, z, 0);
     }
 
+    @PowerNukkitOnly
     @Override
     public int getBlockId(int x, int y, int z, int layer) {
         return layerStorage.getStorageOrEmpty(layer).getBlockId(x, y, z);
@@ -247,6 +252,7 @@ public class ChunkSection implements cn.nukkit.level.format.ChunkSection {
         setBlockId(x, y, z, 0, id);
     }
 
+    @PowerNukkitOnly
     @Override
     public synchronized void setBlockId(int x, int y, int z, int layer, int id) {
         if (id != 0) {
@@ -273,6 +279,7 @@ public class ChunkSection implements cn.nukkit.level.format.ChunkSection {
 
     @Deprecated
     @DeprecationDetails(reason = "The meta is limited to 32 bits", since = "1.4.0.0-PN")
+    @PowerNukkitOnly
     @Override
     public synchronized boolean setFullBlockId(int x, int y, int z, int layer, int fullId) {
         if (fullId != 0) {
@@ -295,6 +302,7 @@ public class ChunkSection implements cn.nukkit.level.format.ChunkSection {
 
     @Deprecated
     @DeprecationDetails(reason = "The data is limited to 32 bits", replaceWith = "getBlockState", since = "1.4.0.0-PN")
+    @PowerNukkitOnly
     @Override
     public int getBlockData(int x, int y, int z, int layer) {
         return layerStorage.getStorageOrEmpty(layer).getBlockData(x, y, z);
@@ -309,6 +317,7 @@ public class ChunkSection implements cn.nukkit.level.format.ChunkSection {
 
     @Deprecated
     @DeprecationDetails(reason = "The data is limited to 32 bits", replaceWith = "getBlockState", since = "1.4.0.0-PN")
+    @PowerNukkitOnly
     @Override
     public synchronized void setBlockData(int x, int y, int z, int layer, int data) {
         if (data != 0) {
@@ -328,12 +337,14 @@ public class ChunkSection implements cn.nukkit.level.format.ChunkSection {
         return getFullBlock(x, y, z, 0);
     }
 
+    @PowerNukkitOnly
     @Nonnull
     @Override
     public BlockState getBlockState(int x, int y, int z, int layer) {
         return layerStorage.getStorageOrEmpty(layer).getBlockState(x, y, z);
     }
 
+    @PowerNukkitOnly
     @Deprecated
     @DeprecationDetails(reason = "The data is limited to 32 bits", replaceWith = "getBlockState", since = "1.4.0.0-PN")
     @Override
@@ -346,6 +357,7 @@ public class ChunkSection implements cn.nukkit.level.format.ChunkSection {
         return setBlockStateAtLayer(x, y, z, 0, BlockState.of(blockId));
     }
 
+    @PowerNukkitOnly
     @Override
     public boolean setBlockAtLayer(int x, int y, int z, int layer, int blockId) {
         return setBlockStateAtLayer(x, y, z, layer, BlockState.of(blockId));
@@ -357,6 +369,7 @@ public class ChunkSection implements cn.nukkit.level.format.ChunkSection {
         return getAndSetBlock(x, y, z, 0, block);
     }
 
+    @PowerNukkitOnly
     @Nonnull
     @Override
     public synchronized Block getAndSetBlock(int x, int y, int z, int layer, Block block) {
@@ -402,17 +415,20 @@ public class ChunkSection implements cn.nukkit.level.format.ChunkSection {
 
     @Deprecated
     @DeprecationDetails(reason = "The data is limited to 32 bits", replaceWith = "getBlockState", since = "1.4.0.0-PN")
+    @PowerNukkitOnly
     @Override
     public boolean setBlockAtLayer(int x, int y, int z, int layer, int blockId, int meta) {
         return setBlockStateAtLayer(x, y, z, layer, BlockState.of(blockId, meta));
     }
 
+    @PowerNukkitOnly
     @Override
     public synchronized boolean setBlockStateAtLayer(int x, int y, int z, int layer, BlockState state) {
         BlockState previous = getAndSetBlockState(x, y, z, layer, state);
         return !state.equals(previous);
     }
 
+    @PowerNukkitOnly
     @Override
     public int getBlockChangeStateAbove(int x, int y, int z) {
         BlockStorage storage = layerStorage.getStorageOrNull(0);
@@ -437,8 +453,8 @@ public class ChunkSection implements cn.nukkit.level.format.ChunkSection {
             } else if (compressedLight == null) {
                 return 15;
             }
+            this.skyLight = getSkyLightArray();
         }
-        this.skyLight = getSkyLightArray();
         int sl = this.skyLight[(y << 7) | (z << 3) | (x >> 1)] & 0xff;
         if ((x & 1) == 0) {
             return sl & 0x0f;
@@ -502,19 +518,22 @@ public class ChunkSection implements cn.nukkit.level.format.ChunkSection {
 
     @Override
     public byte[] getSkyLightArray() {
-        if (this.skyLight != null) return skyLight;
-        if (hasSkyLight) {
-            if (compressedLight != null) {
-                inflate();
-                return this.skyLight;
-            }
-            return EmptyChunkSection.EMPTY_SKY_LIGHT_ARR;
-        } else {
-            return EmptyChunkSection.EMPTY_LIGHT_ARR;
+        if (skyLight != null) {
+            return skyLight.clone();
         }
+        
+        if (!hasSkyLight) {
+            return new byte[EmptyChunkSection.EMPTY_LIGHT_ARR.length];
+        }
+        
+        if (compressedLight != null && inflate() && skyLight != null) {
+            return skyLight.clone();
+        }
+        
+        return EmptyChunkSection.EMPTY_SKY_LIGHT_ARR.clone();
     }
 
-    private void inflate() {
+    private boolean inflate() {
         try {
             if (compressedLight != null && compressedLight.length != 0) {
                 byte[] inflated = Zlib.inflate(compressedLight);
@@ -535,20 +554,24 @@ public class ChunkSection implements cn.nukkit.level.format.ChunkSection {
                     Arrays.fill(skyLight, (byte) 0xFF);
                 }
             }
+            return true;
         } catch (IOException e) {
             log.error("Failed to decompress a chunk section", e);
+            return false;
         }
     }
 
     @Override
     public byte[] getLightArray() {
-        if (this.blockLight != null) return blockLight;
-        if (hasBlockLight) {
-            inflate();
-            return this.blockLight;
-        } else {
-            return EmptyChunkSection.EMPTY_LIGHT_ARR;
+        if (blockLight != null) {
+            return blockLight.clone();
         }
+
+        if (hasBlockLight && compressedLight != null && inflate() && blockLight != null) {
+            return blockLight.clone();
+        }
+
+        return new byte[EmptyChunkSection.EMPTY_LIGHT_ARR.length];
     }
 
     @Override
@@ -652,6 +675,7 @@ public class ChunkSection implements cn.nukkit.level.format.ChunkSection {
         return blob;
     }
 
+    @PowerNukkitOnly
     @Nonnull
     @Override
     public synchronized CompoundTag toNBT() {
@@ -719,8 +743,8 @@ public class ChunkSection implements cn.nukkit.level.format.ChunkSection {
         if (version >= SAVE_STORAGE_VERSION) {
             s.putList(storageList);
         }
-        s.putByteArray("BlockLight", getLightArray());
-        s.putByteArray("SkyLight", getSkyLightArray());
+        s.putByteArray("BlockLight", blockLight == null? getLightArray() : blockLight);
+        s.putByteArray("SkyLight", skyLight == null? getSkyLightArray(): skyLight);
         return s;
     }
     
@@ -799,6 +823,7 @@ public class ChunkSection implements cn.nukkit.level.format.ChunkSection {
         return results;
     }
 
+    @Override
     @SneakyThrows(CloneNotSupportedException.class)
     @Nonnull
     public ChunkSection copy() {
@@ -812,7 +837,8 @@ public class ChunkSection implements cn.nukkit.level.format.ChunkSection {
                 this.hasSkyLight
         );
     }
-    
+
+    @PowerNukkitOnly
     @Override
     public int getMaximumLayer() {
         return 1;
@@ -832,6 +858,7 @@ public class ChunkSection implements cn.nukkit.level.format.ChunkSection {
         this.contentVersion = contentVersion;
     }
 
+    @PowerNukkitOnly
     @Override
     public boolean hasBlocks() {
         return layerStorage.hasBlocks();

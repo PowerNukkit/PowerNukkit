@@ -135,6 +135,7 @@ public class EntityPainting extends EntityHanging {
         this.namedTag.putString("Motive", this.motive.title);
     }
 
+    @PowerNukkitOnly
     @Override
     public void onPushByPiston(BlockEntityPistonArm piston) {
         if (this.level.getGameRules().getBoolean(GameRule.DO_ENTITY_DROPS)) {
@@ -198,10 +199,12 @@ public class EntityPainting extends EntityHanging {
             this.height = height;
         }
     }
-    
-    
+
+
+    @PowerNukkitOnly
+    @Since("1.5.1.0-PN")
     @Override
-    public String getName() {
+    public String getOriginalName() {
         return "Painting";
     }
 }

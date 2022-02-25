@@ -45,13 +45,16 @@ public class EntityPiglinBrute extends EntityMob {
         return 1.9f;
     }
 
+    @PowerNukkitOnly
     @Override
     public boolean isPreventingSleep(Player player) {
         return true;
     }
 
+    @PowerNukkitOnly
+    @Since("1.5.1.0-PN")
     @Override
-    public String getName() {
+    public String getOriginalName() {
         return "Piglin Brute";
     }
 }

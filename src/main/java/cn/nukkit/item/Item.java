@@ -3,16 +3,18 @@ package cn.nukkit.item;
 import cn.nukkit.Player;
 import cn.nukkit.Server;
 import cn.nukkit.api.*;
-import cn.nukkit.api.Since;
 import cn.nukkit.block.Block;
 import cn.nukkit.block.BlockID;
+import cn.nukkit.block.BlockUnknown;
 import cn.nukkit.blockproperty.UnknownRuntimeIdException;
+import cn.nukkit.blockproperty.exception.BlockPropertyNotFoundException;
 import cn.nukkit.blockproperty.exception.InvalidBlockPropertyMetaException;
 import cn.nukkit.blockstate.BlockState;
 import cn.nukkit.blockstate.BlockStateRegistry;
 import cn.nukkit.blockstate.exception.InvalidBlockStateException;
 import cn.nukkit.entity.Entity;
 import cn.nukkit.inventory.Fuel;
+import cn.nukkit.item.RuntimeItemMapping.RuntimeEntry;
 import cn.nukkit.item.enchantment.Enchantment;
 import cn.nukkit.item.enchantment.sideeffect.SideEffect;
 import cn.nukkit.level.Level;
@@ -50,7 +52,7 @@ public class Item implements Cloneable, BlockID, ItemID {
     @PowerNukkitOnly
     @Since("1.4.0.0-PN")
     public static final Item[] EMPTY_ARRAY = new Item[0];
-    
+
     /**
      * Groups:
      * <ol>
@@ -67,7 +69,7 @@ public class Item implements Cloneable, BlockID, ItemID {
 
     protected static String UNKNOWN_STR = "Unknown";
     public static Class[] list = null;
-    
+
     private static Map<String, Integer> itemIds = Arrays.stream(ItemID.class.getDeclaredFields())
             .filter(field-> field.getModifiers() == (Modifier.PUBLIC | Modifier.STATIC | Modifier.FINAL))
             .filter(field -> field.getType().equals(int.class))
@@ -225,7 +227,7 @@ public class Item implements Cloneable, BlockID, ItemID {
             list[SIGN] = ItemSign.class; //323
             list[WOODEN_DOOR] = ItemDoorWood.class; //324
             list[BUCKET] = ItemBucket.class; //325
-            
+
             list[MINECART] = ItemMinecart.class; //328
             list[SADDLE] = ItemSaddle.class; //329
             list[IRON_DOOR] = ItemDoorIron.class; //330
@@ -234,7 +236,6 @@ public class Item implements Cloneable, BlockID, ItemID {
             list[BOAT] = ItemBoat.class; //333
             list[LEATHER] = ItemLeather.class; //334
             list[KELP] = ItemKelp.class; //335
-
             list[BRICK] = ItemBrick.class; //336
             list[CLAY] = ItemClay.class; //337
             list[SUGARCANE] = ItemSugarcane.class; //338
@@ -301,7 +302,7 @@ public class Item implements Cloneable, BlockID, ItemID {
             list[NETHER_STAR] = ItemNetherStar.class; //399
             list[PUMPKIN_PIE] = ItemPumpkinPie.class; //400
             list[FIREWORKS] = ItemFirework.class; //401
-
+            list[FIREWORKSCHARGE] = ItemFireworkStar.class; //402
             list[ENCHANTED_BOOK] = ItemBookEnchanted.class; //403
             list[COMPARATOR] = ItemRedstoneComparator.class; //404
             list[NETHER_BRICK] = ItemNetherBrick.class; //405
@@ -341,16 +342,14 @@ public class Item implements Cloneable, BlockID, ItemID {
             list[LINGERING_POTION] = ItemPotionLingering.class; //441
 
             list[ELYTRA] = ItemElytra.class; //444
-
             list[SHULKER_SHELL] = ItemShulkerShell.class; //445
             list[BANNER] = ItemBanner.class; //446
 
             list[TOTEM] = ItemTotem.class; //450
-            
-            list[IRON_NUGGET] = ItemNuggetIron.class; //452
-            
-            list[TRIDENT] = ItemTrident.class; //455
 
+            list[IRON_NUGGET] = ItemNuggetIron.class; //452
+
+            list[TRIDENT] = ItemTrident.class; //455
             list[BEETROOT] = ItemBeetroot.class; //457
             list[BEETROOT_SEEDS] = ItemSeedsBeetroot.class; //458
             list[BEETROOT_SOUP] = ItemBeetrootSoup.class; //459
@@ -359,11 +358,12 @@ public class Item implements Cloneable, BlockID, ItemID {
             list[PUFFERFISH] = ItemPufferfish.class; //462
             list[COOKED_SALMON] = ItemSalmonCooked.class; //463
             list[DRIED_KELP] = ItemDriedKelp.class; //464
-
+            list[NAUTILUS_SHELL] = ItemNautilusShell.class; //465
             list[GOLDEN_APPLE_ENCHANTED] = ItemAppleGoldEnchanted.class; //466
-            
+            list[HEART_OF_THE_SEA] = ItemHeartOfTheSea.class; //467
+            list[SCUTE] = ItemScute.class; //468
             list[TURTLE_SHELL] = ItemTurtleShell.class; //469
-
+            list[PHANTOM_MEMBRANE] = ItemPhantomMembrane.class; //470
             list[CROSSBOW] = ItemCrossbow.class; //471
             list[SPRUCE_SIGN] = ItemSpruceSign.class; //472
             list[BIRCH_SIGN] = ItemBirchSign.class; //473
@@ -393,7 +393,7 @@ public class Item implements Cloneable, BlockID, ItemID {
 
             list[HONEYCOMB] = ItemHoneycomb.class; //736
             list[HONEY_BOTTLE] = ItemHoneyBottle.class; //737
-                        
+
             list[LODESTONECOMPASS] = ItemCompassLodestone.class; //741;
             list[NETHERITE_INGOT] = ItemIngotNetherite.class; //742
             list[NETHERITE_SWORD] = ItemSwordNetherite.class; //743
@@ -415,8 +415,10 @@ public class Item implements Cloneable, BlockID, ItemID {
             list[RECORD_PIGSTEP] = ItemRecordPigstep.class; //759
             list[NETHER_SPROUTS] = ItemNetherSprouts.class; //760
 
+            list[SPYGLASS] = ItemSpyglass.class; //772
+
             list[SOUL_CAMPFIRE] = ItemCampfireSoul.class; //801
-            
+
             for (int i = 0; i < 256; ++i) {
                 if (Block.list[i] != null) {
                     list[i] = Block.list[i];
@@ -477,6 +479,50 @@ public class Item implements Cloneable, BlockID, ItemID {
     private static Item loadCreativeItemEntry(Map<String, Object> data) {
         String nbt = (String) data.get("nbt_b64");
         byte[] nbtBytes = nbt != null ? Base64.getDecoder().decode(nbt) : EmptyArrays.EMPTY_BYTES;
+
+        if (data.containsKey("blockState")) {
+            String blockStateId = data.get("blockState").toString();
+            // TODO Remove this when the support is added to these blocks
+            if (Stream.of(
+                    "minecraft:candle",
+                    "minecraft:deepslate",
+                    "minecraft:cracked_deepslate_bricks",
+                    "minecraft:cracked_deepslate_tiles",
+                    "minecraft:smooth_basalt"
+            ).anyMatch(blockStateId::startsWith)) {
+                return null;
+            }
+            try {
+                // TODO Remove this when the support is added to these blocks
+                String[] stateParts = blockStateId.split(";", 2);
+                Integer blockId = BlockStateRegistry.getBlockId(stateParts[0]);
+                if (blockId != null && blockId > BlockID.QUARTZ_BRICKS) {
+                    return Item.getBlock(BlockID.AIR);
+                }
+
+                BlockState state = BlockState.of(blockStateId);
+                Item item = state.asItemBlock();
+                item.setCompoundTag(nbtBytes);
+                return item;
+            } catch (BlockPropertyNotFoundException | UnknownRuntimeIdException e) {
+                int runtimeId = BlockStateRegistry.getKnownRuntimeIdByBlockStateId(blockStateId);
+                if (runtimeId == -1) {
+                    log.warn("Unsupported block found in creativeitems.json: {}", blockStateId);
+                    return null;
+                }
+                int blockId = BlockStateRegistry.getBlockIdByRuntimeId(runtimeId);
+                BlockState defaultBlockState = BlockState.of(blockId);
+                if (defaultBlockState.getProperties().equals(BlockUnknown.PROPERTIES)) {
+                    log.warn("Unsupported block found in creativeitems.json: {}", blockStateId);
+                    return null;
+                }
+                log.error("Failed to load the creative item with {}", blockStateId, e);
+                return null;
+            } catch (Exception e) {
+                log.error("Failed to load the creative item {}", blockStateId, e);
+                return null;
+            }
+        }
 
         String id = data.get("id").toString();
         Item item = null;
@@ -552,18 +598,22 @@ public class Item implements Cloneable, BlockID, ItemID {
         return -1;
     }
 
+    @PowerNukkitOnly
     public static Item getBlock(int id) {
         return getBlock(id, 0);
     }
 
+    @PowerNukkitOnly
     public static Item getBlock(int id, Integer meta) {
         return getBlock(id, meta, 1);
     }
 
+    @PowerNukkitOnly
     public static Item getBlock(int id, Integer meta, int count) {
         return getBlock(id, meta, count, EmptyArrays.EMPTY_BYTES);
     }
 
+    @PowerNukkitOnly
     public static Item getBlock(int id, Integer meta, int count, byte[] tags) {
         if (id > 255) {
             id = 255 - id;
@@ -619,7 +669,7 @@ public class Item implements Cloneable, BlockID, ItemID {
                     } catch (UnknownRuntimeIdException e) {
                         log.warn("Attempted to get an illegal item block {}:{} ({}), the runtime id was unknown and the meta was changed to 0",
                                 id, meta, blockId, e);
-                        item = BlockState.of(id).asItemBlock(count);
+                        item = BlockState.of(blockId).asItemBlock(count);
                     }
                 }
             } else if (c == null) {
@@ -635,10 +685,10 @@ public class Item implements Cloneable, BlockID, ItemID {
             if (tags.length != 0) {
                 item.setCompoundTag(tags);
             }
-            
+
             return item;
         } catch (Exception e) {
-            log.error("Error getting the item {}:{}{}! Returning an unsafe item stack!", 
+            log.error("Error getting the item {}:{}{}! Returning an unsafe item stack!",
                     id, meta, id < 0? " ("+(255 - id)+")":"", e);
             return new Item(id, meta, count).setCompoundTag(tags);
         }
@@ -651,7 +701,7 @@ public class Item implements Cloneable, BlockID, ItemID {
         if (!matcher.matches()) {
             return get(AIR);
         }
-        
+
         String name = matcher.group(2);
         OptionalInt meta = OptionalInt.empty();
         String metaGroup;
@@ -692,7 +742,7 @@ public class Item implements Cloneable, BlockID, ItemID {
             int id = Integer.parseInt(numericIdGroup);
             return get(id, meta.orElse(0));
         }
-        
+
         if (name == null) {
             return get(AIR);
         }
@@ -878,15 +928,6 @@ public class Item implements Cloneable, BlockID, ItemID {
         return false;
     }
 
-    /**
-     * Convenience method to check if the item stack has positive level on a specific enchantment by it's id.
-     * @param id The enchantment ID from {@link Enchantment} constants.
-     */
-    @PowerNukkitOnly
-    @Since("1.4.0.0-PN")
-    public boolean hasEnchantment(int id) {
-        return getEnchantmentLevel(id) > 0;
-    }
 
     /**
      * Find the enchantment level by the enchantment id.
@@ -905,7 +946,7 @@ public class Item implements Cloneable, BlockID, ItemID {
                 return entry.getShort("lvl");
             }
         }
-        
+
         return 0;
     }
 
@@ -992,8 +1033,17 @@ public class Item implements Cloneable, BlockID, ItemID {
         return enchantments.toArray(Enchantment.EMPTY_ARRAY);
     }
 
+    /**
+     * Convenience method to check if the item stack has positive level on a specific enchantment by it's id.
+     * @param id The enchantment ID from {@link Enchantment} constants.
+     */
+    @Since("1.4.0.0-PN")
+    public boolean hasEnchantment(int id) {
+        return this.getEnchantmentLevel(id) > 0;
+    }
+
     @PowerNukkitOnly
-    @Since("FUTURE")
+    @Since("1.5.1.0-PN")
     @Nonnull
     public SideEffect[] getAttackSideEffects(@Nonnull Entity attacker, @Nonnull Entity entity) {
         return Arrays.stream(getEnchantments())
@@ -1250,11 +1300,6 @@ public class Item implements Cloneable, BlockID, ItemID {
         }
     }
 
-    @Since("1.4.0.0-PN")
-    public final int getNetworkId() throws UnknownNetworkIdException {
-        return RuntimeItems.getNetworkId(getNetworkFullId());
-    }
-    
     @PowerNukkitOnly
     @Since("1.4.0.0-PN")
     public String getNamespaceId() {
@@ -1263,7 +1308,7 @@ public class Item implements Cloneable, BlockID, ItemID {
                 RuntimeItems.getNetworkId(runtimeMapping.getNetworkFullId(this))
         );
     }
-    
+
     @PowerNukkitOnly
     @Since("1.4.0.0-PN")
     public int getBlockId() {
@@ -1285,7 +1330,7 @@ public class Item implements Cloneable, BlockID, ItemID {
             this.hasMeta = false;
         }
     }
-    
+
     @PowerNukkitOnly
     @Since("1.4.0.0-PN")
     public Item createFuzzyCraftingRecipe() {
@@ -1401,18 +1446,20 @@ public class Item implements Cloneable, BlockID, ItemID {
     public boolean isLavaResistant() {
         return false;
     }
-    
+
     public boolean onUse(Player player, int ticksUsed) {
         return false;
     }
 
+    /**
+     * Allows the item to execute code when the player releases the item after long clicking it.
+     * @param player The player who released the click button
+     * @param ticksUsed How many ticks the item was held.
+     * @return If an inventory contents update should be sent to the player
+     */
     public boolean onRelease(Player player, int ticksUsed) {
         return false;
     }
-
-    @PowerNukkitOnly
-    @Since("1.4.0.0-PN")
-    public boolean damageWhenBreaking() { return true; }
 
     @Override
     final public String toString() {
@@ -1505,6 +1552,8 @@ public class Item implements Cloneable, BlockID, ItemID {
      * Same as {@link #equals(Item, boolean)} but the enchantment order of the items does not affect the result.
      * @since 1.2.1.0-PN
      */
+    @PowerNukkitOnly
+    @Since("1.2.1.0-PN")
     public final boolean equalsIgnoringEnchantmentOrder(Item item, boolean checkDamage) {
         if (!this.equals(item, checkDamage, false)) {
             return false;
@@ -1580,4 +1629,14 @@ public class Item implements Cloneable, BlockID, ItemID {
         }
     }
 
+    @Since("FUTURE")
+    public final RuntimeEntry getRuntimeEntry() {
+        //TODO Implement
+        throw new UnsupportedOperationException();
+    }
+
+    @Since("1.4.0.0-PN")
+    public final int getNetworkId() throws UnknownNetworkIdException {
+        return RuntimeItems.getNetworkId(getNetworkFullId());
+    }
 }

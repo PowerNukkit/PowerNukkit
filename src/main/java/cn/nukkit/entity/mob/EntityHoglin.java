@@ -47,11 +47,14 @@ public class EntityHoglin extends EntityMob implements EntityAgeable {
         return 0.9f;
     }
 
+    @PowerNukkitOnly
+    @Since("1.5.1.0-PN")
     @Override
-    public String getName() {
+    public String getOriginalName() {
         return "Hoglin";
     }
 
+    @PowerNukkitOnly
     @Override
     public boolean isBaby() {
         return this.getDataFlag(DATA_FLAGS, DATA_FLAG_BABY);

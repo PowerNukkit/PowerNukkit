@@ -8,6 +8,7 @@ import cn.nukkit.block.Block;
 import cn.nukkit.block.BlockID;
 import cn.nukkit.block.BlockUnknown;
 import cn.nukkit.blockproperty.BlockProperties;
+import cn.nukkit.blockproperty.exception.BlockPropertyNotFoundException;
 import cn.nukkit.blockstate.exception.InvalidBlockStateException;
 import cn.nukkit.nbt.NBTIO;
 import cn.nukkit.nbt.tag.CompoundTag;
@@ -15,6 +16,7 @@ import cn.nukkit.nbt.tag.Tag;
 import cn.nukkit.utils.BinaryStream;
 import cn.nukkit.utils.HumanStringComparator;
 import com.google.common.base.Preconditions;
+import io.netty.util.internal.EmptyArrays;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import lombok.AllArgsConstructor;
@@ -58,6 +60,8 @@ public class BlockStateRegistry {
     
     private final byte[] blockPaletteBytes;
 
+    private final List<String> knownStateIds;
+
     //<editor-fold desc="static initialization" defaultstate="collapsed">
     static {
 
@@ -95,6 +99,7 @@ public class BlockStateRegistry {
 
         //<editor-fold desc="Loading canonical_block_states.nbt" defaultstate="collapsed">
         List<CompoundTag> tags = new ArrayList<>();
+        List<String> loadingKnownStateIds = new ArrayList<>();
         try (InputStream stream = Server.class.getClassLoader().getResourceAsStream("canonical_block_states.nbt")) {
             if (stream == null) {
                 throw new AssertionError("Unable to locate block state nbt");
@@ -107,14 +112,18 @@ public class BlockStateRegistry {
                     tag.putInt("runtimeId", runtimeId++);
                     tag.putInt("blockId", persistenceNameToBlockId.getOrDefault(tag.getString("name").toLowerCase(), -1));
                     tags.add(tag);
+                    loadingKnownStateIds.add(getStateId(tag));
                 }
             }
+            knownStateIds = Arrays.asList(loadingKnownStateIds.toArray(EmptyArrays.EMPTY_STRINGS));
         } catch (IOException e) {
             throw new AssertionError(e);
         }
         //</editor-fold>
         Integer infoUpdateRuntimeId = null;
-        
+
+        Set<String> warned = new HashSet<>();
+
         for (CompoundTag state : tags) {
             int blockId = state.getInt("blockId");
             int runtimeId = state.getInt("runtimeId");
@@ -127,6 +136,11 @@ public class BlockStateRegistry {
             // All other cases, register the name normally
             if (isNameOwnerOfId(name, blockId)) {
                 registerPersistenceName(blockId, name);
+                registerStateId(state, runtimeId);
+            } else if (blockId == -1) {
+                if (warned.add(name)) {
+                    log.warn("Unknown block id for the block named {}", name);
+                }
                 registerStateId(state, runtimeId);
             }
         }
@@ -145,9 +159,9 @@ public class BlockStateRegistry {
         
     }
     //</editor-fold>
-    
+
     private boolean isNameOwnerOfId(String name, int blockId) {
-        return !name.equals("minecraft:wood") || blockId == BlockID.WOOD_BARK;
+        return blockId != -1 && !name.equals("minecraft:wood") || blockId == BlockID.WOOD_BARK;
     }
     
     @Nonnull
@@ -167,6 +181,33 @@ public class BlockStateRegistry {
     @Nullable
     private static Registration findRegistrationByRuntimeId(int runtimeId) {
         return runtimeIdRegistration.get(runtimeId);
+    }
+
+    @PowerNukkitOnly
+    @Since("1.5.2.0-PN")
+    @Nullable
+    public String getKnownBlockStateIdByRuntimeId(int runtimeId) {
+        if (runtimeId >= 0 && runtimeId < knownStateIds.size()) {
+            return knownStateIds.get(runtimeId);
+        }
+        return null;
+    }
+
+    @PowerNukkitOnly
+    @Since("1.5.2.0-PN")
+    public int getKnownRuntimeIdByBlockStateId(String stateId) {
+        int result = knownStateIds.indexOf(stateId);
+        if (result != -1) {
+            return result;
+        }
+        BlockState state;
+        try {
+            state = BlockState.of(stateId);
+        } catch (NoSuchElementException|IllegalStateException|IllegalArgumentException ignored) {
+            return -1;
+        }
+        String fullStateId = state.getStateId();
+        return knownStateIds.indexOf(fullStateId);
     }
 
     /**
@@ -213,6 +254,44 @@ public class BlockStateRegistry {
         return state;
     }
 
+    private static NoSuchElementException runtimeIdNotRegistered(int runtimeId) {
+        return new NoSuchElementException("The block id for the runtime id "+runtimeId+" is not registered");
+    }
+
+    @PowerNukkitOnly
+    @Since("1.5.2.0-PN")
+    public int getBlockIdByRuntimeId(int runtimeId) {
+        Registration registration = findRegistrationByRuntimeId(runtimeId);
+        if (registration == null) {
+            throw runtimeIdNotRegistered(runtimeId);
+        }
+        BlockState state = registration.state;
+        if (state != null) {
+            return state.getBlockId();
+        }
+        CompoundTag originalBlock = registration.originalBlock;
+        if (originalBlock == null) {
+            throw runtimeIdNotRegistered(runtimeId);
+        }
+        try {
+            state = buildStateFromCompound(originalBlock);
+        } catch (BlockPropertyNotFoundException e) {
+            String name = originalBlock.getString("name").toLowerCase(Locale.ENGLISH);
+            Integer id = getBlockId(name);
+            if (id == null) {
+                throw runtimeIdNotRegistered(runtimeId);
+            }
+            return id;
+        }
+        if (state != null) {
+            registration.state = state;
+            registration.originalBlock = null;
+        } else {
+            throw runtimeIdNotRegistered(runtimeId);
+        }
+        return state.getBlockId();
+    }
+
     @PowerNukkitOnly
     @Since("1.4.0.0-PN")
     public int getRuntimeId(BlockState state) {
@@ -220,17 +299,14 @@ public class BlockStateRegistry {
     }
 
     private BlockState convertToNewState(BlockState oldState) {
-        int exactInt;
-        switch (oldState.getBlockId()) {
-            // Check OldWoodBarkUpdater.java and https://minecraft.fandom.com/wiki/Log#Metadata
-            // The Only bark variant is replaced in the client side to minecraft:wood with the same wood type
-            case BlockID.LOG:
-            case BlockID.LOG2:
-                if (oldState.getBitSize() == 4 && ((exactInt = oldState.getExactIntStorage()) & 0b1100) == 0b1100) {
-                    int increment = oldState.getBlockId() == BlockID.LOG? 0b000 : 0b100;
-                    return BlockState.of(BlockID.WOOD_BARK, (exactInt & 0b11) + increment);
-                }
-                break;
+        // Check OldWoodBarkUpdater.java and https://minecraft.fandom.com/wiki/Log#Metadata
+        // The Only bark variant is replaced in the client side to minecraft:wood with the same wood type
+        if (oldState.getBitSize() == 4 && (oldState.getBlockId() == BlockID.LOG || oldState.getBlockId() == BlockID.LOG2)) {
+            int exactInt = oldState.getExactIntStorage();
+            if ((exactInt & 0b1100) == 0b1100) {
+                int increment = oldState.getBlockId() == BlockID.LOG ? 0b000 : 0b100;
+                return BlockState.of(BlockID.WOOD_BARK, (exactInt & 0b11) + increment);
+            }
         }
         return oldState;
     }
@@ -429,7 +505,7 @@ public class BlockStateRegistry {
     public BlockProperties getProperties(int blockId) {
         int fullId = blockId << Block.DATA_BITS;
         Block block;
-        if (fullId >= Block.fullList.length || (block = Block.fullList[fullId]) == null) {
+        if (fullId >= Block.fullList.length || fullId < 0 || (block = Block.fullList[fullId]) == null) {
             return BlockUnknown.PROPERTIES;
         }
         return block.getProperties();

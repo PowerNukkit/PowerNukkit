@@ -27,6 +27,7 @@ import cn.nukkit.event.server.ServerStopEvent;
 import cn.nukkit.inventory.CraftingManager;
 import cn.nukkit.inventory.Recipe;
 import cn.nukkit.item.Item;
+import cn.nukkit.item.RuntimeItems;
 import cn.nukkit.item.enchantment.Enchantment;
 import cn.nukkit.lang.BaseLang;
 import cn.nukkit.lang.TextContainer;
@@ -223,18 +224,21 @@ public class Server {
     private PositionTrackingService positionTrackingService;
 
     private final Map<Integer, Level> levels = new HashMap<Integer, Level>() {
+        @Override
         public Level put(Integer key, Level value) {
             Level result = super.put(key, value);
             levelArray = levels.values().toArray(Level.EMPTY_ARRAY);
             return result;
         }
 
+        @Override
         public boolean remove(Object key, Object value) {
             boolean result = super.remove(key, value);
             levelArray = levels.values().toArray(Level.EMPTY_ARRAY);
             return result;
         }
 
+        @Override
         public Level remove(Object key) {
             Level result = super.remove(key);
             levelArray = levels.values().toArray(Level.EMPTY_ARRAY);
@@ -242,7 +246,7 @@ public class Server {
         }
     };
 
-    private Level[] levelArray = Level.EMPTY_ARRAY;
+    private Level[] levelArray;
 
     private final ServiceManager serviceManager = new NKServiceManager();
 
@@ -272,13 +276,13 @@ public class Server {
      * Minimal initializer for testing
      */
     @SuppressWarnings("UnstableApiUsage")
-    @PowerNukkitOnly
-    @Since("1.4.0.0-PN")
     Server(File tempDir) throws IOException {
         if (tempDir.isFile() && !tempDir.delete()) {
             throw new IOException("Failed to delete " + tempDir);
         }
         instance = this;
+        config = new Config();
+        levelArray = Level.EMPTY_ARRAY;
         launchTime = System.currentTimeMillis();
         BatchPacket batchPacket = new BatchPacket();
         batchPacket.payload = EmptyArrays.EMPTY_BYTES;
@@ -300,7 +304,6 @@ public class Server {
         
         console = new NukkitConsole(this);
         consoleThread = new ConsoleThread();
-        config = new Config();
         properties = new Config();
         banByName = new BanList(dataPath + "banned-players.json");
         banByIP = new BanList(dataPath + "banned-ips.json");
@@ -496,6 +499,7 @@ public class Server {
 
         log.info("Loading {} ...", TextFormat.GREEN + "nukkit.yml" + TextFormat.WHITE);
         this.config = new Config(this.dataPath + "nukkit.yml", Config.YAML);
+        levelArray = Level.EMPTY_ARRAY;
 
         Nukkit.DEBUG = NukkitMath.clamp(this.getConfig("debug.level", 1), 1, 3);
 
@@ -641,10 +645,11 @@ public class Server {
 
         Block.init();
         Enchantment.init();
+        RuntimeItems.getRuntimeMapping();
+        Potion.init();
         Item.init();
         EnumBiome.values(); //load class, this also registers biomes
         Effect.init();
-        Potion.init();
         Attribute.init();
         DispenseBehaviorRegister.init();
         GlobalBlockPalette.getOrCreateRuntimeId(0, 0); //Force it to load
@@ -1270,15 +1275,8 @@ public class Server {
     }
 
     private void checkTickUpdates(int currentTick, long tickTime) {
-        for (Player p : new ArrayList<>(this.players.values())) {
-            /*if (!p.loggedIn && (tickTime - p.creationTime) >= 10000 && p.kick(PlayerKickEvent.Reason.LOGIN_TIMEOUT, "Login timeout")) {
-                continue;
-            }
-
-            client freezes when applying resource packs
-            todo: fix*/
-
-            if (this.alwaysTickPlayers) {
+        if (this.alwaysTickPlayers) {
+            for (Player p : new ArrayList<>(this.players.values())) {
                 p.onUpdate(currentTick);
             }
         }
@@ -1492,6 +1490,7 @@ public class Server {
         return Nukkit.VERSION;
     }
 
+    @PowerNukkitOnly
     public String getGitCommit() {
         return Nukkit.GIT_COMMIT;
     }
@@ -2275,10 +2274,12 @@ public class Server {
         return forceLanguage;
     }
 
+    @PowerNukkitOnly
     public boolean isRedstoneEnabled() {
         return redstoneEnabled;
     }
 
+    @PowerNukkitOnly
     public void setRedstoneEnabled(boolean redstoneEnabled) {
         this.redstoneEnabled = redstoneEnabled;
     }
@@ -2414,7 +2415,7 @@ public class Server {
     }
 
     public boolean isOp(String name) {
-        return this.operators.exists(name, true);
+        return name != null && this.operators.exists(name, true);
     }
 
     public Config getWhitelist() {

@@ -9,7 +9,6 @@ import cn.nukkit.item.enchantment.sideeffect.SideEffect;
 import cn.nukkit.potion.Effect;
 import cn.nukkit.utils.EventException;
 import com.google.common.collect.ImmutableMap;
-import lombok.var;
 
 import javax.annotation.Nonnull;
 import java.util.*;
@@ -32,13 +31,15 @@ public class EntityDamageEvent extends EntityEvent implements Cancellable {
     private final Map<DamageModifier, Float> originals;
 
     private SideEffect[] sideEffects = SideEffect.EMPTY_ARRAY;
-
+    
+    private static Map<DamageModifier, Float> createDamageModifierMap(float baseDamage) {
+        Map<DamageModifier, Float> modifiers = new EnumMap<>(DamageModifier.class);
+        modifiers.put(DamageModifier.BASE, baseDamage);
+        return modifiers;
+    }
+    
     public EntityDamageEvent(Entity entity, DamageCause cause, float damage) {
-        this(entity, cause, new EnumMap<DamageModifier, Float>(DamageModifier.class) {
-            {
-                put(DamageModifier.BASE, damage);
-            }
-        });
+        this(entity, cause, createDamageModifierMap(damage));
     }
 
     public EntityDamageEvent(Entity entity, DamageCause cause, Map<DamageModifier, Float> modifiers) {
@@ -52,8 +53,8 @@ public class EntityDamageEvent extends EntityEvent implements Cancellable {
             throw new EventException("BASE Damage modifier missing");
         }
 
-        if (entity.hasEffect(Effect.DAMAGE_RESISTANCE)) {
-            this.setDamage((float) -(this.getDamage(DamageModifier.BASE) * 0.20 * (entity.getEffect(Effect.DAMAGE_RESISTANCE).getAmplifier() + 1)), DamageModifier.RESISTANCE);
+        if (entity.hasEffect(Effect.RESISTANCE)) {
+            this.setDamage((float) -(this.getDamage(DamageModifier.BASE) * 0.20 * (entity.getEffect(Effect.RESISTANCE).getAmplifier() + 1)), DamageModifier.RESISTANCE);
         }
     }
 
@@ -117,47 +118,47 @@ public class EntityDamageEvent extends EntityEvent implements Cancellable {
     }
 
     @PowerNukkitOnly
-    @Since("FUTURE")
+    @Since("1.5.1.0-PN")
     @Nonnull
     public SideEffect[] getSideEffects() {
-        SideEffect[] sideEffects = this.sideEffects;
-        if (sideEffects.length == 0) {
-            return sideEffects;
+        SideEffect[] sideEffectsArray = this.sideEffects;
+        if (sideEffectsArray.length == 0) {
+            return sideEffectsArray;
         }
-        return Arrays.stream(sideEffects)
-                .map(SideEffect::clone)
+        return Arrays.stream(sideEffectsArray)
+                .map(SideEffect::cloneSideEffect)
                 .toArray(SideEffect[]::new)
         ;
     }
 
     @PowerNukkitOnly
-    @Since("FUTURE")
+    @Since("1.5.1.0-PN")
     public void setSideEffects(@Nonnull SideEffect... sideEffects) {
         this.sideEffects = Arrays.stream(sideEffects)
                 .filter(Objects::nonNull)
-                .map(SideEffect::clone)
+                .map(SideEffect::cloneSideEffect)
                 .toArray(SideEffect[]::new)
         ;
     }
 
     @PowerNukkitOnly
-    @Since("FUTURE")
+    @Since("1.5.1.0-PN")
     public void setSideEffects(@Nonnull Collection<SideEffect> sideEffects) {
         this.setSideEffects(sideEffects.toArray(SideEffect.EMPTY_ARRAY));
     }
 
     @PowerNukkitOnly
-    @Since("FUTURE")
+    @Since("1.5.1.0-PN")
     public void addSideEffects(@Nonnull SideEffect... sideEffects) {
-        var safeStream = Arrays.stream(sideEffects)
+        Stream<SideEffect> safeStream = Arrays.stream(sideEffects)
                 .filter(Objects::nonNull)
-                .map(SideEffect::clone);
+                .map(SideEffect::cloneSideEffect);
 
         this.sideEffects = Stream.concat(Arrays.stream(this.sideEffects), safeStream).toArray(SideEffect[]::new);
     }
 
     @PowerNukkitOnly
-    @Since("FUTURE")
+    @Since("1.5.1.0-PN")
     public void addSideEffects(@Nonnull Collection<SideEffect> sideEffects) {
         this.addSideEffects(sideEffects.toArray(SideEffect.EMPTY_ARRAY));
     }
@@ -276,6 +277,48 @@ public class EntityDamageEvent extends EntityEvent implements Cancellable {
         /**
          * Damage caused by hunger
          */
-        HUNGER
+        HUNGER,
+        /**
+         * Damage caused by Wither
+         */
+        @PowerNukkitOnly
+        @Since("1.5.2.0-PN")
+        WITHER,
+        /**
+         * Damage caused by thorns
+         */
+        @PowerNukkitOnly
+        @Since("1.5.2.0-PN")
+        THORNS,
+        /**
+         * Damage caused by falling block
+         */
+        @PowerNukkitOnly
+        @Since("1.5.2.0-PN")
+        FALLING_BLOCK,
+        /**
+         * Damage caused by flying into wall
+         */
+        @PowerNukkitOnly
+        @Since("1.5.2.0-PN")
+        FLYING_INTO_WALL,
+        /**
+         * Damage caused when an entity steps on a hot block, like {@link cn.nukkit.block.BlockID#MAGMA}
+         */
+        @PowerNukkitOnly
+        @Since("1.5.2.0-PN")
+        HOT_FLOOR,
+        /**
+         * Damage caused by fireworks
+         */
+        @PowerNukkitOnly
+        @Since("1.5.2.0-PN")
+        FIREWORKS,
+        /**
+         * Damage caused by temperature
+         */
+        @PowerNukkitOnly
+        @Since("1.5.2.0-PN")
+        FREEZING,
     }
 }

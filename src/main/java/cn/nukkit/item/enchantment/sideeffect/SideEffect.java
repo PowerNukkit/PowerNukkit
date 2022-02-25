@@ -9,18 +9,19 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 @PowerNukkitOnly
-@Since("FUTURE")
+@Since("1.5.1.0-PN")
 public interface SideEffect extends Cloneable {
+    @PowerNukkitOnly
     SideEffect[] EMPTY_ARRAY = new SideEffect[0];
 
     @PowerNukkitOnly
-    @Since("FUTURE")
+    @Since("1.5.1.0-PN")
     default void doPreHealthChange(@Nonnull Entity entity, @Nonnull EntityDamageEvent source, @Nullable Entity attacker) {
         // Does nothing
     }
 
     @PowerNukkitOnly
-    @Since("FUTURE")
+    @Since("1.5.1.0-PN")
     default void doPostAttack(@Nonnull Entity entity, @Nonnull EntityDamageEvent source, @Nullable Entity attacker) {
         // Does nothing
     }
@@ -28,5 +29,5 @@ public interface SideEffect extends Cloneable {
     @PowerNukkitOnly
     @Since("FUTURE")
     @Nonnull
-    SideEffect clone();
+    SideEffect cloneSideEffect();
 }

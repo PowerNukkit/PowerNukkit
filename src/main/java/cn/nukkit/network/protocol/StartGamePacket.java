@@ -64,8 +64,8 @@ public class StartGamePacket extends DataPacket {
     public boolean commandsEnabled;
     public boolean isTexturePacksRequired = false;
     public GameRules gameRules;
-    @PowerNukkitOnly @Since("1.4.0.0-PN") public ExperimentData[] experiments = ExperimentData.EMPTY_ARRAY;
-    @PowerNukkitOnly @Since("1.4.0.0-PN") public boolean experimentsPreviouslyToggled = false;
+    @PowerNukkitOnly @Since("FUTURE") public ExperimentData[] experiments = ExperimentData.EMPTY_ARRAY;
+    @PowerNukkitOnly @Since("FUTURE") public boolean experimentsPreviouslyToggled = false;
     public boolean bonusChest = false;
     public boolean hasStartWithMapEnabled = false;
     @Since("1.3.0.0-PN") public boolean trustingPlayers;
@@ -78,20 +78,19 @@ public class StartGamePacket extends DataPacket {
     public boolean isFromWorldTemplate = false;
     public boolean isWorldTemplateOptionLocked = false;
     public boolean isOnlySpawningV1Villagers = false;
-    public String vanillaVersion = "*";
-    @PowerNukkitOnly @Since("1.4.0.0-PN") public int limitedWorldWidth = 16;
-    @PowerNukkitOnly @Since("1.4.0.0-PN") public int limitedWorldHeight = 16;
-    @PowerNukkitOnly @Since("1.4.0.0-PN") public boolean netherType = false;
-    @PowerNukkitOnly @Since("1.4.0.0-PN") public boolean forceExperimentalGameplay = false;
-    /**
-     * Base64 string, usually the same as world folder name in vanilla
-     */
-    public String levelId = "";
+    public String vanillaVersion = "1.17.40";
+    //HACK: For now we can specify this version, since the new chunk changes are not relevant for our Anvil format.
+    //However, it could be that Microsoft will prevent this in a new update.
+    @PowerNukkitOnly @Since("FUTURE") public int limitedWorldWidth = 16;
+    @PowerNukkitOnly @Since("FUTURE") public int limitedWorldHeight = 16;
+    @PowerNukkitOnly @Since("FUTURE") public boolean netherType = false;
+    @PowerNukkitOnly @Since("FUTURE") public boolean forceExperimentalGameplay = false;
+    public String levelId = ""; //base64 string, usually the same as world folder name in vanilla
     public String worldName;
     public String premiumWorldTemplateId = "00000000-0000-0000-0000-000000000000";
     public boolean isTrial = false;
-    @Deprecated public boolean isMovementServerAuthoritative;
-    @PowerNukkitOnly @Since("1.4.0.0-PN") public SyncedPlayerMovementSettings playerMovementSettings = null;
+    @Deprecated @DeprecationDetails(since = "FUTURE", by = "PowerNukkit", reason = "Minecraft update", replaceWith="playerMovementSettings") public boolean isMovementServerAuthoritative;
+    @PowerNukkitOnly @Since("FUTURE") public SyncedPlayerMovementSettings playerMovementSettings = null;
     public long currentTick;
     public int enchantmentSeed;
     @PowerNukkitOnly @Since("1.4.0.0-PN") public BlockPropertyData[] properties = BlockPropertyData.EMPTY_ARRAY;
@@ -159,9 +158,10 @@ public class StartGamePacket extends DataPacket {
         this.putLInt(this.limitedWorldWidth);
         this.putLInt(this.limitedWorldHeight);
         this.putBoolean(this.netherType);
+        this.putString(""); // EduSharedUriResource buttonName
+        this.putString(""); // EduSharedUriResource linkUri
         this.putBoolean(this.forceExperimentalGameplay);
         // TODO: handle force experimental
-
         this.putString(this.levelId);
         this.putString(this.worldName);
         this.putString(this.premiumWorldTemplateId);
@@ -190,11 +190,12 @@ public class StartGamePacket extends DataPacket {
         this.putString(this.multiplayerCorrelationId);
         this.putBoolean(this.isInventoryServerAuthoritative);
         this.putString(this.serverEngine);
+        this.putLLong(0L); // BlockRegistryChecksum
     }
     
     @ToString
     @PowerNukkitOnly
-    @Since("1.4.0.0-PN")
+    @Since("FUTURE")
     public static class ExperimentData {
     
         public static final ExperimentData[] EMPTY_ARRAY = new ExperimentData[0];
@@ -218,7 +219,7 @@ public class StartGamePacket extends DataPacket {
     
     @ToString
     @PowerNukkitOnly
-    @Since("1.4.0.0-PN")
+    @Since("FUTURE")
     public static class SyncedPlayerMovementSettings {
     
         private final AuthoritativeMovementMode movementMode;
@@ -246,7 +247,7 @@ public class StartGamePacket extends DataPacket {
     
     @ToString
     @PowerNukkitOnly
-    @Since("1.4.0.0-PN")
+    @Since("FUTURE")
     public static class BlockPropertyData {
     
         public static final BlockPropertyData[] EMPTY_ARRAY = new BlockPropertyData[0];
@@ -269,7 +270,7 @@ public class StartGamePacket extends DataPacket {
     }
     
     @PowerNukkitOnly
-    @Since("1.4.0.0-PN")
+    @Since("FUTURE")
     public enum AuthoritativeMovementMode {
         CLIENT,
         SERVER,

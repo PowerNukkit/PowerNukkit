@@ -44,14 +44,17 @@ public class EntitySkeletonHorse extends EntityAnimal implements EntitySmite {
         return new Item[]{Item.get(Item.BONE)};
     }
 
+    @PowerNukkitOnly
     @Override
     public boolean isUndead() {
         return true;
     }
-    
-    
+
+
+    @PowerNukkitOnly
+    @Since("1.5.1.0-PN")
     @Override
-    public String getName() {
+    public String getOriginalName() {
         return "Skeleton Horse";
     }
 }

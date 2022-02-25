@@ -1,6 +1,8 @@
 package cn.nukkit.entity.mob;
 
 import cn.nukkit.Player;
+import cn.nukkit.api.PowerNukkitOnly;
+import cn.nukkit.api.Since;
 import cn.nukkit.entity.Entity;
 import cn.nukkit.entity.data.ByteEntityData;
 import cn.nukkit.entity.weather.EntityLightningStrike;
@@ -67,6 +69,7 @@ public class EntityCreeper extends EntityMob {
         }
     }
 
+    @Override
     public void onStruckByLightning(Entity entity) {
         this.setPowered(true);
     }
@@ -81,8 +84,10 @@ public class EntityCreeper extends EntityMob {
         this.setMaxHealth(20);
     }
 
+    @PowerNukkitOnly
+    @Since("1.5.1.0-PN")
     @Override
-    public String getName() {
+    public String getOriginalName() {
         return "Creeper";
     }
 
@@ -94,6 +99,7 @@ public class EntityCreeper extends EntityMob {
         return Item.EMPTY_ARRAY;
     }
 
+    @PowerNukkitOnly
     @Override
     public boolean isPreventingSleep(Player player) {
         return true;
