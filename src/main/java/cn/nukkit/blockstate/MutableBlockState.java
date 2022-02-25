@@ -22,16 +22,19 @@ import static cn.nukkit.api.API.Usage.INCUBATING;
 @EqualsAndHashCode
 @ParametersAreNonnullByDefault
 public abstract class MutableBlockState implements IMutableBlockState {
+    @PowerNukkitOnly
+    @Since("1.4.0.0-PN")
     protected final int blockId;
+
+    @PowerNukkitOnly
+    @Since("1.4.0.0-PN")
     protected final BlockProperties properties;
-    
+
     MutableBlockState(int blockId, BlockProperties properties) {
         this.blockId = blockId;
         this.properties = properties;
     }
 
-    @PowerNukkitOnly
-    @Since("1.4.0.0-PN")
     @API(definition = INTERNAL, usage = INCUBATING)
     void setDataStorageWithoutValidation(Number storage) {
         setDataStorage(storage);
@@ -52,18 +55,21 @@ public abstract class MutableBlockState implements IMutableBlockState {
         }
     }
 
+    @PowerNukkitOnly
     @Nonnull
     @Override
     public final BlockProperties getProperties() {
         return properties;
     }
 
+    @PowerNukkitOnly
     @Nonnegative
     @Override
     public final int getBlockId() {
         return blockId;
     }
 
+    @PowerNukkitOnly
     @Override
     @Deprecated
     @DeprecationDetails(reason = "Can't store all data, exists for backward compatibility reasons", since = "1.4.0.0-PN", replaceWith = "the BlockState itself")
@@ -74,10 +80,12 @@ public abstract class MutableBlockState implements IMutableBlockState {
     @Override
     @Deprecated
     @DeprecationDetails(reason = "Can't store all data, exists for backward compatibility reasons", since = "1.4.0.0-PN", replaceWith = "the BlockState itself")
+    @PowerNukkitOnly
     public final long getBigId() {
         return IMutableBlockState.super.getBigId();
     }
 
+    @PowerNukkitOnly
     @Override
     public final int getBitSize() {
         return getProperties().getBitSize();
@@ -86,8 +94,12 @@ public abstract class MutableBlockState implements IMutableBlockState {
     /**
      * @throws cn.nukkit.blockstate.exception.InvalidBlockStateException if the state is invalid
      */
+    @PowerNukkitOnly
+    @Since("1.4.0.0-PN")
     public abstract void validate();
 
+    @PowerNukkitOnly
+    @Since("1.4.0.0-PN")
     @Nonnull
     public abstract MutableBlockState copy();
 }

@@ -1,6 +1,6 @@
 package cn.nukkit.level.biome.type;
 
-import cn.nukkit.api.RemovedFromNewRakNet;
+import cn.nukkit.api.PowerNukkitOnly;
 import cn.nukkit.api.Since;
 import cn.nukkit.block.BlockDoublePlant;
 import cn.nukkit.level.generator.populator.impl.PopulatorDoublePlant;
@@ -33,7 +33,7 @@ public abstract class GrassyBiome extends CoveredBiome {
         this.addPopulator(pumpkin);
     }
 
-    @RemovedFromNewRakNet
+    @PowerNukkitOnly
     @Since("1.4.0.0-PN")
     @Override
     public int getSurfaceBlock(int y) {
@@ -43,7 +43,7 @@ public abstract class GrassyBiome extends CoveredBiome {
         return GRASS;
     }
 
-    @RemovedFromNewRakNet
+    @PowerNukkitOnly
     @Since("1.4.0.0-PN")
     @Override
     public int getGroundBlock(int y) {

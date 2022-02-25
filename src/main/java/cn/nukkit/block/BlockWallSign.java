@@ -4,6 +4,7 @@ import cn.nukkit.api.PowerNukkitDifference;
 import cn.nukkit.api.PowerNukkitOnly;
 import cn.nukkit.api.Since;
 import cn.nukkit.blockproperty.BlockProperties;
+import cn.nukkit.blockproperty.CommonBlockProperties;
 import cn.nukkit.level.Level;
 import cn.nukkit.math.BlockFace;
 import cn.nukkit.math.CompassRoseDirection;
@@ -20,7 +21,7 @@ import static cn.nukkit.blockproperty.CommonBlockProperties.FACING_DIRECTION;
 public class BlockWallSign extends BlockSignPost {
     @PowerNukkitOnly
     @Since("1.4.0.0-PN")
-    public static final BlockProperties PROPERTIES = new BlockProperties(FACING_DIRECTION);
+    public static final BlockProperties PROPERTIES = CommonBlockProperties.FACING_DIRECTION_BLOCK_PROPERTIES;
 
     public BlockWallSign() {
         this(0);
@@ -43,11 +44,13 @@ public class BlockWallSign extends BlockSignPost {
         return PROPERTIES;
     }
 
+    @PowerNukkitOnly
     @Override
     public int getWallId() {
         return getId();
     }
 
+    @PowerNukkitOnly
     @Override
     protected int getPostId() {
         return SIGN_POST;
@@ -81,11 +84,13 @@ public class BlockWallSign extends BlockSignPost {
         return getPropertyValue(FACING_DIRECTION);
     }
 
+    @PowerNukkitOnly
     @Override
     public void setSignDirection(CompassRoseDirection direction) {
         setBlockFace(direction.getClosestBlockFace());
     }
 
+    @PowerNukkitOnly
     @Override
     public CompassRoseDirection getSignDirection() {
         return getBlockFace().getCompassRoseDirection();

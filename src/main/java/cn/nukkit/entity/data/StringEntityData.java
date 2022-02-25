@@ -13,10 +13,12 @@ public class StringEntityData extends EntityData<String> {
         this.data = data;
     }
 
+    @Override
     public String getData() {
         return data;
     }
 
+    @Override
     public void setData(String data) {
         this.data = data;
     }
@@ -24,10 +26,5 @@ public class StringEntityData extends EntityData<String> {
     @Override
     public int getType() {
         return Entity.DATA_TYPE_STRING;
-    }
-
-    @Override
-    public String toString() {
-        return data;
     }
 }

@@ -1,14 +1,24 @@
 package cn.nukkit.block;
 
+import cn.nukkit.api.PowerNukkitOnly;
+import cn.nukkit.api.Since;
+import cn.nukkit.blockproperty.BlockProperties;
+import cn.nukkit.blockproperty.CommonBlockProperties;
 import cn.nukkit.item.ItemTool;
 import cn.nukkit.utils.BlockColor;
 import cn.nukkit.utils.DyeColor;
+
+import javax.annotation.Nonnull;
 
 /**
  * @author CreeperFace
  * @since 2.6.2017
  */
 public class BlockConcrete extends BlockSolidMeta {
+
+    @PowerNukkitOnly
+    @Since("1.5.0.0-PN")
+    public static final BlockProperties PROPERTIES = CommonBlockProperties.COLOR_BLOCK_PROPERTIES;
 
     public BlockConcrete() {
         this(0);
@@ -23,6 +33,14 @@ public class BlockConcrete extends BlockSolidMeta {
         return CONCRETE;
     }
 
+    @Since("1.4.0.0-PN")
+    @PowerNukkitOnly
+    @Nonnull
+    @Override
+    public BlockProperties getProperties() {
+        return PROPERTIES;
+    }
+
     @Override
     public double getResistance() {
         return 9;
@@ -35,7 +53,7 @@ public class BlockConcrete extends BlockSolidMeta {
 
     @Override
     public String getName() {
-        return "Concrete";
+        return getDyeColor().getName() + " Concrete";
     }
 
     @Override
@@ -44,16 +62,17 @@ public class BlockConcrete extends BlockSolidMeta {
     }
 
     @Override
+    @PowerNukkitOnly
     public int getToolTier() {
         return ItemTool.TIER_WOODEN;
     }
 
     @Override
     public BlockColor getColor() {
-        return DyeColor.getByWoolData(getDamage()).getColor();
+        return getDyeColor().getColor();
     }
 
     public DyeColor getDyeColor() {
-        return DyeColor.getByWoolData(getDamage());
+        return getPropertyValue(CommonBlockProperties.COLOR);
     }
 }

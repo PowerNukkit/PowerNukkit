@@ -30,6 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static cn.nukkit.blockproperty.CommonBlockProperties.OPEN;
+import static cn.nukkit.blockproperty.CommonBlockProperties.UPPER_BLOCK;
 
 /**
  * @author MagicDroidX (Nukkit Project)
@@ -44,13 +45,18 @@ public abstract class BlockDoor extends BlockTransparentMeta implements Redstone
     // and gives the vanilla behavior; no idea how to make this better :d
     private static final List<Location> manualOverrides = new ArrayList<>();
 
-    public static final BooleanBlockProperty UPPER_BLOCK = new BooleanBlockProperty("upper_block_bit", false);
+    @PowerNukkitOnly
+    @Since("1.4.0.0-PN")
     public static final BooleanBlockProperty DOOR_HINGE = new BooleanBlockProperty("door_hinge_bit", false);
+
+    @PowerNukkitOnly
+    @Since("1.4.0.0-PN")
     public static final BlockProperty<BlockFace> DOOR_DIRECTION = new ArrayBlockProperty<>("direction", false, new BlockFace[]{
             BlockFace.EAST, BlockFace.SOUTH,
             BlockFace.WEST, BlockFace.NORTH
     }).ordinal(true);
 
+    @PowerNukkitOnly
     protected static final BlockProperties PROPERTIES = new BlockProperties(DOOR_DIRECTION, OPEN, UPPER_BLOCK, DOOR_HINGE);
 
     @Deprecated @DeprecationDetails(reason = "Use the accessors or properties instead", since = "1.4.0.0-PN", replaceWith = "CommonBlockProperties.OPEN")
@@ -447,12 +453,14 @@ public abstract class BlockDoor extends BlockTransparentMeta implements Redstone
     }
 
     @Override
+    @PowerNukkitOnly
     public boolean breaksWhenMoved() {
         return true;
     }
 
     @Override
-    public boolean sticksToPiston() {
+    @PowerNukkitOnly
+    public  boolean sticksToPiston() {
         return false;
     }
 }

@@ -1,5 +1,7 @@
 package cn.nukkit.entity.passive;
 
+import cn.nukkit.api.PowerNukkitOnly;
+import cn.nukkit.api.Since;
 import cn.nukkit.level.format.FullChunk;
 import cn.nukkit.nbt.tag.CompoundTag;
 
@@ -19,18 +21,21 @@ public class EntityCod extends EntityAnimal {
         return NETWORK_ID;
     }
 
-    public String getName() {
+    @PowerNukkitOnly
+    @Since("1.5.1.0-PN")
+    @Override
+    public String getOriginalName() {
         return "Cod";
     }
 
     @Override
     public float getWidth() {
-        return 0.5f;
+        return 0.6f;
     }
 
     @Override
     public float getHeight() {
-        return 0.2f;
+        return 0.3f;
     }
 
     @Override

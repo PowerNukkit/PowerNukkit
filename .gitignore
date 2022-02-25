@@ -234,6 +234,10 @@ data/
 data/*
 /src/main/resources/rebel.xml
 /run
+!/src/main/resources/*
+!/src/main/resources/**/*
+!/src/test/resources/*
+!/src/test/resources/**/*
 
 ### Add the codestyle to the repo
 !/.idea/codeStyles
@@ -243,3 +247,7 @@ data/*
 
 # a file that can be used for your helm chart values
 /helm-values.local.yaml
+
+__pycache__
+*.pyo
+/release-script/release_config_local.py

@@ -13,12 +13,20 @@ import javax.annotation.Nonnull;
 
 import static cn.nukkit.blockproperty.CommonBlockProperties.PILLAR_AXIS;
 
+@PowerNukkitOnly
+@Since("1.4.0.0-PN")
 public class BlockBasalt extends BlockSolidMeta {
 
+    @PowerNukkitOnly
+    @Since("1.4.0.0-PN")
     public static final BlockProperties PROPERTIES = new BlockProperties(PILLAR_AXIS);
 
+    @PowerNukkitOnly
+    @Since("1.4.0.0-PN")
     public BlockBasalt() { this(0); }
 
+    @PowerNukkitOnly
+    @Since("1.4.0.0-PN")
     public BlockBasalt(int meta) {
         super(meta);
     }
@@ -57,14 +65,19 @@ public class BlockBasalt extends BlockSolidMeta {
     }
 
     @Override
+    @PowerNukkitOnly
     public int getToolTier() {
         return ItemTool.TIER_WOODEN;
     }
 
+    @PowerNukkitOnly
+    @Since("1.4.0.0-PN")
     public BlockFace.Axis getPillarAxis() {
         return getPropertyValue(PILLAR_AXIS);
     }
 
+    @PowerNukkitOnly
+    @Since("1.4.0.0-PN")
     public void setPillarAxis(BlockFace.Axis axis) {
         setPropertyValue(PILLAR_AXIS, axis);
     }
