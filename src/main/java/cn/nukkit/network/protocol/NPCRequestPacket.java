@@ -18,65 +18,66 @@ public class NPCRequestPacket extends DataPacket {
 
     @Since("1.4.0.0-PN")
     public int actionType;
-    
-    private String sceneName;
+
+    @Since("FUTURE")
+    public String sceneName;
 
     @PowerNukkitOnly
-    @Since("FUTURE")
+    @Since("1.5.2.0-PN")
     public long getRequestedEntityRuntimeId() {
         return entityRuntimeId;
     }
 
     @PowerNukkitOnly
-    @Since("FUTURE")
+    @Since("1.5.2.0-PN")
     public void setRequestedEntityRuntimeId(long entityRuntimeId) {
         this.entityRuntimeId = entityRuntimeId;
     }
 
     @PowerNukkitOnly
-    @Since("FUTURE")
+    @Since("1.5.2.0-PN")
     public RequestType getRequestType() {
         return requestType;
     }
 
     @PowerNukkitOnly
-    @Since("FUTURE")
+    @Since("1.5.2.0-PN")
     public void setRequestType(RequestType requestType) {
         this.requestType = requestType;
     }
 
     @PowerNukkitOnly
-    @Since("FUTURE")
+    @Since("1.5.2.0-PN")
     public String getCommandString() {
         return commandString;
     }
 
     @PowerNukkitOnly
-    @Since("FUTURE")
+    @Since("1.5.2.0-PN")
     public void setCommandString(String commandString) {
         this.commandString = commandString;
     }
 
     @PowerNukkitOnly
-    @Since("FUTURE")
+    @Since("1.5.2.0-PN")
     public int getActionType() {
         return actionType;
     }
 
     @PowerNukkitOnly
-    @Since("FUTURE")
+    @Since("1.5.2.0-PN")
     public void setActionType(int actionType) {
         this.actionType = actionType;
     }
 
     @PowerNukkitOnly
-    @Since("FUTURE")
+    @Since("1.5.2.0-PN")
     public String getSceneName() {
         return sceneName;
     }
 
     @PowerNukkitOnly
-    @Since("FUTURE")
+    @Since("1.5.2.0-PN")
     public void setSceneName(String sceneName) {
         this.sceneName = sceneName;
     }
@@ -114,7 +115,6 @@ public class NPCRequestPacket extends DataPacket {
         this.putByte((byte) requestType.ordinal());
         this.putString(this.commandString);
         this.putByte((byte) this.actionType);
-        this.putString(sceneName);
+        this.putString(this.sceneName);
     }
-
 }

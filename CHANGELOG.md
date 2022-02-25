@@ -6,8 +6,78 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 with an added upstream's major version number in front of the major version, so we have a better distinction from
 Nukkit 1.X and 2.X.
 
-## [Unreleased 1.5.2.0-PN] - Future ([Check the milestone](https://github.com/PowerNukkit/PowerNukkit/milestone/28?closed=1))
+## [Unreleased 1.6.0.0-PN] - Future ([Check the milestone](https://github.com/PowerNukkit/PowerNukkit/milestone/29?closed=1))
 Click the link above to see the future.
+
+This work in progress version supports Minecraft `1.18.0`.
+
+### Breaking changes
+- [#1267] Changed Nimbus Jose JWT library from `7.9` to `9.13`
+- [#1267] Removed some deprecated APIs, check the JDiff for details.
+- [#1267] Changed the method signature to customize the boss bar color
+- [#1267] `ItemArmor.TIER_OTHER` is not a constant anymore.
+
+### Depreciation
+- [#1266] Some APIs become deprecated, check the JDiff for details.
+- [#1266] `ItemTrident.setCreative` and `getCreative` are now deprecated.
+
+### Added
+- [#1266] API to get the potion names, level in roman string and tipped arrow potion.
+- [#1266] API for the banner pattern snout (Piglin)
+
+### Changed
+- [#1258] Changed supported version to Minecraft Bedrock Edition `1.18.0`.
+
+### Fixes
+- [#267] Regression of: Fishing hooks without players, loaded from the level save.
+- [#1267] Network decoding of the `MoveEntityDeltaPacket`
+- [#1267] `isOp` param of the `CapturingCommandSender` constructors were not being used
+- [#1267] Boats placed by dispenser could have the wrong wood type
+- [#1267] Falling anvil was not dealing damage to the entities correctly
+- [#1267] Some randomizers could pick the same number over and over again.
+- [#1267] Bowl and Crossbow fuel time
+- [#1267] The durability of some items
+
+### Documentation
+- [#1267] Added all missing `@PowerNukkitOnly` annotations
+- [#1267] Added all missing `@Override` annotations
+- [#1267] Removed all incorrect `@PowerNukkitOnly` annotations
+
+## [1.5.2.1-PN] - 2021-12-21 ([Check the milestone](https://github.com/PowerNukkit/PowerNukkit/milestone/30?closed=1))
+
+### CRITICAL SECURITY FIX
+- [#1266], [#1270] Changed Log4J library from `2.13.3` to `2.17.0`
+
+## [1.5.2.0-PN] - 2021-12-01 ([Check the milestone](https://github.com/PowerNukkit/PowerNukkit/milestone/28?closed=1))
+This new version adds protocol support for Minecraft `1.17.40` as if it was `1.16.221` with some new features and fixes.
+
+We are still working on `1.17` and `1.18` new features, but we plain to release them in December 2021.
+
+`1.18` support will be added on `1.6.0.0-PN` and it will be released as soon as possible.
+
+Thank you for the translations!
+Help us to translate PowerNukkit at https://translate.powernukkit.org
+
+Want to talk?
+Talk to us at https://discuss.powernukkit.org and/or https://powernukkit.org/discord
+
+### Added
+- [#1233] New API classes and methods were added, check the [JDiff](https://devs.powernukkit.org/jdiff/1.5.2.0-PN_x_1.5.1.0-PN/changes.html) for details.
+- [#1193] Add more damage causes to the API and improve magma block death message
+- [#1233] French translations (thank you for the translations!)
+
+### Changed
+- [#1244] Changed the `recipes.json` and `creativeitems.json` format for easier changes, updates, and maintenance (backward compatible)
+- [#1233] Updated Deutsche, Indonesian, Korean, Poland, Russian, Spanish, Turkish, Vietnamese, Brazilian Portuguese, and Simplified Chinese translations. (thank you!)
+
+### Fixes
+- [#1187] Fixes powered rails do not update in a row
+- [#1191] `SimpleChunkManager.setBlockAtLayer` ignoring the layer
+- [#1174] Fixes Infinite loop with double chest and comparator
+- [#1202] Improves unknown item handling, shows unknown block instead of disconnections
+- [#982] Populator error due to corruption on compressed light data
+- [#1214] Fixed the names for BlockConcrete and BlockConcretePowder
+- [#1172] Fix and improve resource pack related packets
 
 ## [1.5.1.0-PN] - 2021-07-05 ([Check the milestone](https://github.com/PowerNukkit/PowerNukkit/milestone/22?closed=1))
 Our goal on this version was to fix bugs, and we did it, we fixed a lot of them!
@@ -58,7 +128,7 @@ Talk to us at https://discuss.powernukkit.org and/or https://powernukkit.org/dis
 - [#702] Burning arrow and rain will make a lot of particles
 - [#625] If you instant kill a mob with fire aspect enchant tool, it will not give fire aspect drops
 - [#979] Fixes an issue where the players could not hear each other walking
-- [#576] Swmming in a 1x1 tunnel of water was causing suffocation damage by the block above the player
+- [#576] Swimming in a 1x1 tunnel of water was causing suffocation damage by the block above the player
 
 ## [1.5.0.0-PN] - 2021-06-11 ([Check the milestone](https://github.com/PowerNukkit/PowerNukkit/milestone/26?closed=1))
 This was quick! This new version add protocol support for Minecraft `1.17.0` as if it was `1.16.221`.
@@ -732,7 +802,9 @@ Fixes several anvil issues.
 [updated changelog]:https://github.com/PowerNukkit/PowerNukkit/blob/bleeding/CHANGELOG.md
 [discord guild]: https://powernukkit.org/discord
 
-[Unreleased 1.5.2.0-PN]: https://github.com/PowerNukkit/PowerNukkit/compare/v1.5.1.0-PN...bleeding
+[Unreleased 1.6.0.0-PN]: https://github.com/PowerNukkit/PowerNukkit/compare/v1.5.2.1-PN...bleeding
+[1.5.2.1-PN]: https://github.com/PowerNukkit/PowerNukkit/compare/v1.5.2.0-PN...v1.5.2.1-PN
+[1.5.2.0-PN]: https://github.com/PowerNukkit/PowerNukkit/compare/v1.5.1.0-PN...v1.5.2.0-PN
 [1.5.1.0-PN]: https://github.com/PowerNukkit/PowerNukkit/compare/v1.5.0.0-PN...v1.5.1.0-PN
 [1.5.0.0-PN]: https://github.com/PowerNukkit/PowerNukkit/compare/v1.4.0.0-PN...v1.5.0.0-PN
 [1.4.0.0-PN]: https://github.com/PowerNukkit/PowerNukkit/compare/v1.3.1.5-PN...v1.4.0.0-PN
@@ -894,6 +966,7 @@ Fixes several anvil issues.
 [#959]: https://github.com/PowerNukkit/PowerNukkit/issues/959
 [#960]: https://github.com/PowerNukkit/PowerNukkit/issues/960
 [#979]: https://github.com/PowerNukkit/PowerNukkit/issues/979
+[#982]: https://github.com/PowerNukkit/PowerNukkit/issues/982
 [#990]: https://github.com/PowerNukkit/PowerNukkit/issues/990
 [#1100]: https://github.com/PowerNukkit/PowerNukkit/issues/1100
 [#1103]: https://github.com/PowerNukkit/PowerNukkit/issues/1103
@@ -910,6 +983,21 @@ Fixes several anvil issues.
 [#1149]: https://github.com/PowerNukkit/PowerNukkit/issues/1149
 [#1150]: https://github.com/PowerNukkit/PowerNukkit/issues/1150
 [#1151]: https://github.com/PowerNukkit/PowerNukkit/issues/1151
+[#1120]: https://github.com/PowerNukkit/PowerNukkit/issues/1120
 [#1153]: https://github.com/PowerNukkit/PowerNukkit/issues/1153
 [#1170]: https://github.com/PowerNukkit/PowerNukkit/issues/1170
+[#1172]: https://github.com/PowerNukkit/PowerNukkit/issues/1172
+[#1174]: https://github.com/PowerNukkit/PowerNukkit/issues/1174
 [#1177]: https://github.com/PowerNukkit/PowerNukkit/issues/1177
+[#1187]: https://github.com/PowerNukkit/PowerNukkit/issues/1187
+[#1191]: https://github.com/PowerNukkit/PowerNukkit/issues/1191
+[#1193]: https://github.com/PowerNukkit/PowerNukkit/issues/1193
+[#1202]: https://github.com/PowerNukkit/PowerNukkit/issues/1202
+[#1214]: https://github.com/PowerNukkit/PowerNukkit/issues/1214
+[#1233]: https://github.com/PowerNukkit/PowerNukkit/issues/1233
+[#1244]: https://github.com/PowerNukkit/PowerNukkit/issues/1244
+[#1216]: https://github.com/PowerNukkit/PowerNukkit/issues/1216
+[#1258]: https://github.com/PowerNukkit/PowerNukkit/issues/1258
+[#1266]: https://github.com/PowerNukkit/PowerNukkit/issues/1266
+[#1267]: https://github.com/PowerNukkit/PowerNukkit/issues/1267
+[#1270]: https://github.com/PowerNukkit/PowerNukkit/issues/1270

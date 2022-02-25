@@ -3,6 +3,8 @@ package cn.nukkit.utils;
 import cn.nukkit.api.PowerNukkitOnly;
 import cn.nukkit.api.Since;
 import cn.nukkit.block.Block;
+import cn.nukkit.blockstate.BlockState;
+import cn.nukkit.blockstate.BlockStateRegistry;
 import cn.nukkit.entity.Attribute;
 import cn.nukkit.entity.data.Skin;
 import cn.nukkit.item.*;
@@ -32,6 +34,7 @@ import java.lang.reflect.Array;
 import java.nio.ByteOrder;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
+import java.util.function.Consumer;
 import java.util.function.Function;
 
 /**
@@ -39,6 +42,8 @@ import java.util.function.Function;
  */
 @Log4j2
 public class BinaryStream {
+
+    private static final int FALLBACK_ID = 248;
 
     public int offset;
     private byte[] buffer;
@@ -286,10 +291,8 @@ public class BinaryStream {
 
         this.putImage(skin.getCapeData());
         this.putString(skin.getGeometryData());
+        this.putString(skin.getGeometryDataEngineVersion());
         this.putString(skin.getAnimationData());
-        this.putBoolean(skin.isPremium());
-        this.putBoolean(skin.isPersona());
-        this.putBoolean(skin.isCapeOnClassic());
         this.putString(skin.getCapeId());
         this.putString(skin.getFullSkinId());
         this.putString(skin.getArmSize());
@@ -314,6 +317,11 @@ public class BinaryStream {
                 this.putString(color);
             }
         }
+
+        this.putBoolean(skin.isPremium());
+        this.putBoolean(skin.isPersona());
+        this.putBoolean(skin.isCapeOnClassic());
+        this.putBoolean(skin.isPrimaryUser());
     }
 
     public Skin getSkin() {
@@ -334,10 +342,8 @@ public class BinaryStream {
 
         skin.setCapeData(this.getImage());
         skin.setGeometryData(this.getString());
+        skin.setGeometryDataEngineVersion(this.getString());
         skin.setAnimationData(this.getString());
-        skin.setPremium(this.getBoolean());
-        skin.setPersona(this.getBoolean());
-        skin.setCapeOnClassic(this.getBoolean());
         skin.setCapeId(this.getString());
         this.getString(); // TODO: Full skin id
         skin.setArmSize(this.getString());
@@ -363,6 +369,11 @@ public class BinaryStream {
             }
             skin.getTintColors().add(new PersonaPieceTint(pieceType, colors));
         }
+
+        skin.setPremium(this.getBoolean());
+        skin.setPersona(this.getBoolean());
+        skin.setCapeOnClassic(this.getBoolean());
+        skin.setPrimaryUser(this.getBoolean());
         return skin;
     }
 
@@ -400,7 +411,13 @@ public class BinaryStream {
             getVarInt(); // netId
         }
 
-        getVarInt(); // blockRuntimeId
+        int blockRuntimeId = getVarInt();
+        if (id <= 255 && id != FALLBACK_ID) {
+            BlockState blockStateByRuntimeId = BlockStateRegistry.getBlockStateByRuntimeId(blockRuntimeId);
+            if (blockStateByRuntimeId != null) {
+                damage = blockStateByRuntimeId.asItemBlock().getDamage();
+            }
+        }
 
         byte[] bytes = getByteArray();
         ByteBuf buf = AbstractByteBufAllocator.DEFAULT.ioBuffer(bytes.length);
@@ -424,7 +441,9 @@ public class BinaryStream {
 
             if (compoundTag != null && compoundTag.getAllTags().size() > 0) {
                 if (compoundTag.contains("Damage")) {
-                    damage = compoundTag.getInt("Damage");
+                    if (id > 255) {
+                        damage = compoundTag.getInt("Damage");
+                    }
                     compoundTag.remove("Damage");
                 }
                 if (compoundTag.contains("__DamageConflict__")) {
@@ -483,12 +502,12 @@ public class BinaryStream {
 
         return item;
     }
-    
+
     private Item readUnknownItem(Item item) {
-        if (item.getId() != 248 || !item.hasCompoundTag()) {
+        if (item.getId() != FALLBACK_ID || !item.hasCompoundTag()) {
             return item;
         }
-        
+
         CompoundTag tag = item.getNamedTag();
         if (!tag.containsCompound("PowerNukkitUnknown")) {
             return item;
@@ -501,7 +520,7 @@ public class BinaryStream {
         boolean hasCompound = pnTag.getBoolean("HasCompound");
         boolean hasDisplayTag = pnTag.getBoolean("HasDisplayTag");
         String customName = pnTag.getString("OriginalCustomName");
-        
+
         item = Item.get(itemId, meta, item.getCount());
         if (hasCompound) {
             tag.remove("PowerNukkitUnknown");
@@ -516,13 +535,13 @@ public class BinaryStream {
             }
             item.setNamedTag(tag);
         }
-        
+
         return item;
     }
-    
+
     private Item createFakeUnknownItem(Item item) {
         boolean hasCompound = item.hasCompoundTag();
-        Item fallback = Item.getBlock(248, 0, item.getCount());
+        Item fallback = Item.getBlock(FALLBACK_ID, 0, item.getCount());
         CompoundTag tag = item.getNamedTag();
         if (tag == null) {
             tag = new CompoundTag();
@@ -794,10 +813,10 @@ public class BinaryStream {
     }
 
     public void putGameRules(GameRules gameRules) {
-        // LinkedHashMap gives mutability and is faster in iteration 
+        // LinkedHashMap gives mutability and is faster in iteration
         val rules = new LinkedHashMap<>(gameRules.getGameRules());
         rules.keySet().removeIf(GameRule::isDeprecated);
-        
+
         this.putUnsignedVarInt(rules.size());
         rules.forEach((gameRule, value) -> {
             this.putString(gameRule.getName().toLowerCase());
@@ -861,6 +880,30 @@ public class BinaryStream {
         );
     }
 
+    @PowerNukkitOnly
+    @Since("1.5.2.0-PN")
+    public <T> void putArray(Collection<T> collection, Consumer<T> writer) {
+        if (collection == null) {
+            putUnsignedVarInt(0);
+            return;
+        }
+        putUnsignedVarInt(collection.size());
+        collection.forEach(writer);
+    }
+
+    @PowerNukkitOnly
+    @Since("1.5.2.0-PN")
+    public <T> void putArray(T[] collection, Consumer<T> writer) {
+        if (collection == null) {
+            putUnsignedVarInt(0);
+            return;
+        }
+        putUnsignedVarInt(collection.length);
+        for (T t : collection) {
+            writer.accept(t);
+        }
+    }
+
     @SuppressWarnings("unchecked")
     public <T> T[] getArray(Class<T> clazz, Function<BinaryStream, T> function) {
         ArrayDeque<T> deque = new ArrayDeque<>();
@@ -884,7 +927,7 @@ public class BinaryStream {
         try {
             return NBTIO.read(is);
         } finally {
-            offset += is.available() - initial;
+            offset += initial - is.available();
         }
     }
 

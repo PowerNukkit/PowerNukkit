@@ -117,6 +117,7 @@ public class CraftingDataPacket extends DataPacket {
                     break;
                 case SHAPELESS:
                 case CARTOGRAPHY:
+                case SHULKER_BOX:
                     ShapelessRecipe shapeless = (ShapelessRecipe) recipe;
                     this.putString(shapeless.getRecipeId());
                     List<Item> ingredients = shapeless.getIngredientList();
@@ -211,6 +212,8 @@ public class CraftingDataPacket extends DataPacket {
             this.putVarInt(recipe.getIngredient().getNetworkId());
             this.putVarInt(recipe.getResult().getNetworkId());
         }
+
+        this.putUnsignedVarInt(0); // Material reducers size
 
         this.putBoolean(cleanRecipes);
     }
