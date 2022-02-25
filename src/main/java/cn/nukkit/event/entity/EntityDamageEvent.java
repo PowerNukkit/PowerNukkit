@@ -9,7 +9,6 @@ import cn.nukkit.item.enchantment.sideeffect.SideEffect;
 import cn.nukkit.potion.Effect;
 import cn.nukkit.utils.EventException;
 import com.google.common.collect.ImmutableMap;
-import lombok.var;
 
 import javax.annotation.Nonnull;
 import java.util.*;
@@ -127,7 +126,7 @@ public class EntityDamageEvent extends EntityEvent implements Cancellable {
             return sideEffectsArray;
         }
         return Arrays.stream(sideEffectsArray)
-                .map(SideEffect::clone)
+                .map(SideEffect::cloneSideEffect)
                 .toArray(SideEffect[]::new)
         ;
     }
@@ -137,7 +136,7 @@ public class EntityDamageEvent extends EntityEvent implements Cancellable {
     public void setSideEffects(@Nonnull SideEffect... sideEffects) {
         this.sideEffects = Arrays.stream(sideEffects)
                 .filter(Objects::nonNull)
-                .map(SideEffect::clone)
+                .map(SideEffect::cloneSideEffect)
                 .toArray(SideEffect[]::new)
         ;
     }
@@ -151,9 +150,9 @@ public class EntityDamageEvent extends EntityEvent implements Cancellable {
     @PowerNukkitOnly
     @Since("1.5.1.0-PN")
     public void addSideEffects(@Nonnull SideEffect... sideEffects) {
-        var safeStream = Arrays.stream(sideEffects)
+        Stream<SideEffect> safeStream = Arrays.stream(sideEffects)
                 .filter(Objects::nonNull)
-                .map(SideEffect::clone);
+                .map(SideEffect::cloneSideEffect);
 
         this.sideEffects = Stream.concat(Arrays.stream(this.sideEffects), safeStream).toArray(SideEffect[]::new);
     }
@@ -278,6 +277,48 @@ public class EntityDamageEvent extends EntityEvent implements Cancellable {
         /**
          * Damage caused by hunger
          */
-        HUNGER
+        HUNGER,
+        /**
+         * Damage caused by Wither
+         */
+        @PowerNukkitOnly
+        @Since("1.5.2.0-PN")
+        WITHER,
+        /**
+         * Damage caused by thorns
+         */
+        @PowerNukkitOnly
+        @Since("1.5.2.0-PN")
+        THORNS,
+        /**
+         * Damage caused by falling block
+         */
+        @PowerNukkitOnly
+        @Since("1.5.2.0-PN")
+        FALLING_BLOCK,
+        /**
+         * Damage caused by flying into wall
+         */
+        @PowerNukkitOnly
+        @Since("1.5.2.0-PN")
+        FLYING_INTO_WALL,
+        /**
+         * Damage caused when an entity steps on a hot block, like {@link cn.nukkit.block.BlockID#MAGMA}
+         */
+        @PowerNukkitOnly
+        @Since("1.5.2.0-PN")
+        HOT_FLOOR,
+        /**
+         * Damage caused by fireworks
+         */
+        @PowerNukkitOnly
+        @Since("1.5.2.0-PN")
+        FIREWORKS,
+        /**
+         * Damage caused by temperature
+         */
+        @PowerNukkitOnly
+        @Since("1.5.2.0-PN")
+        FREEZING,
     }
 }

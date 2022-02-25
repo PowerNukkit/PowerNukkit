@@ -2,6 +2,9 @@ package cn.nukkit.command;
 
 import cn.nukkit.Player;
 import cn.nukkit.Server;
+import cn.nukkit.api.DeprecationDetails;
+import cn.nukkit.api.PowerNukkitDifference;
+import cn.nukkit.api.PowerNukkitOnly;
 import cn.nukkit.command.data.*;
 import cn.nukkit.lang.TextContainer;
 import cn.nukkit.lang.TranslationContainer;
@@ -17,8 +20,6 @@ import java.util.*;
  * @author MagicDroidX (Nukkit Project)
  */
 public abstract class Command {
-
-    private static CommandData defaultDataTemplate;
 
     protected CommandData commandData;
 
@@ -134,7 +135,8 @@ public abstract class Command {
     public Map<String, CommandOverload> getOverloads() {
         return this.commandData.overloads;
     }
-    
+
+    @PowerNukkitOnly
     protected double parseTilde(String arg, double pos) {
         if (arg.equals("~")) {
             return pos;
@@ -263,11 +265,17 @@ public abstract class Command {
         this.usageMessage = usageMessage;
     }
 
+    @Deprecated
+    @DeprecationDetails(
+            by = "PowerNukkit",
+            since = "1.5.2.0-PN",
+            reason = "Unused and always throws an exception even in Cloudburst Nukkit")
+    @PowerNukkitDifference(
+            since = "1.5.2.0-PN",
+            info = "Throws UnsupportedOperationException instead of NullPointerException"
+    )
     public static CommandData generateDefaultData() {
-        if (defaultDataTemplate == null) {
-            //defaultDataTemplate = new Gson().fromJson(new InputStreamReader(Server.class.getClassLoader().getResourceAsStream("command_default.json")));
-        }
-        return defaultDataTemplate.clone();
+        throw new UnsupportedOperationException();
     }
 
     public static void broadcastCommandMessage(CommandSender source, String message) {
