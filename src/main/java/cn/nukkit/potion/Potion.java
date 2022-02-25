@@ -410,7 +410,6 @@ public class Potion implements Cloneable {
                 case NIGHT_VISION_LONG:
                 case STRENGTH_LONG:
                 case WATER_BREATHING_LONG:
-                case SPEED_II:
                 case SPEED_LONG:
                 case FIRE_RESISTANCE_LONG:
                 case LEAPING_LONG:
@@ -420,6 +419,7 @@ public class Potion implements Cloneable {
                 case WEAKNESS:
                 case STRENGTH_II:
                 case SLOWNESS:
+                case SPEED_II:
                     return 90;
                 case SLOWNESS_LONG:
                 case WEAKNESS_LONG:
