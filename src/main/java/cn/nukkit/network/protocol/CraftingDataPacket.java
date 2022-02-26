@@ -1,7 +1,7 @@
 package cn.nukkit.network.protocol;
 
-import cn.nukkit.api.Since;
 import cn.nukkit.api.PowerNukkitOnly;
+import cn.nukkit.api.Since;
 import cn.nukkit.inventory.*;
 import cn.nukkit.item.Item;
 import lombok.ToString;
@@ -26,6 +26,7 @@ public class CraftingDataPacket extends DataPacket {
     public static final String CRAFTING_TAG_CAMPFIRE = "campfire";
     public static final String CRAFTING_TAG_BLAST_FURNACE = "blast_furnace";
     public static final String CRAFTING_TAG_SMOKER = "smoker";
+    public static final String CRAFTING_TAG_SMITHING_TABLE = "smithing_table";
 
     private List<Recipe> entries = new ArrayList<>();
     private final List<BrewingRecipe> brewingEntries = new ArrayList<>();
@@ -118,6 +119,7 @@ public class CraftingDataPacket extends DataPacket {
                 case SHAPELESS:
                 case CARTOGRAPHY:
                 case SHULKER_BOX:
+                case SMITHING:
                     ShapelessRecipe shapeless = (ShapelessRecipe) recipe;
                     this.putString(shapeless.getRecipeId());
                     List<Item> ingredients = shapeless.getIngredientList();
@@ -128,7 +130,18 @@ public class CraftingDataPacket extends DataPacket {
                     this.putUnsignedVarInt(1);
                     this.putSlot(shapeless.getResult(), true);
                     this.putUUID(shapeless.getId());
-                    this.putString(recipe.getType() == RecipeType.CARTOGRAPHY ? CRAFTING_TAG_CARTOGRAPHY_TABLE : CRAFTING_TAG_CRAFTING_TABLE);
+                    switch (recipe.getType()) {
+                        case CARTOGRAPHY:
+                            this.putString(CRAFTING_TAG_CARTOGRAPHY_TABLE);
+                            break;
+                        case SHAPELESS:
+                        case SHULKER_BOX:
+                            this.putString(CRAFTING_TAG_CRAFTING_TABLE);
+                            break;
+                        case SMITHING:
+                            this.putString(CRAFTING_TAG_SMITHING_TABLE);
+                            break;
+                    }
                     this.putVarInt(shapeless.getPriority());
                     this.putUnsignedVarInt(recipeNetworkId++);
                     break;

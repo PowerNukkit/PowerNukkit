@@ -1,6 +1,195 @@
 {
-  "version": 475,
+  "version": 486,
   "recipes": [
+    {
+      "id": "minecraft:smithingtable_diamond_axe_to_netherite_axe",
+      "type": 0,
+      "input": [
+        {
+          "id": "minecraft:diamond_axe",
+          "fuzzy": true
+        },
+        {
+          "id": "minecraft:netherite_ingot",
+          "fuzzy": true
+        }
+      ],
+      "output": [
+        {
+          "id": "minecraft:netherite_axe"
+        }
+      ],
+      "block": "smithing_table",
+      "priority": 2
+    },
+    {
+      "id": "minecraft:smithingtable_diamond_boots_to_netherite_boots",
+      "type": 0,
+      "input": [
+        {
+          "id": "minecraft:diamond_boots",
+          "fuzzy": true
+        },
+        {
+          "id": "minecraft:netherite_ingot",
+          "fuzzy": true
+        }
+      ],
+      "output": [
+        {
+          "id": "minecraft:netherite_boots"
+        }
+      ],
+      "block": "smithing_table",
+      "priority": 2
+    },
+    {
+      "id": "minecraft:smithingtable_diamond_chestplate_to_netherite_chestplate",
+      "type": 0,
+      "input": [
+        {
+          "id": "minecraft:diamond_chestplate",
+          "fuzzy": true
+        },
+        {
+          "id": "minecraft:netherite_ingot",
+          "fuzzy": true
+        }
+      ],
+      "output": [
+        {
+          "id": "minecraft:netherite_chestplate"
+        }
+      ],
+      "block": "smithing_table",
+      "priority": 2
+    },
+    {
+      "id": "minecraft:smithingtable_diamond_helmet_to_netherite_helmet",
+      "type": 0,
+      "input": [
+        {
+          "id": "minecraft:diamond_helmet",
+          "fuzzy": true
+        },
+        {
+          "id": "minecraft:netherite_ingot",
+          "fuzzy": true
+        }
+      ],
+      "output": [
+        {
+          "id": "minecraft:netherite_helmet"
+        }
+      ],
+      "block": "smithing_table",
+      "priority": 2
+    },
+    {
+      "id": "minecraft:smithingtable_diamond_hoe_to_netherite_hoe",
+      "type": 0,
+      "input": [
+        {
+          "id": "minecraft:diamond_hoe",
+          "fuzzy": true
+        },
+        {
+          "id": "minecraft:netherite_ingot",
+          "fuzzy": true
+        }
+      ],
+      "output": [
+        {
+          "id": "minecraft:netherite_hoe"
+        }
+      ],
+      "block": "smithing_table",
+      "priority": 2
+    },
+    {
+      "id": "minecraft:smithingtable_diamond_leggings_to_netherite_leggings",
+      "type": 0,
+      "input": [
+        {
+          "id": "minecraft:diamond_leggings",
+          "fuzzy": true
+        },
+        {
+          "id": "minecraft:netherite_ingot",
+          "fuzzy": true
+        }
+      ],
+      "output": [
+        {
+          "id": "minecraft:netherite_leggings"
+        }
+      ],
+      "block": "smithing_table",
+      "priority": 2
+    },
+    {
+      "id": "minecraft:smithingtable_diamond_pickaxe_to_netherite_pickaxe",
+      "type": 0,
+      "input": [
+        {
+          "id": "minecraft:diamond_pickaxe",
+          "fuzzy": true
+        },
+        {
+          "id": "minecraft:netherite_ingot",
+          "fuzzy": true
+        }
+      ],
+      "output": [
+        {
+          "id": "minecraft:netherite_pickaxe"
+        }
+      ],
+      "block": "smithing_table",
+      "priority": 2
+    },
+    {
+      "id": "minecraft:smithingtable_diamond_shovel_to_netherite_shovel",
+      "type": 0,
+      "input": [
+        {
+          "id": "minecraft:diamond_shovel",
+          "fuzzy": true
+        },
+        {
+          "id": "minecraft:netherite_ingot",
+          "fuzzy": true
+        }
+      ],
+      "output": [
+        {
+          "id": "minecraft:netherite_shovel"
+        }
+      ],
+      "block": "smithing_table",
+      "priority": 2
+    },
+    {
+      "id": "minecraft:smithingtable_diamond_sword_to_netherite_sword",
+      "type": 0,
+      "input": [
+        {
+          "id": "minecraft:diamond_sword",
+          "fuzzy": true
+        },
+        {
+          "id": "minecraft:netherite_ingot",
+          "fuzzy": true
+        }
+      ],
+      "output": [
+        {
+          "id": "minecraft:netherite_sword"
+        }
+      ],
+      "block": "smithing_table",
+      "priority": 2
+    },
     {
       "type": 4,
       "uuid": "442d85ed-8272-4543-a6f1-418f90ded05d"
@@ -12469,7 +12658,7 @@
       "type": 1,
       "input": {
         "A": {
-          "legacyId": 624,
+          "legacyId": 625,
           "id": "minecraft:amethyst_shard",
           "damage": 32767
         }
@@ -19284,7 +19473,7 @@
       ],
       "output": [
         {
-          "legacyId": 622,
+          "legacyId": 623,
           "id": "minecraft:glow_frame"
         }
       ],
@@ -29134,7 +29323,7 @@
       "type": 1,
       "input": {
         "A": {
-          "legacyId": 624,
+          "legacyId": 625,
           "id": "minecraft:amethyst_shard",
           "damage": 32767
         },
@@ -29146,7 +29335,6 @@
       },
       "output": [
         {
-          "legacyId": 625,
           "id": "minecraft:spyglass"
         }
       ],
@@ -30260,7 +30448,7 @@
       "type": 1,
       "input": {
         "A": {
-          "legacyId": 624,
+          "legacyId": 625,
           "id": "minecraft:amethyst_shard",
           "damage": 32767
         },
@@ -49419,78 +49607,6 @@
     },
     {
       "inputId": "minecraft:potion",
-      "inputMeta": 21,
-      "reagentId": "minecraft:fermented_spider_eye",
-      "reagentMeta": 0,
-      "outputId": "minecraft:potion",
-      "outputMeta": 23
-    },
-    {
-      "inputId": "minecraft:splash_potion",
-      "inputMeta": 21,
-      "reagentId": "minecraft:fermented_spider_eye",
-      "reagentMeta": 0,
-      "outputId": "minecraft:splash_potion",
-      "outputMeta": 23
-    },
-    {
-      "inputId": "minecraft:lingering_potion",
-      "inputMeta": 21,
-      "reagentId": "minecraft:fermented_spider_eye",
-      "reagentMeta": 0,
-      "outputId": "minecraft:lingering_potion",
-      "outputMeta": 23
-    },
-    {
-      "inputId": "minecraft:potion",
-      "inputMeta": 5,
-      "reagentId": "minecraft:redstone",
-      "reagentMeta": 0,
-      "outputId": "minecraft:potion",
-      "outputMeta": 6
-    },
-    {
-      "inputId": "minecraft:splash_potion",
-      "inputMeta": 5,
-      "reagentId": "minecraft:redstone",
-      "reagentMeta": 0,
-      "outputId": "minecraft:splash_potion",
-      "outputMeta": 6
-    },
-    {
-      "inputId": "minecraft:lingering_potion",
-      "inputMeta": 5,
-      "reagentId": "minecraft:redstone",
-      "reagentMeta": 0,
-      "outputId": "minecraft:lingering_potion",
-      "outputMeta": 6
-    },
-    {
-      "inputId": "minecraft:potion",
-      "inputMeta": 0,
-      "reagentId": "minecraft:rabbit_foot",
-      "reagentMeta": 0,
-      "outputId": "minecraft:potion",
-      "outputMeta": 1
-    },
-    {
-      "inputId": "minecraft:splash_potion",
-      "inputMeta": 0,
-      "reagentId": "minecraft:rabbit_foot",
-      "reagentMeta": 0,
-      "outputId": "minecraft:splash_potion",
-      "outputMeta": 1
-    },
-    {
-      "inputId": "minecraft:lingering_potion",
-      "inputMeta": 0,
-      "reagentId": "minecraft:rabbit_foot",
-      "reagentMeta": 0,
-      "outputId": "minecraft:lingering_potion",
-      "outputMeta": 1
-    },
-    {
-      "inputId": "minecraft:potion",
       "inputMeta": 4,
       "reagentId": "minecraft:fermented_spider_eye",
       "reagentMeta": 0,
@@ -49804,6 +49920,30 @@
     {
       "inputId": "minecraft:potion",
       "inputMeta": 21,
+      "reagentId": "minecraft:fermented_spider_eye",
+      "reagentMeta": 0,
+      "outputId": "minecraft:potion",
+      "outputMeta": 23
+    },
+    {
+      "inputId": "minecraft:splash_potion",
+      "inputMeta": 21,
+      "reagentId": "minecraft:fermented_spider_eye",
+      "reagentMeta": 0,
+      "outputId": "minecraft:splash_potion",
+      "outputMeta": 23
+    },
+    {
+      "inputId": "minecraft:lingering_potion",
+      "inputMeta": 21,
+      "reagentId": "minecraft:fermented_spider_eye",
+      "reagentMeta": 0,
+      "outputId": "minecraft:lingering_potion",
+      "outputMeta": 23
+    },
+    {
+      "inputId": "minecraft:potion",
+      "inputMeta": 21,
       "reagentId": "minecraft:glowstone_dust",
       "reagentMeta": 0,
       "outputId": "minecraft:potion",
@@ -50112,6 +50252,30 @@
       "reagentMeta": 0,
       "outputId": "minecraft:lingering_potion",
       "outputMeta": 7
+    },
+    {
+      "inputId": "minecraft:potion",
+      "inputMeta": 5,
+      "reagentId": "minecraft:redstone",
+      "reagentMeta": 0,
+      "outputId": "minecraft:potion",
+      "outputMeta": 6
+    },
+    {
+      "inputId": "minecraft:splash_potion",
+      "inputMeta": 5,
+      "reagentId": "minecraft:redstone",
+      "reagentMeta": 0,
+      "outputId": "minecraft:splash_potion",
+      "outputMeta": 6
+    },
+    {
+      "inputId": "minecraft:lingering_potion",
+      "inputMeta": 5,
+      "reagentId": "minecraft:redstone",
+      "reagentMeta": 0,
+      "outputId": "minecraft:lingering_potion",
+      "outputMeta": 6
     },
     {
       "inputId": "minecraft:potion",
@@ -50712,6 +50876,30 @@
       "reagentMeta": 0,
       "outputId": "minecraft:lingering_potion",
       "outputMeta": 4
+    },
+    {
+      "inputId": "minecraft:potion",
+      "inputMeta": 0,
+      "reagentId": "minecraft:rabbit_foot",
+      "reagentMeta": 0,
+      "outputId": "minecraft:potion",
+      "outputMeta": 1
+    },
+    {
+      "inputId": "minecraft:splash_potion",
+      "inputMeta": 0,
+      "reagentId": "minecraft:rabbit_foot",
+      "reagentMeta": 0,
+      "outputId": "minecraft:splash_potion",
+      "outputMeta": 1
+    },
+    {
+      "inputId": "minecraft:lingering_potion",
+      "inputMeta": 0,
+      "reagentId": "minecraft:rabbit_foot",
+      "reagentMeta": 0,
+      "outputId": "minecraft:lingering_potion",
+      "outputMeta": 1
     },
     {
       "inputId": "minecraft:potion",

@@ -386,7 +386,10 @@ public class LevelSoundEventPacket extends DataPacket {
     @PowerNukkitOnly @Since("FUTURE") public static final int SOUND_RECORD_OTHERSIDE = 371;
 
     @PowerNukkitDifference(info = "Not constant", since = "FUTURE")
-    public static final int SOUND_UNDEFINED = dynamic(372);
+    public static final int SOUND_TONGUE = dynamic(372);
+    public static final int SOUND_CRACK_IRON_GOLEM = 373;
+    public static final int SOUND_REPAIR_IRON_GOLEM = 374;
+    public static final int SOUND_UNDEFINED = 375;
 
     public int sound;
     public float x;

@@ -5,6 +5,7 @@ package cn.nukkit.block;
  */
 
 import cn.nukkit.Player;
+import cn.nukkit.api.DeprecationDetails;
 import cn.nukkit.api.PowerNukkitDifference;
 import cn.nukkit.api.PowerNukkitOnly;
 import cn.nukkit.api.Since;
@@ -31,13 +32,15 @@ import static cn.nukkit.blockproperty.CommonBlockProperties.FACING_DIRECTION;
 @PowerNukkitDifference(since = "1.4.0.0-PN", info = "Implements BlockEntityHolder only in PowerNukkit")
 @PowerNukkitDifference(info = "Implements RedstoneComponent.", since = "1.4.0.0-PN")
 public class BlockSkull extends BlockTransparentMeta implements RedstoneComponent, BlockEntityHolder<BlockEntitySkull> {
+    @Deprecated
+    @DeprecationDetails(since = "FUTURE", reason = "Mojang removed from Minecraft 1.18.10")
     @PowerNukkitOnly
     @Since("1.5.0.0-PN")
     public static final BooleanBlockProperty NO_DROP = new BooleanBlockProperty("no_drop_bit", false);
 
     @PowerNukkitOnly
     @Since("1.5.0.0-PN")
-    public static final BlockProperties PROPERTIES = new BlockProperties(FACING_DIRECTION, NO_DROP);
+    public static final BlockProperties PROPERTIES = new BlockProperties(FACING_DIRECTION);
 
     public BlockSkull() {
         this(0);

@@ -1753,16 +1753,16 @@
       "blockState": "minecraft:budding_amethyst"
     },
     {
-      "blockState": "minecraft:amethyst_cluster;facing_direction=0"
+      "blockState": "minecraft:amethyst_cluster;facing_direction=1"
     },
     {
-      "blockState": "minecraft:large_amethyst_bud;facing_direction=0"
+      "blockState": "minecraft:large_amethyst_bud;facing_direction=1"
     },
     {
-      "blockState": "minecraft:medium_amethyst_bud;facing_direction=0"
+      "blockState": "minecraft:medium_amethyst_bud;facing_direction=1"
     },
     {
-      "blockState": "minecraft:small_amethyst_bud;facing_direction=0"
+      "blockState": "minecraft:small_amethyst_bud;facing_direction=1"
     },
     {
       "blockState": "minecraft:tuff"
@@ -4355,6 +4355,9 @@
     },
     {
       "id": "minecraft:piglin_banner_pattern"
+    },
+    {
+      "id": "minecraft:globe_banner_pattern"
     },
     {
       "id": "minecraft:firework_rocket",
