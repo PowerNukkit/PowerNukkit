@@ -42,7 +42,8 @@ public class StartGamePacket extends DataPacket {
     public float z;
     public float yaw;
     public float pitch;
-    public int seed;
+    @Deprecated @DeprecationDetails(since = "FUTURE", by = "PowerNukkit", reason = "Minecraft have started supporting 64-bit seed since v1.18.30 update.", replaceWith="seed64") public int seed;
+    @PowerNukkitOnly @Since("FUTURE") public Long seed64 = null;
     public byte dimension;
     public int generator = 1;
     public int worldGamemode;
@@ -114,7 +115,11 @@ public class StartGamePacket extends DataPacket {
         this.putLFloat(this.yaw);
         this.putLFloat(this.pitch);
 
-        this.putLLong(this.seed);
+        if (this.seed64 == null) {
+            this.putLLong(this.seed);
+        } else {
+            this.putLLong(this.seed64);
+        }
         this.putLShort(0x00); // SpawnBiomeType - Default
         this.putString("plains"); // UserDefinedBiomeName
         this.putVarInt(this.dimension);
