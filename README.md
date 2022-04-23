@@ -32,11 +32,12 @@ Links
 - __[👩🏽‍💻 PowerNukkit Website for Plugin Developers](https://devs.powernukkit.org/)__
 - __[💬 PowerNukkit Forum and Guides](https://discuss.powernukkit.org/)__
 - __[💬 PowerNukkit Discord](https://powernukkit.org/discord)__
-- __[💾 Download PowerNukkit Recommended Build](https://powernukkit.org/recommended)__
-- __[💾 Download PowerNukkit Releases](https://powernukkit.org/releases)__
-- __[💾 Download PowerNukkit Snapshots](https://powernukkit.org/snapshots)__
-- __[🔌 Cloudburst Nukkit Plugins](https://cloudburstmc.org/resources/categories/nukkit-plugins.1/)__
-- __[🔌 PowerNukkit Plugins](https://discuss.powernukkit.org/c/plugins/powernukkit-plugins/14/)__
+- __[💾 Download PowerNukkit Recommended Build](https://powernukkit.org/#download)__
+- __[💾 Download PowerNukkit Releases](https://powernukkit.org/#stable)__
+- __[💾 Download PowerNukkit Snapshots](https://powernukkit.org/#snapshot)__
+- __[🥚 Download PowerNukkit Pterodactyl Eggs](https://powernukkit.org/#pterodactyl)__
+- __[🔌 Download PowerNukkit Plugins](https://plugins.powernukkit.org)__
+- __[🔌 Download Cloudburst Nukkit Plugins](https://cloudburstmc.org/resources/categories/nukkit-plugins.1/)__
 - __[🧩 PowerNukkit Plugin Requests](https://discuss.powernukkit.org/c/plugins/plugin-requests/13)__
 
 Creating Plugins
@@ -50,7 +51,7 @@ repositories {
 }
 
 dependencies {
-    compile group: 'org.powernukkit', name: 'powernukkit', version: '1.5.2.1-PN'
+    compile group: 'org.powernukkit', name: 'powernukkit', version: '1.6.0.1-PN'
 }
 ```
 
@@ -60,7 +61,7 @@ dependencies {
     <dependency>
         <groupId>org.powernukkit</groupId>
         <artifactId>powernukkit</artifactId>
-        <version>1.5.2.1-PN</version>
+        <version>1.6.0.1-PN</version>
     </dependency>
 </dependencies>
 ```
@@ -133,7 +134,9 @@ Check the [docker-compose.yml](docker-compose.yml) file for more details.
 
 ### Supported tags
 * _bleeding_ (⚠️ **use with care, may contain unstable code!** ⚠️)
-* 1.5.2.0, 1.5.2, 1.5, 1, latest
+* 1.6.0.1, 1.6.0, 1.6, 1, latest
+* 1.6.0.0
+* 1.5.2.0, 1.5.2, 1.5
 * 1.5.1.0, 1.5.1
 * 1.5.0.0, 1.5.0
 * 1.4.0.0, 1.4.0, 1.4

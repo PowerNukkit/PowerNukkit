@@ -25,7 +25,7 @@ public class ItemBannerPattern extends Item {
     public static final int PATTERN_BORDURE_INDENTED = 5;
 
     @PowerNukkitOnly
-    @Since("FUTURE")
+    @Since("1.6.0.0-PN")
     public static final int PATTERN_SNOUT = 6;
 
     public ItemBannerPattern() {

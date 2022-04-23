@@ -1629,7 +1629,7 @@ public class Item implements Cloneable, BlockID, ItemID {
         }
     }
 
-    @Since("FUTURE")
+    @Since("1.6.0.0-PN")
     public final RuntimeEntry getRuntimeEntry() {
         //TODO Implement
         throw new UnsupportedOperationException();

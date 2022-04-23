@@ -48,6 +48,9 @@ public interface BlockID {
     int BUSH = 32;
     int DEAD_BUSH = 32;
     int PISTON = 33;
+    @PowerNukkitOnly @Since("1.6.0.0-PN") int PISTON_ARM_COLLISION = 34;
+    @Deprecated
+    @DeprecationDetails(since = "1.6.0.0-PN", by = "PowerNukkit", reason = "Incorrect name", replaceWith = "PISTON_ARM_COLLISION")
     int PISTON_HEAD = 34;
     int WOOL = 35;
     int DANDELION = 37;
@@ -181,6 +184,9 @@ public interface BlockID {
     int EMERALD_ORE = 129;
     int ENDER_CHEST = 130;
     int TRIPWIRE_HOOK = 131;
+    @PowerNukkitOnly @Since("1.6.0.0-PN") int TRIP_WIRE = 132;
+    @Deprecated
+    @DeprecationDetails(since = "1.6.0.0-PN", by = "Mojang", reason = "Renamed", replaceWith = "TRIP_WIRE")
     int TRIPWIRE = 132;
     int EMERALD_BLOCK = 133;
     int SPRUCE_WOOD_STAIRS = 134;
@@ -301,8 +307,11 @@ public interface BlockID {
     int RED_GLAZED_TERRACOTTA = 234;
     int BLACK_GLAZED_TERRACOTTA = 235;
     int CONCRETE = 236;
-    @Since("1.4.0.0-PN") @PowerNukkitOnly int CONCRETEPOWDER = 237;
-    int CONCRETE_POWDER = CONCRETEPOWDER;
+    int CONCRETE_POWDER = 237;
+    @Since("1.4.0.0-PN")
+    @PowerNukkitOnly
+    @Deprecated @DeprecationDetails(since = "1.6.0.0-PN", by = "Mojang", replaceWith = "CONCRETE_POWDER", reason = "Renamed")
+    int CONCRETEPOWDER = CONCRETE_POWDER;
 
     int CHORUS_PLANT = 240;
     int STAINED_GLASS = 241;
@@ -430,8 +439,15 @@ public interface BlockID {
      @PowerNukkitOnly int LIT_BLAST_FURNACE = 469;
      @PowerNukkitOnly int LIGHT_BLOCK = 470;
      @PowerNukkitOnly int WITHER_ROSE = 471;
-     @PowerNukkitOnly int STICKYPISTONARMCOLLISION = 472;
-     @PowerNukkitOnly int PISTON_HEAD_STICKY = 472;
+     @PowerNukkitOnly @Since("1.6.0.0-PN") int STICKY_PISTON_ARM_COLLISION = 472;
+     @PowerNukkitOnly
+     @Deprecated
+     @DeprecationDetails(since = "1.6.0.0-PN", by = "Mojang", replaceWith = "STICKY_PISTON_ARM_COLLISION", reason = "Renamed")
+     int STICKYPISTONARMCOLLISION = STICKY_PISTON_ARM_COLLISION;
+     @PowerNukkitOnly
+     @Deprecated
+     @DeprecationDetails(since = "1.6.0.0-PN", by = "PowerNukkit", replaceWith = "STICKY_PISTON_ARM_COLLISION", reason = "Renamed")
+     int PISTON_HEAD_STICKY = STICKY_PISTON_ARM_COLLISION;
      @PowerNukkitOnly int BEE_NEST = 473;
      @PowerNukkitOnly int BEEHIVE = 474;
      @PowerNukkitOnly int HONEY_BLOCK = 475;

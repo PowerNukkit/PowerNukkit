@@ -12,7 +12,7 @@ import cn.nukkit.potion.Potion;
 public class ItemPotionSplash extends ProjectileItem {
 
     @PowerNukkitOnly
-    @Since("FUTURE")
+    @Since("1.6.0.0-PN")
     public ItemPotionSplash() {
         this(0, 1);
     }

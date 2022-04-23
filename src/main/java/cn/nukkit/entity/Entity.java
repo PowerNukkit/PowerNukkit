@@ -195,7 +195,7 @@ public abstract class Entity extends Location implements Metadatable {
 
     @PowerNukkitOnly("Removed from Cloudburst Nukkit")
     @Deprecated
-    @DeprecationDetails(by = "Cloudburst Nukkit", reason = "Duplicated and removed", replaceWith = "DATA_INTERACTIVE_TAG", since = "FUTURE")
+    @DeprecationDetails(by = "Cloudburst Nukkit", reason = "Duplicated and removed", replaceWith = "DATA_INTERACTIVE_TAG", since = "1.6.0.0-PN")
     @Since("1.2.0.0-PN")
     public static final int DATA_INTERACT_TEXT = dynamic(DATA_INTERACTIVE_TAG); //string
 
@@ -313,7 +313,7 @@ public abstract class Entity extends Location implements Metadatable {
     @Since("1.2.0.0-PN") public static final int DATA_FLAG_BLOCKED_USING_SHIELD = dynamic(73);
     @Since("1.2.0.0-PN") public static final int DATA_FLAG_BLOCKED_USING_DAMAGED_SHIELD = dynamic(74);
     @Since("1.2.0.0-PN") public static final int DATA_FLAG_SLEEPING = dynamic(75);
-    @Since("FUTURE") public static final int DATA_FLAG_ENTITY_GROW_UP = dynamic(76);
+    @Since("1.6.0.0-PN") public static final int DATA_FLAG_ENTITY_GROW_UP = dynamic(76);
     @Since("1.2.0.0-PN") public static final int DATA_FLAG_TRADE_INTEREST = dynamic(77);
     @Since("1.2.0.0-PN") public static final int DATA_FLAG_DOOR_BREAKER = dynamic(78);
     @Since("1.2.0.0-PN") public static final int DATA_FLAG_BREAKING_OBSTRUCTION = dynamic(79);
@@ -334,8 +334,8 @@ public abstract class Entity extends Location implements Metadatable {
     @Since("1.3.0.0-PN") public static final int DATA_FLAG_CELEBRATING_SPECIAL = dynamic(94);
     @Since("1.4.0.0-PN") public static final int DATA_FLAG_RAM_ATTACK = dynamic(96);
     @Since("1.5.0.0-PN") public static final int DATA_FLAG_PLAYING_DEAD = dynamic(97);
-    @Since("FUTURE") public static final int DATA_FLAG_IN_ASCENDABLE_BLOCK = dynamic(98);
-    @Since("FUTURE") public static final int DATA_FLAG_OVER_DESCENDABLE_BLOCK = dynamic(99);
+    @Since("1.6.0.0-PN") public static final int DATA_FLAG_IN_ASCENDABLE_BLOCK = dynamic(98);
+    @Since("1.6.0.0-PN") public static final int DATA_FLAG_OVER_DESCENDABLE_BLOCK = dynamic(99);
     public static final int DATA_FLAG_CROAKING = 100;
     public static final int DATA_FLAG_EAT_MOB = 101;
 
@@ -386,12 +386,12 @@ public abstract class Entity extends Location implements Metadatable {
     public double lastMotionZ;
 
     public double lastPitch;
-    @Since("FUTURE") public double lastYaw;
-    @Since("FUTURE") public double lastHeadYaw;
+    @Since("1.6.0.0-PN") public double lastYaw;
+    @Since("1.6.0.0-PN") public double lastHeadYaw;
 
     public double pitchDelta;
-    @Since("FUTURE") public double yawDelta;
-    @Since("FUTURE") public double headYawDelta;
+    @Since("1.6.0.0-PN") public double yawDelta;
+    @Since("1.6.0.0-PN") public double headYawDelta;
 
     public double entityCollisionReduction = 0; // Higher than 0.9 will result a fast collisions
     public AxisAlignedBB boundingBox;
@@ -2484,7 +2484,7 @@ public abstract class Entity extends Location implements Metadatable {
         return false;
     }
 
-    @Since("FUTURE")
+    @Since("1.6.0.0-PN")
     public boolean setPositionAndRotation(Vector3 pos, double yaw, double pitch, double headYaw) {
         if (this.setPosition(pos)) {
             this.setRotation(yaw, pitch, headYaw);
@@ -2500,7 +2500,7 @@ public abstract class Entity extends Location implements Metadatable {
         this.scheduleUpdate();
     }
 
-    @Since("FUTURE")
+    @Since("1.6.0.0-PN")
     public void setRotation(double yaw, double pitch, double headYaw) {
         this.yaw = yaw;
         this.pitch = pitch;
@@ -2761,14 +2761,20 @@ public abstract class Entity extends Location implements Metadatable {
     }
 
     public boolean setDataProperty(EntityData data, boolean send) {
-        if (!Objects.equals(data, this.getDataProperties().get(data.getId()))) {
-            this.getDataProperties().put(data);
-            if (send) {
-                this.sendData(this.hasSpawned.values().toArray(Player.EMPTY_ARRAY), new EntityMetadata().put(this.dataProperties.get(data.getId())));
-            }
-            return true;
+        if (Objects.equals(data, this.dataProperties.get(data.getId()))) {
+            return false;
         }
-        return false;
+
+        this.dataProperties.put(data);
+        if (send) {
+            EntityMetadata metadata = new EntityMetadata();
+            metadata.put(this.dataProperties.get(data.getId()));
+            if (data.getId() == DATA_FLAGS_EXTENDED) {
+                metadata.put(this.dataProperties.get(DATA_FLAGS));
+            }
+            this.sendData(this.hasSpawned.values().toArray(Player.EMPTY_ARRAY), metadata);
+        }
+        return true;
     }
 
     public EntityMetadata getDataProperties() {

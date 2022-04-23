@@ -33,7 +33,7 @@ import static cn.nukkit.blockproperty.CommonBlockProperties.FACING_DIRECTION;
 @PowerNukkitDifference(info = "Implements RedstoneComponent.", since = "1.4.0.0-PN")
 public class BlockSkull extends BlockTransparentMeta implements RedstoneComponent, BlockEntityHolder<BlockEntitySkull> {
     @Deprecated
-    @DeprecationDetails(since = "FUTURE", reason = "Mojang removed from Minecraft 1.18.10")
+    @DeprecationDetails(since = "1.6.0.0-PN", reason = "Mojang removed from Minecraft 1.18.10")
     @PowerNukkitOnly
     @Since("1.5.0.0-PN")
     public static final BooleanBlockProperty NO_DROP = new BooleanBlockProperty("no_drop_bit", false);

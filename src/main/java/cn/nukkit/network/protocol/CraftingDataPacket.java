@@ -26,7 +26,7 @@ public class CraftingDataPacket extends DataPacket {
     public static final String CRAFTING_TAG_CAMPFIRE = "campfire";
     public static final String CRAFTING_TAG_BLAST_FURNACE = "blast_furnace";
     public static final String CRAFTING_TAG_SMOKER = "smoker";
-    public static final String CRAFTING_TAG_SMITHING_TABLE = "smithing_table";
+    @PowerNukkitOnly @Since("1.6.0.0-PN") public static final String CRAFTING_TAG_SMITHING_TABLE = "smithing_table";
 
     private List<Recipe> entries = new ArrayList<>();
     private final List<BrewingRecipe> brewingEntries = new ArrayList<>();

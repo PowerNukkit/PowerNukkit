@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @since 2021-12-13
  */
 @PowerNukkitOnly
-@Since("FUTURE")
+@Since("1.6.0.0-PN")
 class MoveEntityDeltaPacketTest {
 
     MoveEntityDeltaPacket packet;

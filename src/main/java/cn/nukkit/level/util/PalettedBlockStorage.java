@@ -1,6 +1,10 @@
 package cn.nukkit.level.util;
 
-import cn.nukkit.level.GlobalBlockPalette;
+import cn.nukkit.api.DeprecationDetails;
+import cn.nukkit.api.PowerNukkitOnly;
+import cn.nukkit.api.Since;
+import cn.nukkit.block.BlockID;
+import cn.nukkit.blockstate.BlockStateRegistry;
 import cn.nukkit.utils.BinaryStream;
 import it.unimi.dsi.fastutil.ints.IntArrayList;
 import it.unimi.dsi.fastutil.ints.IntList;
@@ -14,21 +18,47 @@ public class PalettedBlockStorage {
     private final IntList palette;
     private BitArray bitArray;
 
+    @Since("1.6.0.0-PN")
     public static PalettedBlockStorage createFromBlockPalette() {
         return createFromBlockPalette(BitArrayVersion.V2);
     }
 
+    @Since("1.6.0.0-PN")
     public static PalettedBlockStorage createFromBlockPalette(BitArrayVersion version) {
-        int runtimeId = GlobalBlockPalette.getOrCreateRuntimeId(0); // Air is first
+        int runtimeId = BlockStateRegistry.getRuntimeId(BlockID.AIR);
         return new PalettedBlockStorage(version, runtimeId);
     }
 
+    @Since("1.6.0.0-PN")
     public static PalettedBlockStorage createWithDefaultState(int defaultState) {
         return createWithDefaultState(BitArrayVersion.V2, defaultState);
     }
 
+    @Since("1.6.0.0-PN")
     public static PalettedBlockStorage createWithDefaultState(BitArrayVersion version, int defaultState) {
         return new PalettedBlockStorage(version, defaultState);
+    }
+
+    @PowerNukkitOnly("This was removed on 1.6.0.0-PN by Cloudburst Nukkit and re-added to fix plugin compatibility issue on 1.6.0.1-PN")
+    @Deprecated
+    @DeprecationDetails(
+            since = "1.6.0.0-PN",
+            reason = "Refactored by Cloudburst Nukkit to use static method instead of constructor",
+            replaceWith = "createFromBlockPalette()"
+    )
+    public PalettedBlockStorage() {
+        this(BitArrayVersion.V2);
+    }
+
+    @PowerNukkitOnly("This was removed on 1.6.0.0-PN by Cloudburst Nukkit and re-added to fix plugin compatibility issue on 1.6.0.1-PN")
+    @Deprecated
+    @DeprecationDetails(
+            since = "1.6.0.0-PN",
+            reason = "Refactored by Cloudburst Nukkit to use static method instead of constructor",
+            replaceWith = "createFromBlockPalette(BitArrayVersion)"
+    )
+    public PalettedBlockStorage(BitArrayVersion version) {
+        this(version, BlockStateRegistry.getRuntimeId(BlockID.AIR));
     }
 
     private PalettedBlockStorage(BitArrayVersion version, int defaultState) {
@@ -50,6 +80,7 @@ public class PalettedBlockStorage {
         return (x << 8) | (z << 4) | y;
     }
 
+    @Since("1.6.0.0-PN")
     public void setBlock(int x, int y, int z, int runtimeId) {
         this.setBlock(this.getIndex(x, y, z), runtimeId);
     }

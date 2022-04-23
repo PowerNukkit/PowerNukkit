@@ -2,33 +2,28 @@ package cn.nukkit.level.format.anvil;
 
 import cn.nukkit.api.PowerNukkitDifference;
 import cn.nukkit.api.PowerNukkitOnly;
-import cn.nukkit.blockentity.BlockEntity;
-import cn.nukkit.blockentity.BlockEntitySpawnable;
+import cn.nukkit.api.Since;
 import cn.nukkit.level.Level;
-import cn.nukkit.level.biome.Biome;
 import cn.nukkit.level.format.FullChunk;
 import cn.nukkit.level.format.generic.BaseFullChunk;
 import cn.nukkit.level.format.generic.BaseLevelProvider;
 import cn.nukkit.level.format.generic.BaseRegionLoader;
+import cn.nukkit.level.format.generic.serializer.NetworkChunkSerializer;
 import cn.nukkit.level.generator.Generator;
-import cn.nukkit.level.util.PalettedBlockStorage;
 import cn.nukkit.nbt.NBTIO;
 import cn.nukkit.nbt.tag.CompoundTag;
 import cn.nukkit.scheduler.AsyncTask;
 import cn.nukkit.utils.BinaryStream;
 import cn.nukkit.utils.ChunkException;
-import cn.nukkit.utils.ThreadCache;
 import cn.nukkit.utils.Utils;
-import io.netty.util.internal.EmptyArrays;
 import it.unimi.dsi.fastutil.objects.ObjectIterator;
 import lombok.extern.log4j.Log4j2;
 
 import java.io.*;
 import java.nio.ByteOrder;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.function.BiConsumer;
 import java.util.regex.Pattern;
 
 /**
@@ -38,6 +33,7 @@ import java.util.regex.Pattern;
 public class Anvil extends BaseLevelProvider {
     public static final int VERSION = 19133;
     private static final byte[] PAD_256 = new byte[256];
+    @Since("1.6.0.0-PN")
     public static final int EXTENDED_NEGATIVE_SUB_CHUNKS = 4;
 
     public Anvil(Level level, String path) throws IOException {
@@ -126,82 +122,10 @@ public class Anvil extends BaseLevelProvider {
         }
 
         long timestamp = chunk.getChanges();
-
-        byte[] blockEntities = EmptyArrays.EMPTY_BYTES;
-
-        if (!chunk.getBlockEntities().isEmpty()) {
-            List<CompoundTag> tagList = new ArrayList<>();
-
-            for (BlockEntity blockEntity : chunk.getBlockEntities().values()) {
-                if (blockEntity instanceof BlockEntitySpawnable) {
-                    tagList.add(((BlockEntitySpawnable) blockEntity).getSpawnCompound());
-                }
-            }
-
-            try {
-                blockEntities = NBTIO.write(tagList, ByteOrder.LITTLE_ENDIAN, true);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
-
-        int count = 0;
-        cn.nukkit.level.format.ChunkSection[] sections = chunk.getSections();
-        for (int i = sections.length - 1; i >= 0; i--) {
-            if (!sections[i].isEmpty()) {
-                count = i + 1;
-                break;
-            }
-        }
-
-        // In 1.18 3D biome palettes were introduced. However, current world format
-        // used internally doesn't support them, so we need to convert from legacy 2D
-        byte[] biomePalettes = this.convert2DBiomesTo3D(chunk);
-
-        BinaryStream stream = ThreadCache.binaryStream.get().reset();
-        if (chunk.getProvider().getLevel().getDimension() == Level.DIMENSION_OVERWORLD) {
-            //Build up 4 SubChunks for the extended negative height
-            for (int i = 0; i < EXTENDED_NEGATIVE_SUB_CHUNKS; i++) {
-                stream.putByte((byte) 8); // SubChunk version
-                stream.putByte((byte) 0); // 0 layers
-            }
-        }
-
-        for (int i = 0; i < count; i++) {
-            sections[i].writeTo(stream);
-        }
-
-        stream.put(biomePalettes);
-        stream.putByte((byte) 0); // Border blocks
-        stream.put(blockEntities);
-        if (chunk.getProvider().getLevel().getDimension() == Level.DIMENSION_OVERWORLD) {
-            this.getLevel().chunkRequestCallback(timestamp, x, z, EXTENDED_NEGATIVE_SUB_CHUNKS + count, stream.getBuffer());
-        } else {
-            this.getLevel().chunkRequestCallback(timestamp, x, z, count, stream.getBuffer());
-        }
+        BiConsumer<BinaryStream, Integer> callback = (stream, subchunks) ->
+                this.getLevel().chunkRequestCallback(timestamp, x, z, subchunks, stream.getBuffer());
+        NetworkChunkSerializer.serialize(chunk, callback, this.level.getDimensionData());
         return null;
-    }
-
-    private byte[] convert2DBiomesTo3D(BaseFullChunk chunk) {
-        PalettedBlockStorage palette = PalettedBlockStorage.createWithDefaultState(Biome.getBiomeIdOrCorrect(chunk.getBiomeId(0, 0)));
-        for (int x = 0; x < 16; x++) {
-            for (int z = 0; z < 16; z++) {
-                int biomeId = Biome.getBiomeIdOrCorrect(chunk.getBiomeId(x, z));
-                for (int y = 0; y < 16; y++) {
-                    palette.setBlock(x, y, z, biomeId);
-                }
-            }
-        }
-
-        BinaryStream stream = ThreadCache.binaryStream.get().reset();
-        palette.writeTo(stream);
-        byte[] bytes = stream.getBuffer();
-        stream.reset();
-        
-        for (int i = 0; i < 25; i++) {
-            stream.put(bytes);
-        }
-        return stream.getBuffer();
     }
 
     private int lastPosition = 0;

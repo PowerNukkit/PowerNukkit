@@ -1,5 +1,8 @@
 package cn.nukkit.network.protocol;
 
+import cn.nukkit.api.DeprecationDetails;
+import cn.nukkit.api.PowerNukkitOnly;
+import cn.nukkit.api.Since;
 import lombok.ToString;
 
 /**
@@ -25,7 +28,11 @@ public class BossEventPacket extends DataPacket {
     /* S2C: Sets title of the bar. */
     public static final int TYPE_TITLE = 5;
     /* S2C: Not sure on this. Includes color and overlay fields, plus an unknown short. TODO: check this */
-    public static final int TYPE_UPDATE_PROPERTIES = 6;
+    @Since("1.6.0.0-PN") public static final int TYPE_UPDATE_PROPERTIES = 6;
+    @PowerNukkitOnly("Renamed by cloudburst")
+    @Deprecated
+    @DeprecationDetails(by = "Cloudburst", reason = "Renamed", replaceWith = "TYPE_UPDATE_PROPERTIES", since = "1.6.0.0-PN")
+    public static final int TYPE_UNKNOWN_6 = TYPE_UPDATE_PROPERTIES;
     /* S2C: Sets color and overlay of the bar. */
     public static final int TYPE_TEXTURE = 7;
     public static final int TYPE_QUERY = 8;

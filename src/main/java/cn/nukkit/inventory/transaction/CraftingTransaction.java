@@ -32,10 +32,10 @@ public class CraftingTransaction extends InventoryTransaction {
     protected Item primaryOutput;
 
     @Deprecated
-    @DeprecationDetails(since = "FUTURE", reason = "When the recipe is not a CraftingRecipe, this is set to null instead of the recipe",
+    @DeprecationDetails(since = "1.6.0.0-PN", reason = "When the recipe is not a CraftingRecipe, this is set to null instead of the recipe",
             by = "PowerNukkit", replaceWith = "getTransactionRecipe()")
     @Nullable
-    @Since("FUTURE")
+    @Since("1.6.0.0-PN")
     protected CraftingRecipe recipe;
 
     private Recipe transactionRecipe;
@@ -105,22 +105,22 @@ public class CraftingTransaction extends InventoryTransaction {
     }
 
     @Deprecated
-    @DeprecationDetails(since = "FUTURE", reason = "When the recipe is not a CraftingRecipe, returns null instead of the recipe",
+    @DeprecationDetails(since = "1.6.0.0-PN", reason = "When the recipe is not a CraftingRecipe, returns null instead of the recipe",
         by = "PowerNukkit", replaceWith = "getTransactionRecipe()")
-    @Since("FUTURE")
+    @Since("1.6.0.0-PN")
     @Nullable
     public CraftingRecipe getRecipe() {
         return recipe;
     }
 
     @PowerNukkitOnly
-    @Since("FUTURE")
+    @Since("1.6.0.0-PN")
     public Recipe getTransactionRecipe() {
         return transactionRecipe;
     }
 
     @PowerNukkitOnly
-    @Since("FUTURE")
+    @Since("1.6.0.0-PN")
     protected void setTransactionRecipe(Recipe recipe) {
         this.transactionRecipe = recipe;
         this.recipe = (recipe instanceof CraftingRecipe)? (CraftingRecipe) recipe: null;

@@ -150,7 +150,7 @@ public class Player extends EntityHuman implements CommandSender, InventoryHolde
     public static final @PowerNukkitOnly int GRINDSTONE_WINDOW_ID = dynamic(5);
     public static final @Since("1.4.0.0-PN") @PowerNukkitOnly int SMITHING_WINDOW_ID = dynamic(6);
 
-    @Since("FUTURE")
+    @Since("1.6.0.0-PN")
     protected static final int RESOURCE_PACK_CHUNK_SIZE = 8 * 1024; // 8KB
 
     protected final SourceInterface interfaz;
@@ -302,8 +302,6 @@ public class Player extends EntityHuman implements CommandSender, InventoryHolde
     private float soulSpeedMultiplier = 1;
     private boolean wasInSoulSandCompatible;
     
-    @PowerNukkitOnly
-    @Since("FUTURE")
     private boolean isIgnoringMobEquipmentPacket;
     
     @PowerNukkitOnly
@@ -1441,20 +1439,6 @@ public class Player extends EntityHuman implements CommandSender, InventoryHolde
         }
 
         return Item.EMPTY_ARRAY;
-    }
-
-    @Override
-    public boolean setDataProperty(EntityData data) {
-        return setDataProperty(data, true);
-    }
-
-    @Override
-    public boolean setDataProperty(EntityData data, boolean send) {
-        if (super.setDataProperty(data, send)) {
-            if (send) this.sendData(this, new EntityMetadata().put(this.getDataProperty(data.getId())));
-            return true;
-        }
-        return false;
     }
 
     @Override
@@ -2617,11 +2601,12 @@ public class Player extends EntityHuman implements CommandSender, InventoryHolde
                     MovePlayerPacket movePlayerPacket = (MovePlayerPacket) packet;
                     Vector3 newPos = new Vector3(movePlayerPacket.x, movePlayerPacket.y - this.getBaseOffset(), movePlayerPacket.z);
 
-                    if (newPos.distanceSquared(this) < 0.01 && movePlayerPacket.yaw % 360 == this.yaw && movePlayerPacket.pitch % 360 == this.pitch) {
+                    double dis = newPos.distanceSquared(this);
+                    if (dis == 0 && movePlayerPacket.yaw % 360 == this.yaw && movePlayerPacket.pitch % 360 == this.pitch) {
                         break;
                     }
 
-                    if (newPos.distanceSquared(this) > 100) {
+                    if (dis > 100) {
                         this.sendPosition(this, movePlayerPacket.yaw, movePlayerPacket.pitch, MovePlayerPacket.MODE_RESET);
                         break;
                     }
@@ -4160,7 +4145,7 @@ public class Player extends EntityHuman implements CommandSender, InventoryHolde
         }
 
         for (String msg : message.split("\n")) {
-            if (!msg.trim().isEmpty() && msg.length() <= 255 && this.messageCounter-- > 0) {
+            if (!msg.trim().isEmpty() && msg.length() <= 512 && this.messageCounter-- > 0) {
                 PlayerChatEvent chatEvent = new PlayerChatEvent(this, msg);
                 this.server.getPluginManager().callEvent(chatEvent);
                 if (!chatEvent.isCancelled()) {
@@ -6235,13 +6220,13 @@ public class Player extends EntityHuman implements CommandSender, InventoryHolde
     }
     
     @PowerNukkitOnly
-    @Since("FUTURE")
+    @Since("1.6.0.0-PN")
     public boolean isIgnoringMobEquipmentPacket() {
         return this.isIgnoringMobEquipmentPacket;
     }
     
     @PowerNukkitOnly
-    @Since("FUTURE")
+    @Since("1.6.0.0-PN")
     public void setIgnoringMobEquipmentPacket(boolean isIgnoringMobEquipmentPacket) {
         this.isIgnoringMobEquipmentPacket = isIgnoringMobEquipmentPacket;
     }

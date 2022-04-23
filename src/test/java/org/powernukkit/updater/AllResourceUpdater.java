@@ -318,7 +318,7 @@ public class AllResourceUpdater {
     private void init() {
         Block.init();
         Enchantment.init();
-        Item.init();
         Potion.init();
+        Item.init();
     }
 }
