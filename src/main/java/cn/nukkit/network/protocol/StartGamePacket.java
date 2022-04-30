@@ -55,7 +55,7 @@ public class StartGamePacket extends DataPacket {
     public int dayCycleStopTime = 0;
     public int eduEditionOffer = 0;
     public boolean hasEduFeaturesEnabled = false;
-    @PowerNukkitOnly @Since("1.4.0.0-PN") public String educationProductionId = "";
+    @PowerNukkitOnly @Since("FUTURE") public String educationProductionId = "";
     public float rainLevel;
     public float lightningLevel;
     public boolean hasConfirmedPlatformLockedContent = false;
@@ -93,7 +93,7 @@ public class StartGamePacket extends DataPacket {
     @PowerNukkitOnly @Since("FUTURE") public SyncedPlayerMovementSettings playerMovementSettings = null;
     public long currentTick;
     public int enchantmentSeed;
-    @PowerNukkitOnly @Since("1.4.0.0-PN") public BlockPropertyData[] properties = BlockPropertyData.EMPTY_ARRAY;
+    @PowerNukkitOnly @Since("FUTURE") public BlockPropertyData[] properties = BlockPropertyData.EMPTY_ARRAY;
     
     public String multiplayerCorrelationId = "";
     @Since("1.3.0.0-PN") public boolean isInventoryServerAuthoritative;
