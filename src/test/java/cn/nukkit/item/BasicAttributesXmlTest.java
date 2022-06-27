@@ -33,7 +33,7 @@ import static org.junit.jupiter.api.Assertions.fail;
  * @since 2021-12-15
  */
 @PowerNukkitOnly
-@Since("FUTURE")
+@Since("1.6.0.0-PN")
 @ExtendWith(PowerNukkitExtension.class)
 public class BasicAttributesXmlTest {
     private static Document document;

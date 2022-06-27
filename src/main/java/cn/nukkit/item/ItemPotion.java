@@ -151,7 +151,7 @@ public class ItemPotion extends Item {
     }
 
     @PowerNukkitOnly
-    @Since("FUTURE")
+    @Since("1.6.0.0-PN")
     @Nullable
     public Potion getPotion() {
         return getPotion(getDamage());

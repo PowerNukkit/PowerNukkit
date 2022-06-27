@@ -163,9 +163,9 @@ public class RuntimeItemMapping {
     }
 
     @Data
-    @Getter(onMethod = @__(@Since("FUTURE")))
-    @RequiredArgsConstructor(onConstructor = @__(@Since("FUTURE")))
-    @Since("FUTURE")
+    @Getter(onMethod = @__(@Since("1.6.0.0-PN")))
+    @RequiredArgsConstructor(onConstructor = @__(@Since("1.6.0.0-PN")))
+    @Since("1.6.0.0-PN")
     public static class LegacyEntry {
         private final int legacyId;
         private final boolean hasDamage;
@@ -177,9 +177,9 @@ public class RuntimeItemMapping {
     }
 
     @Data
-    @Getter(onMethod = @__(@Since("FUTURE")))
-    @RequiredArgsConstructor(onConstructor = @__(@Since("FUTURE")))
-    @Since("FUTURE")
+    @Getter(onMethod = @__(@Since("1.6.0.0-PN")))
+    @RequiredArgsConstructor(onConstructor = @__(@Since("1.6.0.0-PN")))
+    @Since("1.6.0.0-PN")
     public static class RuntimeEntry {
         private final String identifier;
         private final int runtimeId;

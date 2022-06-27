@@ -369,7 +369,7 @@ public abstract class Enchantment implements Cloneable {
 
     }
 
-    @Since("FUTURE")
+    @Since("1.6.0.0-PN")
     public void doAttack(Entity attacker, Entity entity) {
 
     }

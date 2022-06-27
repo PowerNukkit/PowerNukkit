@@ -35,12 +35,12 @@ public class BlockSlabRedSandstone extends BlockSlab {
     }
 
     public BlockSlabRedSandstone(int meta) {
-        super(meta, DOUBLE_RED_SANDSTONE_SLAB);
+        super(meta, DOUBLE_STONE_BLOCK_SLAB2);
     }
 
     @Override
     public int getId() {
-        return RED_SANDSTONE_SLAB;
+        return STONE_BLOCK_SLAB2;
     }
 
     @Since("1.4.0.0-PN")

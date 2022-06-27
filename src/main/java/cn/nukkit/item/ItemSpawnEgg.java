@@ -49,7 +49,7 @@ public class ItemSpawnEgg extends Item {
     }
 
     @PowerNukkitOnly
-    @Since("FUTURE")
+    @Since("1.6.0.0-PN")
     protected void updateName() {
         String entityName = getEntityName();
         if (entityName == null) {
@@ -121,7 +121,7 @@ public class ItemSpawnEgg extends Item {
     }
 
     @PowerNukkitOnly
-    @Since("FUTURE")
+    @Since("1.6.0.0-PN")
     @Nullable
     public String getEntityName() {
         String saveId = Entity.getSaveId(getEntityNetworkId());

@@ -31,7 +31,7 @@ import java.util.stream.Stream;
  * @since 2021-12-08
  */
 @PowerNukkitOnly
-@Since("FUTURE")
+@Since("1.6.0.0-PN")
 @Log4j2
 public class AnnotationProblemScanner {
     private static final String NEED_TO_ADD_POWERNUKKIT_ONLY = "Need to add @PowerNukkitOnly to ";

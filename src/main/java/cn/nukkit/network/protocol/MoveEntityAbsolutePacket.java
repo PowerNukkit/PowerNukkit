@@ -20,7 +20,7 @@ public class MoveEntityAbsolutePacket extends DataPacket {
     public double pitch;
     public boolean onGround;
     public boolean teleport;
-    @Since("FUTURE") public boolean forceMoveLocalEntity;
+    @Since("1.6.0.0-PN") public boolean forceMoveLocalEntity;
 
     @Override
     public byte pid() {
