@@ -8,7 +8,15 @@ import cn.nukkit.level.format.FullChunk;
 import cn.nukkit.level.generator.noise.vanilla.f.NoiseGeneratorPerlinF;
 import cn.nukkit.level.generator.populator.type.Populator;
 import cn.nukkit.math.NukkitRandom;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
+import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,11 +31,36 @@ public abstract class Biome implements BlockID {
     
     private static final NoiseGeneratorPerlinF temperatureNoise = new NoiseGeneratorPerlinF(new NukkitRandom(12345678), 1); // TODO: Get correct temperature noise seed
     
+    private static final Int2ObjectMap<String> runtimeId2Identifier = new Int2ObjectOpenHashMap<>();
+
     private final ArrayList<Populator> populators = new ArrayList<>();
     private int id;
     private float baseHeight = 0.1f;
     private float heightVariation = 0.3f;
     private float temperature = 0.5f;
+
+    static {
+        try (InputStream stream = Biome.class.getClassLoader().getResourceAsStream("biome_id_map.json")) {
+            JsonObject json = JsonParser.parseReader(new InputStreamReader(stream)).getAsJsonObject();
+            for (String identifier : json.keySet()) {
+                int biomeId = json.get(identifier).getAsInt();
+                runtimeId2Identifier.put(biomeId, identifier);
+            }
+        } catch (NullPointerException | IOException e) {
+            throw new AssertionError("Unable to load biome mapping from biome_id_map.json", e);
+        }
+    }
+
+    public static String getBiomeNameFromId(int biomeId) {
+        return runtimeId2Identifier.get(biomeId);
+    }
+
+    public static int getBiomeIdOrCorrect(int biomeId) {
+        if (runtimeId2Identifier.get(biomeId) == null) {
+            return EnumBiome.OCEAN.id;
+        }
+        return biomeId;
+    }
 
     protected static void register(int id, Biome biome) {
         biome.setId(id);

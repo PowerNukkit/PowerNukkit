@@ -21,7 +21,7 @@ jobs:
     - name: Get version
       run: |
         SHA=$(echo $GITHUB_SHA | cut -c1-7)
-        PN_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)-git-$SHA
+        PN_VERSION=$(mvn --no-transfer-progress help:evaluate -Dexpression=project.version -q -DforceStdout)-git-$SHA
         echo "Version: $PN_VERSION"
         echo "PN_VERSION=$PN_VERSION-git" >> $GITHUB_ENV
     - name: Create Sentry release

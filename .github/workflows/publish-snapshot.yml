@@ -26,7 +26,13 @@ jobs:
         server-username: MAVEN_USERNAME
         server-password: MAVEN_PASSWORD
     - name: Publish snapshot
-      run: mvn -B deploy -Dgpg.skip=true -DskipTests=false
+      run: mvn --no-transfer-progress -B deploy -Dgpg.skip=true -DskipTests=false
       env:
         MAVEN_USERNAME: ${{ secrets.POWERNUKKIT_SNAPSHOT_USER }}
         MAVEN_PASSWORD: ${{ secrets.POWERNUKKIT_SNAPSHOT_PASSWORD }}
+    - name: Trigger powernukkit-versions.json update
+      uses: peter-evans/repository-dispatch@v2
+      with:
+        token: ${{ secrets.POWERNUKKIT_VERSIONS_TOKEN }}
+        event-type: update-versions-json
+        repository: PowerNukkit/powernukkit-version-aggregator

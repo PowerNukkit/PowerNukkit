@@ -48,7 +48,7 @@ public class SideEffectCombust implements SideEffect {
     }
 
     @Deprecated
-    @DeprecationDetails(since = "FUTURE", reason = "clone have problems when defined in an interface", by = "PowerNukkit",
+    @DeprecationDetails(since = "1.6.0.0-PN", reason = "clone have problems when defined in an interface", by = "PowerNukkit",
         replaceWith = "cloneSideEffect")
     @Since("1.5.1.0-PN")
     @SneakyThrows
@@ -58,7 +58,7 @@ public class SideEffectCombust implements SideEffect {
         return (SideEffect) super.clone();
     }
 
-    @Since("FUTURE")
+    @Since("1.6.0.0-PN")
     @PowerNukkitOnly
     @SneakyThrows
     @Override

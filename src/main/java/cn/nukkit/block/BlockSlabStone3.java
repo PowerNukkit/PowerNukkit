@@ -34,12 +34,12 @@ public class BlockSlabStone3 extends BlockSlab {
 
     @PowerNukkitOnly
     public BlockSlabStone3(int meta) {
-        super(meta, DOUBLE_STONE_SLAB3);
+        super(meta, DOUBLE_STONE_BLOCK_SLAB3);
     }
 
     @Override
     public int getId() {
-        return STONE_SLAB3;
+        return STONE_BLOCK_SLAB3;
     }
 
     @Since("1.4.0.0-PN")
