@@ -142,6 +142,15 @@ public class EntityFallingBlock extends Entity {
             motionZ *= friction;
 
             Vector3 pos = (new Vector3(x - 0.5, y, z - 0.5)).round();
+            
+            if (this.age > 600){
+                close();
+                if (this.level.getGameRules().getBoolean(GameRule.DO_ENTITY_DROPS)) {
+                    getLevel().dropItem(this, Block.get(this.getBlock(), this.getDamage()).toItem());
+                }
+                level.addParticle(new DestroyBlockParticle(pos, Block.get(getBlock(), getDamage())));
+                return true;
+            }
 
             if (breakOnLava && level.getBlock(pos.subtract(0, 1, 0)) instanceof BlockLava) {
                 close();

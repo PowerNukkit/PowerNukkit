@@ -1,5 +1,8 @@
 package cn.nukkit.network.protocol;
 
+import cn.nukkit.api.DeprecationDetails;
+import cn.nukkit.api.PowerNukkitOnly;
+import cn.nukkit.api.Since;
 import lombok.ToString;
 
 /**
@@ -25,9 +28,14 @@ public class BossEventPacket extends DataPacket {
     /* S2C: Sets title of the bar. */
     public static final int TYPE_TITLE = 5;
     /* S2C: Not sure on this. Includes color and overlay fields, plus an unknown short. TODO: check this */
-    public static final int TYPE_UNKNOWN_6 = 6;
+    @Since("1.6.0.0-PN") public static final int TYPE_UPDATE_PROPERTIES = 6;
+    @PowerNukkitOnly("Renamed by cloudburst")
+    @Deprecated
+    @DeprecationDetails(by = "Cloudburst", reason = "Renamed", replaceWith = "TYPE_UPDATE_PROPERTIES", since = "1.6.0.0-PN")
+    public static final int TYPE_UNKNOWN_6 = TYPE_UPDATE_PROPERTIES;
     /* S2C: Sets color and overlay of the bar. */
     public static final int TYPE_TEXTURE = 7;
+    public static final int TYPE_QUERY = 8;
 
     public long bossEid;
     public int type;
@@ -50,12 +58,13 @@ public class BossEventPacket extends DataPacket {
         switch (this.type) {
             case TYPE_REGISTER_PLAYER:
             case TYPE_UNREGISTER_PLAYER:
+            case TYPE_QUERY:
                 this.playerEid = this.getEntityUniqueId();
                 break;
             case TYPE_SHOW:
                 this.title = this.getString();
                 this.healthPercent = this.getLFloat();
-            case TYPE_UNKNOWN_6:
+            case TYPE_UPDATE_PROPERTIES:
                 this.unknown = (short) this.getShort();
             case TYPE_TEXTURE:
                 this.color = (int) this.getUnsignedVarInt();
@@ -78,12 +87,13 @@ public class BossEventPacket extends DataPacket {
         switch (this.type) {
             case TYPE_REGISTER_PLAYER:
             case TYPE_UNREGISTER_PLAYER:
+            case TYPE_QUERY:
                 this.putEntityUniqueId(this.playerEid);
                 break;
             case TYPE_SHOW:
                 this.putString(this.title);
                 this.putLFloat(this.healthPercent);
-            case TYPE_UNKNOWN_6:
+            case TYPE_UPDATE_PROPERTIES:
                 this.putShort(this.unknown);
             case TYPE_TEXTURE:
                 this.putUnsignedVarInt(this.color);

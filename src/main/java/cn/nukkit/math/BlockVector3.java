@@ -46,19 +46,19 @@ public class BlockVector3 implements Cloneable {
         return this.z;
     }
 
-    @Since("FUTURE")
+    @Since("1.6.0.0-PN")
     public BlockVector3 setX(int x) {
         this.x = x;
         return this;
     }
 
-    @Since("FUTURE")
+    @Since("1.6.0.0-PN")
     public BlockVector3 setY(int y) {
         this.y = y;
         return this;
     }
 
-    @Since("FUTURE")
+    @Since("1.6.0.0-PN")
     public BlockVector3 setZ(int z) {
         this.z = z;
         return this;

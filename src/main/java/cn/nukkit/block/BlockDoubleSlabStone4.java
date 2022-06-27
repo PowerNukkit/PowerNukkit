@@ -29,7 +29,7 @@ public class BlockDoubleSlabStone4 extends BlockDoubleSlabBase {
 
     @Override
     public int getId() {
-        return DOUBLE_STONE_SLAB4;
+        return DOUBLE_STONE_BLOCK_SLAB4;
     }
 
     @Since("1.4.0.0-PN")

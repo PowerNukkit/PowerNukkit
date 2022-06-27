@@ -47,19 +47,19 @@ public class Vector3 implements Cloneable {
         return this.z;
     }
 
-    @Since("FUTURE")
+    @Since("1.6.0.0-PN")
     public Vector3 setX(double x) {
         this.x = x;
         return this;
     }
 
-    @Since("FUTURE")
+    @Since("1.6.0.0-PN")
     public Vector3 setY(double y) {
         this.y = y;
         return this;
     }
 
-    @Since("FUTURE")
+    @Since("1.6.0.0-PN")
     public Vector3 setZ(double z) {
         this.z = z;
         return this;

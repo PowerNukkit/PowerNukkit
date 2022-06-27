@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
  * @since 2021-12-19
  */
 @PowerNukkitOnly
-@Since("FUTURE")
+@Since("1.6.0.0-PN")
 @ExtendWith(PowerNukkitExtension.class)
 class FishingTest {
 

@@ -44,10 +44,10 @@ public class BlockEntityPistonArm extends BlockEntitySpawnable {
 
     public boolean sticky;
 
-    @Since("FUTURE")
+    @Since("1.6.0.0-PN")
     public byte state;
 
-    @Since("FUTURE")
+    @Since("1.6.0.0-PN")
     public byte newState = 1;
 
     @PowerNukkitOnly
@@ -223,7 +223,7 @@ public class BlockEntityPistonArm extends BlockEntitySpawnable {
             }
 
             if (!extending) {
-                if (this.level.getBlock(getSide(facing)).getId() == (sticky? BlockID.PISTON_HEAD_STICKY : BlockID.PISTON_HEAD)) {
+                if (this.level.getBlock(getSide(facing)).getId() == (sticky? BlockID.STICKY_PISTON_ARM_COLLISION : BlockID.PISTON_ARM_COLLISION)) {
                     this.level.setBlock(getSide(facing), new BlockAir());
                 }
                 this.movable = true;

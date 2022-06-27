@@ -599,7 +599,7 @@ public class BinaryStream {
 
         if (!instanceItem) {
             putBoolean(true); // hasNetId
-            putVarInt(0); // netId
+            putVarInt(1); // netId
         }
 
         Block block = item.getBlockUnsafe();

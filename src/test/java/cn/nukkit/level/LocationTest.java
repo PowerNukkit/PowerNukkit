@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @since 2021-12-15
  */
 @PowerNukkitOnly
-@Since("FUTURE")
+@Since("1.6.0.0-PN")
 @ExtendWith(PowerNukkitExtension.class)
 class LocationTest {
     public static final double X = 2;

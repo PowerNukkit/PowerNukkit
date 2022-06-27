@@ -33,19 +33,19 @@ public class AvailableCommandsPacket extends DataPacket {
     public static final int ARG_TYPE_VALUE = dynamic(4);
     public static final int ARG_TYPE_WILDCARD_INT = dynamic(5);
     public static final int ARG_TYPE_OPERATOR = dynamic(6);
-    public static final int ARG_TYPE_TARGET = dynamic(7);
-    public static final int ARG_TYPE_WILDCARD_TARGET = dynamic(8);
+    public static final int ARG_TYPE_TARGET = dynamic(8);
+    public static final int ARG_TYPE_WILDCARD_TARGET = dynamic(10);
 
-    public static final int ARG_TYPE_FILE_PATH = dynamic(16);
+    public static final int ARG_TYPE_FILE_PATH = dynamic(17);
+    public static final int ARG_TYPE_EQUIPMENT_SLOT = dynamic(37);
+    public static final int ARG_TYPE_STRING = dynamic(39);
+    public static final int ARG_TYPE_BLOCK_POSITION = dynamic(47);
+    public static final int ARG_TYPE_POSITION = dynamic(48);
 
-    public static final int ARG_TYPE_STRING = dynamic(32);
-    public static final int ARG_TYPE_BLOCK_POSITION = dynamic(40);
-    public static final int ARG_TYPE_POSITION = dynamic(41);
-
-    public static final int ARG_TYPE_MESSAGE = dynamic(44);
-    public static final int ARG_TYPE_RAWTEXT = dynamic(46);
-    public static final int ARG_TYPE_JSON = dynamic(50);
-    public static final int ARG_TYPE_COMMAND = dynamic(63);
+    public static final int ARG_TYPE_MESSAGE = dynamic(51);
+    public static final int ARG_TYPE_RAWTEXT = dynamic(53);
+    public static final int ARG_TYPE_JSON = dynamic(57);
+    public static final int ARG_TYPE_COMMAND = dynamic(70);
 
     public Map<String, CommandDataVersions> commands;
     public final Map<String, List<String>> softEnums = new HashMap<>();

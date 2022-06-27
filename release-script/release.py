@@ -120,14 +120,25 @@ if create_git_tag:
 finish_progress()
 
 docker_tags = []
+pterodactyl_tags = {8: [], 11: []}
 try:
     if run_docker_build or run_docker_build_pterodactyl:
-        def build_docker(tag, source):
-            global docker_tags
-            log('-> Executing a docker build for tag', tag)
-            stt = subprocess.call(('docker', 'build', '-t', tag, source))
+        def prepare_docker():
+            log('-> Preparing docker for multi-arch build')
+            stt = subprocess.call(('docker', 'buildx', 'create',
+                                   '--use', '--name', 'build', '--node', 'build', '--driver-opt', 'network=host'))
+            check(stt == 0, "Could prepare docker for multi-arch build! Status code: " + str(stt))
+
+        def build_docker(tag_list, source):
+            log('-> Executing a docker build for tags', tag_list)
+            cmd_parts = ['docker', 'buildx', 'build', '--platform', 'linux/arm64,linux/amd64', '--pull']
+            if run_docker_push:
+                cmd_parts += ['--push']
+            for tag in tag_list:
+                cmd_parts += ['-t', tag]
+            cmd_parts += [source]
+            stt = subprocess.call(cmd_parts)
             check(stt == 0, "Could not execute a docker build! Status code: " + str(stt))
-            docker_tags += [tag]
 
         docker_version = project_version.replace('-PN', '')
         docker_tag = docker_tag_prefix + ':' + docker_version
@@ -135,25 +146,12 @@ try:
         is_snapshot = docker_version_parts[-1].lower() == "snapshot"
         if is_snapshot:
             docker_version_parts.pop()
-        elif run_docker_build:
-            start_progress("Executing Docker build")
-            build_docker(docker_tag, '.')
-            finish_progress()
 
-        def pterodactyl_tag_name(base, java):
-            return base + '-pterodactyl-java-' + str(java)
-
-        def build_pterodactyl(java):
-            base = docker_tag
+        def pterodactyl_tag_name(java):
+            base = docker_tag_prefix + ':stable'
             if is_snapshot:
-                base = "bleeding"
-            build_docker(pterodactyl_tag_name(base, java), './docker_pterodactyl-image-java'+str(java)+'.Dockerfile')
-
-        if run_docker_build_pterodactyl:
-            start_progress("Building pterodactyl images")
-            build_pterodactyl(8)
-            build_pterodactyl(11)
-            finish_progress()
+                base = docker_tag_prefix + ':bleeding'
+            return base + '-pterodactyl-java-' + str(java)
 
         if not is_snapshot:
             start_progress("Tagging Docker image")
@@ -167,17 +165,29 @@ try:
                     break
 
                 if docker_sub_version is not None:
-                    def add_tag(from_tag, to_tag):
-                        global docker_tags
+                    def add_tag(to_list, to_tag):
                         log("-> Adding docker tag", to_tag)
-                        cmd('docker', 'tag', from_tag, to_tag)
-                        docker_tags += [to_tag]
+                        to_list += [to_tag]
 
                     subversion_tag = docker_tag_prefix + ':' + docker_sub_version
-                    add_tag(docker_tag, subversion_tag)
+                    add_tag(docker_tags, subversion_tag)
                     if run_docker_build_pterodactyl:
-                        add_tag(pterodactyl_tag_name(docker_tag, 8), pterodactyl_tag_name(subversion_tag, 8))
-                        add_tag(pterodactyl_tag_name(docker_tag, 11), pterodactyl_tag_name(subversion_tag, 11))
+                        add_tag(pterodactyl_tags[8], pterodactyl_tag_name(8))
+                        add_tag(pterodactyl_tags[11], pterodactyl_tag_name(11))
+            finish_progress()
+
+            if run_docker_build:
+                start_progress("Executing Docker build")
+                build_docker(docker_tags, '.')
+                finish_progress()
+
+        def build_pterodactyl(java):
+            build_docker(pterodactyl_tags[java], './docker_pterodactyl-image-java'+str(java)+'.Dockerfile')
+
+        if run_docker_build_pterodactyl:
+            start_progress("Building pterodactyl images")
+            build_pterodactyl(8)
+            build_pterodactyl(11)
             finish_progress()
 
     if run_maven_deploy:
@@ -197,12 +207,12 @@ except Exception as e:
     cmd('git', 'reset', '--soft', 'HEAD~1')
     raise e
 
-if run_docker_push:
-    start_progress("Pushing Docker image and tags")
-    for docker_tag_to_push in docker_tags:
-        log('-> Pushing docker tag', docker_tag_to_push)
-        cmd('docker', 'push', docker_tag_to_push)
-    finish_progress()
+# if run_docker_push:
+#     start_progress("Pushing Docker image and tags")
+#     for docker_tag_to_push in docker_tags:
+#         log('-> Pushing docker tag', docker_tag_to_push)
+#         cmd('docker', 'push', docker_tag_to_push)
+#     finish_progress()
 
 if update_pom_version:
     start_progress("Updating pom.xml")
