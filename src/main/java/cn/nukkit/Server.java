@@ -536,7 +536,7 @@ public class Server {
                 put("generator-settings", "");
                 put("level-name", "world");
                 put("level-seed", "");
-                put("level-type", "PowerNukkitOverworld"); // Now we use PowerNukkit generator
+                put("level-type", "DEFAULT");
                 put("allow-nether", true);
                 put("enable-query", true);
                 put("enable-rcon", false);
