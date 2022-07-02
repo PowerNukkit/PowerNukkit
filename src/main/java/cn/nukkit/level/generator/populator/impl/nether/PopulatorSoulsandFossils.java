@@ -8,8 +8,11 @@ import cn.nukkit.math.NukkitMath;
 import cn.nukkit.math.NukkitRandom;
 
 public class PopulatorSoulsandFossils extends Populator {
+    private ChunkManager level;
+
     @Override
     public void populate(ChunkManager level, int chunkX, int chunkZ, NukkitRandom random, FullChunk chunk) {
+        this.level = level;
         if(random.nextBoundedInt(5) == 0) {
             int x = NukkitMath.randomRange(random, chunkX << 4, (chunkX << 4) + 15);
             int z = NukkitMath.randomRange(random, chunkZ << 4, (chunkZ << 4) + 15);
@@ -28,7 +31,7 @@ public class PopulatorSoulsandFossils extends Populator {
         //start scanning a bit lower down to allow space for placing on top
         for (y = 120; y >= 0; y--) {
             int b = chunk.getBlockId(x, y, z);
-            if (b == SOUL_SAND || b == SOUL_SOIL) {
+            if ((b == SOUL_SAND || b == SOUL_SOIL) && this.level.getBlockIdAt(x, y+1, z) == AIR) {
                 break;
             }
         }

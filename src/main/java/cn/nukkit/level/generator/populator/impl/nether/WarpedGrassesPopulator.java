@@ -19,7 +19,7 @@ public class WarpedGrassesPopulator extends Populator {
     @Override
     public void populate(ChunkManager level, int chunkX, int chunkZ, NukkitRandom random, FullChunk chunk) {
         this.level = level;
-        int amount = random.nextBoundedInt(128) + 128;
+        int amount = random.nextBoundedInt(96) + 48;
 
         for (int i = 0; i < amount; ++i) {
             int x = NukkitMath.randomRange(random, chunkX << 4, (chunkX << 4) + 15);

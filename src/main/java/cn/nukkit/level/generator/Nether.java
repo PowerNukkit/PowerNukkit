@@ -27,12 +27,12 @@ public class Nether extends Generator {
      */
     private NukkitRandom nukkitRandom;
     private Random random;
-    private double lavaHeight = 32;
-    private double bedrockDepth = 5;
-    private SimplexF[] noiseGen = new SimplexF[3];
-    private OpenSimplex2S biomeGen;
-    private final List<Populator> populators = new ArrayList<>();
-    private final List<Populator> generationPopulators = new ArrayList<>();
+    protected double lavaHeight = 32;
+    protected int bedrockDepth = 5;
+    protected SimplexF[] noiseGen = new SimplexF[3];
+    protected OpenSimplex2S biomeGen;
+    protected final List<Populator> populators = new ArrayList<>();
+    protected final List<Populator> generationPopulators = new ArrayList<>();
 
     private long localSeed1;
     private long localSeed2;
@@ -130,25 +130,41 @@ public class Nether extends Generator {
                 NetherBiome biome = (NetherBiome) pickBiomeExperimental(baseX + x, baseZ + z).biome;
                 chunk.setBiomeId(x, z, biome.getId());
 
-                chunk.setBlockId(x, 0, z, Block.BEDROCK);
-                for(int i = 0; i < nukkitRandom.nextBoundedInt(6); i++) {
-                    chunk.setBlockId(x, 126-i, z, biome.getMiddleBlock());
-                }
-                for (int y = 126; y < 127; ++y) {
-                    chunk.setBlockId(x, y, z, biome.getMiddleBlock());
-                }
-                chunk.setBlockId(x, 127, z, Block.BEDROCK);
-                for (int y = 1; y < 127; ++y) {
+                for (int y = 126; y > 1; --y) {
                     if (getNoise(baseX | x, y, baseZ | z) > 0) {
-                        chunk.setBlockId(x, y, z, biome.getMiddleBlock());
+                        chunk.setBlockId(x, y, z, chunk.getBlockId(x, y+1, z) == AIR ? biome.getCoverBlock() : biome.getMiddleBlock());
                     } else if (y <= this.lavaHeight) {
                         chunk.setBlockId(x, y, z, Block.STILL_LAVA);
                         chunk.setBlockLight(x, y + 1, z, 15);
                     }
                 }
-                for (int y = 1; y < 127; ++y) {
-                    if (getNoise(baseX | x, y, baseZ | z) > 0) {
-                        if(chunk.getBlockId(x, y+1, z) == 0) chunk.setBlockId(x, y, z, biome.getCoverBlock());
+
+                for(int i = 0; i < nukkitRandom.nextBoundedInt(6); i++) {
+                    chunk.setBlockId(x, 122-i, z, biome.getMiddleBlock());
+                }
+                for (int y = 122; y <= 126; ++y) {
+                    if(y == 122) {
+                        chunk.setBlockId(x, y, z, biome.getMiddleBlock());
+                        continue;
+                    }
+                    int randomNumber = nukkitRandom.nextBoundedInt(6);
+                    if(randomNumber == 6) {
+                        chunk.setBlockId(x, y, z, Block.AIR);
+                    } else if(randomNumber >= 2) {
+                        chunk.setBlockId(x, y, z, Block.BEDROCK);
+                    } else {
+                        chunk.setBlockId(x, y, z, biome.getMiddleBlock());
+                    }
+                }
+
+                chunk.setBlockId(x, 127, z, Block.BEDROCK);
+                chunk.setBlockId(x, 0, z, Block.BEDROCK);
+
+                for(int y = 0; y < nukkitRandom.nextBoundedInt(bedrockDepth); y++) {
+                    if(nukkitRandom.nextBoundedInt(2) != 2) {
+                        chunk.setBlockId(x, y, z, Block.BEDROCK);
+                    } else {
+                        chunk.setBlockId(x, y, z, biome.getMiddleBlock());
                     }
                 }
             }
@@ -202,9 +218,9 @@ public class Nether extends Generator {
     public EnumBiome pickBiomeExperimental(int x, int z) {
         double value = biomeGen.noise2(x/ BIOME_AMPLIFICATION, z/ BIOME_AMPLIFICATION);
         double secondaryValue = biomeGen.noise3_XZBeforeY(x/ (BIOME_AMPLIFICATION*2d), 0, z/ (BIOME_AMPLIFICATION*2d));
-        if(value >= 1/3f) {
+        if(value >= 1/4f) {
             return secondaryValue >= 0 ? EnumBiome.WARPED_FOREST : EnumBiome.CRIMSON_FOREST;
-        } else if(value >= -1/3f) {
+        } else if(value >= -1/4f) {
             return EnumBiome.HELL;
         } else {
             return secondaryValue >= 0 ? EnumBiome.BASALT_DELTAS : EnumBiome.SOUL_SAND_VALLEY;
