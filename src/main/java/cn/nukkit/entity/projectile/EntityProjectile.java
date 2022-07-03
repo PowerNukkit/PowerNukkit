@@ -29,9 +29,9 @@ import java.util.concurrent.ThreadLocalRandom;
 public abstract class EntityProjectile extends Entity {
 
     public static final int DATA_SHOOTER_ID = 17;
-    @Since("FUTURE") public static final int PICKUP_NONE = 0;
-    @Since("FUTURE") public static final int PICKUP_ANY = 1;
-    @Since("FUTURE") public static final int PICKUP_CREATIVE = 2;
+    @Since("1.6.0.0-PN") public static final int PICKUP_NONE = 0;
+    @Since("1.6.0.0-PN") public static final int PICKUP_ANY = 1;
+    @Since("1.6.0.0-PN") public static final int PICKUP_CREATIVE = 2;
 
     public Entity shootingEntity;
 
@@ -55,7 +55,7 @@ public abstract class EntityProjectile extends Entity {
     public boolean closeOnCollide;
 
     @Deprecated
-    @DeprecationDetails(since = "FUTURE", by = "PowerNukkit", reason = "Redundant and unused", replaceWith = "getDamage()")
+    @DeprecationDetails(since = "1.6.0.0-PN", by = "PowerNukkit", reason = "Redundant and unused", replaceWith = "getDamage()")
     protected double damage;
 
     public EntityProjectile(FullChunk chunk, CompoundTag nbt) {
@@ -296,7 +296,7 @@ public abstract class EntityProjectile extends Entity {
     @Since("1.4.0.0-PN")
     @Deprecated
     @DeprecationDetails(
-            by = "PowerNukkit", since = "FUTURE", reason = "Bad method name", replaceWith = "getHasAge",
+            by = "PowerNukkit", since = "1.6.0.0-PN", reason = "Bad method name", replaceWith = "getHasAge",
             toBeRemovedAt = "1.7.0.0-PN")
     public boolean hasAge() {
         return getHasAge();
@@ -306,7 +306,7 @@ public abstract class EntityProjectile extends Entity {
     @Since("1.4.0.0-PN")
     @Deprecated
     @DeprecationDetails(
-            by = "PowerNukkit", since = "FUTURE", reason = "Bad method name", replaceWith = "setHasAge",
+            by = "PowerNukkit", since = "1.6.0.0-PN", reason = "Bad method name", replaceWith = "setHasAge",
             toBeRemovedAt = "1.7.0.0-PN")
     public void setAge(boolean hasAge) {
         setHasAge(hasAge);

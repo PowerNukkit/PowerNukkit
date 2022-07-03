@@ -38,7 +38,7 @@ class BlockStateRegistryTest {
     @Test
     void getBlockIdByRuntimeId() {
         assertThrows(NoSuchElementException.class, ()-> BlockStateRegistry.getBlockIdByRuntimeId(999999999));
-        int runtimeId = BlockStateRegistry.getKnownRuntimeIdByBlockStateId("minecraft:sculk_shrieker;active=1");
+        int runtimeId = BlockStateRegistry.getKnownRuntimeIdByBlockStateId("minecraft:sculk_shrieker;active=1;can_summon=0");
         assertEquals(716, BlockStateRegistry.getBlockIdByRuntimeId(runtimeId));
     }
 }

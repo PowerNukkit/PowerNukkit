@@ -38,7 +38,7 @@ Now that we know what have change, we need to update:
 - Checkout but **don't open as a project, only download the source**: https://github.com/PowerNukkit/Bedrock-Protocol
 - Open the **Maven** tab, click the **+** button to add a maven project to the current project (That should be Bedrock-ProxyPass)
 - Add: **Bedrock-Network**, and **Bedrock-Protocol** that you have just downloaded
-- Press **Shift** two times to open the sarch window and search for the **Action**: `manage git remotes`
+- Press **Shift** two times to open the search window and search for the **Action**: `manage git remotes`
 - Add a new remote for all 3 git repositores, pointing to the cloudburst equivalent of the project:
     * Bedrock-Network: https://github.com/CloudburstMC/Network.git
     * Bedrock-Protocol: https://github.com/CloudburstMC/Protocol.git

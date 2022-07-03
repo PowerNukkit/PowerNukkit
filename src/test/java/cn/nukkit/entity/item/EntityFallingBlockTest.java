@@ -29,7 +29,7 @@ import static org.mockito.Mockito.*;
  * @since 2021-12-20
  */
 @PowerNukkitOnly
-@Since("FUTURE")
+@Since("1.6.0.0-PN")
 @ExtendWith(PowerNukkitExtension.class)
 class EntityFallingBlockTest {
     @MockLevel

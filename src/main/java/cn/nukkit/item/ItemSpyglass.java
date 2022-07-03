@@ -5,20 +5,20 @@ import cn.nukkit.api.Since;
 /**
  * @author LT_Name
  */
-@Since("FUTURE")
+@Since("1.6.0.0-PN")
 public class ItemSpyglass extends Item {
 
-    @Since("FUTURE")
+    @Since("1.6.0.0-PN")
     public ItemSpyglass() {
         this(0, 1);
     }
 
-    @Since("FUTURE")
+    @Since("1.6.0.0-PN")
     public ItemSpyglass(Integer meta) {
         this(meta, 1);
     }
 
-    @Since("FUTURE")
+    @Since("1.6.0.0-PN")
     public ItemSpyglass(Integer meta, int count) {
         super(SPYGLASS, meta, count, "Spyglass");
     }

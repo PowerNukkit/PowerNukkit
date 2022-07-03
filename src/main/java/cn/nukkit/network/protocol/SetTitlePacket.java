@@ -27,8 +27,8 @@ public class SetTitlePacket extends DataPacket {
     public int fadeInTime = 0;
     public int stayTime = 0;
     public int fadeOutTime = 0;
-    @Since("FUTURE") public String xuid = "";
-    @Since("FUTURE") public String platformOnlineId = "";
+    @Since("1.6.0.0-PN") public String xuid = "";
+    @Since("1.6.0.0-PN") public String platformOnlineId = "";
 
     @Override
     public byte pid() {

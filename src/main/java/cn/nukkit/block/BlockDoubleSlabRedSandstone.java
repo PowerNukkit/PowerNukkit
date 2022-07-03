@@ -27,7 +27,7 @@ public class BlockDoubleSlabRedSandstone extends BlockDoubleSlabBase {
 
     @Override
     public int getId() {
-        return DOUBLE_RED_SANDSTONE_SLAB;
+        return DOUBLE_STONE_BLOCK_SLAB2;
     }
 
     @Since("1.4.0.0-PN")

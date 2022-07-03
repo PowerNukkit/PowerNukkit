@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertNotSame;
  * @since 2021-12-19
  */
 @PowerNukkitOnly
-@Since("FUTURE")
+@Since("1.6.0.0-PN")
 class BlockVector3Test {
     BlockVector3 vector3;
     @Test

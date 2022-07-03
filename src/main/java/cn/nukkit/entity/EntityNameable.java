@@ -58,7 +58,7 @@ public interface EntityNameable {
             this.setNameTagVisible(true);
             
             if(consume && !player.isCreative()) {
-                player.getInventory().removeItem(item);
+                item.decrement(1);
             }
             // Set entity as persistent.
             return true;

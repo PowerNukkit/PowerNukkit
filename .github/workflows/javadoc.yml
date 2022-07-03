@@ -26,10 +26,10 @@ jobs:
     - name: Adjust pom.xml
       run: sed -i 's/-CUSTOM//g' pom.xml
     - name: Generate javadoc
-      run: mvn javadoc:javadoc
+      run: mvn --no-transfer-progress javadoc:javadoc
     - name: Get version
       run: |
-        PN_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+        PN_VERSION=$(mvn --no-transfer-progress help:evaluate -Dexpression=project.version -q -DforceStdout)
         echo "Version: $PN_VERSION"
         echo "PN_VERSION=$PN_VERSION" >> $GITHUB_ENV
     - uses: actions/checkout@v2

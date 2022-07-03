@@ -10,10 +10,10 @@ import cn.nukkit.item.Item;
  * @since 2021-12-11
  */
 @PowerNukkitOnly
-@Since("FUTURE")
+@Since("1.6.0.0-PN")
 public abstract class NoOpIventoryAction extends InventoryAction {
     @PowerNukkitOnly
-    @Since("FUTURE")
+    @Since("1.6.0.0-PN")
     protected NoOpIventoryAction(Item sourceItem, Item targetItem) {
         super(sourceItem, targetItem);
     }

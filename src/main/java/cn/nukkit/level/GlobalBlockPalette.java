@@ -35,7 +35,7 @@ public class GlobalBlockPalette {
         return BlockStateRegistry.getPersistenceName(blockId);
     }
 
-    @Since("FUTURE")
+    @Since("1.6.0.0-PN")
     public static int getLegacyFullId(int runtimeId) {
         //TODO Implement
         throw new UnsupportedOperationException();

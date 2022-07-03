@@ -19,7 +19,7 @@ import javax.annotation.Nonnull;
 /**
  * @author MagicDroidX (Nukkit Project)
  */
-@PowerNukkitDifference(since = "FUTURE", info = "Implements equals() and hashcode() only in PowerNukkit")
+@PowerNukkitDifference(since = "1.6.0.0-PN", info = "Implements equals() and hashcode() only in PowerNukkit")
 @EqualsAndHashCode
 public class Potion implements Cloneable {
 
@@ -70,7 +70,7 @@ public class Potion implements Cloneable {
 
     @Since("1.4.0.0-PN")
     @Deprecated
-    @DeprecationDetails(since = "FUTURE", by = "PowerNukkit", reason =
+    @DeprecationDetails(since = "1.6.0.0-PN", by = "PowerNukkit", reason =
             "Incorrect name, there is vanilla potion with slowness long 2, the result of potion with slowness 1 + glowstone is slowness 4",
             replaceWith = "SLOWNESS_IV")
     public static final int SLOWNESS_LONG_II = SLOWNESS_IV;
@@ -410,7 +410,6 @@ public class Potion implements Cloneable {
                 case NIGHT_VISION_LONG:
                 case STRENGTH_LONG:
                 case WATER_BREATHING_LONG:
-                case SPEED_II:
                 case SPEED_LONG:
                 case FIRE_RESISTANCE_LONG:
                 case LEAPING_LONG:
@@ -420,6 +419,7 @@ public class Potion implements Cloneable {
                 case WEAKNESS:
                 case STRENGTH_II:
                 case SLOWNESS:
+                case SPEED_II:
                     return 90;
                 case SLOWNESS_LONG:
                 case WEAKNESS_LONG:
@@ -444,7 +444,7 @@ public class Potion implements Cloneable {
     }
 
     @PowerNukkitOnly
-    @Since("FUTURE")
+    @Since("1.6.0.0-PN")
     @Nonnull
     public String getPotionTypeName() {
         switch (getId()) {
@@ -517,7 +517,7 @@ public class Potion implements Cloneable {
     }
 
     @PowerNukkitOnly
-    @Since("FUTURE")
+    @Since("1.6.0.0-PN")
     @Nonnull
     public String getName() {
         String name = getPotionTypeName();
@@ -542,7 +542,7 @@ public class Potion implements Cloneable {
     }
 
     @PowerNukkitOnly
-    @Since("FUTURE")
+    @Since("1.6.0.0-PN")
     @Nonnull
     public String getRomanLevel() {
         int currentLevel = getLevel();

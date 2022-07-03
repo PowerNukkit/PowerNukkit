@@ -233,7 +233,7 @@ public class Network {
     }
 
     @PowerNukkitOnly
-    @Since("FUTURE")
+    @Since("1.6.0.0-PN")
     public List<DataPacket> unpackBatchedPackets(BatchPacket packet) throws ProtocolException {
         List<DataPacket> packets = new ObjectArrayList<>();
         processBatch(packet.payload, packets);

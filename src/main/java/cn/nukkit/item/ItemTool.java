@@ -51,9 +51,9 @@ public abstract class ItemTool extends Item implements ItemDurable {
     public static final int DURABILITY_TRIDENT = dynamic(251);
     public static final int DURABILITY_FISHING_ROD = dynamic(384);
     @Since("1.4.0.0-PN") public static final int DURABILITY_CROSSBOW = dynamic(464);
-    @Since("FUTURE") public static final int DURABILITY_CARROT_ON_A_STICK = dynamic(26);
-    @Since("FUTURE") public static final int DURABILITY_WARPED_FUNGUS_ON_A_STICK = dynamic(101);
-    @Since("FUTURE") @PowerNukkitOnly public static final int DURABILITY_SHIELD = dynamic(337);
+    @Since("1.6.0.0-PN") public static final int DURABILITY_CARROT_ON_A_STICK = dynamic(26);
+    @Since("1.6.0.0-PN") public static final int DURABILITY_WARPED_FUNGUS_ON_A_STICK = dynamic(101);
+    @Since("1.6.0.0-PN") @PowerNukkitOnly public static final int DURABILITY_SHIELD = dynamic(337);
 
     @PowerNukkitOnly
     @Since("1.4.0.0-PN")
@@ -221,7 +221,7 @@ public abstract class ItemTool extends Item implements ItemDurable {
      * No damage to item when it's used to attack entities
      * @return whether the item should take damage when used to attack entities
      */
-    @Since("FUTURE")
+    @Since("1.6.0.0-PN")
     public boolean noDamageOnAttack() {
         return false;
     }
@@ -230,7 +230,7 @@ public abstract class ItemTool extends Item implements ItemDurable {
      * No damage to item when it's used to break blocks
      * @return whether the item should take damage when used to break blocks
      */
-    @Since("FUTURE")
+    @Since("1.6.0.0-PN")
     public boolean noDamageOnBreak() {
         return false;
     }

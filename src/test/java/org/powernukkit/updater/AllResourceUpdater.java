@@ -8,6 +8,7 @@ import cn.nukkit.blockstate.BlockStateRegistry;
 import cn.nukkit.item.Item;
 import cn.nukkit.item.RuntimeItems;
 import cn.nukkit.item.enchantment.Enchantment;
+import cn.nukkit.potion.Potion;
 import cn.nukkit.utils.Config;
 import cn.nukkit.utils.Utils;
 import com.google.gson.Gson;
@@ -317,6 +318,7 @@ public class AllResourceUpdater {
     private void init() {
         Block.init();
         Enchantment.init();
+        Potion.init();
         Item.init();
     }
 }
