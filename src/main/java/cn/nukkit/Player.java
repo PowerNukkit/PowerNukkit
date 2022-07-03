@@ -201,7 +201,8 @@ public class Player extends EntityHuman implements CommandSender, InventoryHolde
     protected Vector3 teleportPosition = null;
 
     protected boolean connected = true;
-    protected final InetSocketAddress socketAddress;
+    protected final InetSocketAddress rawSocketAddress;
+    protected InetSocketAddress socketAddress;
     protected boolean removeFormat = true;
 
     protected String username;
@@ -679,6 +680,7 @@ public class Player extends EntityHuman implements CommandSender, InventoryHolde
         this.perm = new PermissibleBase(this);
         this.server = Server.getInstance();
         this.lastBreak = -1;
+        this.rawSocketAddress = socketAddress;
         this.socketAddress = socketAddress;
         this.clientID = clientID;
         this.loaderId = Level.generateChunkLoaderId(this);
@@ -740,6 +742,18 @@ public class Player extends EntityHuman implements CommandSender, InventoryHolde
         if (this.spawned) {
             this.server.updatePlayerListData(this.getUniqueId(), this.getId(), this.getDisplayName(), skin, this.getLoginChainData().getXUID());
         }
+    }
+
+    public String getRawAddress() {
+        return this.rawSocketAddress.getAddress().getHostAddress();
+    }
+
+    public int getRawPort() {
+        return this.rawSocketAddress.getPort();
+    }
+
+    public InetSocketAddress getRawSocketAddress() {
+        return this.rawSocketAddress;
     }
 
     public String getAddress() {
@@ -1690,18 +1704,18 @@ public class Player extends EntityHuman implements CommandSender, InventoryHolde
             //UpdateFoodExpLevel
             if (distance >= 0.05) {
                 double jump = 0;
-                double swimming = this.isInsideOfWater() ? 0.015 * distance : 0;
+                double swimming = this.isInsideOfWater() ? 0.01 * distance : 0;
                 if (swimming != 0) distance = 0;
                 if (this.isSprinting()) {  //Running
                     if (this.inAirTicks == 3 && swimming == 0) {
-                        jump = 0.7;
-                    }
-                    this.getFoodData().updateFoodExpLevel(0.06 * distance + jump + swimming);
-                } else {
-                    if (this.inAirTicks == 3 && swimming == 0) {
                         jump = 0.2;
                     }
-                    this.getFoodData().updateFoodExpLevel(0.01 * distance + jump + swimming);
+                    this.getFoodData().updateFoodExpLevel(0.1 * distance + jump + swimming);
+                } else {
+                    if (this.inAirTicks == 3 && swimming == 0) {
+                        jump = 0.05;
+                    }
+                    this.getFoodData().updateFoodExpLevel(jump + swimming);
                 }
             }
         }
@@ -2390,6 +2404,10 @@ public class Player extends EntityHuman implements CommandSender, InventoryHolde
                         break;
                     }
 
+                    if (this.server.getConfig("settings.waterdogpe", false) && loginChainData.getWaterdogIP() != null) {
+                        this.socketAddress = new InetSocketAddress(this.loginChainData.getWaterdogIP(), this.getRawPort());
+                    }
+
                     this.randomClientId = loginPacket.clientId;
 
                     this.uuid = loginPacket.clientUUID;
@@ -2756,7 +2774,7 @@ public class Player extends EntityHuman implements CommandSender, InventoryHolde
                                 Item oldItem = playerInteractEvent.getItem();
                                 Item i = this.level.useBreakOn(block, oldItem, this, true);
                                 if (this.isSurvival() || this.isAdventure()) {
-                                    this.getFoodData().updateFoodExpLevel(0.025);
+                                    this.getFoodData().updateFoodExpLevel(0.005);
                                     if (!i.equals(oldItem) || i.getCount() != oldItem.getCount()) {
                                         inventory.setItemInHand(i);
                                         inventory.sendHeldItem(this.getViewers().values());
@@ -3749,7 +3767,7 @@ public class Player extends EntityHuman implements CommandSender, InventoryHolde
 
                                     if (this.canInteract(blockVector.add(0.5, 0.5, 0.5), this.isCreative() ? 13 : 7) && (i = this.level.useBreakOn(blockVector.asVector3(), face, i, this, true)) != null) {
                                         if (this.isSurvival() || this.isAdventure()) {
-                                            this.getFoodData().updateFoodExpLevel(0.025);
+                                            this.getFoodData().updateFoodExpLevel(0.005);
                                             if (!i.equals(oldItem) || i.getCount() != oldItem.getCount()) {
                                                 if (oldItem.getId() == i.getId() || i.getId() == 0) {
                                                     inventory.setItemInHand(i);
@@ -5034,7 +5052,7 @@ public class Player extends EntityHuman implements CommandSender, InventoryHolde
                 if (source instanceof EntityDamageByEntityEvent) {
                     Entity damager = ((EntityDamageByEntityEvent) source).getDamager();
                     if (damager instanceof Player) {
-                        ((Player) damager).getFoodData().updateFoodExpLevel(0.3);
+                        ((Player) damager).getFoodData().updateFoodExpLevel(0.1);
                     }
                 }
                 EntityEventPacket pk = new EntityEventPacket();
