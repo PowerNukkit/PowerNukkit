@@ -40,6 +40,7 @@ import java.util.stream.Stream;
 @Since("1.4.0.0-PN")
 public enum MinecraftItemID {
     @PowerNukkitOnly @Since("1.4.0.0-PN") UNKNOWN(false, true),
+    @PowerNukkitOnly @Since("FUTURE") COPPER_ORE,
     @PowerNukkitOnly @Since("1.4.0.0-PN") QUARTZ_BRICKS,
     @PowerNukkitOnly @Since("1.4.0.0-PN") CRACKED_NETHER_BRICKS,
     @PowerNukkitOnly @Since("1.4.0.0-PN") CHISELED_NETHER_BRICKS,
@@ -954,7 +955,10 @@ public enum MinecraftItemID {
     @PowerNukkitOnly @Since("1.4.0.0-PN") LIGHT_GRAY_DYE,
     @PowerNukkitOnly @Since("1.4.0.0-PN") CHARCOAL,
     @PowerNukkitOnly @Since("1.4.0.0-PN") AGENT_SPAWN_EGG(false, false, true),
-    @PowerNukkitOnly @Since("1.6.0.0-PN") SPYGLASS
+    @PowerNukkitOnly @Since("1.6.0.0-PN") SPYGLASS,
+    @PowerNukkitOnly @Since("FUTURE") RAW_IRON,
+    @PowerNukkitOnly @Since("FUTURE") RAW_GOLD,
+    @PowerNukkitOnly @Since("FUTURE") RAW_COPPER
     ;
     private static final Map<String, MinecraftItemID> namespacedIdMap = Arrays.stream(values())
             .flatMap(id-> 

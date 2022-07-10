@@ -565,4 +565,6 @@ public interface BlockID {
     @Since("1.4.0.0-PN") @PowerNukkitOnly int CHISELED_NETHER_BRICKS = 557;
     @Since("1.4.0.0-PN") @PowerNukkitOnly int CRACKED_NETHER_BRICKS = 558;
     @Since("1.4.0.0-PN") @PowerNukkitOnly int QUARTZ_BRICKS = 559;
+
+    @Since("FUTURE") @PowerNukkitOnly int COPPER_ORE = 566;
 }

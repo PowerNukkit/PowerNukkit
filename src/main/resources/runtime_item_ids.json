@@ -4702,5 +4702,25 @@
     "name": "minecraft:spyglass",
     "id": 625,
     "oldId": 772
+  },
+  {
+    "name": "minecraft:raw_iron",
+    "id": 505,
+    "oldId": 520
+  },
+  {
+    "name": "minecraft:raw_gold",
+    "id": 506,
+    "oldId": 521
+  },
+  {
+    "name": "minecraft:raw_copper",
+    "id": 507,
+    "oldId": 522
+  },
+  {
+    "name": "minecraft:copper_ore",
+    "id": -311,
+    "oldId": -311
   }
 ]

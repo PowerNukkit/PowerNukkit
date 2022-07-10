@@ -387,6 +387,10 @@ public class Item implements Cloneable, BlockID, ItemID {
 
             list[SHIELD] = ItemShield.class; //513
 
+            list[RAW_IRON] = ItemRawIron.class; //520
+            list[RAW_GOLD] = ItemRawGold.class; //521
+            list[RAW_COPPER] = ItemRawCopper.class; //522
+
             list[CAMPFIRE] = ItemCampfire.class; //720
 
             list[SUSPICIOUS_STEW] = ItemSuspiciousStew.class; //734
@@ -496,7 +500,7 @@ public class Item implements Cloneable, BlockID, ItemID {
                 // TODO Remove this when the support is added to these blocks
                 String[] stateParts = blockStateId.split(";", 2);
                 Integer blockId = BlockStateRegistry.getBlockId(stateParts[0]);
-                if (blockId != null && blockId > BlockID.QUARTZ_BRICKS) {
+                if (blockId != null && blockId > BlockID.COPPER_ORE) {
                     return Item.getBlock(BlockID.AIR);
                 }
 
@@ -531,7 +535,7 @@ public class Item implements Cloneable, BlockID, ItemID {
             item = fromString(id + ":" + meta);
         } else if (data.containsKey("blockRuntimeId")) {
             Integer blockId = BlockStateRegistry.getBlockId(id);
-            if (blockId == null || blockId > BlockID.QUARTZ_BRICKS) { //TODO Remove this after the support is added
+            if (blockId == null || blockId > BlockID.COPPER_ORE) { //TODO Remove this after the support is added
                 return null;
             }
             int blockRuntimeId = -1;

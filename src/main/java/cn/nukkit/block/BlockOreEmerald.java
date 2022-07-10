@@ -46,7 +46,7 @@ public class BlockOreEmerald extends BlockSolid {
 
     @Override
     public double getResistance() {
-        return 15;
+        return 3;
     }
 
     @Override

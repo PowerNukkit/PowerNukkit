@@ -258,6 +258,10 @@ public interface ItemID {
 
     int SHIELD = 513;
 
+    @PowerNukkitOnly @Since("FUTURE") int RAW_IRON = 520;
+    @PowerNukkitOnly @Since("FUTURE") int RAW_GOLD = 521;
+    @PowerNukkitOnly @Since("FUTURE") int RAW_COPPER = 522;
+
     @PowerNukkitOnly int CAMPFIRE = 720;
 
     int SUSPICIOUS_STEW = 734;

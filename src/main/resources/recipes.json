@@ -28180,7 +28180,6 @@
       },
       "output": [
         {
-          "legacyId": 507,
           "id": "minecraft:raw_copper",
           "count": 9
         }
@@ -28196,9 +28195,8 @@
       "type": 1,
       "input": {
         "A": {
-          "legacyId": 507,
           "id": "minecraft:raw_copper",
-          "damage": 32767
+          "fuzzy": true
         }
       },
       "output": [
@@ -28225,7 +28223,6 @@
       },
       "output": [
         {
-          "legacyId": 506,
           "id": "minecraft:raw_gold",
           "count": 9
         }
@@ -28241,9 +28238,8 @@
       "type": 1,
       "input": {
         "A": {
-          "legacyId": 506,
           "id": "minecraft:raw_gold",
-          "damage": 32767
+          "fuzzy": true
         }
       },
       "output": [
@@ -28270,7 +28266,6 @@
       },
       "output": [
         {
-          "legacyId": 505,
           "id": "minecraft:raw_iron",
           "count": 9
         }
@@ -28286,9 +28281,8 @@
       "type": 1,
       "input": {
         "A": {
-          "legacyId": 505,
           "id": "minecraft:raw_iron",
-          "damage": 32767
+          "fuzzy": true
         }
       },
       "output": [
@@ -51804,9 +51798,8 @@
     {
       "type": 3,
       "input": {
-        "legacyId": 505,
         "id": "minecraft:raw_iron",
-        "damage": -1
+        "fuzzy": true
       },
       "output": {
         "id": "minecraft:iron_ingot",
@@ -51817,9 +51810,8 @@
     {
       "type": 3,
       "input": {
-        "legacyId": 505,
         "id": "minecraft:raw_iron",
-        "damage": -1
+        "fuzzy": true
       },
       "output": {
         "id": "minecraft:iron_ingot",
@@ -51830,9 +51822,8 @@
     {
       "type": 3,
       "input": {
-        "legacyId": 506,
         "id": "minecraft:raw_gold",
-        "damage": -1
+        "fuzzy": true
       },
       "output": {
         "id": "minecraft:gold_ingot",
@@ -51843,9 +51834,8 @@
     {
       "type": 3,
       "input": {
-        "legacyId": 506,
         "id": "minecraft:raw_gold",
-        "damage": -1
+        "fuzzy": true
       },
       "output": {
         "id": "minecraft:gold_ingot",
@@ -51856,9 +51846,8 @@
     {
       "type": 3,
       "input": {
-        "legacyId": 507,
         "id": "minecraft:raw_copper",
-        "damage": -1
+        "fuzzy": true
       },
       "output": {
         "legacyId": 504,
@@ -51870,9 +51859,8 @@
     {
       "type": 3,
       "input": {
-        "legacyId": 507,
         "id": "minecraft:raw_copper",
-        "damage": -1
+        "fuzzy": true
       },
       "output": {
         "legacyId": 504,
