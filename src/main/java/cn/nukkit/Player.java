@@ -6251,10 +6251,12 @@ public class Player extends EntityHuman implements CommandSender, InventoryHolde
     public void setShowingCredits(boolean showingCredits) {
         this.showingCredits = showingCredits;
 
-        ShowCreditsPacket pk = new ShowCreditsPacket();
-        pk.eid = this.getId();
-        pk.status = showingCredits ? ShowCreditsPacket.STATUS_START_CREDITS : ShowCreditsPacket.STATUS_END_CREDITS;
-        this.dataPacket(pk);
+        if (showingCredits) {
+            ShowCreditsPacket pk = new ShowCreditsPacket();
+            pk.eid = this.getId();
+            pk.status = ShowCreditsPacket.STATUS_START_CREDITS;
+            this.dataPacket(pk);
+        }
     }
     
     @PowerNukkitOnly

@@ -65,7 +65,7 @@ public class PlayerTeleportEvent extends PlayerEvent implements Cancellable {
         ENDER_PEARL,   // Teleport by ender pearl
         CHORUS_FRUIT,  // Teleport by chorus fruit
         UNKNOWN,       // Unknown cause
-        @PowerNukkitOnly @Since("1.4.0.0-PN") END_PORTAL,    // Teleport using End Portal
-        @PowerNukkitOnly @Since("1.4.0.0-PN") END_GATEWAY    // Teleport using End Gateway
+        @PowerNukkitOnly @Since("FUTURE") END_PORTAL,    // Teleport using End Portal
+        @PowerNukkitOnly @Since("FUTURE") END_GATEWAY    // Teleport using End Gateway
     }
 }

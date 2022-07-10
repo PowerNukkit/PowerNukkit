@@ -11,7 +11,7 @@ import lombok.extern.log4j.Log4j2;
 public enum EnumLevel {
     OVERWORLD,
     NETHER,
-    THE_END
+    @PowerNukkitOnly @Since("FUTURE") THE_END
     ;
 
     Level level;

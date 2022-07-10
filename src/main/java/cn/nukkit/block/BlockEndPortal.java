@@ -57,7 +57,9 @@ public class BlockEndPortal extends BlockFlowable implements BlockEntityHolder<B
     public String getBlockEntityType() {
         return BlockEntity.END_PORTAL;
     }
-    
+
+    @PowerNukkitOnly
+    @Since("FUTURE")
     @Override
     public boolean place(@Nonnull Item item, @Nonnull Block block, @Nonnull Block target, @Nonnull BlockFace face, double fx, double fy, double fz, @Nullable Player player) {
         return BlockEntityHolder.setBlockAndCreateEntity(this) != null;
@@ -70,7 +72,7 @@ public class BlockEndPortal extends BlockFlowable implements BlockEntityHolder<B
     public BlockProperties getProperties() {
         return CommonBlockProperties.EMPTY_PROPERTIES;
     }
-    
+
     @Override
     public boolean canPassThrough() {
         return false;
@@ -121,27 +123,33 @@ public class BlockEndPortal extends BlockFlowable implements BlockEntityHolder<B
     public boolean canBeFlowedInto() {
         return false;
     }
-    
+
     @Override
     public Item toItem() {
         return new ItemBlock(Block.get(BlockID.AIR));
     }
-    
+
+    @PowerNukkitOnly
+    @Since("FUTURE")
     @Override
     public boolean canBePushed() {
         return false;
     }
-    
+
+    @PowerNukkitOnly
+    @Since("FUTURE")
     @Override
     public boolean canBePulled() {
         return false;
     }
-    
+
+    @PowerNukkitOnly
+    @Since("FUTURE")
     @Override
     public double getMaxY() {
         return getY() + (12.0 / 16.0);
     }
-    
+
     @PowerNukkitOnly
     @Since("FUTURE")
     public static void spawnObsidianPlatform(Position position) {

@@ -18,6 +18,8 @@ import cn.nukkit.level.Sound;
 import cn.nukkit.math.BlockFace;
 import cn.nukkit.math.Vector3;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 import javax.annotation.Nonnull;
@@ -36,7 +38,9 @@ public class BlockChorusFlower extends BlockTransparentMeta {
     public BlockChorusFlower() {
         this(0);
     }
-    
+
+    @PowerNukkitOnly
+    @Since("FUTURE")
     public BlockChorusFlower(int meta) {
         super(meta);
     }
@@ -153,7 +157,7 @@ public class BlockChorusFlower extends BlockTransparentMeta {
                         for (int i = 0; i < ThreadLocalRandom.current().nextInt(ground ? 5 : 4); i++) {
                             BlockFace face = BlockFace.Plane.HORIZONTAL.random();
                             Block check = this.getSide(face);
-                            if (check.getId() == AIR && check.down().getId() == AIR && isHorizontalAirExcept(check, face.getOpposite())) {
+                            if (check.getId() == AIR && check.down().getId() == AIR && isHorizontalAir(check, Collections.singletonList(face.getOpposite()))) {
                                 BlockChorusFlower block = (BlockChorusFlower) this.clone();
                                 block.x = check.x;
                                 block.y = check.y;
@@ -190,7 +194,7 @@ public class BlockChorusFlower extends BlockTransparentMeta {
                 return Level.BLOCK_UPDATE_RANDOM;
             }
         }
-        
+
         return 0;
     }
 
@@ -220,7 +224,7 @@ public class BlockChorusFlower extends BlockTransparentMeta {
     }
     
     @PowerNukkitOnly
-    @Since("1.4.0.0-PN")
+    @Since("FUTURE")
     @Override
     public boolean onProjectileHit(@Nonnull Entity projectile, @Nonnull Position position, @Nonnull Vector3 motion) {
         if (projectile instanceof EntityArrow || projectile instanceof EntitySnowball) { // TODO: Check Fire Charge too
@@ -232,50 +236,46 @@ public class BlockChorusFlower extends BlockTransparentMeta {
     }
     
     @PowerNukkitOnly
-    @Since("1.4.0.0-PN")
+    @Since("FUTURE")
     public int getMaxAge() {
         return AGE.getMaxValue();
     }
     
     @PowerNukkitOnly
-    @Since("1.4.0.0-PN")
+    @Since("FUTURE")
     public int getAge() {
         return getIntValue(AGE);
     }
     
     @PowerNukkitOnly
-    @Since("1.4.0.0-PN")
+    @Since("FUTURE")
     public void setAge(int age) {
         setIntValue(AGE, age);
     }
     
     @PowerNukkitOnly
-    @Since("1.4.0.0-PN")
+    @Since("FUTURE")
     public boolean isFullyAged() {
         return getAge() >= getMaxAge();
     }
     
     @PowerNukkitOnly
-    @Since("1.4.0.0-PN")
+    @Since("FUTURE")
     private boolean isHorizontalAir(Block block) {
-        for (BlockFace face : BlockFace.Plane.HORIZONTAL) {
-            if (block.getSide(face).getId() != AIR) {
-                return false;
-            }
-        }
-        return true;
+        return this.isHorizontalAir(block, null);
     }
     
     @PowerNukkitOnly
-    @Since("1.4.0.0-PN")
-    private boolean isHorizontalAirExcept(Block block, BlockFace except) {
+    @Since("FUTURE")
+    private boolean isHorizontalAir(Block block, List<BlockFace> exceptFace) {
         for (BlockFace face : BlockFace.Plane.HORIZONTAL) {
-            if (face != except) {
+            if (exceptFace.contains(face)) {
                 if (block.getSide(face).getId() != AIR) {
                     return false;
                 }
             }
         }
+
         return true;
     }
 }

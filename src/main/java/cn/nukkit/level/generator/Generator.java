@@ -1,5 +1,6 @@
 package cn.nukkit.level.generator;
 
+import cn.nukkit.api.PowerNukkitOnly;
 import cn.nukkit.api.Since;
 import cn.nukkit.block.BlockID;
 import cn.nukkit.level.ChunkManager;
@@ -20,6 +21,8 @@ public abstract class Generator implements BlockID {
     public static final int TYPE_INFINITE = 1;
     public static final int TYPE_FLAT = 2;
     public static final int TYPE_NETHER = 3;
+    @PowerNukkitOnly
+    @Since("FUTURE")
     public static final int TYPE_THE_END = 4;
 
     public abstract int getId();
