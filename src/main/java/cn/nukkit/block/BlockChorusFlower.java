@@ -267,9 +267,9 @@ public class BlockChorusFlower extends BlockTransparentMeta {
     
     @PowerNukkitOnly
     @Since("FUTURE")
-    private boolean isHorizontalAir(Block block, List<BlockFace> exceptFace) {
+    private boolean isHorizontalAir(Block block, @Nullable List<BlockFace> exceptFaces) {
         for (BlockFace face : BlockFace.Plane.HORIZONTAL) {
-            if (exceptFace.contains(face)) {
+            if (exceptFaces == null || !exceptFaces.contains(face)) {
                 if (block.getSide(face).getId() != AIR) {
                     return false;
                 }

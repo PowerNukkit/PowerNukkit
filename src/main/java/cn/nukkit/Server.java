@@ -2687,19 +2687,19 @@ public class Server {
     public boolean isCheckMovement(){
         return checkMovement;
     }
-    
+
     @PowerNukkitOnly
     @Since("1.4.0.0-PN")
     public long getLaunchTime() {
         return launchTime;
     }
-    
+
     @PowerNukkitOnly
     @Since("FUTURE")
     public boolean isTheEndAllowed() {
         return this.allowTheEnd;
     }
-    
+
     private class ConsoleThread extends Thread implements InterruptibleThread {
 
         @Override
