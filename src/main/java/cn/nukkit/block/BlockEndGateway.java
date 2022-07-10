@@ -35,7 +35,7 @@ public class BlockEndGateway extends BlockSolid implements BlockEntityHolder<Blo
     }
     
     @PowerNukkitOnly
-    @Since("1.4.0.0-PN")
+    @Since("FUTURE")
     @Nonnull
     @Override
     public Class<? extends BlockEntityEndGateway> getBlockEntityClass() {
@@ -43,7 +43,7 @@ public class BlockEndGateway extends BlockSolid implements BlockEntityHolder<Blo
     }
     
     @PowerNukkitOnly
-    @Since("1.4.0.0-PN")
+    @Since("FUTURE")
     @Nonnull
     @Override
     public String getBlockEntityType() {

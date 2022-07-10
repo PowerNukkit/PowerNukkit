@@ -307,13 +307,15 @@ public class Player extends EntityHuman implements CommandSender, InventoryHolde
     private boolean isIgnoringMobEquipmentPacket;
     
     @PowerNukkitOnly
-    @Since("1.4.0.0-PN")
+    @Since("FUTURE")
     private boolean showingCredits;
     
     @PowerNukkitOnly
-    @Since("1.4.0.0-PN")
+    @Since("FUTURE")
     private boolean hasSeenCredits;
-    
+
+    @PowerNukkitOnly
+    @Since("1.4.0.0-PN")
     public float getSoulSpeedMultiplier() {
         return this.soulSpeedMultiplier;
     }
@@ -6239,37 +6241,36 @@ public class Player extends EntityHuman implements CommandSender, InventoryHolde
     }
 
     @PowerNukkitOnly
-    @Since("1.4.0.0-PN")
+    @Since("FUTURE")
     public boolean isShowingCredits() {
         return showingCredits;
     }
     
     @PowerNukkitOnly
-    @Since("1.4.0.0-PN")
+    @Since("FUTURE")
     public void setShowingCredits(boolean showingCredits) {
         this.showingCredits = showingCredits;
-        if (showingCredits) {
-            ShowCreditsPacket pk = new ShowCreditsPacket();
-            pk.eid = this.getId();
-            pk.status = ShowCreditsPacket.STATUS_START_CREDITS;
-            this.dataPacket(pk);
-        }
+
+        ShowCreditsPacket pk = new ShowCreditsPacket();
+        pk.eid = this.getId();
+        pk.status = showingCredits ? ShowCreditsPacket.STATUS_START_CREDITS : ShowCreditsPacket.STATUS_END_CREDITS;
+        this.dataPacket(pk);
     }
     
     @PowerNukkitOnly
-    @Since("1.4.0.0-PN")
+    @Since("FUTURE")
     public void showCredits() {
         this.setShowingCredits(true);
     }
     
     @PowerNukkitOnly
-    @Since("1.4.0.0-PN")
+    @Since("FUTURE")
     public boolean hasSeenCredits() {
         return showingCredits;
     }
     
     @PowerNukkitOnly
-    @Since("1.4.0.0-PN")
+    @Since("FUTURE")
     public void setHasSeenCredits(boolean hasSeenCredits) {
         this.hasSeenCredits = hasSeenCredits;
     }

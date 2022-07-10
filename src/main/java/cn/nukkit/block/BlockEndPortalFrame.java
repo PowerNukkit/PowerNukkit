@@ -49,7 +49,7 @@ public class BlockEndPortalFrame extends BlockTransparentMeta implements Faceabl
     public int getId() {
         return END_PORTAL_FRAME;
     }
-    
+
     @Since("1.4.0.0-PN")
     @PowerNukkitOnly
     @Nonnull
@@ -57,7 +57,7 @@ public class BlockEndPortalFrame extends BlockTransparentMeta implements Faceabl
     public BlockProperties getProperties() {
         return PROPERTIES;
     }
-    
+
     @Override
     public double getResistance() {
         return 3600000;
@@ -227,7 +227,7 @@ public class BlockEndPortalFrame extends BlockTransparentMeta implements Faceabl
     }
     
     @PowerNukkitOnly
-    @Since("1.4.0.0-PN")
+    @Since("FUTURE")
     @Override
     public void setBlockFace(BlockFace face) {
         setPropertyValue(DIRECTION, face);
@@ -250,13 +250,13 @@ public class BlockEndPortalFrame extends BlockTransparentMeta implements Faceabl
     }
     
     @PowerNukkitOnly
-    @Since("1.4.0.0-PN")
+    @Since("FUTURE")
     public boolean isEndPortalEye() {
         return getPropertyValue(END_PORTAL_EYE);
     }
     
     @PowerNukkitOnly
-    @Since("1.4.0.0-PN")
+    @Since("FUTURE")
     public void setEndPortalEye(boolean endPortalEye) {
         setPropertyValue(END_PORTAL_EYE, endPortalEye);
     }

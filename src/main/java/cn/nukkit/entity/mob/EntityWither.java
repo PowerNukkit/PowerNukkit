@@ -59,7 +59,7 @@ public class EntityWither extends EntityMob implements EntitySmite {
     }
     
     @PowerNukkitOnly
-    @Since("1.4.0.0-PN")
+    @Since("FUTURE")
     @Override
     public boolean isBoss() {
         return true;

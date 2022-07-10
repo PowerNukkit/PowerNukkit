@@ -43,7 +43,7 @@ public class BlockEndPortal extends BlockFlowable implements BlockEntityHolder<B
     }
     
     @PowerNukkitOnly
-    @Since("1.4.0.0-PN")
+    @Since("FUTURE")
     @Nonnull
     @Override
     public Class<? extends BlockEntityEndPortal> getBlockEntityClass() {
@@ -51,7 +51,7 @@ public class BlockEndPortal extends BlockFlowable implements BlockEntityHolder<B
     }
     
     @PowerNukkitOnly
-    @Since("1.4.0.0-PN")
+    @Since("FUTURE")
     @Nonnull
     @Override
     public String getBlockEntityType() {
@@ -143,7 +143,7 @@ public class BlockEndPortal extends BlockFlowable implements BlockEntityHolder<B
     }
     
     @PowerNukkitOnly
-    @Since("1.4.0.0-PN")
+    @Since("FUTURE")
     public static void spawnObsidianPlatform(Position position) {
         Level level = position.getLevel();
         int x = position.getFloorX();

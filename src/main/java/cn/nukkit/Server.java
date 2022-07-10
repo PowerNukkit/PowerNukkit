@@ -274,7 +274,7 @@ public class Server {
     private boolean checkMovement = true;
     
     @PowerNukkitOnly
-    @Since("1.4.0.0-PN")
+    @Since("FUTURE")
     private boolean allowTheEnd;
     
     /**
@@ -2695,7 +2695,7 @@ public class Server {
     }
     
     @PowerNukkitOnly
-    @Since("1.4.0.0-PN")
+    @Since("FUTURE")
     public boolean isTheEndAllowed() {
         return this.allowTheEnd;
     }

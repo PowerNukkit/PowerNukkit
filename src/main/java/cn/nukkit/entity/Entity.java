@@ -2975,7 +2975,7 @@ public abstract class Entity extends Location implements Metadatable {
     }
     
     @PowerNukkitOnly
-    @Since("1.4.0.0-PN")
+    @Since("FUTURE")
     public boolean isBoss() {
         return false;
     }

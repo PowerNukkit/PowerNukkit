@@ -97,7 +97,7 @@ public enum EnumLevel {
     }
     
     @PowerNukkitOnly
-    @Since("1.4.0.0-PN")
+    @Since("FUTURE")
     public static Level getOtherTheEndPair(Level current)   {
         if (current == OVERWORLD.level) {
             return THE_END.level;
@@ -109,7 +109,7 @@ public enum EnumLevel {
     }
     
     @PowerNukkitOnly
-    @Since("1.4.0.0-PN")
+    @Since("FUTURE")
     public static Position moveToTheEnd(Position current)   {
         if (THE_END.level == null) {
             return null;
