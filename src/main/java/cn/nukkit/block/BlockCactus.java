@@ -57,7 +57,7 @@ public class BlockCactus extends BlockTransparentMeta {
 
     @Override
     public double getResistance() {
-        return 2;
+        return 0.4;
     }
 
     @PowerNukkitOnly
