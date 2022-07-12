@@ -1,5 +1,5 @@
 {
-  "version": 503,
+  "version": 527,
   "recipes": [
     {
       "id": "minecraft:smithingtable_diamond_axe_to_netherite_axe",
@@ -858,7 +858,7 @@
       "output": [
         {
           "count": 2,
-          "blockState": "minecraft:stone_slab3;stone_slab_type_3=andesite"
+          "blockState": "minecraft:stone_block_slab3;stone_slab_type_3=andesite"
         }
       ],
       "block": "stonecutter",
@@ -959,7 +959,7 @@
       "output": [
         {
           "count": 2,
-          "blockState": "minecraft:stone_slab;stone_slab_type=brick"
+          "blockState": "minecraft:stone_block_slab;stone_slab_type=brick"
         }
       ],
       "block": "stonecutter",
@@ -1128,7 +1128,7 @@
       "output": [
         {
           "count": 2,
-          "blockState": "minecraft:stone_slab;stone_slab_type=cobblestone"
+          "blockState": "minecraft:stone_block_slab;stone_slab_type=cobblestone"
         }
       ],
       "block": "stonecutter",
@@ -1266,7 +1266,7 @@
       "output": [
         {
           "count": 2,
-          "blockState": "minecraft:stone_slab2;stone_slab_type_2=prismarine_dark"
+          "blockState": "minecraft:stone_block_slab2;stone_slab_type_2=prismarine_dark"
         }
       ],
       "block": "stonecutter",
@@ -1299,7 +1299,7 @@
       "output": [
         {
           "count": 2,
-          "blockState": "minecraft:stone_slab3;stone_slab_type_3=diorite"
+          "blockState": "minecraft:stone_block_slab3;stone_slab_type_3=diorite"
         }
       ],
       "block": "stonecutter",
@@ -1348,7 +1348,7 @@
       "output": [
         {
           "count": 2,
-          "blockState": "minecraft:stone_slab4;stone_slab_type_4=stone"
+          "blockState": "minecraft:stone_block_slab4;stone_slab_type_4=stone"
         }
       ],
       "block": "stonecutter",
@@ -1365,7 +1365,7 @@
       "output": [
         {
           "count": 2,
-          "blockState": "minecraft:stone_slab3"
+          "blockState": "minecraft:stone_block_slab3"
         }
       ],
       "block": "stonecutter",
@@ -1382,7 +1382,7 @@
       "output": [
         {
           "count": 2,
-          "blockState": "minecraft:stone_slab3"
+          "blockState": "minecraft:stone_block_slab3"
         }
       ],
       "block": "stonecutter",
@@ -1568,7 +1568,7 @@
       "output": [
         {
           "count": 2,
-          "blockState": "minecraft:stone_slab3;stone_slab_type_3=granite"
+          "blockState": "minecraft:stone_block_slab3;stone_slab_type_3=granite"
         }
       ],
       "block": "stonecutter",
@@ -1617,7 +1617,7 @@
       "output": [
         {
           "count": 2,
-          "blockState": "minecraft:stone_slab2;stone_slab_type_2=mossy_cobblestone"
+          "blockState": "minecraft:stone_block_slab2;stone_slab_type_2=mossy_cobblestone"
         }
       ],
       "block": "stonecutter",
@@ -1666,7 +1666,7 @@
       "output": [
         {
           "count": 2,
-          "blockState": "minecraft:stone_slab4"
+          "blockState": "minecraft:stone_block_slab4"
         }
       ],
       "block": "stonecutter",
@@ -1705,6 +1705,58 @@
       "priority": 2
     },
     {
+      "id": "minecraft:stonecutter_mud_brick_slab",
+      "type": 0,
+      "input": [
+        {
+          "fuzzy": true,
+          "blockState": "minecraft:mud_bricks"
+        }
+      ],
+      "output": [
+        {
+          "count": 2,
+          "blockState": "minecraft:mud_brick_slab;top_slot_bit=0"
+        }
+      ],
+      "block": "stonecutter",
+      "priority": 0
+    },
+    {
+      "id": "minecraft:stonecutter_mud_brick_stairs",
+      "type": 0,
+      "input": [
+        {
+          "fuzzy": true,
+          "blockState": "minecraft:mud_bricks"
+        }
+      ],
+      "output": [
+        {
+          "blockState": "minecraft:mud_brick_stairs;upside_down_bit=0;weirdo_direction=0"
+        }
+      ],
+      "block": "stonecutter",
+      "priority": 1
+    },
+    {
+      "id": "minecraft:stonecutter_mud_brick_wall",
+      "type": 0,
+      "input": [
+        {
+          "fuzzy": true,
+          "blockState": "minecraft:mud_bricks"
+        }
+      ],
+      "output": [
+        {
+          "blockState": "minecraft:mud_brick_wall;wall_connection_type_east=none;wall_connection_type_north=none;wall_connection_type_south=none;wall_connection_type_west=none;wall_post_bit=0"
+        }
+      ],
+      "block": "stonecutter",
+      "priority": 2
+    },
+    {
       "id": "minecraft:stonecutter_nether_brick_slab",
       "type": 0,
       "input": [
@@ -1715,7 +1767,7 @@
       "output": [
         {
           "count": 2,
-          "blockState": "minecraft:stone_slab;stone_slab_type=nether_brick"
+          "blockState": "minecraft:stone_block_slab;stone_slab_type=nether_brick"
         }
       ],
       "block": "stonecutter",
@@ -1869,7 +1921,7 @@
       "output": [
         {
           "count": 2,
-          "blockState": "minecraft:stone_slab3;stone_slab_type_3=polished_andesite"
+          "blockState": "minecraft:stone_block_slab3;stone_slab_type_3=polished_andesite"
         }
       ],
       "block": "stonecutter",
@@ -1886,7 +1938,7 @@
       "output": [
         {
           "count": 2,
-          "blockState": "minecraft:stone_slab3;stone_slab_type_3=polished_andesite"
+          "blockState": "minecraft:stone_block_slab3;stone_slab_type_3=polished_andesite"
         }
       ],
       "block": "stonecutter",
@@ -2037,7 +2089,7 @@
       "output": [
         {
           "count": 2,
-          "blockState": "minecraft:stone_slab3;stone_slab_type_3=polished_diorite"
+          "blockState": "minecraft:stone_block_slab3;stone_slab_type_3=polished_diorite"
         }
       ],
       "block": "stonecutter",
@@ -2054,7 +2106,7 @@
       "output": [
         {
           "count": 2,
-          "blockState": "minecraft:stone_slab3;stone_slab_type_3=polished_diorite"
+          "blockState": "minecraft:stone_block_slab3;stone_slab_type_3=polished_diorite"
         }
       ],
       "block": "stonecutter",
@@ -2136,7 +2188,7 @@
       "output": [
         {
           "count": 2,
-          "blockState": "minecraft:stone_slab3;stone_slab_type_3=polished_granite"
+          "blockState": "minecraft:stone_block_slab3;stone_slab_type_3=polished_granite"
         }
       ],
       "block": "stonecutter",
@@ -2153,7 +2205,7 @@
       "output": [
         {
           "count": 2,
-          "blockState": "minecraft:stone_slab3;stone_slab_type_3=polished_granite"
+          "blockState": "minecraft:stone_block_slab3;stone_slab_type_3=polished_granite"
         }
       ],
       "block": "stonecutter",
@@ -2254,7 +2306,7 @@
       "output": [
         {
           "count": 2,
-          "blockState": "minecraft:stone_slab2;stone_slab_type_2=prismarine_brick"
+          "blockState": "minecraft:stone_block_slab2;stone_slab_type_2=prismarine_brick"
         }
       ],
       "block": "stonecutter",
@@ -2287,7 +2339,7 @@
       "output": [
         {
           "count": 2,
-          "blockState": "minecraft:stone_slab2;stone_slab_type_2=prismarine_rough"
+          "blockState": "minecraft:stone_block_slab2;stone_slab_type_2=prismarine_rough"
         }
       ],
       "block": "stonecutter",
@@ -2352,7 +2404,7 @@
       "output": [
         {
           "count": 2,
-          "blockState": "minecraft:stone_slab2;stone_slab_type_2=purpur"
+          "blockState": "minecraft:stone_block_slab2;stone_slab_type_2=purpur"
         }
       ],
       "block": "stonecutter",
@@ -2433,7 +2485,7 @@
       "output": [
         {
           "count": 2,
-          "blockState": "minecraft:stone_slab;stone_slab_type=quartz"
+          "blockState": "minecraft:stone_block_slab;stone_slab_type=quartz"
         }
       ],
       "block": "stonecutter",
@@ -2466,7 +2518,7 @@
       "output": [
         {
           "count": 2,
-          "blockState": "minecraft:stone_slab2;stone_slab_type_2=red_nether_brick"
+          "blockState": "minecraft:stone_block_slab2;stone_slab_type_2=red_nether_brick"
         }
       ],
       "block": "stonecutter",
@@ -2515,7 +2567,7 @@
       "output": [
         {
           "count": 2,
-          "blockState": "minecraft:stone_slab2"
+          "blockState": "minecraft:stone_block_slab2"
         }
       ],
       "block": "stonecutter",
@@ -2596,7 +2648,7 @@
       "output": [
         {
           "count": 2,
-          "blockState": "minecraft:stone_slab;stone_slab_type=sandstone"
+          "blockState": "minecraft:stone_block_slab;stone_slab_type=sandstone"
         }
       ],
       "block": "stonecutter",
@@ -2713,7 +2765,7 @@
       "output": [
         {
           "count": 2,
-          "blockState": "minecraft:stone_slab"
+          "blockState": "minecraft:stone_block_slab"
         }
       ],
       "block": "stonecutter",
@@ -2730,7 +2782,7 @@
       "output": [
         {
           "count": 2,
-          "blockState": "minecraft:stone_slab4;stone_slab_type_4=smooth_quartz"
+          "blockState": "minecraft:stone_block_slab4;stone_slab_type_4=smooth_quartz"
         }
       ],
       "block": "stonecutter",
@@ -2763,7 +2815,7 @@
       "output": [
         {
           "count": 2,
-          "blockState": "minecraft:stone_slab3;stone_slab_type_3=smooth_red_sandstone"
+          "blockState": "minecraft:stone_block_slab3;stone_slab_type_3=smooth_red_sandstone"
         }
       ],
       "block": "stonecutter",
@@ -2796,7 +2848,7 @@
       "output": [
         {
           "count": 2,
-          "blockState": "minecraft:stone_slab2;stone_slab_type_2=smooth_sandstone"
+          "blockState": "minecraft:stone_block_slab2;stone_slab_type_2=smooth_sandstone"
         }
       ],
       "block": "stonecutter",
@@ -2894,7 +2946,7 @@
       "output": [
         {
           "count": 2,
-          "blockState": "minecraft:stone_slab;stone_slab_type=stone_brick"
+          "blockState": "minecraft:stone_block_slab;stone_slab_type=stone_brick"
         }
       ],
       "block": "stonecutter",
@@ -2911,7 +2963,7 @@
       "output": [
         {
           "count": 2,
-          "blockState": "minecraft:stone_slab;stone_slab_type=stone_brick"
+          "blockState": "minecraft:stone_block_slab;stone_slab_type=stone_brick"
         }
       ],
       "block": "stonecutter",
@@ -3784,7 +3836,7 @@
       "output": [
         {
           "count": 6,
-          "blockState": "minecraft:stone_slab;stone_slab_type=cobblestone"
+          "blockState": "minecraft:stone_block_slab;stone_slab_type=cobblestone"
         }
       ],
       "shape": [
@@ -3804,7 +3856,7 @@
       "output": [
         {
           "count": 6,
-          "blockState": "minecraft:stone_slab;stone_slab_type=nether_brick"
+          "blockState": "minecraft:stone_block_slab;stone_slab_type=nether_brick"
         }
       ],
       "shape": [
@@ -3824,7 +3876,7 @@
       "output": [
         {
           "count": 6,
-          "blockState": "minecraft:stone_slab;stone_slab_type=sandstone"
+          "blockState": "minecraft:stone_block_slab;stone_slab_type=sandstone"
         }
       ],
       "shape": [
@@ -4018,7 +4070,7 @@
       "output": [
         {
           "count": 6,
-          "blockState": "minecraft:stone_slab4;stone_slab_type_4=stone"
+          "blockState": "minecraft:stone_block_slab4;stone_slab_type_4=stone"
         }
       ],
       "shape": [
@@ -4038,7 +4090,7 @@
       "output": [
         {
           "count": 6,
-          "blockState": "minecraft:stone_slab4"
+          "blockState": "minecraft:stone_block_slab4"
         }
       ],
       "shape": [
@@ -4058,7 +4110,7 @@
       "output": [
         {
           "count": 6,
-          "blockState": "minecraft:stone_slab;stone_slab_type=brick"
+          "blockState": "minecraft:stone_block_slab;stone_slab_type=brick"
         }
       ],
       "shape": [
@@ -4078,7 +4130,7 @@
       "output": [
         {
           "count": 6,
-          "blockState": "minecraft:stone_slab;stone_slab_type=stone_brick"
+          "blockState": "minecraft:stone_block_slab;stone_slab_type=stone_brick"
         }
       ],
       "shape": [
@@ -4098,7 +4150,7 @@
       "output": [
         {
           "count": 6,
-          "blockState": "minecraft:stone_slab"
+          "blockState": "minecraft:stone_block_slab"
         }
       ],
       "shape": [
@@ -5191,6 +5243,405 @@
         "B": {
           "fuzzy": true,
           "blockState": "minecraft:crimson_planks"
+        }
+      },
+      "output": [
+        {
+          "id": "minecraft:bed",
+          "damage": 9
+        }
+      ],
+      "shape": [
+        "AAA",
+        "BBB"
+      ],
+      "block": "crafting_table",
+      "priority": 2
+    },
+    {
+      "id": "bed_color_mangrove_0",
+      "type": 1,
+      "input": {
+        "A": {
+          "blockState": "minecraft:wool"
+        },
+        "B": {
+          "fuzzy": true,
+          "blockState": "minecraft:mangrove_planks"
+        }
+      },
+      "output": [
+        {
+          "id": "minecraft:bed"
+        }
+      ],
+      "shape": [
+        "AAA",
+        "BBB"
+      ],
+      "block": "crafting_table",
+      "priority": 2
+    },
+    {
+      "id": "bed_color_mangrove_1",
+      "type": 1,
+      "input": {
+        "A": {
+          "blockState": "minecraft:wool;color=orange"
+        },
+        "B": {
+          "fuzzy": true,
+          "blockState": "minecraft:mangrove_planks"
+        }
+      },
+      "output": [
+        {
+          "id": "minecraft:bed",
+          "damage": 1
+        }
+      ],
+      "shape": [
+        "AAA",
+        "BBB"
+      ],
+      "block": "crafting_table",
+      "priority": 2
+    },
+    {
+      "id": "bed_color_mangrove_10",
+      "type": 1,
+      "input": {
+        "A": {
+          "blockState": "minecraft:wool;color=purple"
+        },
+        "B": {
+          "fuzzy": true,
+          "blockState": "minecraft:mangrove_planks"
+        }
+      },
+      "output": [
+        {
+          "id": "minecraft:bed",
+          "damage": 10
+        }
+      ],
+      "shape": [
+        "AAA",
+        "BBB"
+      ],
+      "block": "crafting_table",
+      "priority": 2
+    },
+    {
+      "id": "bed_color_mangrove_11",
+      "type": 1,
+      "input": {
+        "A": {
+          "blockState": "minecraft:wool;color=blue"
+        },
+        "B": {
+          "fuzzy": true,
+          "blockState": "minecraft:mangrove_planks"
+        }
+      },
+      "output": [
+        {
+          "id": "minecraft:bed",
+          "damage": 11
+        }
+      ],
+      "shape": [
+        "AAA",
+        "BBB"
+      ],
+      "block": "crafting_table",
+      "priority": 2
+    },
+    {
+      "id": "bed_color_mangrove_12",
+      "type": 1,
+      "input": {
+        "A": {
+          "blockState": "minecraft:wool;color=brown"
+        },
+        "B": {
+          "fuzzy": true,
+          "blockState": "minecraft:mangrove_planks"
+        }
+      },
+      "output": [
+        {
+          "id": "minecraft:bed",
+          "damage": 12
+        }
+      ],
+      "shape": [
+        "AAA",
+        "BBB"
+      ],
+      "block": "crafting_table",
+      "priority": 2
+    },
+    {
+      "id": "bed_color_mangrove_13",
+      "type": 1,
+      "input": {
+        "A": {
+          "blockState": "minecraft:wool;color=green"
+        },
+        "B": {
+          "fuzzy": true,
+          "blockState": "minecraft:mangrove_planks"
+        }
+      },
+      "output": [
+        {
+          "id": "minecraft:bed",
+          "damage": 13
+        }
+      ],
+      "shape": [
+        "AAA",
+        "BBB"
+      ],
+      "block": "crafting_table",
+      "priority": 2
+    },
+    {
+      "id": "bed_color_mangrove_14",
+      "type": 1,
+      "input": {
+        "A": {
+          "blockState": "minecraft:wool;color=red"
+        },
+        "B": {
+          "fuzzy": true,
+          "blockState": "minecraft:mangrove_planks"
+        }
+      },
+      "output": [
+        {
+          "id": "minecraft:bed",
+          "damage": 14
+        }
+      ],
+      "shape": [
+        "AAA",
+        "BBB"
+      ],
+      "block": "crafting_table",
+      "priority": 2
+    },
+    {
+      "id": "bed_color_mangrove_15",
+      "type": 1,
+      "input": {
+        "A": {
+          "blockState": "minecraft:wool;color=black"
+        },
+        "B": {
+          "fuzzy": true,
+          "blockState": "minecraft:mangrove_planks"
+        }
+      },
+      "output": [
+        {
+          "id": "minecraft:bed",
+          "damage": 15
+        }
+      ],
+      "shape": [
+        "AAA",
+        "BBB"
+      ],
+      "block": "crafting_table",
+      "priority": 2
+    },
+    {
+      "id": "bed_color_mangrove_2",
+      "type": 1,
+      "input": {
+        "A": {
+          "blockState": "minecraft:wool;color=magenta"
+        },
+        "B": {
+          "fuzzy": true,
+          "blockState": "minecraft:mangrove_planks"
+        }
+      },
+      "output": [
+        {
+          "id": "minecraft:bed",
+          "damage": 2
+        }
+      ],
+      "shape": [
+        "AAA",
+        "BBB"
+      ],
+      "block": "crafting_table",
+      "priority": 2
+    },
+    {
+      "id": "bed_color_mangrove_3",
+      "type": 1,
+      "input": {
+        "A": {
+          "blockState": "minecraft:wool;color=light_blue"
+        },
+        "B": {
+          "fuzzy": true,
+          "blockState": "minecraft:mangrove_planks"
+        }
+      },
+      "output": [
+        {
+          "id": "minecraft:bed",
+          "damage": 3
+        }
+      ],
+      "shape": [
+        "AAA",
+        "BBB"
+      ],
+      "block": "crafting_table",
+      "priority": 2
+    },
+    {
+      "id": "bed_color_mangrove_4",
+      "type": 1,
+      "input": {
+        "A": {
+          "blockState": "minecraft:wool;color=yellow"
+        },
+        "B": {
+          "fuzzy": true,
+          "blockState": "minecraft:mangrove_planks"
+        }
+      },
+      "output": [
+        {
+          "id": "minecraft:bed",
+          "damage": 4
+        }
+      ],
+      "shape": [
+        "AAA",
+        "BBB"
+      ],
+      "block": "crafting_table",
+      "priority": 2
+    },
+    {
+      "id": "bed_color_mangrove_5",
+      "type": 1,
+      "input": {
+        "A": {
+          "blockState": "minecraft:wool;color=lime"
+        },
+        "B": {
+          "fuzzy": true,
+          "blockState": "minecraft:mangrove_planks"
+        }
+      },
+      "output": [
+        {
+          "id": "minecraft:bed",
+          "damage": 5
+        }
+      ],
+      "shape": [
+        "AAA",
+        "BBB"
+      ],
+      "block": "crafting_table",
+      "priority": 2
+    },
+    {
+      "id": "bed_color_mangrove_6",
+      "type": 1,
+      "input": {
+        "A": {
+          "blockState": "minecraft:wool;color=pink"
+        },
+        "B": {
+          "fuzzy": true,
+          "blockState": "minecraft:mangrove_planks"
+        }
+      },
+      "output": [
+        {
+          "id": "minecraft:bed",
+          "damage": 6
+        }
+      ],
+      "shape": [
+        "AAA",
+        "BBB"
+      ],
+      "block": "crafting_table",
+      "priority": 2
+    },
+    {
+      "id": "bed_color_mangrove_7",
+      "type": 1,
+      "input": {
+        "A": {
+          "blockState": "minecraft:wool;color=gray"
+        },
+        "B": {
+          "fuzzy": true,
+          "blockState": "minecraft:mangrove_planks"
+        }
+      },
+      "output": [
+        {
+          "id": "minecraft:bed",
+          "damage": 7
+        }
+      ],
+      "shape": [
+        "AAA",
+        "BBB"
+      ],
+      "block": "crafting_table",
+      "priority": 2
+    },
+    {
+      "id": "bed_color_mangrove_8",
+      "type": 1,
+      "input": {
+        "A": {
+          "blockState": "minecraft:wool;color=silver"
+        },
+        "B": {
+          "fuzzy": true,
+          "blockState": "minecraft:mangrove_planks"
+        }
+      },
+      "output": [
+        {
+          "id": "minecraft:bed",
+          "damage": 8
+        }
+      ],
+      "shape": [
+        "AAA",
+        "BBB"
+      ],
+      "block": "crafting_table",
+      "priority": 2
+    },
+    {
+      "id": "bed_color_mangrove_9",
+      "type": 1,
+      "input": {
+        "A": {
+          "blockState": "minecraft:wool;color=cyan"
+        },
+        "B": {
+          "fuzzy": true,
+          "blockState": "minecraft:mangrove_planks"
         }
       },
       "output": [
@@ -12188,7 +12639,7 @@
       "type": 1,
       "input": {
         "A": {
-          "blockState": "minecraft:double_stone_slab;stone_slab_type=quartz"
+          "blockState": "minecraft:stone_block_slab;stone_slab_type=quartz"
         }
       },
       "output": [
@@ -12208,7 +12659,7 @@
       "type": 1,
       "input": {
         "A": {
-          "blockState": "minecraft:double_stone_slab;stone_slab_type=stone_brick"
+          "blockState": "minecraft:stone_block_slab;stone_slab_type=stone_brick"
         }
       },
       "output": [
@@ -12258,7 +12709,7 @@
       "type": 1,
       "input": {
         "A": {
-          "blockState": "minecraft:double_stone_slab2"
+          "blockState": "minecraft:stone_block_slab2"
         }
       },
       "output": [
@@ -12278,7 +12729,7 @@
       "type": 1,
       "input": {
         "A": {
-          "blockState": "minecraft:double_stone_slab;stone_slab_type=sandstone"
+          "blockState": "minecraft:stone_block_slab;stone_slab_type=sandstone"
         }
       },
       "output": [
@@ -12320,7 +12771,7 @@
       "type": 1,
       "input": {
         "A": {
-          "blockState": "minecraft:double_stone_slab2;stone_slab_type_2=purpur"
+          "blockState": "minecraft:stone_block_slab2;stone_slab_type_2=purpur"
         }
       },
       "output": [
@@ -12381,6 +12832,28 @@
       "shape": [
         "ABA",
         "AAA"
+      ],
+      "block": "crafting_table",
+      "priority": 0
+    },
+    {
+      "id": "minecraft:acacia_chest_boat",
+      "type": 0,
+      "input": [
+        {
+          "fuzzy": true,
+          "blockState": "minecraft:chest"
+        },
+        {
+          "id": "minecraft:acacia_boat",
+          "damage": 4
+        }
+      ],
+      "output": [
+        {
+          "legacyId": 642,
+          "id": "minecraft:acacia_chest_boat"
+        }
       ],
       "block": "crafting_table",
       "priority": 0
@@ -12774,7 +13247,7 @@
           "fuzzy": true
         },
         "B": {
-          "blockState": "minecraft:double_stone_slab"
+          "blockState": "minecraft:stone_block_slab"
         }
       },
       "output": [
@@ -13004,6 +13477,32 @@
       "priority": 2
     },
     {
+      "id": "minecraft:barrel_from_mangrove_slab",
+      "type": 1,
+      "input": {
+        "A": {
+          "id": "minecraft:stick",
+          "fuzzy": true
+        },
+        "B": {
+          "fuzzy": true,
+          "blockState": "minecraft:mangrove_slab"
+        }
+      },
+      "output": [
+        {
+          "blockState": "minecraft:barrel"
+        }
+      ],
+      "shape": [
+        "ABA",
+        "A A",
+        "ABA"
+      ],
+      "block": "crafting_table",
+      "priority": 2
+    },
+    {
       "id": "minecraft:barrel_from_warped_slab",
       "type": 1,
       "input": {
@@ -13134,6 +13633,32 @@
       "priority": 2
     },
     {
+      "id": "minecraft:beehive_from_mangrove_planks",
+      "type": 1,
+      "input": {
+        "A": {
+          "fuzzy": true,
+          "blockState": "minecraft:mangrove_planks"
+        },
+        "B": {
+          "id": "minecraft:honeycomb",
+          "fuzzy": true
+        }
+      },
+      "output": [
+        {
+          "blockState": "minecraft:beehive"
+        }
+      ],
+      "shape": [
+        "AAA",
+        "BBB",
+        "AAA"
+      ],
+      "block": "crafting_table",
+      "priority": 2
+    },
+    {
       "id": "minecraft:beehive_from_warped_planks",
       "type": 1,
       "input": {
@@ -13221,6 +13746,28 @@
       "shape": [
         "ABA",
         "AAA"
+      ],
+      "block": "crafting_table",
+      "priority": 0
+    },
+    {
+      "id": "minecraft:birch_chest_boat",
+      "type": 0,
+      "input": [
+        {
+          "fuzzy": true,
+          "blockState": "minecraft:chest"
+        },
+        {
+          "id": "minecraft:birch_boat",
+          "damage": 2
+        }
+      ],
+      "output": [
+        {
+          "legacyId": 639,
+          "id": "minecraft:birch_chest_boat"
+        }
       ],
       "block": "crafting_table",
       "priority": 0
@@ -14523,6 +15070,32 @@
       "priority": 2
     },
     {
+      "id": "minecraft:bookshelf_from_mangrove_planks",
+      "type": 1,
+      "input": {
+        "A": {
+          "fuzzy": true,
+          "blockState": "minecraft:mangrove_planks"
+        },
+        "B": {
+          "id": "minecraft:book",
+          "fuzzy": true
+        }
+      },
+      "output": [
+        {
+          "blockState": "minecraft:bookshelf"
+        }
+      ],
+      "shape": [
+        "AAA",
+        "BBB",
+        "AAA"
+      ],
+      "block": "crafting_table",
+      "priority": 2
+    },
+    {
       "id": "minecraft:bookshelf_from_warped_planks",
       "type": 1,
       "input": {
@@ -14581,6 +15154,28 @@
         "A": {
           "fuzzy": true,
           "blockState": "minecraft:crimson_planks"
+        }
+      },
+      "output": [
+        {
+          "id": "minecraft:bowl",
+          "count": 4
+        }
+      ],
+      "shape": [
+        "A A",
+        " A "
+      ],
+      "block": "crafting_table",
+      "priority": 2
+    },
+    {
+      "id": "minecraft:bowl_from_mangrove_planks",
+      "type": 1,
+      "input": {
+        "A": {
+          "fuzzy": true,
+          "blockState": "minecraft:mangrove_planks"
         }
       },
       "output": [
@@ -15428,6 +16023,36 @@
       "priority": 0
     },
     {
+      "id": "minecraft:campfire_from_charcoal_stripped_mangrove_log",
+      "type": 1,
+      "input": {
+        "A": {
+          "id": "minecraft:stick",
+          "fuzzy": true
+        },
+        "B": {
+          "id": "minecraft:charcoal",
+          "fuzzy": true
+        },
+        "C": {
+          "fuzzy": true,
+          "blockState": "minecraft:stripped_mangrove_log"
+        }
+      },
+      "output": [
+        {
+          "id": "minecraft:campfire"
+        }
+      ],
+      "shape": [
+        " A ",
+        "ABA",
+        "CCC"
+      ],
+      "block": "crafting_table",
+      "priority": 0
+    },
+    {
       "id": "minecraft:campfire_from_charcoal_stripped_oak_log",
       "type": 1,
       "input": {
@@ -15560,6 +16185,64 @@
         "C": {
           "fuzzy": true,
           "blockState": "minecraft:log2"
+        }
+      },
+      "output": [
+        {
+          "id": "minecraft:campfire"
+        }
+      ],
+      "shape": [
+        " A ",
+        "ABA",
+        "CCC"
+      ],
+      "block": "crafting_table",
+      "priority": 2
+    },
+    {
+      "id": "minecraft:campfire_from_mangrove_log",
+      "type": 1,
+      "input": {
+        "A": {
+          "id": "minecraft:stick",
+          "fuzzy": true
+        },
+        "B": {
+          "id": "minecraft:coal"
+        },
+        "C": {
+          "fuzzy": true,
+          "blockState": "minecraft:mangrove_log"
+        }
+      },
+      "output": [
+        {
+          "id": "minecraft:campfire"
+        }
+      ],
+      "shape": [
+        " A ",
+        "ABA",
+        "CCC"
+      ],
+      "block": "crafting_table",
+      "priority": 2
+    },
+    {
+      "id": "minecraft:campfire_from_mangrove_wood",
+      "type": 1,
+      "input": {
+        "A": {
+          "id": "minecraft:stick",
+          "fuzzy": true
+        },
+        "B": {
+          "id": "minecraft:coal"
+        },
+        "C": {
+          "fuzzy": true,
+          "blockState": "minecraft:mangrove_wood"
         }
       },
       "output": [
@@ -15719,6 +16402,64 @@
       ],
       "block": "crafting_table",
       "priority": 2
+    },
+    {
+      "id": "minecraft:campfire_from_stripped_mangrove_log",
+      "type": 1,
+      "input": {
+        "A": {
+          "id": "minecraft:stick",
+          "fuzzy": true
+        },
+        "B": {
+          "id": "minecraft:coal"
+        },
+        "C": {
+          "fuzzy": true,
+          "blockState": "minecraft:stripped_mangrove_log"
+        }
+      },
+      "output": [
+        {
+          "id": "minecraft:campfire"
+        }
+      ],
+      "shape": [
+        " A ",
+        "ABA",
+        "CCC"
+      ],
+      "block": "crafting_table",
+      "priority": 0
+    },
+    {
+      "id": "minecraft:campfire_from_stripped_mangrove_wood",
+      "type": 1,
+      "input": {
+        "A": {
+          "id": "minecraft:stick",
+          "fuzzy": true
+        },
+        "B": {
+          "id": "minecraft:coal"
+        },
+        "C": {
+          "fuzzy": true,
+          "blockState": "minecraft:stripped_mangrove_wood"
+        }
+      },
+      "output": [
+        {
+          "id": "minecraft:campfire"
+        }
+      ],
+      "shape": [
+        " A ",
+        "ABA",
+        "CCC"
+      ],
+      "block": "crafting_table",
+      "priority": 50
     },
     {
       "id": "minecraft:campfire_from_stripped_oak_log",
@@ -15968,6 +16709,32 @@
       "priority": 2
     },
     {
+      "id": "minecraft:cartography_table_from_mangrove_planks",
+      "type": 1,
+      "input": {
+        "A": {
+          "id": "minecraft:paper",
+          "fuzzy": true
+        },
+        "B": {
+          "fuzzy": true,
+          "blockState": "minecraft:mangrove_planks"
+        }
+      },
+      "output": [
+        {
+          "blockState": "minecraft:cartography_table"
+        }
+      ],
+      "shape": [
+        "AA",
+        "BB",
+        "BB"
+      ],
+      "block": "crafting_table",
+      "priority": 2
+    },
+    {
       "id": "minecraft:cartography_table_from_warped_planks",
       "type": 1,
       "input": {
@@ -16042,12 +16809,55 @@
       "priority": 0
     },
     {
+      "id": "minecraft:chest_boat",
+      "type": 0,
+      "input": [
+        {
+          "fuzzy": true,
+          "blockState": "minecraft:chest"
+        },
+        {
+          "id": "minecraft:oak_boat"
+        }
+      ],
+      "output": [
+        {
+          "legacyId": 638,
+          "id": "minecraft:oak_chest_boat"
+        }
+      ],
+      "block": "crafting_table",
+      "priority": 0
+    },
+    {
       "id": "minecraft:chest_from_crimson_planks",
       "type": 1,
       "input": {
         "A": {
           "fuzzy": true,
           "blockState": "minecraft:crimson_planks"
+        }
+      },
+      "output": [
+        {
+          "blockState": "minecraft:chest"
+        }
+      ],
+      "shape": [
+        "AAA",
+        "A A",
+        "AAA"
+      ],
+      "block": "crafting_table",
+      "priority": 2
+    },
+    {
+      "id": "minecraft:chest_from_mangrove_planks",
+      "type": 1,
+      "input": {
+        "A": {
+          "fuzzy": true,
+          "blockState": "minecraft:mangrove_planks"
         }
       },
       "output": [
@@ -16087,25 +16897,21 @@
     },
     {
       "id": "minecraft:chest_minecart",
-      "type": 1,
-      "input": {
-        "A": {
+      "type": 0,
+      "input": [
+        {
           "fuzzy": true,
           "blockState": "minecraft:chest"
         },
-        "B": {
+        {
           "id": "minecraft:minecart",
           "fuzzy": true
         }
-      },
+      ],
       "output": [
         {
           "id": "minecraft:chest_minecart"
         }
-      ],
-      "shape": [
-        "A",
-        "B"
       ],
       "block": "crafting_table",
       "priority": 0
@@ -16136,7 +16942,7 @@
       "type": 1,
       "input": {
         "A": {
-          "blockState": "minecraft:double_stone_slab;stone_slab_type=nether_brick"
+          "blockState": "minecraft:stone_block_slab;stone_slab_type=nether_brick"
         }
       },
       "output": [
@@ -16515,6 +17321,28 @@
       "priority": 2
     },
     {
+      "id": "minecraft:composter_from_mangrove_slab",
+      "type": 1,
+      "input": {
+        "A": {
+          "fuzzy": true,
+          "blockState": "minecraft:mangrove_slab"
+        }
+      },
+      "output": [
+        {
+          "blockState": "minecraft:composter"
+        }
+      ],
+      "shape": [
+        "A A",
+        "A A",
+        "AAA"
+      ],
+      "block": "crafting_table",
+      "priority": 2
+    },
+    {
       "id": "minecraft:composter_from_warped_slab",
       "type": 1,
       "input": {
@@ -16749,6 +17577,27 @@
         "A": {
           "fuzzy": true,
           "blockState": "minecraft:crimson_planks"
+        }
+      },
+      "output": [
+        {
+          "blockState": "minecraft:crafting_table"
+        }
+      ],
+      "shape": [
+        "AA",
+        "AA"
+      ],
+      "block": "crafting_table",
+      "priority": 2
+    },
+    {
+      "id": "minecraft:crafting_table_from_mangrove_planks",
+      "type": 1,
+      "input": {
+        "A": {
+          "fuzzy": true,
+          "blockState": "minecraft:mangrove_planks"
         }
       },
       "output": [
@@ -17840,6 +18689,28 @@
       "priority": 0
     },
     {
+      "id": "minecraft:dark_oak_chest_boat",
+      "type": 0,
+      "input": [
+        {
+          "fuzzy": true,
+          "blockState": "minecraft:chest"
+        },
+        {
+          "id": "minecraft:dark_oak_boat",
+          "damage": 5
+        }
+      ],
+      "output": [
+        {
+          "legacyId": 643,
+          "id": "minecraft:dark_oak_chest_boat"
+        }
+      ],
+      "block": "crafting_table",
+      "priority": 0
+    },
+    {
       "id": "minecraft:dark_oak_door",
       "type": 1,
       "input": {
@@ -18142,6 +19013,36 @@
         "C": {
           "fuzzy": true,
           "blockState": "minecraft:crimson_slab"
+        }
+      },
+      "output": [
+        {
+          "blockState": "minecraft:daylight_detector"
+        }
+      ],
+      "shape": [
+        "AAA",
+        "BBB",
+        "CCC"
+      ],
+      "block": "crafting_table",
+      "priority": 2
+    },
+    {
+      "id": "minecraft:daylight_detector_from_mangrove_slab",
+      "type": 1,
+      "input": {
+        "A": {
+          "fuzzy": true,
+          "blockState": "minecraft:glass"
+        },
+        "B": {
+          "id": "minecraft:quartz",
+          "fuzzy": true
+        },
+        "C": {
+          "fuzzy": true,
+          "blockState": "minecraft:mangrove_slab"
         }
       },
       "output": [
@@ -19264,6 +20165,32 @@
         "B": {
           "fuzzy": true,
           "blockState": "minecraft:crimson_planks"
+        }
+      },
+      "output": [
+        {
+          "blockState": "minecraft:fletching_table"
+        }
+      ],
+      "shape": [
+        "AA",
+        "BB",
+        "BB"
+      ],
+      "block": "crafting_table",
+      "priority": 2
+    },
+    {
+      "id": "minecraft:fletching_table_from_mangrove_planks",
+      "type": 1,
+      "input": {
+        "A": {
+          "id": "minecraft:flint",
+          "fuzzy": true
+        },
+        "B": {
+          "fuzzy": true,
+          "blockState": "minecraft:mangrove_planks"
         }
       },
       "output": [
@@ -20530,7 +21457,7 @@
           "fuzzy": true
         },
         "B": {
-          "blockState": "minecraft:double_stone_slab4;stone_slab_type_4=stone"
+          "blockState": "minecraft:stone_block_slab4;stone_slab_type_4=stone"
         },
         "C": {
           "fuzzy": true,
@@ -20559,7 +21486,7 @@
         },
         "B": {
           "fuzzy": true,
-          "blockState": "minecraft:double_stone_slab"
+          "blockState": "minecraft:stone_block_slab"
         },
         "C": {
           "fuzzy": true,
@@ -20588,7 +21515,7 @@
         },
         "B": {
           "fuzzy": true,
-          "blockState": "minecraft:double_stone_slab2"
+          "blockState": "minecraft:stone_block_slab2"
         },
         "C": {
           "fuzzy": true,
@@ -20617,7 +21544,7 @@
         },
         "B": {
           "fuzzy": true,
-          "blockState": "minecraft:double_stone_slab3"
+          "blockState": "minecraft:stone_block_slab3"
         },
         "C": {
           "fuzzy": true,
@@ -20646,11 +21573,127 @@
         },
         "B": {
           "fuzzy": true,
-          "blockState": "minecraft:double_stone_slab4"
+          "blockState": "minecraft:stone_block_slab4"
         },
         "C": {
           "fuzzy": true,
           "blockState": "minecraft:crimson_planks"
+        }
+      },
+      "output": [
+        {
+          "blockState": "minecraft:grindstone"
+        }
+      ],
+      "shape": [
+        "ABA",
+        "C C"
+      ],
+      "block": "crafting_table",
+      "priority": 2
+    },
+    {
+      "id": "minecraft:grindstone_from_mangrove_planks",
+      "type": 1,
+      "input": {
+        "A": {
+          "id": "minecraft:stick",
+          "fuzzy": true
+        },
+        "B": {
+          "fuzzy": true,
+          "blockState": "minecraft:stone_block_slab"
+        },
+        "C": {
+          "fuzzy": true,
+          "blockState": "minecraft:mangrove_planks"
+        }
+      },
+      "output": [
+        {
+          "blockState": "minecraft:grindstone"
+        }
+      ],
+      "shape": [
+        "ABA",
+        "C C"
+      ],
+      "block": "crafting_table",
+      "priority": 2
+    },
+    {
+      "id": "minecraft:grindstone_from_mangrove_planks2",
+      "type": 1,
+      "input": {
+        "A": {
+          "id": "minecraft:stick",
+          "fuzzy": true
+        },
+        "B": {
+          "fuzzy": true,
+          "blockState": "minecraft:stone_block_slab2"
+        },
+        "C": {
+          "fuzzy": true,
+          "blockState": "minecraft:mangrove_planks"
+        }
+      },
+      "output": [
+        {
+          "blockState": "minecraft:grindstone"
+        }
+      ],
+      "shape": [
+        "ABA",
+        "C C"
+      ],
+      "block": "crafting_table",
+      "priority": 2
+    },
+    {
+      "id": "minecraft:grindstone_from_mangrove_planks3",
+      "type": 1,
+      "input": {
+        "A": {
+          "id": "minecraft:stick",
+          "fuzzy": true
+        },
+        "B": {
+          "fuzzy": true,
+          "blockState": "minecraft:stone_block_slab3"
+        },
+        "C": {
+          "fuzzy": true,
+          "blockState": "minecraft:mangrove_planks"
+        }
+      },
+      "output": [
+        {
+          "blockState": "minecraft:grindstone"
+        }
+      ],
+      "shape": [
+        "ABA",
+        "C C"
+      ],
+      "block": "crafting_table",
+      "priority": 2
+    },
+    {
+      "id": "minecraft:grindstone_from_mangrove_planks4",
+      "type": 1,
+      "input": {
+        "A": {
+          "id": "minecraft:stick",
+          "fuzzy": true
+        },
+        "B": {
+          "fuzzy": true,
+          "blockState": "minecraft:stone_block_slab4"
+        },
+        "C": {
+          "fuzzy": true,
+          "blockState": "minecraft:mangrove_planks"
         }
       },
       "output": [
@@ -20675,7 +21718,7 @@
         },
         "B": {
           "fuzzy": true,
-          "blockState": "minecraft:double_stone_slab"
+          "blockState": "minecraft:stone_block_slab"
         },
         "C": {
           "fuzzy": true,
@@ -20704,7 +21747,7 @@
         },
         "B": {
           "fuzzy": true,
-          "blockState": "minecraft:double_stone_slab2"
+          "blockState": "minecraft:stone_block_slab2"
         },
         "C": {
           "fuzzy": true,
@@ -20733,7 +21776,7 @@
         },
         "B": {
           "fuzzy": true,
-          "blockState": "minecraft:double_stone_slab3"
+          "blockState": "minecraft:stone_block_slab3"
         },
         "C": {
           "fuzzy": true,
@@ -20762,7 +21805,7 @@
         },
         "B": {
           "fuzzy": true,
-          "blockState": "minecraft:double_stone_slab4"
+          "blockState": "minecraft:stone_block_slab4"
         },
         "C": {
           "fuzzy": true,
@@ -20955,25 +21998,21 @@
     },
     {
       "id": "minecraft:hopper_minecart",
-      "type": 1,
-      "input": {
-        "A": {
+      "type": 0,
+      "input": [
+        {
           "id": "minecraft:hopper",
           "fuzzy": true
         },
-        "B": {
+        {
           "id": "minecraft:minecart",
           "fuzzy": true
         }
-      },
+      ],
       "output": [
         {
           "id": "minecraft:hopper_minecart"
         }
-      ],
-      "shape": [
-        "A",
-        "B"
       ],
       "block": "crafting_table",
       "priority": 0
@@ -21443,6 +22482,32 @@
       "priority": 2
     },
     {
+      "id": "minecraft:jukebox_from_mangrove_planks",
+      "type": 1,
+      "input": {
+        "A": {
+          "fuzzy": true,
+          "blockState": "minecraft:mangrove_planks"
+        },
+        "B": {
+          "id": "minecraft:diamond",
+          "fuzzy": true
+        }
+      },
+      "output": [
+        {
+          "blockState": "minecraft:jukebox"
+        }
+      ],
+      "shape": [
+        "AAA",
+        "ABA",
+        "AAA"
+      ],
+      "block": "crafting_table",
+      "priority": 2
+    },
+    {
       "id": "minecraft:jukebox_from_warped_planks",
       "type": 1,
       "input": {
@@ -21489,6 +22554,28 @@
       "shape": [
         "ABA",
         "AAA"
+      ],
+      "block": "crafting_table",
+      "priority": 0
+    },
+    {
+      "id": "minecraft:jungle_chest_boat",
+      "type": 0,
+      "input": [
+        {
+          "fuzzy": true,
+          "blockState": "minecraft:chest"
+        },
+        {
+          "id": "minecraft:jungle_boat",
+          "damage": 3
+        }
+      ],
+      "output": [
+        {
+          "legacyId": 640,
+          "id": "minecraft:jungle_chest_boat"
+        }
       ],
       "block": "crafting_table",
       "priority": 0
@@ -22012,6 +23099,32 @@
         "A": {
           "fuzzy": true,
           "blockState": "minecraft:crimson_slab"
+        },
+        "B": {
+          "fuzzy": true,
+          "blockState": "minecraft:bookshelf"
+        }
+      },
+      "output": [
+        {
+          "blockState": "minecraft:lectern"
+        }
+      ],
+      "shape": [
+        "AAA",
+        " B ",
+        " A "
+      ],
+      "block": "crafting_table",
+      "priority": 2
+    },
+    {
+      "id": "minecraft:lectern_from_mangrove_slab",
+      "type": 1,
+      "input": {
+        "A": {
+          "fuzzy": true,
+          "blockState": "minecraft:mangrove_slab"
         },
         "B": {
           "fuzzy": true,
@@ -23309,6 +24422,31 @@
       "priority": 2
     },
     {
+      "id": "minecraft:loom_from_mangrove_planks",
+      "type": 1,
+      "input": {
+        "A": {
+          "id": "minecraft:string",
+          "fuzzy": true
+        },
+        "B": {
+          "fuzzy": true,
+          "blockState": "minecraft:mangrove_planks"
+        }
+      },
+      "output": [
+        {
+          "blockState": "minecraft:loom"
+        }
+      ],
+      "shape": [
+        "AA",
+        "BB"
+      ],
+      "block": "crafting_table",
+      "priority": 2
+    },
+    {
       "id": "minecraft:loom_from_warped_planks",
       "type": 1,
       "input": {
@@ -23853,6 +24991,390 @@
       "priority": 0
     },
     {
+      "id": "minecraft:mangrove_boat",
+      "type": 1,
+      "input": {
+        "A": {
+          "blockState": "minecraft:mangrove_planks"
+        },
+        "B": {
+          "id": "minecraft:wooden_shovel",
+          "fuzzy": true
+        }
+      },
+      "output": [
+        {
+          "legacyId": 635,
+          "id": "minecraft:mangrove_boat"
+        }
+      ],
+      "shape": [
+        "ABA",
+        "AAA"
+      ],
+      "block": "crafting_table",
+      "priority": 0
+    },
+    {
+      "id": "minecraft:mangrove_button",
+      "type": 1,
+      "input": {
+        "A": {
+          "fuzzy": true,
+          "blockState": "minecraft:mangrove_planks"
+        }
+      },
+      "output": [
+        {
+          "blockState": "minecraft:mangrove_button;button_pressed_bit=0;facing_direction=0"
+        }
+      ],
+      "shape": [
+        "A"
+      ],
+      "block": "crafting_table",
+      "priority": 0
+    },
+    {
+      "id": "minecraft:mangrove_chest_boat",
+      "type": 0,
+      "input": [
+        {
+          "fuzzy": true,
+          "blockState": "minecraft:chest"
+        },
+        {
+          "legacyId": 635,
+          "id": "minecraft:mangrove_boat"
+        }
+      ],
+      "output": [
+        {
+          "legacyId": 644,
+          "id": "minecraft:mangrove_chest_boat"
+        }
+      ],
+      "block": "crafting_table",
+      "priority": 0
+    },
+    {
+      "id": "minecraft:mangrove_door",
+      "type": 1,
+      "input": {
+        "A": {
+          "fuzzy": true,
+          "blockState": "minecraft:mangrove_planks"
+        }
+      },
+      "output": [
+        {
+          "legacyId": 633,
+          "id": "minecraft:mangrove_door",
+          "count": 3
+        }
+      ],
+      "shape": [
+        "AA",
+        "AA",
+        "AA"
+      ],
+      "block": "crafting_table",
+      "priority": 0
+    },
+    {
+      "id": "minecraft:mangrove_fence",
+      "type": 1,
+      "input": {
+        "A": {
+          "fuzzy": true,
+          "blockState": "minecraft:mangrove_planks"
+        },
+        "B": {
+          "id": "minecraft:stick",
+          "fuzzy": true
+        }
+      },
+      "output": [
+        {
+          "count": 3,
+          "blockState": "minecraft:mangrove_fence"
+        }
+      ],
+      "shape": [
+        "ABA",
+        "ABA"
+      ],
+      "block": "crafting_table",
+      "priority": 0
+    },
+    {
+      "id": "minecraft:mangrove_fence_gate",
+      "type": 1,
+      "input": {
+        "A": {
+          "id": "minecraft:stick",
+          "fuzzy": true
+        },
+        "B": {
+          "fuzzy": true,
+          "blockState": "minecraft:mangrove_planks"
+        }
+      },
+      "output": [
+        {
+          "blockState": "minecraft:mangrove_fence_gate;direction=0;in_wall_bit=0;open_bit=0"
+        }
+      ],
+      "shape": [
+        "ABA",
+        "ABA"
+      ],
+      "block": "crafting_table",
+      "priority": 0
+    },
+    {
+      "id": "minecraft:mangrove_planks",
+      "type": 1,
+      "input": {
+        "A": {
+          "fuzzy": true,
+          "blockState": "minecraft:mangrove_log"
+        }
+      },
+      "output": [
+        {
+          "count": 4,
+          "blockState": "minecraft:mangrove_planks"
+        }
+      ],
+      "shape": [
+        "A"
+      ],
+      "block": "crafting_table",
+      "priority": 0
+    },
+    {
+      "id": "minecraft:mangrove_planks_from_stripped_log",
+      "type": 1,
+      "input": {
+        "A": {
+          "fuzzy": true,
+          "blockState": "minecraft:stripped_mangrove_log"
+        }
+      },
+      "output": [
+        {
+          "count": 4,
+          "blockState": "minecraft:mangrove_planks"
+        }
+      ],
+      "shape": [
+        "A"
+      ],
+      "block": "crafting_table",
+      "priority": 0
+    },
+    {
+      "id": "minecraft:mangrove_planks_from_stripped_wood",
+      "type": 1,
+      "input": {
+        "A": {
+          "fuzzy": true,
+          "blockState": "minecraft:stripped_mangrove_wood"
+        }
+      },
+      "output": [
+        {
+          "count": 4,
+          "blockState": "minecraft:mangrove_planks"
+        }
+      ],
+      "shape": [
+        "A"
+      ],
+      "block": "crafting_table",
+      "priority": 0
+    },
+    {
+      "id": "minecraft:mangrove_planks_from_wood",
+      "type": 1,
+      "input": {
+        "A": {
+          "fuzzy": true,
+          "blockState": "minecraft:mangrove_wood"
+        }
+      },
+      "output": [
+        {
+          "count": 4,
+          "blockState": "minecraft:mangrove_planks"
+        }
+      ],
+      "shape": [
+        "A"
+      ],
+      "block": "crafting_table",
+      "priority": 0
+    },
+    {
+      "id": "minecraft:mangrove_pressure_plate",
+      "type": 1,
+      "input": {
+        "A": {
+          "fuzzy": true,
+          "blockState": "minecraft:mangrove_planks"
+        }
+      },
+      "output": [
+        {
+          "blockState": "minecraft:mangrove_pressure_plate;redstone_signal=0"
+        }
+      ],
+      "shape": [
+        "AA"
+      ],
+      "block": "crafting_table",
+      "priority": 0
+    },
+    {
+      "id": "minecraft:mangrove_sign",
+      "type": 1,
+      "input": {
+        "A": {
+          "fuzzy": true,
+          "blockState": "minecraft:mangrove_planks"
+        },
+        "B": {
+          "id": "minecraft:stick",
+          "fuzzy": true
+        }
+      },
+      "output": [
+        {
+          "legacyId": 634,
+          "id": "minecraft:mangrove_sign",
+          "count": 3
+        }
+      ],
+      "shape": [
+        "AAA",
+        "AAA",
+        " B "
+      ],
+      "block": "crafting_table",
+      "priority": 0
+    },
+    {
+      "id": "minecraft:mangrove_slab",
+      "type": 1,
+      "input": {
+        "A": {
+          "fuzzy": true,
+          "blockState": "minecraft:mangrove_planks"
+        }
+      },
+      "output": [
+        {
+          "count": 6,
+          "blockState": "minecraft:mangrove_slab;top_slot_bit=0"
+        }
+      ],
+      "shape": [
+        "AAA"
+      ],
+      "block": "crafting_table",
+      "priority": 0
+    },
+    {
+      "id": "minecraft:mangrove_stairs",
+      "type": 1,
+      "input": {
+        "A": {
+          "fuzzy": true,
+          "blockState": "minecraft:mangrove_planks"
+        }
+      },
+      "output": [
+        {
+          "count": 4,
+          "blockState": "minecraft:mangrove_stairs;upside_down_bit=0;weirdo_direction=0"
+        }
+      ],
+      "shape": [
+        "A  ",
+        "AA ",
+        "AAA"
+      ],
+      "block": "crafting_table",
+      "priority": 0
+    },
+    {
+      "id": "minecraft:mangrove_trapdoor",
+      "type": 1,
+      "input": {
+        "A": {
+          "fuzzy": true,
+          "blockState": "minecraft:mangrove_planks"
+        }
+      },
+      "output": [
+        {
+          "count": 2,
+          "blockState": "minecraft:mangrove_trapdoor;direction=0;open_bit=0;upside_down_bit=0"
+        }
+      ],
+      "shape": [
+        "AAA",
+        "AAA"
+      ],
+      "block": "crafting_table",
+      "priority": 0
+    },
+    {
+      "id": "minecraft:mangrove_wood",
+      "type": 1,
+      "input": {
+        "A": {
+          "fuzzy": true,
+          "blockState": "minecraft:mangrove_log"
+        }
+      },
+      "output": [
+        {
+          "count": 3,
+          "blockState": "minecraft:mangrove_wood;pillar_axis=y;stripped_bit=0"
+        }
+      ],
+      "shape": [
+        "AA",
+        "AA"
+      ],
+      "block": "crafting_table",
+      "priority": 0
+    },
+    {
+      "id": "minecraft:mangrove_wood_stripped",
+      "type": 1,
+      "input": {
+        "A": {
+          "fuzzy": true,
+          "blockState": "minecraft:stripped_mangrove_log"
+        }
+      },
+      "output": [
+        {
+          "count": 3,
+          "blockState": "minecraft:mangrove_wood;pillar_axis=y;stripped_bit=0"
+        }
+      ],
+      "shape": [
+        "AA",
+        "AA"
+      ],
+      "block": "crafting_table",
+      "priority": 0
+    },
+    {
       "id": "minecraft:map",
       "type": 1,
       "input": {
@@ -24129,6 +25651,115 @@
       "priority": 0
     },
     {
+      "id": "minecraft:mud_brick_slab",
+      "type": 1,
+      "input": {
+        "A": {
+          "fuzzy": true,
+          "blockState": "minecraft:mud_bricks"
+        }
+      },
+      "output": [
+        {
+          "count": 6,
+          "blockState": "minecraft:mud_brick_slab;top_slot_bit=0"
+        }
+      ],
+      "shape": [
+        "AAA"
+      ],
+      "block": "crafting_table",
+      "priority": 0
+    },
+    {
+      "id": "minecraft:mud_brick_stairs",
+      "type": 1,
+      "input": {
+        "A": {
+          "fuzzy": true,
+          "blockState": "minecraft:mud_bricks"
+        }
+      },
+      "output": [
+        {
+          "count": 4,
+          "blockState": "minecraft:mud_brick_stairs;upside_down_bit=0;weirdo_direction=0"
+        }
+      ],
+      "shape": [
+        "A  ",
+        "AA ",
+        "AAA"
+      ],
+      "block": "crafting_table",
+      "priority": 0
+    },
+    {
+      "id": "minecraft:mud_brick_wall",
+      "type": 1,
+      "input": {
+        "A": {
+          "fuzzy": true,
+          "blockState": "minecraft:mud_bricks"
+        }
+      },
+      "output": [
+        {
+          "count": 6,
+          "blockState": "minecraft:mud_brick_wall;wall_connection_type_east=none;wall_connection_type_north=none;wall_connection_type_south=none;wall_connection_type_west=none;wall_post_bit=0"
+        }
+      ],
+      "shape": [
+        "AAA",
+        "AAA"
+      ],
+      "block": "crafting_table",
+      "priority": 0
+    },
+    {
+      "id": "minecraft:mud_bricks",
+      "type": 1,
+      "input": {
+        "A": {
+          "fuzzy": true,
+          "blockState": "minecraft:packed_mud"
+        }
+      },
+      "output": [
+        {
+          "count": 4,
+          "blockState": "minecraft:mud_bricks"
+        }
+      ],
+      "shape": [
+        "AA",
+        "AA"
+      ],
+      "block": "crafting_table",
+      "priority": 0
+    },
+    {
+      "id": "minecraft:muddy_mangrove_roots",
+      "type": 0,
+      "input": [
+        {
+          "fuzzy": true,
+          "blockState": "minecraft:mangrove_roots"
+        },
+        {
+          "fuzzy": true,
+          "blockState": "minecraft:mud"
+        }
+      ],
+      "output": [
+        {
+          "blockState": "minecraft:muddy_mangrove_roots"
+        }
+      ],
+      "block": "crafting_table",
+      "priority": 0
+    },
+    {
       "id": "minecraft:mushroom_stew",
       "type": 0,
       "input": [
@@ -24362,6 +25993,32 @@
         "A": {
           "fuzzy": true,
           "blockState": "minecraft:crimson_planks"
+        },
+        "B": {
+          "id": "minecraft:redstone",
+          "fuzzy": true
+        }
+      },
+      "output": [
+        {
+          "blockState": "minecraft:noteblock"
+        }
+      ],
+      "shape": [
+        "AAA",
+        "ABA",
+        "AAA"
+      ],
+      "block": "crafting_table",
+      "priority": 2
+    },
+    {
+      "id": "minecraft:noteblock_from_mangrove_planks",
+      "type": 1,
+      "input": {
+        "A": {
+          "fuzzy": true,
+          "blockState": "minecraft:mangrove_planks"
         },
         "B": {
           "id": "minecraft:redstone",
@@ -24907,6 +26564,27 @@
       "priority": 0
     },
     {
+      "id": "minecraft:packed_mud",
+      "type": 0,
+      "input": [
+        {
+          "fuzzy": true,
+          "blockState": "minecraft:mud"
+        },
+        {
+          "id": "minecraft:wheat",
+          "fuzzy": true
+        }
+      ],
+      "output": [
+        {
+          "blockState": "minecraft:packed_mud"
+        }
+      ],
+      "block": "crafting_table",
+      "priority": 0
+    },
+    {
       "id": "minecraft:paper",
       "type": 1,
       "input": {
@@ -25277,6 +26955,40 @@
         "A": {
           "fuzzy": true,
           "blockState": "minecraft:crimson_planks"
+        },
+        "B": {
+          "fuzzy": true,
+          "blockState": "minecraft:cobblestone"
+        },
+        "C": {
+          "id": "minecraft:iron_ingot",
+          "fuzzy": true
+        },
+        "D": {
+          "id": "minecraft:redstone",
+          "fuzzy": true
+        }
+      },
+      "output": [
+        {
+          "blockState": "minecraft:piston;facing_direction=1"
+        }
+      ],
+      "shape": [
+        "AAA",
+        "BCB",
+        "BDB"
+      ],
+      "block": "crafting_table",
+      "priority": 2
+    },
+    {
+      "id": "minecraft:piston_from_mangrove_planks",
+      "type": 1,
+      "input": {
+        "A": {
+          "fuzzy": true,
+          "blockState": "minecraft:mangrove_planks"
         },
         "B": {
           "fuzzy": true,
@@ -26593,6 +28305,86 @@
       "priority": 0
     },
     {
+      "id": "minecraft:record_5",
+      "type": 1,
+      "input": {
+        "A": {
+          "legacyId": 637,
+          "id": "minecraft:disc_fragment_5",
+          "damage": 32767
+        }
+      },
+      "output": [
+        {
+          "legacyId": 636,
+          "id": "minecraft:music_disc_5"
+        }
+      ],
+      "shape": [
+        "AAA",
+        "AAA",
+        "AAA"
+      ],
+      "block": "crafting_table",
+      "priority": 1
+    },
+    {
+      "id": "minecraft:recovery_compass",
+      "type": 1,
+      "input": {
+        "A": {
+          "legacyId": 647,
+          "id": "minecraft:echo_shard",
+          "damage": 32767
+        },
+        "B": {
+          "id": "minecraft:compass",
+          "fuzzy": true
+        }
+      },
+      "output": [
+        {
+          "legacyId": 646,
+          "id": "minecraft:recovery_compass"
+        }
+      ],
+      "shape": [
+        "AAA",
+        "ABA",
+        "AAA"
+      ],
+      "block": "crafting_table",
+      "priority": 1
+    },
+    {
+      "id": "minecraft:recovery_compass_from_lodestone_compass",
+      "type": 1,
+      "input": {
+        "A": {
+          "legacyId": 647,
+          "id": "minecraft:echo_shard",
+          "damage": 32767
+        },
+        "B": {
+          "id": "minecraft:lodestone_compass",
+          "fuzzy": true
+        }
+      },
+      "output": [
+        {
+          "legacyId": 646,
+          "id": "minecraft:recovery_compass"
+        }
+      ],
+      "shape": [
+        "AAA",
+        "ABA",
+        "AAA"
+      ],
+      "block": "crafting_table",
+      "priority": 1
+    },
+    {
       "id": "minecraft:red_banner",
       "type": 1,
       "input": {
@@ -27374,6 +29166,32 @@
       "priority": 2
     },
     {
+      "id": "minecraft:shield_from_mangrove_planks",
+      "type": 1,
+      "input": {
+        "A": {
+          "fuzzy": true,
+          "blockState": "minecraft:mangrove_planks"
+        },
+        "B": {
+          "id": "minecraft:iron_ingot",
+          "fuzzy": true
+        }
+      },
+      "output": [
+        {
+          "id": "minecraft:shield"
+        }
+      ],
+      "shape": [
+        "ABA",
+        "AAA",
+        " A "
+      ],
+      "block": "crafting_table",
+      "priority": 2
+    },
+    {
       "id": "minecraft:shield_from_warped_planks",
       "type": 1,
       "input": {
@@ -27677,6 +29495,32 @@
       "priority": 2
     },
     {
+      "id": "minecraft:smithing_table_from_mangrove_planks",
+      "type": 1,
+      "input": {
+        "A": {
+          "id": "minecraft:iron_ingot",
+          "fuzzy": true
+        },
+        "B": {
+          "fuzzy": true,
+          "blockState": "minecraft:mangrove_planks"
+        }
+      },
+      "output": [
+        {
+          "blockState": "minecraft:smithing_table"
+        }
+      ],
+      "shape": [
+        "AA",
+        "BB",
+        "BB"
+      ],
+      "block": "crafting_table",
+      "priority": 2
+    },
+    {
       "id": "minecraft:smithing_table_from_warped_planks",
       "type": 1,
       "input": {
@@ -27779,6 +29623,58 @@
       ],
       "block": "crafting_table",
       "priority": 0
+    },
+    {
+      "id": "minecraft:smoker_from_mangrove_log",
+      "type": 1,
+      "input": {
+        "A": {
+          "fuzzy": true,
+          "blockState": "minecraft:mangrove_log"
+        },
+        "B": {
+          "fuzzy": true,
+          "blockState": "minecraft:furnace"
+        }
+      },
+      "output": [
+        {
+          "blockState": "minecraft:smoker"
+        }
+      ],
+      "shape": [
+        " A ",
+        "ABA",
+        " A "
+      ],
+      "block": "crafting_table",
+      "priority": 2
+    },
+    {
+      "id": "minecraft:smoker_from_mangrove_wood",
+      "type": 1,
+      "input": {
+        "A": {
+          "fuzzy": true,
+          "blockState": "minecraft:mangrove_wood"
+        },
+        "B": {
+          "fuzzy": true,
+          "blockState": "minecraft:furnace"
+        }
+      },
+      "output": [
+        {
+          "blockState": "minecraft:smoker"
+        }
+      ],
+      "shape": [
+        " A ",
+        "ABA",
+        " A "
+      ],
+      "block": "crafting_table",
+      "priority": 50
     },
     {
       "id": "minecraft:smoker_from_stripped_acacia",
@@ -27909,6 +29805,58 @@
       ],
       "block": "crafting_table",
       "priority": 0
+    },
+    {
+      "id": "minecraft:smoker_from_stripped_mangrove_log",
+      "type": 1,
+      "input": {
+        "A": {
+          "fuzzy": true,
+          "blockState": "minecraft:stripped_mangrove_log"
+        },
+        "B": {
+          "fuzzy": true,
+          "blockState": "minecraft:furnace"
+        }
+      },
+      "output": [
+        {
+          "blockState": "minecraft:smoker"
+        }
+      ],
+      "shape": [
+        " A ",
+        "ABA",
+        " A "
+      ],
+      "block": "crafting_table",
+      "priority": 0
+    },
+    {
+      "id": "minecraft:smoker_from_stripped_mangrove_wood",
+      "type": 1,
+      "input": {
+        "A": {
+          "fuzzy": true,
+          "blockState": "minecraft:stripped_mangrove_wood"
+        },
+        "B": {
+          "fuzzy": true,
+          "blockState": "minecraft:furnace"
+        }
+      },
+      "output": [
+        {
+          "blockState": "minecraft:smoker"
+        }
+      ],
+      "shape": [
+        " A ",
+        "ABA",
+        " A "
+      ],
+      "block": "crafting_table",
+      "priority": 50
     },
     {
       "id": "minecraft:smoker_from_stripped_oak",
@@ -28223,6 +30171,126 @@
       ],
       "block": "crafting_table",
       "priority": 2
+    },
+    {
+      "id": "minecraft:soul_campfire_from_mangrove_log",
+      "type": 1,
+      "input": {
+        "A": {
+          "id": "minecraft:stick",
+          "fuzzy": true
+        },
+        "B": {
+          "fuzzy": true,
+          "blockState": "minecraft:soul_soil"
+        },
+        "C": {
+          "fuzzy": true,
+          "blockState": "minecraft:mangrove_log"
+        }
+      },
+      "output": [
+        {
+          "id": "minecraft:soul_campfire"
+        }
+      ],
+      "shape": [
+        " A ",
+        "ABA",
+        "CCC"
+      ],
+      "block": "crafting_table",
+      "priority": 2
+    },
+    {
+      "id": "minecraft:soul_campfire_from_mangrove_log2",
+      "type": 1,
+      "input": {
+        "A": {
+          "id": "minecraft:stick",
+          "fuzzy": true
+        },
+        "B": {
+          "fuzzy": true,
+          "blockState": "minecraft:soul_sand"
+        },
+        "C": {
+          "fuzzy": true,
+          "blockState": "minecraft:mangrove_log"
+        }
+      },
+      "output": [
+        {
+          "id": "minecraft:soul_campfire"
+        }
+      ],
+      "shape": [
+        " A ",
+        "ABA",
+        "CCC"
+      ],
+      "block": "crafting_table",
+      "priority": 2
+    },
+    {
+      "id": "minecraft:soul_campfire_from_mangrove_wood",
+      "type": 1,
+      "input": {
+        "A": {
+          "id": "minecraft:stick",
+          "fuzzy": true
+        },
+        "B": {
+          "fuzzy": true,
+          "blockState": "minecraft:soul_soil"
+        },
+        "C": {
+          "fuzzy": true,
+          "blockState": "minecraft:mangrove_wood"
+        }
+      },
+      "output": [
+        {
+          "id": "minecraft:soul_campfire"
+        }
+      ],
+      "shape": [
+        " A ",
+        "ABA",
+        "CCC"
+      ],
+      "block": "crafting_table",
+      "priority": 50
+    },
+    {
+      "id": "minecraft:soul_campfire_from_mangrove_wood2",
+      "type": 1,
+      "input": {
+        "A": {
+          "id": "minecraft:stick",
+          "fuzzy": true
+        },
+        "B": {
+          "fuzzy": true,
+          "blockState": "minecraft:soul_sand"
+        },
+        "C": {
+          "fuzzy": true,
+          "blockState": "minecraft:mangrove_wood"
+        }
+      },
+      "output": [
+        {
+          "id": "minecraft:soul_campfire"
+        }
+      ],
+      "shape": [
+        " A ",
+        "ABA",
+        "CCC"
+      ],
+      "block": "crafting_table",
+      "priority": 50
     },
     {
       "id": "minecraft:soul_campfire_from_soul_sand",
@@ -28825,6 +30893,126 @@
       "priority": 2
     },
     {
+      "id": "minecraft:soul_campfire_from_stripped_mangrove_log",
+      "type": 1,
+      "input": {
+        "A": {
+          "id": "minecraft:stick",
+          "fuzzy": true
+        },
+        "B": {
+          "fuzzy": true,
+          "blockState": "minecraft:soul_soil"
+        },
+        "C": {
+          "fuzzy": true,
+          "blockState": "minecraft:stripped_mangrove_log"
+        }
+      },
+      "output": [
+        {
+          "id": "minecraft:soul_campfire"
+        }
+      ],
+      "shape": [
+        " A ",
+        "ABA",
+        "CCC"
+      ],
+      "block": "crafting_table",
+      "priority": 2
+    },
+    {
+      "id": "minecraft:soul_campfire_from_stripped_mangrove_log2",
+      "type": 1,
+      "input": {
+        "A": {
+          "id": "minecraft:stick",
+          "fuzzy": true
+        },
+        "B": {
+          "fuzzy": true,
+          "blockState": "minecraft:soul_sand"
+        },
+        "C": {
+          "fuzzy": true,
+          "blockState": "minecraft:stripped_mangrove_log"
+        }
+      },
+      "output": [
+        {
+          "id": "minecraft:soul_campfire"
+        }
+      ],
+      "shape": [
+        " A ",
+        "ABA",
+        "CCC"
+      ],
+      "block": "crafting_table",
+      "priority": 2
+    },
+    {
+      "id": "minecraft:soul_campfire_from_stripped_mangrove_wood",
+      "type": 1,
+      "input": {
+        "A": {
+          "id": "minecraft:stick",
+          "fuzzy": true
+        },
+        "B": {
+          "fuzzy": true,
+          "blockState": "minecraft:soul_soil"
+        },
+        "C": {
+          "fuzzy": true,
+          "blockState": "minecraft:stripped_mangrove_wood"
+        }
+      },
+      "output": [
+        {
+          "id": "minecraft:soul_campfire"
+        }
+      ],
+      "shape": [
+        " A ",
+        "ABA",
+        "CCC"
+      ],
+      "block": "crafting_table",
+      "priority": 50
+    },
+    {
+      "id": "minecraft:soul_campfire_from_stripped_mangrove_wood2",
+      "type": 1,
+      "input": {
+        "A": {
+          "id": "minecraft:stick",
+          "fuzzy": true
+        },
+        "B": {
+          "fuzzy": true,
+          "blockState": "minecraft:soul_sand"
+        },
+        "C": {
+          "fuzzy": true,
+          "blockState": "minecraft:stripped_mangrove_wood"
+        }
+      },
+      "output": [
+        {
+          "id": "minecraft:soul_campfire"
+        }
+      ],
+      "shape": [
+        " A ",
+        "ABA",
+        "CCC"
+      ],
+      "block": "crafting_table",
+      "priority": 50
+    },
+    {
       "id": "minecraft:soul_campfire_from_stripped_warped_stem",
       "type": 1,
       "input": {
@@ -29077,6 +31265,28 @@
       "shape": [
         "ABA",
         "AAA"
+      ],
+      "block": "crafting_table",
+      "priority": 0
+    },
+    {
+      "id": "minecraft:spruce_chest_boat",
+      "type": 0,
+      "input": [
+        {
+          "fuzzy": true,
+          "blockState": "minecraft:chest"
+        },
+        {
+          "id": "minecraft:spruce_boat",
+          "damage": 1
+        }
+      ],
+      "output": [
+        {
+          "legacyId": 641,
+          "id": "minecraft:spruce_chest_boat"
+        }
       ],
       "block": "crafting_table",
       "priority": 0
@@ -29353,6 +31563,28 @@
         "A": {
           "fuzzy": true,
           "blockState": "minecraft:crimson_planks"
+        }
+      },
+      "output": [
+        {
+          "id": "minecraft:stick",
+          "count": 4
+        }
+      ],
+      "shape": [
+        "A",
+        "A"
+      ],
+      "block": "crafting_table",
+      "priority": 2
+    },
+    {
+      "id": "minecraft:stick_from_mangrove_planks",
+      "type": 1,
+      "input": {
+        "A": {
+          "fuzzy": true,
+          "blockState": "minecraft:mangrove_planks"
         }
       },
       "output": [
@@ -29998,6 +32230,28 @@
       "priority": 0
     },
     {
+      "id": "minecraft:stripped_mangrove_wood",
+      "type": 1,
+      "input": {
+        "A": {
+          "fuzzy": true,
+          "blockState": "minecraft:stripped_mangrove_log"
+        }
+      },
+      "output": [
+        {
+          "count": 3,
+          "blockState": "minecraft:stripped_mangrove_wood;pillar_axis=y"
+        }
+      ],
+      "shape": [
+        "AA",
+        "AA"
+      ],
+      "block": "crafting_table",
+      "priority": 0
+    },
+    {
       "id": "minecraft:stripped_warped_hyphae",
       "type": 1,
       "input": {
@@ -30499,24 +32753,20 @@
     },
     {
       "id": "minecraft:tnt_minecart",
-      "type": 1,
-      "input": {
-        "A": {
+      "type": 0,
+      "input": [
+        {
           "blockState": "minecraft:tnt"
         },
-        "B": {
+        {
           "id": "minecraft:minecart",
           "fuzzy": true
         }
-      },
+      ],
       "output": [
         {
           "id": "minecraft:tnt_minecart"
         }
-      ],
-      "shape": [
-        "A",
-        "B"
       ],
       "block": "crafting_table",
       "priority": 0
@@ -30557,6 +32807,36 @@
         "C": {
           "fuzzy": true,
           "blockState": "minecraft:crimson_planks"
+        }
+      },
+      "output": [
+        {
+          "blockState": "minecraft:tripwire_hook"
+        }
+      ],
+      "shape": [
+        "A",
+        "B",
+        "C"
+      ],
+      "block": "crafting_table",
+      "priority": 2
+    },
+    {
+      "id": "minecraft:tripwire_hook_from_mangrove_planks",
+      "type": 1,
+      "input": {
+        "A": {
+          "id": "minecraft:iron_ingot",
+          "fuzzy": true
+        },
+        "B": {
+          "id": "minecraft:stick",
+          "fuzzy": true
+        },
+        "C": {
+          "fuzzy": true,
+          "blockState": "minecraft:mangrove_planks"
         }
       },
       "output": [
@@ -31716,6 +33996,32 @@
       "priority": 2
     },
     {
+      "id": "minecraft:wooden_axe_from_mangrove_planks",
+      "type": 1,
+      "input": {
+        "A": {
+          "fuzzy": true,
+          "blockState": "minecraft:mangrove_planks"
+        },
+        "B": {
+          "id": "minecraft:stick",
+          "fuzzy": true
+        }
+      },
+      "output": [
+        {
+          "id": "minecraft:wooden_axe"
+        }
+      ],
+      "shape": [
+        "AA",
+        "AB",
+        " B"
+      ],
+      "block": "crafting_table",
+      "priority": 2
+    },
+    {
       "id": "minecraft:wooden_axe_from_warped_planks",
       "type": 1,
       "input": {
@@ -31790,6 +34096,32 @@
       "priority": 2
     },
     {
+      "id": "minecraft:wooden_hoe_from_mangrove_planks",
+      "type": 1,
+      "input": {
+        "A": {
+          "fuzzy": true,
+          "blockState": "minecraft:mangrove_planks"
+        },
+        "B": {
+          "id": "minecraft:stick",
+          "fuzzy": true
+        }
+      },
+      "output": [
+        {
+          "id": "minecraft:wooden_hoe"
+        }
+      ],
+      "shape": [
+        "AA ",
+        " B ",
+        " B "
+      ],
+      "block": "crafting_table",
+      "priority": 2
+    },
+    {
       "id": "minecraft:wooden_hoe_from_warped_planks",
       "type": 1,
       "input": {
@@ -31822,6 +34154,32 @@
         "A": {
           "fuzzy": true,
           "blockState": "minecraft:crimson_planks"
+        },
+        "B": {
+          "id": "minecraft:stick",
+          "fuzzy": true
+        }
+      },
+      "output": [
+        {
+          "id": "minecraft:wooden_pickaxe"
+        }
+      ],
+      "shape": [
+        "AAA",
+        " B ",
+        " B "
+      ],
+      "block": "crafting_table",
+      "priority": 2
+    },
+    {
+      "id": "minecraft:wooden_pickaxe_from_mangrove_planks",
+      "type": 1,
+      "input": {
+        "A": {
+          "fuzzy": true,
+          "blockState": "minecraft:mangrove_planks"
         },
         "B": {
           "id": "minecraft:stick",
@@ -31894,6 +34252,32 @@
       "priority": 2
     },
     {
+      "id": "minecraft:wooden_shovel_from_mangrove_planks",
+      "type": 1,
+      "input": {
+        "A": {
+          "fuzzy": true,
+          "blockState": "minecraft:mangrove_planks"
+        },
+        "B": {
+          "id": "minecraft:stick",
+          "fuzzy": true
+        }
+      },
+      "output": [
+        {
+          "id": "minecraft:wooden_shovel"
+        }
+      ],
+      "shape": [
+        "A",
+        "B",
+        "B"
+      ],
+      "block": "crafting_table",
+      "priority": 2
+    },
+    {
       "id": "minecraft:wooden_shovel_from_warped_planks",
       "type": 1,
       "input": {
@@ -31926,6 +34310,32 @@
         "A": {
           "fuzzy": true,
           "blockState": "minecraft:crimson_planks"
+        },
+        "B": {
+          "id": "minecraft:stick",
+          "fuzzy": true
+        }
+      },
+      "output": [
+        {
+          "id": "minecraft:wooden_sword"
+        }
+      ],
+      "shape": [
+        "A",
+        "A",
+        "B"
+      ],
+      "block": "crafting_table",
+      "priority": 2
+    },
+    {
+      "id": "minecraft:wooden_sword_from_mangrove_planks",
+      "type": 1,
+      "input": {
+        "A": {
+          "fuzzy": true,
+          "blockState": "minecraft:mangrove_planks"
         },
         "B": {
           "id": "minecraft:stick",
@@ -39727,7 +42137,7 @@
       "output": [
         {
           "count": 6,
-          "blockState": "minecraft:stone_slab3"
+          "blockState": "minecraft:stone_block_slab3"
         }
       ],
       "shape": [
@@ -39791,7 +42201,7 @@
       "output": [
         {
           "count": 6,
-          "blockState": "minecraft:stone_slab2"
+          "blockState": "minecraft:stone_block_slab2"
         }
       ],
       "shape": [
@@ -39811,7 +42221,7 @@
       "output": [
         {
           "count": 6,
-          "blockState": "minecraft:stone_slab2;stone_slab_type_2=prismarine_brick"
+          "blockState": "minecraft:stone_block_slab2;stone_slab_type_2=prismarine_brick"
         }
       ],
       "shape": [
@@ -39831,7 +42241,7 @@
       "output": [
         {
           "count": 6,
-          "blockState": "minecraft:stone_slab2;stone_slab_type_2=prismarine_dark"
+          "blockState": "minecraft:stone_block_slab2;stone_slab_type_2=prismarine_dark"
         }
       ],
       "shape": [
@@ -39851,7 +42261,7 @@
       "output": [
         {
           "count": 6,
-          "blockState": "minecraft:stone_slab2;stone_slab_type_2=purpur"
+          "blockState": "minecraft:stone_block_slab2;stone_slab_type_2=purpur"
         }
       ],
       "shape": [
@@ -39871,7 +42281,7 @@
       "output": [
         {
           "count": 6,
-          "blockState": "minecraft:stone_slab2;stone_slab_type_2=mossy_cobblestone"
+          "blockState": "minecraft:stone_block_slab2;stone_slab_type_2=mossy_cobblestone"
         }
       ],
       "shape": [
@@ -39891,7 +42301,7 @@
       "output": [
         {
           "count": 6,
-          "blockState": "minecraft:stone_slab2;stone_slab_type_2=red_nether_brick"
+          "blockState": "minecraft:stone_block_slab2;stone_slab_type_2=red_nether_brick"
         }
       ],
       "shape": [
@@ -39911,7 +42321,7 @@
       "output": [
         {
           "count": 6,
-          "blockState": "minecraft:stone_slab2"
+          "blockState": "minecraft:stone_block_slab2"
         }
       ],
       "shape": [
@@ -39931,7 +42341,7 @@
       "output": [
         {
           "count": 6,
-          "blockState": "minecraft:stone_slab2;stone_slab_type_2=smooth_sandstone"
+          "blockState": "minecraft:stone_block_slab2;stone_slab_type_2=smooth_sandstone"
         }
       ],
       "shape": [
@@ -39951,7 +42361,7 @@
       "output": [
         {
           "count": 6,
-          "blockState": "minecraft:stone_slab3;stone_slab_type_3=andesite"
+          "blockState": "minecraft:stone_block_slab3;stone_slab_type_3=andesite"
         }
       ],
       "shape": [
@@ -39971,7 +42381,7 @@
       "output": [
         {
           "count": 6,
-          "blockState": "minecraft:stone_slab3;stone_slab_type_3=diorite"
+          "blockState": "minecraft:stone_block_slab3;stone_slab_type_3=diorite"
         }
       ],
       "shape": [
@@ -39991,7 +42401,7 @@
       "output": [
         {
           "count": 6,
-          "blockState": "minecraft:stone_slab3;stone_slab_type_3=granite"
+          "blockState": "minecraft:stone_block_slab3;stone_slab_type_3=granite"
         }
       ],
       "shape": [
@@ -40011,7 +42421,7 @@
       "output": [
         {
           "count": 6,
-          "blockState": "minecraft:stone_slab3;stone_slab_type_3=polished_granite"
+          "blockState": "minecraft:stone_block_slab3;stone_slab_type_3=polished_granite"
         }
       ],
       "shape": [
@@ -40031,7 +42441,7 @@
       "output": [
         {
           "count": 6,
-          "blockState": "minecraft:stone_slab3;stone_slab_type_3=polished_andesite"
+          "blockState": "minecraft:stone_block_slab3;stone_slab_type_3=polished_andesite"
         }
       ],
       "shape": [
@@ -40051,7 +42461,7 @@
       "output": [
         {
           "count": 6,
-          "blockState": "minecraft:stone_slab3;stone_slab_type_3=polished_diorite"
+          "blockState": "minecraft:stone_block_slab3;stone_slab_type_3=polished_diorite"
         }
       ],
       "shape": [
@@ -40071,7 +42481,7 @@
       "output": [
         {
           "count": 6,
-          "blockState": "minecraft:stone_slab3;stone_slab_type_3=smooth_red_sandstone"
+          "blockState": "minecraft:stone_block_slab3;stone_slab_type_3=smooth_red_sandstone"
         }
       ],
       "shape": [
@@ -40091,7 +42501,7 @@
       "output": [
         {
           "count": 6,
-          "blockState": "minecraft:stone_slab4;stone_slab_type_4=cut_red_sandstone"
+          "blockState": "minecraft:stone_block_slab4;stone_slab_type_4=cut_red_sandstone"
         }
       ],
       "shape": [
@@ -40111,7 +42521,7 @@
       "output": [
         {
           "count": 6,
-          "blockState": "minecraft:stone_slab4;stone_slab_type_4=cut_sandstone"
+          "blockState": "minecraft:stone_block_slab4;stone_slab_type_4=cut_sandstone"
         }
       ],
       "shape": [
@@ -40131,7 +42541,7 @@
       "output": [
         {
           "count": 6,
-          "blockState": "minecraft:stone_slab4;stone_slab_type_4=smooth_quartz"
+          "blockState": "minecraft:stone_block_slab4;stone_slab_type_4=smooth_quartz"
         }
       ],
       "shape": [
@@ -40151,7 +42561,7 @@
       "output": [
         {
           "count": 6,
-          "blockState": "minecraft:stone_slab;stone_slab_type=quartz"
+          "blockState": "minecraft:stone_block_slab;stone_slab_type=quartz"
         }
       ],
       "shape": [
@@ -40171,7 +42581,7 @@
       "output": [
         {
           "count": 6,
-          "blockState": "minecraft:stone_slab2;stone_slab_type_2=prismarine_rough"
+          "blockState": "minecraft:stone_block_slab2;stone_slab_type_2=prismarine_rough"
         }
       ],
       "shape": [
@@ -40191,7 +42601,7 @@
       "output": [
         {
           "count": 6,
-          "blockState": "minecraft:stone_slab;stone_slab_type=sandstone"
+          "blockState": "minecraft:stone_block_slab;stone_slab_type=sandstone"
         }
       ],
       "shape": [
@@ -47364,6 +49774,54 @@
       "type": 3,
       "input": {
         "fuzzy": true,
+        "blockState": "minecraft:stripped_mangrove_wood"
+      },
+      "output": {
+        "id": "minecraft:charcoal",
+        "damage": 1
+      },
+      "block": "furnace"
+    },
+    {
+      "type": 3,
+      "input": {
+        "fuzzy": true,
+        "blockState": "minecraft:mangrove_wood"
+      },
+      "output": {
+        "id": "minecraft:charcoal",
+        "damage": 1
+      },
+      "block": "furnace"
+    },
+    {
+      "type": 3,
+      "input": {
+        "fuzzy": true,
+        "blockState": "minecraft:stripped_mangrove_log"
+      },
+      "output": {
+        "id": "minecraft:charcoal",
+        "damage": 1
+      },
+      "block": "furnace"
+    },
+    {
+      "type": 3,
+      "input": {
+        "fuzzy": true,
+        "blockState": "minecraft:mangrove_log"
+      },
+      "output": {
+        "id": "minecraft:charcoal",
+        "damage": 1
+      },
+      "block": "furnace"
+    },
+    {
+      "type": 3,
+      "input": {
+        "fuzzy": true,
         "blockState": "minecraft:deepslate_copper_ore"
       },
       "output": {
@@ -49535,30 +51993,6 @@
   "potionMixes": [
     {
       "inputId": "minecraft:potion",
-      "inputMeta": 27,
-      "reagentId": "minecraft:fermented_spider_eye",
-      "reagentMeta": 0,
-      "outputId": "minecraft:potion",
-      "outputMeta": 24
-    },
-    {
-      "inputId": "minecraft:splash_potion",
-      "inputMeta": 27,
-      "reagentId": "minecraft:fermented_spider_eye",
-      "reagentMeta": 0,
-      "outputId": "minecraft:splash_potion",
-      "outputMeta": 24
-    },
-    {
-      "inputId": "minecraft:lingering_potion",
-      "inputMeta": 27,
-      "reagentId": "minecraft:fermented_spider_eye",
-      "reagentMeta": 0,
-      "outputId": "minecraft:lingering_potion",
-      "outputMeta": 24
-    },
-    {
-      "inputId": "minecraft:potion",
       "inputMeta": 17,
       "reagentId": "minecraft:glowstone_dust",
       "reagentMeta": 0,
@@ -49583,51 +52017,27 @@
     },
     {
       "inputId": "minecraft:potion",
-      "inputMeta": 0,
-      "reagentId": "minecraft:magma_cream",
+      "inputMeta": 27,
+      "reagentId": "minecraft:fermented_spider_eye",
       "reagentMeta": 0,
       "outputId": "minecraft:potion",
-      "outputMeta": 1
+      "outputMeta": 24
     },
     {
       "inputId": "minecraft:splash_potion",
-      "inputMeta": 0,
-      "reagentId": "minecraft:magma_cream",
+      "inputMeta": 27,
+      "reagentId": "minecraft:fermented_spider_eye",
       "reagentMeta": 0,
       "outputId": "minecraft:splash_potion",
-      "outputMeta": 1
+      "outputMeta": 24
     },
     {
       "inputId": "minecraft:lingering_potion",
-      "inputMeta": 0,
-      "reagentId": "minecraft:magma_cream",
+      "inputMeta": 27,
+      "reagentId": "minecraft:fermented_spider_eye",
       "reagentMeta": 0,
       "outputId": "minecraft:lingering_potion",
-      "outputMeta": 1
-    },
-    {
-      "inputId": "minecraft:potion",
-      "inputMeta": 0,
-      "reagentId": "minecraft:spider_eye",
-      "reagentMeta": 0,
-      "outputId": "minecraft:potion",
-      "outputMeta": 1
-    },
-    {
-      "inputId": "minecraft:splash_potion",
-      "inputMeta": 0,
-      "reagentId": "minecraft:spider_eye",
-      "reagentMeta": 0,
-      "outputId": "minecraft:splash_potion",
-      "outputMeta": 1
-    },
-    {
-      "inputId": "minecraft:lingering_potion",
-      "inputMeta": 0,
-      "reagentId": "minecraft:spider_eye",
-      "reagentMeta": 0,
-      "outputId": "minecraft:lingering_potion",
-      "outputMeta": 1
+      "outputMeta": 24
     },
     {
       "inputId": "minecraft:potion",
@@ -49655,7 +52065,7 @@
     },
     {
       "inputId": "minecraft:potion",
-      "inputMeta": 33,
+      "inputMeta": 4,
       "reagentId": "minecraft:fermented_spider_eye",
       "reagentMeta": 0,
       "outputId": "minecraft:potion",
@@ -49663,7 +52073,7 @@
     },
     {
       "inputId": "minecraft:splash_potion",
-      "inputMeta": 33,
+      "inputMeta": 4,
       "reagentId": "minecraft:fermented_spider_eye",
       "reagentMeta": 0,
       "outputId": "minecraft:splash_potion",
@@ -49671,107 +52081,11 @@
     },
     {
       "inputId": "minecraft:lingering_potion",
-      "inputMeta": 33,
+      "inputMeta": 4,
       "reagentId": "minecraft:fermented_spider_eye",
       "reagentMeta": 0,
       "outputId": "minecraft:lingering_potion",
       "outputMeta": 34
-    },
-    {
-      "inputId": "minecraft:potion",
-      "inputMeta": 25,
-      "reagentId": "minecraft:glowstone_dust",
-      "reagentMeta": 0,
-      "outputId": "minecraft:potion",
-      "outputMeta": 27
-    },
-    {
-      "inputId": "minecraft:splash_potion",
-      "inputMeta": 25,
-      "reagentId": "minecraft:glowstone_dust",
-      "reagentMeta": 0,
-      "outputId": "minecraft:splash_potion",
-      "outputMeta": 27
-    },
-    {
-      "inputId": "minecraft:lingering_potion",
-      "inputMeta": 25,
-      "reagentId": "minecraft:glowstone_dust",
-      "reagentMeta": 0,
-      "outputId": "minecraft:lingering_potion",
-      "outputMeta": 27
-    },
-    {
-      "inputId": "minecraft:potion",
-      "inputMeta": 1,
-      "reagentId": "minecraft:fermented_spider_eye",
-      "reagentMeta": 0,
-      "outputId": "minecraft:potion",
-      "outputMeta": 34
-    },
-    {
-      "inputId": "minecraft:splash_potion",
-      "inputMeta": 1,
-      "reagentId": "minecraft:fermented_spider_eye",
-      "reagentMeta": 0,
-      "outputId": "minecraft:splash_potion",
-      "outputMeta": 34
-    },
-    {
-      "inputId": "minecraft:lingering_potion",
-      "inputMeta": 1,
-      "reagentId": "minecraft:fermented_spider_eye",
-      "reagentMeta": 0,
-      "outputId": "minecraft:lingering_potion",
-      "outputMeta": 34
-    },
-    {
-      "inputId": "minecraft:potion",
-      "inputMeta": 0,
-      "reagentId": "minecraft:glowstone_dust",
-      "reagentMeta": 0,
-      "outputId": "minecraft:potion",
-      "outputMeta": 3
-    },
-    {
-      "inputId": "minecraft:splash_potion",
-      "inputMeta": 0,
-      "reagentId": "minecraft:glowstone_dust",
-      "reagentMeta": 0,
-      "outputId": "minecraft:splash_potion",
-      "outputMeta": 3
-    },
-    {
-      "inputId": "minecraft:lingering_potion",
-      "inputMeta": 0,
-      "reagentId": "minecraft:glowstone_dust",
-      "reagentMeta": 0,
-      "outputId": "minecraft:lingering_potion",
-      "outputMeta": 3
-    },
-    {
-      "inputId": "minecraft:potion",
-      "inputMeta": 23,
-      "reagentId": "minecraft:glowstone_dust",
-      "reagentMeta": 0,
-      "outputId": "minecraft:potion",
-      "outputMeta": 24
-    },
-    {
-      "inputId": "minecraft:splash_potion",
-      "inputMeta": 23,
-      "reagentId": "minecraft:glowstone_dust",
-      "reagentMeta": 0,
-      "outputId": "minecraft:splash_potion",
-      "outputMeta": 24
-    },
-    {
-      "inputId": "minecraft:lingering_potion",
-      "inputMeta": 23,
-      "reagentId": "minecraft:glowstone_dust",
-      "reagentMeta": 0,
-      "outputId": "minecraft:lingering_potion",
-      "outputMeta": 24
     },
     {
       "inputId": "minecraft:potion",
@@ -49799,51 +52113,219 @@
     },
     {
       "inputId": "minecraft:potion",
-      "inputMeta": 0,
-      "reagentId": "minecraft:fermented_spider_eye",
+      "inputMeta": 4,
+      "reagentId": "minecraft:golden_carrot",
       "reagentMeta": 0,
       "outputId": "minecraft:potion",
-      "outputMeta": 34
+      "outputMeta": 5
     },
     {
       "inputId": "minecraft:splash_potion",
-      "inputMeta": 0,
-      "reagentId": "minecraft:fermented_spider_eye",
+      "inputMeta": 4,
+      "reagentId": "minecraft:golden_carrot",
       "reagentMeta": 0,
       "outputId": "minecraft:splash_potion",
-      "outputMeta": 34
+      "outputMeta": 5
     },
     {
       "inputId": "minecraft:lingering_potion",
-      "inputMeta": 0,
-      "reagentId": "minecraft:fermented_spider_eye",
+      "inputMeta": 4,
+      "reagentId": "minecraft:golden_carrot",
       "reagentMeta": 0,
       "outputId": "minecraft:lingering_potion",
-      "outputMeta": 34
+      "outputMeta": 5
     },
     {
       "inputId": "minecraft:potion",
-      "inputMeta": 7,
-      "reagentId": "minecraft:redstone",
+      "inputMeta": 4,
+      "reagentId": "minecraft:magma_cream",
       "reagentMeta": 0,
       "outputId": "minecraft:potion",
-      "outputMeta": 8
+      "outputMeta": 12
     },
     {
       "inputId": "minecraft:splash_potion",
-      "inputMeta": 7,
-      "reagentId": "minecraft:redstone",
+      "inputMeta": 4,
+      "reagentId": "minecraft:magma_cream",
       "reagentMeta": 0,
       "outputId": "minecraft:splash_potion",
-      "outputMeta": 8
+      "outputMeta": 12
     },
     {
       "inputId": "minecraft:lingering_potion",
-      "inputMeta": 7,
-      "reagentId": "minecraft:redstone",
+      "inputMeta": 4,
+      "reagentId": "minecraft:magma_cream",
       "reagentMeta": 0,
       "outputId": "minecraft:lingering_potion",
-      "outputMeta": 8
+      "outputMeta": 12
+    },
+    {
+      "inputId": "minecraft:potion",
+      "inputMeta": 4,
+      "reagentId": "minecraft:phantom_membrane",
+      "reagentMeta": 0,
+      "outputId": "minecraft:potion",
+      "outputMeta": 40
+    },
+    {
+      "inputId": "minecraft:splash_potion",
+      "inputMeta": 4,
+      "reagentId": "minecraft:phantom_membrane",
+      "reagentMeta": 0,
+      "outputId": "minecraft:splash_potion",
+      "outputMeta": 40
+    },
+    {
+      "inputId": "minecraft:lingering_potion",
+      "inputMeta": 4,
+      "reagentId": "minecraft:phantom_membrane",
+      "reagentMeta": 0,
+      "outputId": "minecraft:lingering_potion",
+      "outputMeta": 40
+    },
+    {
+      "inputId": "minecraft:potion",
+      "inputMeta": 4,
+      "reagentId": "minecraft:pufferfish",
+      "reagentMeta": 0,
+      "outputId": "minecraft:potion",
+      "outputMeta": 19
+    },
+    {
+      "inputId": "minecraft:splash_potion",
+      "inputMeta": 4,
+      "reagentId": "minecraft:pufferfish",
+      "reagentMeta": 0,
+      "outputId": "minecraft:splash_potion",
+      "outputMeta": 19
+    },
+    {
+      "inputId": "minecraft:lingering_potion",
+      "inputMeta": 4,
+      "reagentId": "minecraft:pufferfish",
+      "reagentMeta": 0,
+      "outputId": "minecraft:lingering_potion",
+      "outputMeta": 19
+    },
+    {
+      "inputId": "minecraft:potion",
+      "inputMeta": 4,
+      "reagentId": "minecraft:rabbit_foot",
+      "reagentMeta": 0,
+      "outputId": "minecraft:potion",
+      "outputMeta": 9
+    },
+    {
+      "inputId": "minecraft:splash_potion",
+      "inputMeta": 4,
+      "reagentId": "minecraft:rabbit_foot",
+      "reagentMeta": 0,
+      "outputId": "minecraft:splash_potion",
+      "outputMeta": 9
+    },
+    {
+      "inputId": "minecraft:lingering_potion",
+      "inputMeta": 4,
+      "reagentId": "minecraft:rabbit_foot",
+      "reagentMeta": 0,
+      "outputId": "minecraft:lingering_potion",
+      "outputMeta": 9
+    },
+    {
+      "inputId": "minecraft:potion",
+      "inputMeta": 4,
+      "reagentId": "minecraft:glistering_melon_slice",
+      "reagentMeta": 0,
+      "outputId": "minecraft:potion",
+      "outputMeta": 21
+    },
+    {
+      "inputId": "minecraft:splash_potion",
+      "inputMeta": 4,
+      "reagentId": "minecraft:glistering_melon_slice",
+      "reagentMeta": 0,
+      "outputId": "minecraft:splash_potion",
+      "outputMeta": 21
+    },
+    {
+      "inputId": "minecraft:lingering_potion",
+      "inputMeta": 4,
+      "reagentId": "minecraft:glistering_melon_slice",
+      "reagentMeta": 0,
+      "outputId": "minecraft:lingering_potion",
+      "outputMeta": 21
+    },
+    {
+      "inputId": "minecraft:potion",
+      "inputMeta": 4,
+      "reagentId": "minecraft:spider_eye",
+      "reagentMeta": 0,
+      "outputId": "minecraft:potion",
+      "outputMeta": 25
+    },
+    {
+      "inputId": "minecraft:splash_potion",
+      "inputMeta": 4,
+      "reagentId": "minecraft:spider_eye",
+      "reagentMeta": 0,
+      "outputId": "minecraft:splash_potion",
+      "outputMeta": 25
+    },
+    {
+      "inputId": "minecraft:lingering_potion",
+      "inputMeta": 4,
+      "reagentId": "minecraft:spider_eye",
+      "reagentMeta": 0,
+      "outputId": "minecraft:lingering_potion",
+      "outputMeta": 25
+    },
+    {
+      "inputId": "minecraft:potion",
+      "inputMeta": 4,
+      "reagentId": "minecraft:sugar",
+      "reagentMeta": 0,
+      "outputId": "minecraft:potion",
+      "outputMeta": 14
+    },
+    {
+      "inputId": "minecraft:splash_potion",
+      "inputMeta": 4,
+      "reagentId": "minecraft:sugar",
+      "reagentMeta": 0,
+      "outputId": "minecraft:splash_potion",
+      "outputMeta": 14
+    },
+    {
+      "inputId": "minecraft:lingering_potion",
+      "inputMeta": 4,
+      "reagentId": "minecraft:sugar",
+      "reagentMeta": 0,
+      "outputId": "minecraft:lingering_potion",
+      "outputMeta": 14
+    },
+    {
+      "inputId": "minecraft:potion",
+      "inputMeta": 4,
+      "reagentId": "minecraft:turtle_helmet",
+      "reagentMeta": 0,
+      "outputId": "minecraft:potion",
+      "outputMeta": 37
+    },
+    {
+      "inputId": "minecraft:splash_potion",
+      "inputMeta": 4,
+      "reagentId": "minecraft:turtle_helmet",
+      "reagentMeta": 0,
+      "outputId": "minecraft:splash_potion",
+      "outputMeta": 37
+    },
+    {
+      "inputId": "minecraft:lingering_potion",
+      "inputMeta": 4,
+      "reagentId": "minecraft:turtle_helmet",
+      "reagentMeta": 0,
+      "outputId": "minecraft:lingering_potion",
+      "outputMeta": 37
     },
     {
       "inputId": "minecraft:potion",
@@ -49871,6 +52353,462 @@
     },
     {
       "inputId": "minecraft:potion",
+      "inputMeta": 23,
+      "reagentId": "minecraft:glowstone_dust",
+      "reagentMeta": 0,
+      "outputId": "minecraft:potion",
+      "outputMeta": 24
+    },
+    {
+      "inputId": "minecraft:splash_potion",
+      "inputMeta": 23,
+      "reagentId": "minecraft:glowstone_dust",
+      "reagentMeta": 0,
+      "outputId": "minecraft:splash_potion",
+      "outputMeta": 24
+    },
+    {
+      "inputId": "minecraft:lingering_potion",
+      "inputMeta": 23,
+      "reagentId": "minecraft:glowstone_dust",
+      "reagentMeta": 0,
+      "outputId": "minecraft:lingering_potion",
+      "outputMeta": 24
+    },
+    {
+      "inputId": "minecraft:potion",
+      "inputMeta": 21,
+      "reagentId": "minecraft:fermented_spider_eye",
+      "reagentMeta": 0,
+      "outputId": "minecraft:potion",
+      "outputMeta": 23
+    },
+    {
+      "inputId": "minecraft:splash_potion",
+      "inputMeta": 21,
+      "reagentId": "minecraft:fermented_spider_eye",
+      "reagentMeta": 0,
+      "outputId": "minecraft:splash_potion",
+      "outputMeta": 23
+    },
+    {
+      "inputId": "minecraft:lingering_potion",
+      "inputMeta": 21,
+      "reagentId": "minecraft:fermented_spider_eye",
+      "reagentMeta": 0,
+      "outputId": "minecraft:lingering_potion",
+      "outputMeta": 23
+    },
+    {
+      "inputId": "minecraft:potion",
+      "inputMeta": 21,
+      "reagentId": "minecraft:glowstone_dust",
+      "reagentMeta": 0,
+      "outputId": "minecraft:potion",
+      "outputMeta": 22
+    },
+    {
+      "inputId": "minecraft:splash_potion",
+      "inputMeta": 21,
+      "reagentId": "minecraft:glowstone_dust",
+      "reagentMeta": 0,
+      "outputId": "minecraft:splash_potion",
+      "outputMeta": 22
+    },
+    {
+      "inputId": "minecraft:lingering_potion",
+      "inputMeta": 21,
+      "reagentId": "minecraft:glowstone_dust",
+      "reagentMeta": 0,
+      "outputId": "minecraft:lingering_potion",
+      "outputMeta": 22
+    },
+    {
+      "inputId": "minecraft:potion",
+      "inputMeta": 7,
+      "reagentId": "minecraft:redstone",
+      "reagentMeta": 0,
+      "outputId": "minecraft:potion",
+      "outputMeta": 8
+    },
+    {
+      "inputId": "minecraft:splash_potion",
+      "inputMeta": 7,
+      "reagentId": "minecraft:redstone",
+      "reagentMeta": 0,
+      "outputId": "minecraft:splash_potion",
+      "outputMeta": 8
+    },
+    {
+      "inputId": "minecraft:lingering_potion",
+      "inputMeta": 7,
+      "reagentId": "minecraft:redstone",
+      "reagentMeta": 0,
+      "outputId": "minecraft:lingering_potion",
+      "outputMeta": 8
+    },
+    {
+      "inputId": "minecraft:potion",
+      "inputMeta": 9,
+      "reagentId": "minecraft:fermented_spider_eye",
+      "reagentMeta": 0,
+      "outputId": "minecraft:potion",
+      "outputMeta": 17
+    },
+    {
+      "inputId": "minecraft:splash_potion",
+      "inputMeta": 9,
+      "reagentId": "minecraft:fermented_spider_eye",
+      "reagentMeta": 0,
+      "outputId": "minecraft:splash_potion",
+      "outputMeta": 17
+    },
+    {
+      "inputId": "minecraft:lingering_potion",
+      "inputMeta": 9,
+      "reagentId": "minecraft:fermented_spider_eye",
+      "reagentMeta": 0,
+      "outputId": "minecraft:lingering_potion",
+      "outputMeta": 17
+    },
+    {
+      "inputId": "minecraft:potion",
+      "inputMeta": 9,
+      "reagentId": "minecraft:glowstone_dust",
+      "reagentMeta": 0,
+      "outputId": "minecraft:potion",
+      "outputMeta": 11
+    },
+    {
+      "inputId": "minecraft:splash_potion",
+      "inputMeta": 9,
+      "reagentId": "minecraft:glowstone_dust",
+      "reagentMeta": 0,
+      "outputId": "minecraft:splash_potion",
+      "outputMeta": 11
+    },
+    {
+      "inputId": "minecraft:lingering_potion",
+      "inputMeta": 9,
+      "reagentId": "minecraft:glowstone_dust",
+      "reagentMeta": 0,
+      "outputId": "minecraft:lingering_potion",
+      "outputMeta": 11
+    },
+    {
+      "inputId": "minecraft:potion",
+      "inputMeta": 9,
+      "reagentId": "minecraft:redstone",
+      "reagentMeta": 0,
+      "outputId": "minecraft:potion",
+      "outputMeta": 10
+    },
+    {
+      "inputId": "minecraft:splash_potion",
+      "inputMeta": 9,
+      "reagentId": "minecraft:redstone",
+      "reagentMeta": 0,
+      "outputId": "minecraft:splash_potion",
+      "outputMeta": 10
+    },
+    {
+      "inputId": "minecraft:lingering_potion",
+      "inputMeta": 9,
+      "reagentId": "minecraft:redstone",
+      "reagentMeta": 0,
+      "outputId": "minecraft:lingering_potion",
+      "outputMeta": 10
+    },
+    {
+      "inputId": "minecraft:potion",
+      "inputMeta": 6,
+      "reagentId": "minecraft:fermented_spider_eye",
+      "reagentMeta": 0,
+      "outputId": "minecraft:potion",
+      "outputMeta": 8
+    },
+    {
+      "inputId": "minecraft:splash_potion",
+      "inputMeta": 6,
+      "reagentId": "minecraft:fermented_spider_eye",
+      "reagentMeta": 0,
+      "outputId": "minecraft:splash_potion",
+      "outputMeta": 8
+    },
+    {
+      "inputId": "minecraft:lingering_potion",
+      "inputMeta": 6,
+      "reagentId": "minecraft:fermented_spider_eye",
+      "reagentMeta": 0,
+      "outputId": "minecraft:lingering_potion",
+      "outputMeta": 8
+    },
+    {
+      "inputId": "minecraft:potion",
+      "inputMeta": 15,
+      "reagentId": "minecraft:fermented_spider_eye",
+      "reagentMeta": 0,
+      "outputId": "minecraft:potion",
+      "outputMeta": 18
+    },
+    {
+      "inputId": "minecraft:splash_potion",
+      "inputMeta": 15,
+      "reagentId": "minecraft:fermented_spider_eye",
+      "reagentMeta": 0,
+      "outputId": "minecraft:splash_potion",
+      "outputMeta": 18
+    },
+    {
+      "inputId": "minecraft:lingering_potion",
+      "inputMeta": 15,
+      "reagentId": "minecraft:fermented_spider_eye",
+      "reagentMeta": 0,
+      "outputId": "minecraft:lingering_potion",
+      "outputMeta": 18
+    },
+    {
+      "inputId": "minecraft:potion",
+      "inputMeta": 10,
+      "reagentId": "minecraft:fermented_spider_eye",
+      "reagentMeta": 0,
+      "outputId": "minecraft:potion",
+      "outputMeta": 18
+    },
+    {
+      "inputId": "minecraft:splash_potion",
+      "inputMeta": 10,
+      "reagentId": "minecraft:fermented_spider_eye",
+      "reagentMeta": 0,
+      "outputId": "minecraft:splash_potion",
+      "outputMeta": 18
+    },
+    {
+      "inputId": "minecraft:lingering_potion",
+      "inputMeta": 10,
+      "reagentId": "minecraft:fermented_spider_eye",
+      "reagentMeta": 0,
+      "outputId": "minecraft:lingering_potion",
+      "outputMeta": 18
+    },
+    {
+      "inputId": "minecraft:potion",
+      "inputMeta": 2,
+      "reagentId": "minecraft:fermented_spider_eye",
+      "reagentMeta": 0,
+      "outputId": "minecraft:potion",
+      "outputMeta": 35
+    },
+    {
+      "inputId": "minecraft:splash_potion",
+      "inputMeta": 2,
+      "reagentId": "minecraft:fermented_spider_eye",
+      "reagentMeta": 0,
+      "outputId": "minecraft:splash_potion",
+      "outputMeta": 35
+    },
+    {
+      "inputId": "minecraft:lingering_potion",
+      "inputMeta": 2,
+      "reagentId": "minecraft:fermented_spider_eye",
+      "reagentMeta": 0,
+      "outputId": "minecraft:lingering_potion",
+      "outputMeta": 35
+    },
+    {
+      "inputId": "minecraft:potion",
+      "inputMeta": 26,
+      "reagentId": "minecraft:fermented_spider_eye",
+      "reagentMeta": 0,
+      "outputId": "minecraft:potion",
+      "outputMeta": 23
+    },
+    {
+      "inputId": "minecraft:splash_potion",
+      "inputMeta": 26,
+      "reagentId": "minecraft:fermented_spider_eye",
+      "reagentMeta": 0,
+      "outputId": "minecraft:splash_potion",
+      "outputMeta": 23
+    },
+    {
+      "inputId": "minecraft:lingering_potion",
+      "inputMeta": 26,
+      "reagentId": "minecraft:fermented_spider_eye",
+      "reagentMeta": 0,
+      "outputId": "minecraft:lingering_potion",
+      "outputMeta": 23
+    },
+    {
+      "inputId": "minecraft:potion",
+      "inputMeta": 32,
+      "reagentId": "minecraft:fermented_spider_eye",
+      "reagentMeta": 0,
+      "outputId": "minecraft:potion",
+      "outputMeta": 35
+    },
+    {
+      "inputId": "minecraft:splash_potion",
+      "inputMeta": 32,
+      "reagentId": "minecraft:fermented_spider_eye",
+      "reagentMeta": 0,
+      "outputId": "minecraft:splash_potion",
+      "outputMeta": 35
+    },
+    {
+      "inputId": "minecraft:lingering_potion",
+      "inputMeta": 32,
+      "reagentId": "minecraft:fermented_spider_eye",
+      "reagentMeta": 0,
+      "outputId": "minecraft:lingering_potion",
+      "outputMeta": 35
+    },
+    {
+      "inputId": "minecraft:potion",
+      "inputMeta": 1,
+      "reagentId": "minecraft:fermented_spider_eye",
+      "reagentMeta": 0,
+      "outputId": "minecraft:potion",
+      "outputMeta": 34
+    },
+    {
+      "inputId": "minecraft:splash_potion",
+      "inputMeta": 1,
+      "reagentId": "minecraft:fermented_spider_eye",
+      "reagentMeta": 0,
+      "outputId": "minecraft:splash_potion",
+      "outputMeta": 34
+    },
+    {
+      "inputId": "minecraft:lingering_potion",
+      "inputMeta": 1,
+      "reagentId": "minecraft:fermented_spider_eye",
+      "reagentMeta": 0,
+      "outputId": "minecraft:lingering_potion",
+      "outputMeta": 34
+    },
+    {
+      "inputId": "minecraft:potion",
+      "inputMeta": 5,
+      "reagentId": "minecraft:fermented_spider_eye",
+      "reagentMeta": 0,
+      "outputId": "minecraft:potion",
+      "outputMeta": 7
+    },
+    {
+      "inputId": "minecraft:splash_potion",
+      "inputMeta": 5,
+      "reagentId": "minecraft:fermented_spider_eye",
+      "reagentMeta": 0,
+      "outputId": "minecraft:splash_potion",
+      "outputMeta": 7
+    },
+    {
+      "inputId": "minecraft:lingering_potion",
+      "inputMeta": 5,
+      "reagentId": "minecraft:fermented_spider_eye",
+      "reagentMeta": 0,
+      "outputId": "minecraft:lingering_potion",
+      "outputMeta": 7
+    },
+    {
+      "inputId": "minecraft:potion",
+      "inputMeta": 5,
+      "reagentId": "minecraft:redstone",
+      "reagentMeta": 0,
+      "outputId": "minecraft:potion",
+      "outputMeta": 6
+    },
+    {
+      "inputId": "minecraft:splash_potion",
+      "inputMeta": 5,
+      "reagentId": "minecraft:redstone",
+      "reagentMeta": 0,
+      "outputId": "minecraft:splash_potion",
+      "outputMeta": 6
+    },
+    {
+      "inputId": "minecraft:lingering_potion",
+      "inputMeta": 5,
+      "reagentId": "minecraft:redstone",
+      "reagentMeta": 0,
+      "outputId": "minecraft:lingering_potion",
+      "outputMeta": 6
+    },
+    {
+      "inputId": "minecraft:potion",
+      "inputMeta": 25,
+      "reagentId": "minecraft:fermented_spider_eye",
+      "reagentMeta": 0,
+      "outputId": "minecraft:potion",
+      "outputMeta": 23
+    },
+    {
+      "inputId": "minecraft:splash_potion",
+      "inputMeta": 25,
+      "reagentId": "minecraft:fermented_spider_eye",
+      "reagentMeta": 0,
+      "outputId": "minecraft:splash_potion",
+      "outputMeta": 23
+    },
+    {
+      "inputId": "minecraft:lingering_potion",
+      "inputMeta": 25,
+      "reagentId": "minecraft:fermented_spider_eye",
+      "reagentMeta": 0,
+      "outputId": "minecraft:lingering_potion",
+      "outputMeta": 23
+    },
+    {
+      "inputId": "minecraft:potion",
+      "inputMeta": 25,
+      "reagentId": "minecraft:glowstone_dust",
+      "reagentMeta": 0,
+      "outputId": "minecraft:potion",
+      "outputMeta": 27
+    },
+    {
+      "inputId": "minecraft:splash_potion",
+      "inputMeta": 25,
+      "reagentId": "minecraft:glowstone_dust",
+      "reagentMeta": 0,
+      "outputId": "minecraft:splash_potion",
+      "outputMeta": 27
+    },
+    {
+      "inputId": "minecraft:lingering_potion",
+      "inputMeta": 25,
+      "reagentId": "minecraft:glowstone_dust",
+      "reagentMeta": 0,
+      "outputId": "minecraft:lingering_potion",
+      "outputMeta": 27
+    },
+    {
+      "inputId": "minecraft:potion",
+      "inputMeta": 25,
+      "reagentId": "minecraft:redstone",
+      "reagentMeta": 0,
+      "outputId": "minecraft:potion",
+      "outputMeta": 26
+    },
+    {
+      "inputId": "minecraft:splash_potion",
+      "inputMeta": 25,
+      "reagentId": "minecraft:redstone",
+      "reagentMeta": 0,
+      "outputId": "minecraft:splash_potion",
+      "outputMeta": 26
+    },
+    {
+      "inputId": "minecraft:lingering_potion",
+      "inputMeta": 25,
+      "reagentId": "minecraft:redstone",
+      "reagentMeta": 0,
+      "outputId": "minecraft:lingering_potion",
+      "outputMeta": 26
+    },
+    {
+      "inputId": "minecraft:potion",
       "inputMeta": 28,
       "reagentId": "minecraft:glowstone_dust",
       "reagentMeta": 0,
@@ -49892,6 +52830,246 @@
       "reagentMeta": 0,
       "outputId": "minecraft:lingering_potion",
       "outputMeta": 30
+    },
+    {
+      "inputId": "minecraft:potion",
+      "inputMeta": 28,
+      "reagentId": "minecraft:redstone",
+      "reagentMeta": 0,
+      "outputId": "minecraft:potion",
+      "outputMeta": 29
+    },
+    {
+      "inputId": "minecraft:splash_potion",
+      "inputMeta": 28,
+      "reagentId": "minecraft:redstone",
+      "reagentMeta": 0,
+      "outputId": "minecraft:splash_potion",
+      "outputMeta": 29
+    },
+    {
+      "inputId": "minecraft:lingering_potion",
+      "inputMeta": 28,
+      "reagentId": "minecraft:redstone",
+      "reagentMeta": 0,
+      "outputId": "minecraft:lingering_potion",
+      "outputMeta": 29
+    },
+    {
+      "inputId": "minecraft:potion",
+      "inputMeta": 17,
+      "reagentId": "minecraft:redstone",
+      "reagentMeta": 0,
+      "outputId": "minecraft:potion",
+      "outputMeta": 18
+    },
+    {
+      "inputId": "minecraft:splash_potion",
+      "inputMeta": 17,
+      "reagentId": "minecraft:redstone",
+      "reagentMeta": 0,
+      "outputId": "minecraft:splash_potion",
+      "outputMeta": 18
+    },
+    {
+      "inputId": "minecraft:lingering_potion",
+      "inputMeta": 17,
+      "reagentId": "minecraft:redstone",
+      "reagentMeta": 0,
+      "outputId": "minecraft:lingering_potion",
+      "outputMeta": 18
+    },
+    {
+      "inputId": "minecraft:potion",
+      "inputMeta": 40,
+      "reagentId": "minecraft:redstone",
+      "reagentMeta": 0,
+      "outputId": "minecraft:potion",
+      "outputMeta": 41
+    },
+    {
+      "inputId": "minecraft:splash_potion",
+      "inputMeta": 40,
+      "reagentId": "minecraft:redstone",
+      "reagentMeta": 0,
+      "outputId": "minecraft:splash_potion",
+      "outputMeta": 41
+    },
+    {
+      "inputId": "minecraft:lingering_potion",
+      "inputMeta": 40,
+      "reagentId": "minecraft:redstone",
+      "reagentMeta": 0,
+      "outputId": "minecraft:lingering_potion",
+      "outputMeta": 41
+    },
+    {
+      "inputId": "minecraft:potion",
+      "inputMeta": 31,
+      "reagentId": "minecraft:fermented_spider_eye",
+      "reagentMeta": 0,
+      "outputId": "minecraft:potion",
+      "outputMeta": 34
+    },
+    {
+      "inputId": "minecraft:splash_potion",
+      "inputMeta": 31,
+      "reagentId": "minecraft:fermented_spider_eye",
+      "reagentMeta": 0,
+      "outputId": "minecraft:splash_potion",
+      "outputMeta": 34
+    },
+    {
+      "inputId": "minecraft:lingering_potion",
+      "inputMeta": 31,
+      "reagentId": "minecraft:fermented_spider_eye",
+      "reagentMeta": 0,
+      "outputId": "minecraft:lingering_potion",
+      "outputMeta": 34
+    },
+    {
+      "inputId": "minecraft:potion",
+      "inputMeta": 31,
+      "reagentId": "minecraft:glowstone_dust",
+      "reagentMeta": 0,
+      "outputId": "minecraft:potion",
+      "outputMeta": 33
+    },
+    {
+      "inputId": "minecraft:splash_potion",
+      "inputMeta": 31,
+      "reagentId": "minecraft:glowstone_dust",
+      "reagentMeta": 0,
+      "outputId": "minecraft:splash_potion",
+      "outputMeta": 33
+    },
+    {
+      "inputId": "minecraft:lingering_potion",
+      "inputMeta": 31,
+      "reagentId": "minecraft:glowstone_dust",
+      "reagentMeta": 0,
+      "outputId": "minecraft:lingering_potion",
+      "outputMeta": 33
+    },
+    {
+      "inputId": "minecraft:potion",
+      "inputMeta": 31,
+      "reagentId": "minecraft:redstone",
+      "reagentMeta": 0,
+      "outputId": "minecraft:potion",
+      "outputMeta": 32
+    },
+    {
+      "inputId": "minecraft:splash_potion",
+      "inputMeta": 31,
+      "reagentId": "minecraft:redstone",
+      "reagentMeta": 0,
+      "outputId": "minecraft:splash_potion",
+      "outputMeta": 32
+    },
+    {
+      "inputId": "minecraft:lingering_potion",
+      "inputMeta": 31,
+      "reagentId": "minecraft:redstone",
+      "reagentMeta": 0,
+      "outputId": "minecraft:lingering_potion",
+      "outputMeta": 32
+    },
+    {
+      "inputId": "minecraft:potion",
+      "inputMeta": 22,
+      "reagentId": "minecraft:fermented_spider_eye",
+      "reagentMeta": 0,
+      "outputId": "minecraft:potion",
+      "outputMeta": 24
+    },
+    {
+      "inputId": "minecraft:splash_potion",
+      "inputMeta": 22,
+      "reagentId": "minecraft:fermented_spider_eye",
+      "reagentMeta": 0,
+      "outputId": "minecraft:splash_potion",
+      "outputMeta": 24
+    },
+    {
+      "inputId": "minecraft:lingering_potion",
+      "inputMeta": 22,
+      "reagentId": "minecraft:fermented_spider_eye",
+      "reagentMeta": 0,
+      "outputId": "minecraft:lingering_potion",
+      "outputMeta": 24
+    },
+    {
+      "inputId": "minecraft:potion",
+      "inputMeta": 33,
+      "reagentId": "minecraft:fermented_spider_eye",
+      "reagentMeta": 0,
+      "outputId": "minecraft:potion",
+      "outputMeta": 34
+    },
+    {
+      "inputId": "minecraft:splash_potion",
+      "inputMeta": 33,
+      "reagentId": "minecraft:fermented_spider_eye",
+      "reagentMeta": 0,
+      "outputId": "minecraft:splash_potion",
+      "outputMeta": 34
+    },
+    {
+      "inputId": "minecraft:lingering_potion",
+      "inputMeta": 33,
+      "reagentId": "minecraft:fermented_spider_eye",
+      "reagentMeta": 0,
+      "outputId": "minecraft:lingering_potion",
+      "outputMeta": 34
+    },
+    {
+      "inputId": "minecraft:potion",
+      "inputMeta": 14,
+      "reagentId": "minecraft:fermented_spider_eye",
+      "reagentMeta": 0,
+      "outputId": "minecraft:potion",
+      "outputMeta": 17
+    },
+    {
+      "inputId": "minecraft:splash_potion",
+      "inputMeta": 14,
+      "reagentId": "minecraft:fermented_spider_eye",
+      "reagentMeta": 0,
+      "outputId": "minecraft:splash_potion",
+      "outputMeta": 17
+    },
+    {
+      "inputId": "minecraft:lingering_potion",
+      "inputMeta": 14,
+      "reagentId": "minecraft:fermented_spider_eye",
+      "reagentMeta": 0,
+      "outputId": "minecraft:lingering_potion",
+      "outputMeta": 17
+    },
+    {
+      "inputId": "minecraft:potion",
+      "inputMeta": 14,
+      "reagentId": "minecraft:glowstone_dust",
+      "reagentMeta": 0,
+      "outputId": "minecraft:potion",
+      "outputMeta": 16
+    },
+    {
+      "inputId": "minecraft:splash_potion",
+      "inputMeta": 14,
+      "reagentId": "minecraft:glowstone_dust",
+      "reagentMeta": 0,
+      "outputId": "minecraft:splash_potion",
+      "outputMeta": 16
+    },
+    {
+      "inputId": "minecraft:lingering_potion",
+      "inputMeta": 14,
+      "reagentId": "minecraft:glowstone_dust",
+      "reagentMeta": 0,
+      "outputId": "minecraft:lingering_potion",
+      "outputMeta": 16
     },
     {
       "inputId": "minecraft:potion",
@@ -49967,147 +53145,27 @@
     },
     {
       "inputId": "minecraft:potion",
-      "inputMeta": 4,
-      "reagentId": "minecraft:fermented_spider_eye",
-      "reagentMeta": 0,
-      "outputId": "minecraft:potion",
-      "outputMeta": 34
-    },
-    {
-      "inputId": "minecraft:splash_potion",
-      "inputMeta": 4,
-      "reagentId": "minecraft:fermented_spider_eye",
-      "reagentMeta": 0,
-      "outputId": "minecraft:splash_potion",
-      "outputMeta": 34
-    },
-    {
-      "inputId": "minecraft:lingering_potion",
-      "inputMeta": 4,
-      "reagentId": "minecraft:fermented_spider_eye",
-      "reagentMeta": 0,
-      "outputId": "minecraft:lingering_potion",
-      "outputMeta": 34
-    },
-    {
-      "inputId": "minecraft:potion",
-      "inputMeta": 31,
-      "reagentId": "minecraft:glowstone_dust",
-      "reagentMeta": 0,
-      "outputId": "minecraft:potion",
-      "outputMeta": 33
-    },
-    {
-      "inputId": "minecraft:splash_potion",
-      "inputMeta": 31,
-      "reagentId": "minecraft:glowstone_dust",
-      "reagentMeta": 0,
-      "outputId": "minecraft:splash_potion",
-      "outputMeta": 33
-    },
-    {
-      "inputId": "minecraft:lingering_potion",
-      "inputMeta": 31,
-      "reagentId": "minecraft:glowstone_dust",
-      "reagentMeta": 0,
-      "outputId": "minecraft:lingering_potion",
-      "outputMeta": 33
-    },
-    {
-      "inputId": "minecraft:potion",
-      "inputMeta": 2,
-      "reagentId": "minecraft:fermented_spider_eye",
-      "reagentMeta": 0,
-      "outputId": "minecraft:potion",
-      "outputMeta": 35
-    },
-    {
-      "inputId": "minecraft:splash_potion",
-      "inputMeta": 2,
-      "reagentId": "minecraft:fermented_spider_eye",
-      "reagentMeta": 0,
-      "outputId": "minecraft:splash_potion",
-      "outputMeta": 35
-    },
-    {
-      "inputId": "minecraft:lingering_potion",
-      "inputMeta": 2,
-      "reagentId": "minecraft:fermented_spider_eye",
-      "reagentMeta": 0,
-      "outputId": "minecraft:lingering_potion",
-      "outputMeta": 35
-    },
-    {
-      "inputId": "minecraft:potion",
-      "inputMeta": 17,
+      "inputMeta": 37,
       "reagentId": "minecraft:redstone",
       "reagentMeta": 0,
       "outputId": "minecraft:potion",
-      "outputMeta": 18
+      "outputMeta": 38
     },
     {
       "inputId": "minecraft:splash_potion",
-      "inputMeta": 17,
+      "inputMeta": 37,
       "reagentId": "minecraft:redstone",
       "reagentMeta": 0,
       "outputId": "minecraft:splash_potion",
-      "outputMeta": 18
+      "outputMeta": 38
     },
     {
       "inputId": "minecraft:lingering_potion",
-      "inputMeta": 17,
+      "inputMeta": 37,
       "reagentId": "minecraft:redstone",
       "reagentMeta": 0,
       "outputId": "minecraft:lingering_potion",
-      "outputMeta": 18
-    },
-    {
-      "inputId": "minecraft:potion",
-      "inputMeta": 15,
-      "reagentId": "minecraft:fermented_spider_eye",
-      "reagentMeta": 0,
-      "outputId": "minecraft:potion",
-      "outputMeta": 18
-    },
-    {
-      "inputId": "minecraft:splash_potion",
-      "inputMeta": 15,
-      "reagentId": "minecraft:fermented_spider_eye",
-      "reagentMeta": 0,
-      "outputId": "minecraft:splash_potion",
-      "outputMeta": 18
-    },
-    {
-      "inputId": "minecraft:lingering_potion",
-      "inputMeta": 15,
-      "reagentId": "minecraft:fermented_spider_eye",
-      "reagentMeta": 0,
-      "outputId": "minecraft:lingering_potion",
-      "outputMeta": 18
-    },
-    {
-      "inputId": "minecraft:potion",
-      "inputMeta": 0,
-      "reagentId": "minecraft:rabbit_foot",
-      "reagentMeta": 0,
-      "outputId": "minecraft:potion",
-      "outputMeta": 1
-    },
-    {
-      "inputId": "minecraft:splash_potion",
-      "inputMeta": 0,
-      "reagentId": "minecraft:rabbit_foot",
-      "reagentMeta": 0,
-      "outputId": "minecraft:splash_potion",
-      "outputMeta": 1
-    },
-    {
-      "inputId": "minecraft:lingering_potion",
-      "inputMeta": 0,
-      "reagentId": "minecraft:rabbit_foot",
-      "reagentMeta": 0,
-      "outputId": "minecraft:lingering_potion",
-      "outputMeta": 1
+      "outputMeta": 38
     },
     {
       "inputId": "minecraft:potion",
@@ -50135,387 +53193,51 @@
     },
     {
       "inputId": "minecraft:potion",
-      "inputMeta": 32,
-      "reagentId": "minecraft:fermented_spider_eye",
-      "reagentMeta": 0,
-      "outputId": "minecraft:potion",
-      "outputMeta": 35
-    },
-    {
-      "inputId": "minecraft:splash_potion",
-      "inputMeta": 32,
-      "reagentId": "minecraft:fermented_spider_eye",
-      "reagentMeta": 0,
-      "outputId": "minecraft:splash_potion",
-      "outputMeta": 35
-    },
-    {
-      "inputId": "minecraft:lingering_potion",
-      "inputMeta": 32,
-      "reagentId": "minecraft:fermented_spider_eye",
-      "reagentMeta": 0,
-      "outputId": "minecraft:lingering_potion",
-      "outputMeta": 35
-    },
-    {
-      "inputId": "minecraft:potion",
-      "inputMeta": 4,
-      "reagentId": "minecraft:golden_carrot",
-      "reagentMeta": 0,
-      "outputId": "minecraft:potion",
-      "outputMeta": 5
-    },
-    {
-      "inputId": "minecraft:splash_potion",
-      "inputMeta": 4,
-      "reagentId": "minecraft:golden_carrot",
-      "reagentMeta": 0,
-      "outputId": "minecraft:splash_potion",
-      "outputMeta": 5
-    },
-    {
-      "inputId": "minecraft:lingering_potion",
-      "inputMeta": 4,
-      "reagentId": "minecraft:golden_carrot",
-      "reagentMeta": 0,
-      "outputId": "minecraft:lingering_potion",
-      "outputMeta": 5
-    },
-    {
-      "inputId": "minecraft:potion",
-      "inputMeta": 14,
-      "reagentId": "minecraft:glowstone_dust",
-      "reagentMeta": 0,
-      "outputId": "minecraft:potion",
-      "outputMeta": 16
-    },
-    {
-      "inputId": "minecraft:splash_potion",
-      "inputMeta": 14,
-      "reagentId": "minecraft:glowstone_dust",
-      "reagentMeta": 0,
-      "outputId": "minecraft:splash_potion",
-      "outputMeta": 16
-    },
-    {
-      "inputId": "minecraft:lingering_potion",
-      "inputMeta": 14,
-      "reagentId": "minecraft:glowstone_dust",
-      "reagentMeta": 0,
-      "outputId": "minecraft:lingering_potion",
-      "outputMeta": 16
-    },
-    {
-      "inputId": "minecraft:potion",
-      "inputMeta": 21,
-      "reagentId": "minecraft:fermented_spider_eye",
-      "reagentMeta": 0,
-      "outputId": "minecraft:potion",
-      "outputMeta": 23
-    },
-    {
-      "inputId": "minecraft:splash_potion",
-      "inputMeta": 21,
-      "reagentId": "minecraft:fermented_spider_eye",
-      "reagentMeta": 0,
-      "outputId": "minecraft:splash_potion",
-      "outputMeta": 23
-    },
-    {
-      "inputId": "minecraft:lingering_potion",
-      "inputMeta": 21,
-      "reagentId": "minecraft:fermented_spider_eye",
-      "reagentMeta": 0,
-      "outputId": "minecraft:lingering_potion",
-      "outputMeta": 23
-    },
-    {
-      "inputId": "minecraft:potion",
-      "inputMeta": 10,
-      "reagentId": "minecraft:fermented_spider_eye",
-      "reagentMeta": 0,
-      "outputId": "minecraft:potion",
-      "outputMeta": 18
-    },
-    {
-      "inputId": "minecraft:splash_potion",
-      "inputMeta": 10,
-      "reagentId": "minecraft:fermented_spider_eye",
-      "reagentMeta": 0,
-      "outputId": "minecraft:splash_potion",
-      "outputMeta": 18
-    },
-    {
-      "inputId": "minecraft:lingering_potion",
-      "inputMeta": 10,
-      "reagentId": "minecraft:fermented_spider_eye",
-      "reagentMeta": 0,
-      "outputId": "minecraft:lingering_potion",
-      "outputMeta": 18
-    },
-    {
-      "inputId": "minecraft:potion",
-      "inputMeta": 4,
-      "reagentId": "minecraft:magma_cream",
-      "reagentMeta": 0,
-      "outputId": "minecraft:potion",
-      "outputMeta": 12
-    },
-    {
-      "inputId": "minecraft:splash_potion",
-      "inputMeta": 4,
-      "reagentId": "minecraft:magma_cream",
-      "reagentMeta": 0,
-      "outputId": "minecraft:splash_potion",
-      "outputMeta": 12
-    },
-    {
-      "inputId": "minecraft:lingering_potion",
-      "inputMeta": 4,
-      "reagentId": "minecraft:magma_cream",
-      "reagentMeta": 0,
-      "outputId": "minecraft:lingering_potion",
-      "outputMeta": 12
-    },
-    {
-      "inputId": "minecraft:potion",
-      "inputMeta": 0,
-      "reagentId": "minecraft:glistering_melon_slice",
-      "reagentMeta": 0,
-      "outputId": "minecraft:potion",
-      "outputMeta": 1
-    },
-    {
-      "inputId": "minecraft:splash_potion",
-      "inputMeta": 0,
-      "reagentId": "minecraft:glistering_melon_slice",
-      "reagentMeta": 0,
-      "outputId": "minecraft:splash_potion",
-      "outputMeta": 1
-    },
-    {
-      "inputId": "minecraft:lingering_potion",
-      "inputMeta": 0,
-      "reagentId": "minecraft:glistering_melon_slice",
-      "reagentMeta": 0,
-      "outputId": "minecraft:lingering_potion",
-      "outputMeta": 1
-    },
-    {
-      "inputId": "minecraft:potion",
-      "inputMeta": 5,
-      "reagentId": "minecraft:fermented_spider_eye",
-      "reagentMeta": 0,
-      "outputId": "minecraft:potion",
-      "outputMeta": 7
-    },
-    {
-      "inputId": "minecraft:splash_potion",
-      "inputMeta": 5,
-      "reagentId": "minecraft:fermented_spider_eye",
-      "reagentMeta": 0,
-      "outputId": "minecraft:splash_potion",
-      "outputMeta": 7
-    },
-    {
-      "inputId": "minecraft:lingering_potion",
-      "inputMeta": 5,
-      "reagentId": "minecraft:fermented_spider_eye",
-      "reagentMeta": 0,
-      "outputId": "minecraft:lingering_potion",
-      "outputMeta": 7
-    },
-    {
-      "inputId": "minecraft:potion",
-      "inputMeta": 22,
-      "reagentId": "minecraft:fermented_spider_eye",
-      "reagentMeta": 0,
-      "outputId": "minecraft:potion",
-      "outputMeta": 24
-    },
-    {
-      "inputId": "minecraft:splash_potion",
-      "inputMeta": 22,
-      "reagentId": "minecraft:fermented_spider_eye",
-      "reagentMeta": 0,
-      "outputId": "minecraft:splash_potion",
-      "outputMeta": 24
-    },
-    {
-      "inputId": "minecraft:lingering_potion",
-      "inputMeta": 22,
-      "reagentId": "minecraft:fermented_spider_eye",
-      "reagentMeta": 0,
-      "outputId": "minecraft:lingering_potion",
-      "outputMeta": 24
-    },
-    {
-      "inputId": "minecraft:potion",
-      "inputMeta": 4,
-      "reagentId": "minecraft:pufferfish",
-      "reagentMeta": 0,
-      "outputId": "minecraft:potion",
-      "outputMeta": 19
-    },
-    {
-      "inputId": "minecraft:splash_potion",
-      "inputMeta": 4,
-      "reagentId": "minecraft:pufferfish",
-      "reagentMeta": 0,
-      "outputId": "minecraft:splash_potion",
-      "outputMeta": 19
-    },
-    {
-      "inputId": "minecraft:lingering_potion",
-      "inputMeta": 4,
-      "reagentId": "minecraft:pufferfish",
-      "reagentMeta": 0,
-      "outputId": "minecraft:lingering_potion",
-      "outputMeta": 19
-    },
-    {
-      "inputId": "minecraft:potion",
-      "inputMeta": 25,
-      "reagentId": "minecraft:fermented_spider_eye",
-      "reagentMeta": 0,
-      "outputId": "minecraft:potion",
-      "outputMeta": 23
-    },
-    {
-      "inputId": "minecraft:splash_potion",
-      "inputMeta": 25,
-      "reagentId": "minecraft:fermented_spider_eye",
-      "reagentMeta": 0,
-      "outputId": "minecraft:splash_potion",
-      "outputMeta": 23
-    },
-    {
-      "inputId": "minecraft:lingering_potion",
-      "inputMeta": 25,
-      "reagentId": "minecraft:fermented_spider_eye",
-      "reagentMeta": 0,
-      "outputId": "minecraft:lingering_potion",
-      "outputMeta": 23
-    },
-    {
-      "inputId": "minecraft:potion",
-      "inputMeta": 0,
-      "reagentId": "minecraft:sugar",
-      "reagentMeta": 0,
-      "outputId": "minecraft:potion",
-      "outputMeta": 1
-    },
-    {
-      "inputId": "minecraft:splash_potion",
-      "inputMeta": 0,
-      "reagentId": "minecraft:sugar",
-      "reagentMeta": 0,
-      "outputId": "minecraft:splash_potion",
-      "outputMeta": 1
-    },
-    {
-      "inputId": "minecraft:lingering_potion",
-      "inputMeta": 0,
-      "reagentId": "minecraft:sugar",
-      "reagentMeta": 0,
-      "outputId": "minecraft:lingering_potion",
-      "outputMeta": 1
-    },
-    {
-      "inputId": "minecraft:potion",
-      "inputMeta": 40,
+      "inputMeta": 19,
       "reagentId": "minecraft:redstone",
       "reagentMeta": 0,
       "outputId": "minecraft:potion",
-      "outputMeta": 41
+      "outputMeta": 20
     },
     {
       "inputId": "minecraft:splash_potion",
-      "inputMeta": 40,
+      "inputMeta": 19,
       "reagentId": "minecraft:redstone",
       "reagentMeta": 0,
       "outputId": "minecraft:splash_potion",
-      "outputMeta": 41
+      "outputMeta": 20
     },
     {
       "inputId": "minecraft:lingering_potion",
-      "inputMeta": 40,
+      "inputMeta": 19,
       "reagentId": "minecraft:redstone",
       "reagentMeta": 0,
       "outputId": "minecraft:lingering_potion",
-      "outputMeta": 41
-    },
-    {
-      "inputId": "minecraft:potion",
-      "inputMeta": 4,
-      "reagentId": "minecraft:rabbit_foot",
-      "reagentMeta": 0,
-      "outputId": "minecraft:potion",
-      "outputMeta": 9
-    },
-    {
-      "inputId": "minecraft:splash_potion",
-      "inputMeta": 4,
-      "reagentId": "minecraft:rabbit_foot",
-      "reagentMeta": 0,
-      "outputId": "minecraft:splash_potion",
-      "outputMeta": 9
-    },
-    {
-      "inputId": "minecraft:lingering_potion",
-      "inputMeta": 4,
-      "reagentId": "minecraft:rabbit_foot",
-      "reagentMeta": 0,
-      "outputId": "minecraft:lingering_potion",
-      "outputMeta": 9
+      "outputMeta": 20
     },
     {
       "inputId": "minecraft:potion",
       "inputMeta": 0,
-      "reagentId": "minecraft:nether_wart",
+      "reagentId": "minecraft:fermented_spider_eye",
       "reagentMeta": 0,
       "outputId": "minecraft:potion",
-      "outputMeta": 4
+      "outputMeta": 34
     },
     {
       "inputId": "minecraft:splash_potion",
       "inputMeta": 0,
-      "reagentId": "minecraft:nether_wart",
+      "reagentId": "minecraft:fermented_spider_eye",
       "reagentMeta": 0,
       "outputId": "minecraft:splash_potion",
-      "outputMeta": 4
+      "outputMeta": 34
     },
     {
       "inputId": "minecraft:lingering_potion",
       "inputMeta": 0,
-      "reagentId": "minecraft:nether_wart",
+      "reagentId": "minecraft:fermented_spider_eye",
       "reagentMeta": 0,
       "outputId": "minecraft:lingering_potion",
-      "outputMeta": 4
-    },
-    {
-      "inputId": "minecraft:potion",
-      "inputMeta": 9,
-      "reagentId": "minecraft:redstone",
-      "reagentMeta": 0,
-      "outputId": "minecraft:potion",
-      "outputMeta": 10
-    },
-    {
-      "inputId": "minecraft:splash_potion",
-      "inputMeta": 9,
-      "reagentId": "minecraft:redstone",
-      "reagentMeta": 0,
-      "outputId": "minecraft:splash_potion",
-      "outputMeta": 10
-    },
-    {
-      "inputId": "minecraft:lingering_potion",
-      "inputMeta": 9,
-      "reagentId": "minecraft:redstone",
-      "reagentMeta": 0,
-      "outputId": "minecraft:lingering_potion",
-      "outputMeta": 10
+      "outputMeta": 34
     },
     {
       "inputId": "minecraft:potion",
@@ -50543,51 +53265,99 @@
     },
     {
       "inputId": "minecraft:potion",
-      "inputMeta": 4,
-      "reagentId": "minecraft:turtle_helmet",
+      "inputMeta": 0,
+      "reagentId": "minecraft:glowstone_dust",
       "reagentMeta": 0,
       "outputId": "minecraft:potion",
-      "outputMeta": 37
+      "outputMeta": 3
     },
     {
       "inputId": "minecraft:splash_potion",
-      "inputMeta": 4,
-      "reagentId": "minecraft:turtle_helmet",
+      "inputMeta": 0,
+      "reagentId": "minecraft:glowstone_dust",
       "reagentMeta": 0,
       "outputId": "minecraft:splash_potion",
-      "outputMeta": 37
+      "outputMeta": 3
     },
     {
       "inputId": "minecraft:lingering_potion",
-      "inputMeta": 4,
-      "reagentId": "minecraft:turtle_helmet",
+      "inputMeta": 0,
+      "reagentId": "minecraft:glowstone_dust",
       "reagentMeta": 0,
       "outputId": "minecraft:lingering_potion",
-      "outputMeta": 37
+      "outputMeta": 3
     },
     {
       "inputId": "minecraft:potion",
-      "inputMeta": 4,
-      "reagentId": "minecraft:glistering_melon_slice",
+      "inputMeta": 0,
+      "reagentId": "minecraft:magma_cream",
       "reagentMeta": 0,
       "outputId": "minecraft:potion",
-      "outputMeta": 21
+      "outputMeta": 1
     },
     {
       "inputId": "minecraft:splash_potion",
-      "inputMeta": 4,
-      "reagentId": "minecraft:glistering_melon_slice",
+      "inputMeta": 0,
+      "reagentId": "minecraft:magma_cream",
       "reagentMeta": 0,
       "outputId": "minecraft:splash_potion",
-      "outputMeta": 21
+      "outputMeta": 1
     },
     {
       "inputId": "minecraft:lingering_potion",
-      "inputMeta": 4,
-      "reagentId": "minecraft:glistering_melon_slice",
+      "inputMeta": 0,
+      "reagentId": "minecraft:magma_cream",
       "reagentMeta": 0,
       "outputId": "minecraft:lingering_potion",
-      "outputMeta": 21
+      "outputMeta": 1
+    },
+    {
+      "inputId": "minecraft:potion",
+      "inputMeta": 0,
+      "reagentId": "minecraft:nether_wart",
+      "reagentMeta": 0,
+      "outputId": "minecraft:potion",
+      "outputMeta": 4
+    },
+    {
+      "inputId": "minecraft:splash_potion",
+      "inputMeta": 0,
+      "reagentId": "minecraft:nether_wart",
+      "reagentMeta": 0,
+      "outputId": "minecraft:splash_potion",
+      "outputMeta": 4
+    },
+    {
+      "inputId": "minecraft:lingering_potion",
+      "inputMeta": 0,
+      "reagentId": "minecraft:nether_wart",
+      "reagentMeta": 0,
+      "outputId": "minecraft:lingering_potion",
+      "outputMeta": 4
+    },
+    {
+      "inputId": "minecraft:potion",
+      "inputMeta": 0,
+      "reagentId": "minecraft:rabbit_foot",
+      "reagentMeta": 0,
+      "outputId": "minecraft:potion",
+      "outputMeta": 1
+    },
+    {
+      "inputId": "minecraft:splash_potion",
+      "inputMeta": 0,
+      "reagentId": "minecraft:rabbit_foot",
+      "reagentMeta": 0,
+      "outputId": "minecraft:splash_potion",
+      "outputMeta": 1
+    },
+    {
+      "inputId": "minecraft:lingering_potion",
+      "inputMeta": 0,
+      "reagentId": "minecraft:rabbit_foot",
+      "reagentMeta": 0,
+      "outputId": "minecraft:lingering_potion",
+      "outputMeta": 1
     },
     {
       "inputId": "minecraft:potion",
@@ -50615,123 +53385,75 @@
     },
     {
       "inputId": "minecraft:potion",
-      "inputMeta": 25,
-      "reagentId": "minecraft:redstone",
+      "inputMeta": 0,
+      "reagentId": "minecraft:glistering_melon_slice",
       "reagentMeta": 0,
       "outputId": "minecraft:potion",
-      "outputMeta": 26
+      "outputMeta": 1
     },
     {
       "inputId": "minecraft:splash_potion",
-      "inputMeta": 25,
-      "reagentId": "minecraft:redstone",
+      "inputMeta": 0,
+      "reagentId": "minecraft:glistering_melon_slice",
       "reagentMeta": 0,
       "outputId": "minecraft:splash_potion",
-      "outputMeta": 26
+      "outputMeta": 1
     },
     {
       "inputId": "minecraft:lingering_potion",
-      "inputMeta": 25,
-      "reagentId": "minecraft:redstone",
+      "inputMeta": 0,
+      "reagentId": "minecraft:glistering_melon_slice",
       "reagentMeta": 0,
       "outputId": "minecraft:lingering_potion",
-      "outputMeta": 26
+      "outputMeta": 1
     },
     {
       "inputId": "minecraft:potion",
-      "inputMeta": 19,
-      "reagentId": "minecraft:redstone",
-      "reagentMeta": 0,
-      "outputId": "minecraft:potion",
-      "outputMeta": 20
-    },
-    {
-      "inputId": "minecraft:splash_potion",
-      "inputMeta": 19,
-      "reagentId": "minecraft:redstone",
-      "reagentMeta": 0,
-      "outputId": "minecraft:splash_potion",
-      "outputMeta": 20
-    },
-    {
-      "inputId": "minecraft:lingering_potion",
-      "inputMeta": 19,
-      "reagentId": "minecraft:redstone",
-      "reagentMeta": 0,
-      "outputId": "minecraft:lingering_potion",
-      "outputMeta": 20
-    },
-    {
-      "inputId": "minecraft:potion",
-      "inputMeta": 9,
-      "reagentId": "minecraft:fermented_spider_eye",
-      "reagentMeta": 0,
-      "outputId": "minecraft:potion",
-      "outputMeta": 17
-    },
-    {
-      "inputId": "minecraft:splash_potion",
-      "inputMeta": 9,
-      "reagentId": "minecraft:fermented_spider_eye",
-      "reagentMeta": 0,
-      "outputId": "minecraft:splash_potion",
-      "outputMeta": 17
-    },
-    {
-      "inputId": "minecraft:lingering_potion",
-      "inputMeta": 9,
-      "reagentId": "minecraft:fermented_spider_eye",
-      "reagentMeta": 0,
-      "outputId": "minecraft:lingering_potion",
-      "outputMeta": 17
-    },
-    {
-      "inputId": "minecraft:potion",
-      "inputMeta": 31,
-      "reagentId": "minecraft:redstone",
-      "reagentMeta": 0,
-      "outputId": "minecraft:potion",
-      "outputMeta": 32
-    },
-    {
-      "inputId": "minecraft:splash_potion",
-      "inputMeta": 31,
-      "reagentId": "minecraft:redstone",
-      "reagentMeta": 0,
-      "outputId": "minecraft:splash_potion",
-      "outputMeta": 32
-    },
-    {
-      "inputId": "minecraft:lingering_potion",
-      "inputMeta": 31,
-      "reagentId": "minecraft:redstone",
-      "reagentMeta": 0,
-      "outputId": "minecraft:lingering_potion",
-      "outputMeta": 32
-    },
-    {
-      "inputId": "minecraft:potion",
-      "inputMeta": 4,
+      "inputMeta": 0,
       "reagentId": "minecraft:spider_eye",
       "reagentMeta": 0,
       "outputId": "minecraft:potion",
-      "outputMeta": 25
+      "outputMeta": 1
     },
     {
       "inputId": "minecraft:splash_potion",
-      "inputMeta": 4,
+      "inputMeta": 0,
       "reagentId": "minecraft:spider_eye",
       "reagentMeta": 0,
       "outputId": "minecraft:splash_potion",
-      "outputMeta": 25
+      "outputMeta": 1
     },
     {
       "inputId": "minecraft:lingering_potion",
-      "inputMeta": 4,
+      "inputMeta": 0,
       "reagentId": "minecraft:spider_eye",
       "reagentMeta": 0,
       "outputId": "minecraft:lingering_potion",
-      "outputMeta": 25
+      "outputMeta": 1
+    },
+    {
+      "inputId": "minecraft:potion",
+      "inputMeta": 0,
+      "reagentId": "minecraft:sugar",
+      "reagentMeta": 0,
+      "outputId": "minecraft:potion",
+      "outputMeta": 1
+    },
+    {
+      "inputId": "minecraft:splash_potion",
+      "inputMeta": 0,
+      "reagentId": "minecraft:sugar",
+      "reagentMeta": 0,
+      "outputId": "minecraft:splash_potion",
+      "outputMeta": 1
+    },
+    {
+      "inputId": "minecraft:lingering_potion",
+      "inputMeta": 0,
+      "reagentId": "minecraft:sugar",
+      "reagentMeta": 0,
+      "outputId": "minecraft:lingering_potion",
+      "outputMeta": 1
     },
     {
       "inputId": "minecraft:potion",
@@ -50756,270 +53478,6 @@
       "reagentMeta": 0,
       "outputId": "minecraft:lingering_potion",
       "outputMeta": 35
-    },
-    {
-      "inputId": "minecraft:potion",
-      "inputMeta": 14,
-      "reagentId": "minecraft:fermented_spider_eye",
-      "reagentMeta": 0,
-      "outputId": "minecraft:potion",
-      "outputMeta": 17
-    },
-    {
-      "inputId": "minecraft:splash_potion",
-      "inputMeta": 14,
-      "reagentId": "minecraft:fermented_spider_eye",
-      "reagentMeta": 0,
-      "outputId": "minecraft:splash_potion",
-      "outputMeta": 17
-    },
-    {
-      "inputId": "minecraft:lingering_potion",
-      "inputMeta": 14,
-      "reagentId": "minecraft:fermented_spider_eye",
-      "reagentMeta": 0,
-      "outputId": "minecraft:lingering_potion",
-      "outputMeta": 17
-    },
-    {
-      "inputId": "minecraft:potion",
-      "inputMeta": 6,
-      "reagentId": "minecraft:fermented_spider_eye",
-      "reagentMeta": 0,
-      "outputId": "minecraft:potion",
-      "outputMeta": 8
-    },
-    {
-      "inputId": "minecraft:splash_potion",
-      "inputMeta": 6,
-      "reagentId": "minecraft:fermented_spider_eye",
-      "reagentMeta": 0,
-      "outputId": "minecraft:splash_potion",
-      "outputMeta": 8
-    },
-    {
-      "inputId": "minecraft:lingering_potion",
-      "inputMeta": 6,
-      "reagentId": "minecraft:fermented_spider_eye",
-      "reagentMeta": 0,
-      "outputId": "minecraft:lingering_potion",
-      "outputMeta": 8
-    },
-    {
-      "inputId": "minecraft:potion",
-      "inputMeta": 9,
-      "reagentId": "minecraft:glowstone_dust",
-      "reagentMeta": 0,
-      "outputId": "minecraft:potion",
-      "outputMeta": 11
-    },
-    {
-      "inputId": "minecraft:splash_potion",
-      "inputMeta": 9,
-      "reagentId": "minecraft:glowstone_dust",
-      "reagentMeta": 0,
-      "outputId": "minecraft:splash_potion",
-      "outputMeta": 11
-    },
-    {
-      "inputId": "minecraft:lingering_potion",
-      "inputMeta": 9,
-      "reagentId": "minecraft:glowstone_dust",
-      "reagentMeta": 0,
-      "outputId": "minecraft:lingering_potion",
-      "outputMeta": 11
-    },
-    {
-      "inputId": "minecraft:potion",
-      "inputMeta": 4,
-      "reagentId": "minecraft:phantom_membrane",
-      "reagentMeta": 0,
-      "outputId": "minecraft:potion",
-      "outputMeta": 40
-    },
-    {
-      "inputId": "minecraft:splash_potion",
-      "inputMeta": 4,
-      "reagentId": "minecraft:phantom_membrane",
-      "reagentMeta": 0,
-      "outputId": "minecraft:splash_potion",
-      "outputMeta": 40
-    },
-    {
-      "inputId": "minecraft:lingering_potion",
-      "inputMeta": 4,
-      "reagentId": "minecraft:phantom_membrane",
-      "reagentMeta": 0,
-      "outputId": "minecraft:lingering_potion",
-      "outputMeta": 40
-    },
-    {
-      "inputId": "minecraft:potion",
-      "inputMeta": 4,
-      "reagentId": "minecraft:sugar",
-      "reagentMeta": 0,
-      "outputId": "minecraft:potion",
-      "outputMeta": 14
-    },
-    {
-      "inputId": "minecraft:splash_potion",
-      "inputMeta": 4,
-      "reagentId": "minecraft:sugar",
-      "reagentMeta": 0,
-      "outputId": "minecraft:splash_potion",
-      "outputMeta": 14
-    },
-    {
-      "inputId": "minecraft:lingering_potion",
-      "inputMeta": 4,
-      "reagentId": "minecraft:sugar",
-      "reagentMeta": 0,
-      "outputId": "minecraft:lingering_potion",
-      "outputMeta": 14
-    },
-    {
-      "inputId": "minecraft:potion",
-      "inputMeta": 5,
-      "reagentId": "minecraft:redstone",
-      "reagentMeta": 0,
-      "outputId": "minecraft:potion",
-      "outputMeta": 6
-    },
-    {
-      "inputId": "minecraft:splash_potion",
-      "inputMeta": 5,
-      "reagentId": "minecraft:redstone",
-      "reagentMeta": 0,
-      "outputId": "minecraft:splash_potion",
-      "outputMeta": 6
-    },
-    {
-      "inputId": "minecraft:lingering_potion",
-      "inputMeta": 5,
-      "reagentId": "minecraft:redstone",
-      "reagentMeta": 0,
-      "outputId": "minecraft:lingering_potion",
-      "outputMeta": 6
-    },
-    {
-      "inputId": "minecraft:potion",
-      "inputMeta": 31,
-      "reagentId": "minecraft:fermented_spider_eye",
-      "reagentMeta": 0,
-      "outputId": "minecraft:potion",
-      "outputMeta": 34
-    },
-    {
-      "inputId": "minecraft:splash_potion",
-      "inputMeta": 31,
-      "reagentId": "minecraft:fermented_spider_eye",
-      "reagentMeta": 0,
-      "outputId": "minecraft:splash_potion",
-      "outputMeta": 34
-    },
-    {
-      "inputId": "minecraft:lingering_potion",
-      "inputMeta": 31,
-      "reagentId": "minecraft:fermented_spider_eye",
-      "reagentMeta": 0,
-      "outputId": "minecraft:lingering_potion",
-      "outputMeta": 34
-    },
-    {
-      "inputId": "minecraft:potion",
-      "inputMeta": 26,
-      "reagentId": "minecraft:fermented_spider_eye",
-      "reagentMeta": 0,
-      "outputId": "minecraft:potion",
-      "outputMeta": 23
-    },
-    {
-      "inputId": "minecraft:splash_potion",
-      "inputMeta": 26,
-      "reagentId": "minecraft:fermented_spider_eye",
-      "reagentMeta": 0,
-      "outputId": "minecraft:splash_potion",
-      "outputMeta": 23
-    },
-    {
-      "inputId": "minecraft:lingering_potion",
-      "inputMeta": 26,
-      "reagentId": "minecraft:fermented_spider_eye",
-      "reagentMeta": 0,
-      "outputId": "minecraft:lingering_potion",
-      "outputMeta": 23
-    },
-    {
-      "inputId": "minecraft:potion",
-      "inputMeta": 28,
-      "reagentId": "minecraft:redstone",
-      "reagentMeta": 0,
-      "outputId": "minecraft:potion",
-      "outputMeta": 29
-    },
-    {
-      "inputId": "minecraft:splash_potion",
-      "inputMeta": 28,
-      "reagentId": "minecraft:redstone",
-      "reagentMeta": 0,
-      "outputId": "minecraft:splash_potion",
-      "outputMeta": 29
-    },
-    {
-      "inputId": "minecraft:lingering_potion",
-      "inputMeta": 28,
-      "reagentId": "minecraft:redstone",
-      "reagentMeta": 0,
-      "outputId": "minecraft:lingering_potion",
-      "outputMeta": 29
-    },
-    {
-      "inputId": "minecraft:potion",
-      "inputMeta": 21,
-      "reagentId": "minecraft:glowstone_dust",
-      "reagentMeta": 0,
-      "outputId": "minecraft:potion",
-      "outputMeta": 22
-    },
-    {
-      "inputId": "minecraft:splash_potion",
-      "inputMeta": 21,
-      "reagentId": "minecraft:glowstone_dust",
-      "reagentMeta": 0,
-      "outputId": "minecraft:splash_potion",
-      "outputMeta": 22
-    },
-    {
-      "inputId": "minecraft:lingering_potion",
-      "inputMeta": 21,
-      "reagentId": "minecraft:glowstone_dust",
-      "reagentMeta": 0,
-      "outputId": "minecraft:lingering_potion",
-      "outputMeta": 22
-    },
-    {
-      "inputId": "minecraft:potion",
-      "inputMeta": 37,
-      "reagentId": "minecraft:redstone",
-      "reagentMeta": 0,
-      "outputId": "minecraft:potion",
-      "outputMeta": 38
-    },
-    {
-      "inputId": "minecraft:splash_potion",
-      "inputMeta": 37,
-      "reagentId": "minecraft:redstone",
-      "reagentMeta": 0,
-      "outputId": "minecraft:splash_potion",
-      "outputMeta": 38
-    },
-    {
-      "inputId": "minecraft:lingering_potion",
-      "inputMeta": 37,
-      "reagentId": "minecraft:redstone",
-      "reagentMeta": 0,
-      "outputId": "minecraft:lingering_potion",
-      "outputMeta": 38
     }
   ],
   "containerMixes": [

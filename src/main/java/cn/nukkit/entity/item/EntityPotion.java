@@ -22,6 +22,10 @@ public class EntityPotion extends EntityProjectile {
 
     public static final int DATA_POTION_ID = 37;
 
+    @PowerNukkitOnly
+    @Since("FUTURE")
+    public static final String NBT_POTION_ID = "PotionId";
+
     public int potionId;
 
     public EntityPotion(FullChunk chunk, CompoundTag nbt) {
@@ -36,7 +40,7 @@ public class EntityPotion extends EntityProjectile {
     protected void initEntity() {
         super.initEntity();
 
-        potionId = this.namedTag.getShort("PotionId");
+        potionId = this.namedTag.getShort(NBT_POTION_ID);
 
         this.dataProperties.putShort(DATA_POTION_AUX_VALUE, this.potionId);
 

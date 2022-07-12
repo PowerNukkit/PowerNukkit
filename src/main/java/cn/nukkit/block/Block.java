@@ -61,7 +61,7 @@ public abstract class Block extends Position implements Metadatable, Cloneable, 
     @Deprecated
     @DeprecationDetails(since = "1.4.0.0-PN", reason = "It is being replaced by an other solution that don't require a fixed size")
     @PowerNukkitOnly
-    public static final int MAX_BLOCK_ID = dynamic(750);
+    public static final int MAX_BLOCK_ID = dynamic(800);
     
     @Deprecated
     @DeprecationDetails(since = "1.4.0.0-PN", reason = "It's not a constant value, it may be changed on major updates and" +
@@ -210,8 +210,8 @@ public abstract class Block extends Position implements Metadatable, Cloneable, 
             list[RED_MUSHROOM] = BlockMushroomRed.class; //40
             list[GOLD_BLOCK] = BlockGold.class; //41
             list[IRON_BLOCK] = BlockIron.class; //42
-            list[DOUBLE_STONE_SLAB] = BlockDoubleSlabStone.class; //43
-            list[STONE_SLAB] = BlockSlabStone.class; //44
+            list[DOUBLE_STONE_BLOCK_SLAB] = BlockDoubleSlabStone.class; //43
+            list[STONE_BLOCK_SLAB] = BlockSlabStone.class; //44
             list[BRICKS_BLOCK] = BlockBricks.class; //45
             list[TNT] = BlockTNT.class; //46
             list[BOOKSHELF] = BlockBookshelf.class; //47
@@ -349,8 +349,8 @@ public abstract class Block extends Position implements Metadatable, Cloneable, 
             list[DAYLIGHT_DETECTOR_INVERTED] = BlockDaylightDetectorInverted.class; //178
             list[RED_SANDSTONE] = BlockRedSandstone.class; //179
             list[RED_SANDSTONE_STAIRS] = BlockStairsRedSandstone.class; //180
-            list[DOUBLE_RED_SANDSTONE_SLAB] = BlockDoubleSlabRedSandstone.class; //181
-            list[RED_SANDSTONE_SLAB] = BlockSlabRedSandstone.class; //182
+            list[DOUBLE_STONE_BLOCK_SLAB2] = BlockDoubleSlabRedSandstone.class; //181
+            list[STONE_BLOCK_SLAB2] = BlockSlabRedSandstone.class; //182
             list[FENCE_GATE_SPRUCE] = BlockFenceGateSpruce.class; //183
             list[FENCE_GATE_BIRCH] = BlockFenceGateBirch.class; //184
             list[FENCE_GATE_JUNGLE] = BlockFenceGateJungle.class; //185
@@ -458,13 +458,13 @@ public abstract class Block extends Position implements Metadatable, Cloneable, 
             list[TURTLE_EGG] = BlockTurtleEgg.class; //414
             list[BUBBLE_COLUMN] = BlockBubbleColumn.class; //415
             list[BARRIER] = BlockBarrier.class; //416
-            list[STONE_SLAB3] = BlockSlabStone3.class ; //417
+            list[STONE_BLOCK_SLAB3] = BlockSlabStone3.class ; //417
             list[BAMBOO] = BlockBamboo.class; //418
             list[BAMBOO_SAPLING] = BlockBambooSapling.class; //419
             list[SCAFFOLDING] = BlockScaffolding.class; //420
-            list[STONE_SLAB4] = BlockSlabStone4.class ; //421
-            list[DOUBLE_STONE_SLAB3] = BlockDoubleSlabStone3.class; //422
-            list[DOUBLE_STONE_SLAB4] = BlockDoubleSlabStone4.class; //422
+            list[STONE_BLOCK_SLAB4] = BlockSlabStone4.class ; //421
+            list[DOUBLE_STONE_BLOCK_SLAB3] = BlockDoubleSlabStone3.class; //422
+            list[DOUBLE_STONE_BLOCK_SLAB4] = BlockDoubleSlabStone4.class; //422
 
             list[GRANITE_STAIRS] = BlockStairsGranite.class; //424
             list[DIORITE_STAIRS] = BlockStairsDiorite.class; //425

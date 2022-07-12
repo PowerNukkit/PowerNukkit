@@ -287,6 +287,7 @@ public interface ItemID {
     @Since("1.4.0.0-PN") int RECORD_PIGSTEP = 759;
     @Since("1.4.0.0-PN") @PowerNukkitOnly int NETHER_SPROUTS = 760;
 
+    @PowerNukkitOnly @Since("FUTURE") int AMETHYST_SHARD = 771;
     @Since("1.6.0.0-PN") int SPYGLASS = 772;
 
     @Since("1.4.0.0-PN") @PowerNukkitOnly int SOUL_CAMPFIRE = 801;
