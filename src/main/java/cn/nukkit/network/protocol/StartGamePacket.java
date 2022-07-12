@@ -7,6 +7,7 @@ import cn.nukkit.item.RuntimeItems;
 import cn.nukkit.level.GameRules;
 import cn.nukkit.nbt.NBTIO;
 import cn.nukkit.nbt.tag.CompoundTag;
+import lombok.Getter;
 import lombok.ToString;
 import lombok.extern.log4j.Log4j2;
 
@@ -79,10 +80,11 @@ public class StartGamePacket extends DataPacket {
     public boolean isFromWorldTemplate = false;
     public boolean isWorldTemplateOptionLocked = false;
     public boolean isOnlySpawningV1Villagers = false;
-    public String vanillaVersion = ProtocolInfo.MINECRAFT_VERSION_NETWORK;
+    public String vanillaVersion = "*";
     @PowerNukkitOnly @Since("FUTURE") public int limitedWorldWidth = 16;
     @PowerNukkitOnly @Since("FUTURE") public int limitedWorldHeight = 16;
     @PowerNukkitOnly @Since("FUTURE") public boolean netherType = false;
+    @PowerNukkitOnly @Since("FUTURE") public EduSharedUriResource eduSharedUriResource = EduSharedUriResource.EMPTY;
     @PowerNukkitOnly @Since("FUTURE") public boolean forceExperimentalGameplay = false;
     public String levelId = ""; //base64 string, usually the same as world folder name in vanilla
     public String worldName;
@@ -96,8 +98,9 @@ public class StartGamePacket extends DataPacket {
     
     public String multiplayerCorrelationId = "";
     @Since("1.3.0.0-PN") public boolean isInventoryServerAuthoritative;
-    @Since("FUTURE") public String serverEngine = "";
+    @PowerNukkitOnly @Since("FUTURE") public String serverEngine = ProtocolInfo.MINECRAFT_VERSION_NETWORK;
     @PowerNukkitOnly @Since("FUTURE") public long blockRegistryChecksum;
+    @PowerNukkitOnly @Since("FUTURE") public UUID worldTemplateId = new UUID(0, 0);
     
     @Override
     public void decode() {
@@ -162,8 +165,8 @@ public class StartGamePacket extends DataPacket {
         this.putLInt(this.limitedWorldWidth);
         this.putLInt(this.limitedWorldHeight);
         this.putBoolean(this.netherType);
-        this.putString(""); // EduSharedUriResource buttonName
-        this.putString(""); // EduSharedUriResource linkUri
+        this.putString(this.eduSharedUriResource.getButtonName());
+        this.putString(this.eduSharedUriResource.getLinkUri());
         this.putBoolean(this.forceExperimentalGameplay);
         // TODO: handle force experimental
         this.putString(this.levelId);
@@ -200,7 +203,7 @@ public class StartGamePacket extends DataPacket {
             throw new RuntimeException(e);
         }
         this.putLLong(this.blockRegistryChecksum);
-        this.putUUID(new UUID(0, 0)); // worldTemplateId
+        this.putUUID(this.worldTemplateId);
     }
     
     @ToString
@@ -226,7 +229,25 @@ public class StartGamePacket extends DataPacket {
             return enabled;
         }
     }
-    
+
+    @Getter
+    @ToString
+    @PowerNukkitOnly
+    @Since("FUTURE")
+    public static class EduSharedUriResource {
+
+        public static final EduSharedUriResource EMPTY = new EduSharedUriResource("", "");
+
+        private final String buttonName;
+        private final String linkUri;
+
+        public EduSharedUriResource(String buttonName, String linkUri) {
+            this.buttonName = buttonName;
+            this.linkUri = linkUri;
+        }
+    }
+
+    @Getter
     @ToString
     @PowerNukkitOnly
     @Since("FUTURE")
@@ -240,18 +261,6 @@ public class StartGamePacket extends DataPacket {
             this.movementMode = movementMode;
             this.rewindHistorySize = rewindHistorySize;
             this.serverAuthoritativeBlockBreaking = serverAuthoritativeBlockBreaking;
-        }
-        
-        public AuthoritativeMovementMode getMovementMode() {
-            return movementMode;
-        }
-        
-        public int getRewindHistorySize() {
-            return rewindHistorySize;
-        }
-        
-        public boolean isServerAuthoritativeBlockBreaking() {
-            return serverAuthoritativeBlockBreaking;
         }
     }
     
