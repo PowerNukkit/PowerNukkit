@@ -24,7 +24,7 @@ import cn.nukkit.network.protocol.EntityEventPacket;
 import cn.nukkit.network.protocol.LevelSoundEventPacket;
 import cn.nukkit.utils.DyeColor;
 
-import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * @author CreeperFace
@@ -33,25 +33,38 @@ public class EntityFirework extends Entity {
 
     public static final int NETWORK_ID = 72;
 
-    private int fireworkAge;
-    private int lifetime;
+    @PowerNukkitOnly @Since("FUTURE") public static final String TAG_LIFE = "Life";
+    @PowerNukkitOnly @Since("FUTURE") public static final String TAG_LIFE_TIME = "LifeTime";
+
+    private int life;
+    private int lifeTime;
     private Item firework;
     private boolean hadCollision;
 
     @PowerNukkitDifference(info = "Will default to a black-creeper-face if the firework data is missing", since = "1.3.1.2-PN")
+    @PowerNukkitDifference(info = "Move initialization to initEntity()", since = "FUTURE")
     public EntityFirework(FullChunk chunk, CompoundTag nbt) {
         super(chunk, nbt);
+    }
 
-        this.fireworkAge = 0;
-        Random rand = new Random();
-        this.lifetime = 30 + rand.nextInt(6) + rand.nextInt(7);
+    @PowerNukkitOnly
+    @Since("FUTURE")
+    @Override
+    protected void initEntity() {
+        super.initEntity();
 
-        this.motionX = rand.nextGaussian() * 0.001D;
-        this.motionZ = rand.nextGaussian() * 0.001D;
-        this.motionY = 0.05D;
+        if (this.namedTag.contains(TAG_LIFE)) {
+            this.setLife(this.namedTag.getInt(TAG_LIFE));
+        }
 
-        if (nbt.contains("FireworkItem")) {
-            firework = NBTIO.getItemHelper(nbt.getCompound("FireworkItem"));
+        if (this.namedTag.contains(TAG_LIFE_TIME)) {
+            this.setLifeTime(this.namedTag.getInt(TAG_LIFE_TIME));
+        } else {
+            this.setLifeTime(this.generateLifeTime());
+        }
+
+        if (this.namedTag.contains("FireworkItem")) {
+            firework = NBTIO.getItemHelper(this.namedTag.getCompound("FireworkItem"));
         } else {
             firework = new ItemFirework();
         }
@@ -80,6 +93,11 @@ public class EntityFirework extends Entity {
         this.setDataProperty(new NBTEntityData(Entity.DATA_DISPLAY_ITEM, firework.getNamedTag()));
         this.setDataProperty(new IntEntityData(Entity.DATA_DISPLAY_OFFSET, 1));
         this.setDataProperty(new ByteEntityData(Entity.DATA_HAS_DISPLAY, 1));
+
+        ThreadLocalRandom random = ThreadLocalRandom.current();
+        this.motionX = random.nextGaussian() * 0.001D;
+        this.motionZ = random.nextGaussian() * 0.001D;
+        this.motionY = 0.05D;
     }
 
     @Override
@@ -107,12 +125,13 @@ public class EntityFirework extends Entity {
         boolean hasUpdate = this.entityBaseTick(tickDiff);
 
         if (this.isAlive()) {
-
             this.motionX *= 1.15D;
             this.motionZ *= 1.15D;
             this.motionY += 0.04D;
+
             Position position = getPosition();
             Vector3 motion = getMotion();
+
             this.move(this.motionX, this.motionY, this.motionZ);
 
             if (this.isCollided && !this.hadCollision) { //collide with block
@@ -135,14 +154,14 @@ public class EntityFirework extends Entity {
             this.pitch = (float) (Math.atan2(this.motionY, f) * (180D / Math.PI));
 
 
-            if (this.fireworkAge == 0) {
+            if (this.life == 0) {
                 this.getLevel().addSound(this, Sound.FIREWORK_LAUNCH);
             }
 
-            this.fireworkAge++;
+            this.life++;
 
             hasUpdate = true;
-            if (this.fireworkAge >= this.lifetime) {
+            if (this.life >= this.lifeTime) {
                 EntityEventPacket pk = new EntityEventPacket();
                 pk.data = 0;
                 pk.event = EntityEventPacket.FIREWORK_EXPLOSION;
@@ -153,13 +172,22 @@ public class EntityFirework extends Entity {
                 Server.broadcastPacket(getViewers().values(), pk);
 
                 this.kill();
-                hasUpdate = true;
             }
         }
 
         this.timing.stopTiming();
 
         return hasUpdate || !this.onGround || Math.abs(this.motionX) > 0.00001 || Math.abs(this.motionY) > 0.00001 || Math.abs(this.motionZ) > 0.00001;
+    }
+
+    @PowerNukkitOnly
+    @Since("FUTURE")
+    @Override
+    public void saveNBT() {
+        super.saveNBT();
+
+        this.namedTag.putInt(TAG_LIFE, this.getLife());
+        this.namedTag.putInt(TAG_LIFE_TIME, this.getLifeTime());
     }
 
     @Override
@@ -192,5 +220,47 @@ public class EntityFirework extends Entity {
     @Override
     public String getOriginalName() {
         return "Firework Rocket";
+    }
+
+    /*
+     * Generate lifeTime of the firework when it created first time.
+     */
+    @PowerNukkitOnly
+    @Since("FUTURE")
+    public int generateLifeTime() {
+        ThreadLocalRandom random = ThreadLocalRandom.current();
+        // TODO: Implement flight duration
+        int flightDuration = 2;
+        return (flightDuration + 1) * 10 + random.nextInt(6) + random.nextInt(7);
+    }
+
+    /*
+     * Get how many ticks the firework flew.
+     */
+    @PowerNukkitOnly
+    @Since("FUTURE")
+    public int getLife() {
+        return this.life;
+    }
+
+    /*
+     * Get how many ticks the firework can fly.
+     */
+    @PowerNukkitOnly
+    @Since("FUTURE")
+    public int getLifeTime() {
+        return this.lifeTime;
+    }
+
+    @PowerNukkitOnly
+    @Since("FUTURE")
+    public void setLife(int life) {
+        this.life = life;
+    }
+
+    @PowerNukkitOnly
+    @Since("FUTURE")
+    public void setLifeTime(int lifeTime) {
+        this.lifeTime = lifeTime;
     }
 }
