@@ -2305,4 +2305,10 @@ public abstract class Block extends Position implements Metadatable, Cloneable, 
         }
         return this.level.isBlockPowered(this.getLocation());
     }
+
+    @PowerNukkitOnly
+    @Since("FUTURE")
+    public void onEntityStep(Entity entity) {
+
+    }
 }

@@ -6,8 +6,6 @@ import cn.nukkit.api.PowerNukkitDifference;
 import cn.nukkit.api.PowerNukkitOnly;
 import cn.nukkit.api.Since;
 import cn.nukkit.block.Block;
-import cn.nukkit.block.BlockCactus;
-import cn.nukkit.block.BlockMagma;
 import cn.nukkit.entity.data.ShortEntityData;
 import cn.nukkit.entity.passive.EntityWaterAnimal;
 import cn.nukkit.entity.projectile.EntityProjectile;
@@ -299,10 +297,6 @@ public abstract class EntityLiving extends Entity implements EntityDamageable {
                 }
             }
         }
-
-        // Used to check collisions with magma and cactus blocks
-        Block block = this.level.getBlock((int) x, (int) y - 1, (int) z);
-        if (block instanceof BlockMagma || block instanceof BlockCactus) block.onEntityCollide(this);
 
         Timings.livingEntityBaseTickTimer.stopTiming();
 

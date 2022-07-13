@@ -38,7 +38,9 @@ import static cn.nukkit.blockproperty.CommonBlockProperties.OPEN;
  */
 @PowerNukkitDifference(info = "Implements RedstoneComponent.", since = "1.4.0.0-PN")
 public class BlockTrapdoor extends BlockTransparentMeta implements RedstoneComponent, Faceable {
-    private static final double THICKNESS = 0.1875;
+
+    @PowerNukkitOnly
+    public static final double THICKNESS = 0.1875;
 
     // Contains a list of positions of trap doors, which have been opened by hand (by a player).
     // It is used to detect on redstone update, if the door should be closed if redstone is off on the update,

@@ -212,6 +212,8 @@ public abstract class EntityMinecartAbstract extends EntityVehicle {
                 }
             }
 
+            this.checkSteppingBlock();
+
             // No need to onGround or Motion diff! This always have an update
             return true;
         }

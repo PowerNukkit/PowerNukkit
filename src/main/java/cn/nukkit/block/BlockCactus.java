@@ -25,6 +25,7 @@ import javax.annotation.Nullable;
  * @author Nukkit Project Team
  */
 public class BlockCactus extends BlockTransparentMeta {
+
     @PowerNukkitOnly
     @Since("1.5.0.0-PN")
     public static final BlockProperties PROPERTIES = new BlockProperties(CommonBlockProperties.AGE_15);
@@ -194,5 +195,12 @@ public class BlockCactus extends BlockTransparentMeta {
     @PowerNukkitOnly
     public  boolean sticksToPiston() {
         return false;
+    }
+
+    @PowerNukkitOnly
+    @Since("FUTURE")
+    @Override
+    public void onEntityStep(Entity entity) {
+        entity.attack(new EntityDamageByBlockEvent(this, entity, DamageCause.CONTACT, 1));
     }
 }

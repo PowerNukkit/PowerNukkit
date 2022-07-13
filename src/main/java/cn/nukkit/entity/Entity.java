@@ -1556,6 +1556,7 @@ public abstract class Entity extends Location implements Metadatable {
         boolean hasUpdate = false;
 
         this.checkBlockCollision();
+        this.checkSteppingBlock();
 
         if (this.y <= -16 && this.isAlive()) {
             if (this instanceof Player) {
@@ -2941,5 +2942,13 @@ public abstract class Entity extends Location implements Metadatable {
     public void setNoClip(boolean noClip) {
         this.noClip = noClip;
         this.setDataFlag(DATA_FLAGS, DATA_FLAG_HAS_COLLISION, noClip);
+    }
+
+    @PowerNukkitOnly
+    @Since("FUTURE")
+    protected void checkSteppingBlock() {
+        if (this.onGround) {
+            this.getLevel().getBlock(this.getFloorX(), (int) (this.getY() - (BlockTrapdoor.THICKNESS - 0.01)), this.getFloorZ()).onEntityStep(this);
+        }
     }
 }

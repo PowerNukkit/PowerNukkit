@@ -1,6 +1,8 @@
 package cn.nukkit.block;
 
 import cn.nukkit.Player;
+import cn.nukkit.api.PowerNukkitOnly;
+import cn.nukkit.api.Since;
 import cn.nukkit.entity.Entity;
 import cn.nukkit.event.block.BlockFormEvent;
 import cn.nukkit.event.entity.EntityDamageByBlockEvent;
@@ -41,7 +43,7 @@ public class BlockMagma extends BlockSolid {
 
     @Override
     public double getResistance() {
-        return 30;
+        return 0.5;
     }
 
     @Override
@@ -62,6 +64,25 @@ public class BlockMagma extends BlockSolid {
 
     @Override
     public void onEntityCollide(Entity entity) {
+        if (entity.hasEffect(Effect.FIRE_RESISTANCE)) {
+            return;
+        }
+
+        if (entity instanceof Player) {
+            Player p = (Player) entity;
+            if (p.getInventory().getBoots().getEnchantment(Enchantment.ID_FROST_WALKER) != null
+                    || p.isCreative() || p.isSpectator() || p.isSneaking() || !p.level.getGameRules().getBoolean(GameRule.FIRE_DAMAGE)) {
+                return;
+            }
+        }
+
+        entity.attack(new EntityDamageByBlockEvent(this, entity, EntityDamageEvent.DamageCause.HOT_FLOOR, 1));
+    }
+
+    @PowerNukkitOnly
+    @Since("FUTURE")
+    @Override
+    public void onEntityStep(Entity entity) {
         if (entity.hasEffect(Effect.FIRE_RESISTANCE)) {
             return;
         }
@@ -103,5 +124,4 @@ public class BlockMagma extends BlockSolid {
     public boolean canHarvestWithHand() {
         return false;
     }
-
 }
