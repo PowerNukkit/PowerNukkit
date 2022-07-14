@@ -1,5 +1,6 @@
 package cn.nukkit.network.protocol;
 
+import cn.nukkit.api.DeprecationDetails;
 import cn.nukkit.api.PowerNukkitOnly;
 import cn.nukkit.api.Since;
 import cn.nukkit.math.Vector3f;
@@ -160,7 +161,7 @@ public class LevelSoundEventPacket extends DataPacket {
     public static final int SOUND_IMITATE_ELDER_GUARDIAN = 148;
     public static final int SOUND_IMITATE_ENDER_DRAGON = 149;
     public static final int SOUND_IMITATE_ENDERMAN = 150;
-
+    public static final int SOUND_IMITATE_ENDERMITE = 151;
     public static final int SOUND_IMITATE_EVOCATION_ILLAGER = 152;
     public static final int SOUND_IMITATE_GHAST = 153;
     public static final int SOUND_IMITATE_HUSK = 154;
@@ -196,7 +197,7 @@ public class LevelSoundEventPacket extends DataPacket {
     public static final int SOUND_ITEM_TRIDENT_THUNDER = 184;
     public static final int SOUND_ITEM_TRIDENT_HIT_GROUND = 185;
     public static final int SOUND_DEFAULT = 186;
-
+    public static final int SOUND_BLOCK_FLETCHING_TABLE_USE = 187;
     public static final int SOUND_ELEMCONSTRUCT_OPEN = 188;
     public static final int SOUND_ICEBOMB_HIT = 189;
     public static final int SOUND_BALLOONPOP = 190;
@@ -204,7 +205,10 @@ public class LevelSoundEventPacket extends DataPacket {
     public static final int SOUND_LT_REACTION_BLEACH = 192;
     public static final int SOUND_LT_REACTION_EPASTE = 193;
     public static final int SOUND_LT_REACTION_EPASTE2 = 194;
-
+    public static final int SOUND_LT_REACTION_GLOW_STICK = 195;
+    public static final int SOUND_LT_REACTION_GLOW_STICK_2 = 196;
+    public static final int SOUND_LT_REACTION_LUMINOL = 197;
+    public static final int SOUND_LT_REACTION_SALT = 198;
     public static final int SOUND_LT_REACTION_FERTILIZER = 199;
     public static final int SOUND_LT_REACTION_FIREBALL = 200;
     public static final int SOUND_LT_REACTION_MGSALT = 201;
@@ -228,12 +232,14 @@ public class LevelSoundEventPacket extends DataPacket {
     public static final int SOUND_HURT_BABY = 219;
     public static final int SOUND_DEATH_BABY = 220;
     public static final int SOUND_STEP_BABY = 221;
-    @PowerNukkitOnly @Since("1.6.0.0-PN") public static final int SOUND_BABY_SPAWN = 222;
+    public static final int SOUND_SPAWN_BABY = 222;
+    @Deprecated @DeprecationDetails(since = "FUTURE", reason = "Incorrect naming convention", by = "PowerNukkit", replaceWith = "SOUND_SPAWN_BABY") @PowerNukkitOnly @Since("1.6.0.0-PN") public static final int SOUND_BABY_SPAWN = SOUND_SPAWN_BABY;
     public static final int SOUND_BORN = 223;
     public static final int SOUND_BLOCK_TURTLE_EGG_BREAK = 224;
     public static final int SOUND_BLOCK_TURTLE_EGG_CRACK = 225;
     public static final int SOUND_BLOCK_TURTLE_EGG_HATCH = 226;
-    @PowerNukkitOnly @Since("1.6.0.0-PN") public static final int SOUND_TURTLE_LAY_EGG = 227;
+    public static final int SOUND_LAY_EGG = 227;
+    @Deprecated @DeprecationDetails(since = "FUTURE", reason = "Incorrect naming convention", by = "PowerNukkit", replaceWith = "SOUND_LAY_EGG") @PowerNukkitOnly @Since("1.6.0.0-PN") public static final int SOUND_TURTLE_LAY_EGG = SOUND_LAY_EGG;
     public static final int SOUND_BLOCK_TURTLE_EGG_ATTACK = 228;
     public static final int SOUND_BEACON_ACTIVATE = 229;
     public static final int SOUND_BEACON_AMBIENT = 230;
@@ -381,7 +387,72 @@ public class LevelSoundEventPacket extends DataPacket {
     @Since("1.6.0.0-PN") public static final int SOUND_TONGUE = 372;
     @Since("1.6.0.0-PN") public static final int SOUND_CRACK_IRON_GOLEM = 373;
     @Since("1.6.0.0-PN") public static final int SOUND_REPAIR_IRON_GOLEM = 374;
-    @Since("1.6.0.0-PN") public static final int SOUND_UNDEFINED = 375;
+    public static final int SOUND_LISTENING = 375;
+    public static final int SOUND_HEARTBEAT = 376;
+    public static final int SOUND_HORN_BREAK = 377;
+    public static final int SOUND_SCULK_PLACE = 378;
+    public static final int SOUND_SCULK_SPREAD = 379;
+    public static final int SOUND_SCULK_CHARGE = 380;
+    public static final int SOUND_SCULK_SENSOR_PLACE = 381;
+    public static final int SOUND_SCULK_SHRIEKER_PLACE = 382;
+    public static final int SOUND_GOAT_CALL_0 = 383;
+    public static final int SOUND_GOAT_CALL_1 = 384;
+    public static final int SOUND_GOAT_CALL_2 = 385;
+    public static final int SOUND_GOAT_CALL_3 = 386;
+    public static final int SOUND_GOAT_CALL_4 = 387;
+    public static final int SOUND_GOAT_CALL_5 = 388;
+    public static final int SOUND_GOAT_CALL_6 = 389;
+    public static final int SOUND_GOAT_CALL_7 = 390;
+    public static final int SOUND_GOAT_CALL_8 = 391;
+    public static final int SOUND_GOAT_CALL_9 = 392;
+    public static final int SOUND_GOAT_HARMONY_0 = 393;
+    public static final int SOUND_GOAT_HARMONY_1 = 394;
+    public static final int SOUND_GOAT_HARMONY_2 = 395;
+    public static final int SOUND_GOAT_HARMONY_3 = 396;
+    public static final int SOUND_GOAT_HARMONY_4 = 397;
+    public static final int SOUND_GOAT_HARMONY_5 = 398;
+    public static final int SOUND_GOAT_HARMONY_6 = 399;
+    public static final int SOUND_GOAT_HARMONY_7 = 400;
+    public static final int SOUND_GOAT_HARMONY_8 = 401;
+    public static final int SOUND_GOAT_HARMONY_9 = 402;
+    public static final int SOUND_GOAT_MELODY_0 = 403;
+    public static final int SOUND_GOAT_MELODY_1 = 404;
+    public static final int SOUND_GOAT_MELODY_2 = 405;
+    public static final int SOUND_GOAT_MELODY_3 = 406;
+    public static final int SOUND_GOAT_MELODY_4 = 407;
+    public static final int SOUND_GOAT_MELODY_5 = 408;
+    public static final int SOUND_GOAT_MELODY_6 = 409;
+    public static final int SOUND_GOAT_MELODY_7 = 410;
+    public static final int SOUND_GOAT_MELODY_8 = 411;
+    public static final int SOUND_GOAT_MELODY_9 = 412;
+    public static final int SOUND_GOAT_BASS_0 = 413;
+    public static final int SOUND_GOAT_BASS_1 = 414;
+    public static final int SOUND_GOAT_BASS_2 = 415;
+    public static final int SOUND_GOAT_BASS_3 = 416;
+    public static final int SOUND_GOAT_BASS_4 = 417;
+    public static final int SOUND_GOAT_BASS_5 = 418;
+    public static final int SOUND_GOAT_BASS_6 = 419;
+    public static final int SOUND_GOAT_BASS_7 = 420;
+    public static final int SOUND_GOAT_BASS_8 = 421;
+    public static final int SOUND_GOAT_BASS_9 = 422;
+
+    public static final int SOUND_IMITATE_WARDEN = 426;
+    public static final int SOUND_LISTENING_ANGRY = 427;
+    public static final int SOUND_ITEM_GIVEN = 428;
+    public static final int SOUND_ITEM_TAKEN = 429;
+    public static final int SOUND_DISAPPEARED = 430;
+    public static final int SOUND_REAPPEARED = 431;
+    public static final int SOUND_MILK_DRINK = 432;
+    public static final int SOUND_FROGSPAWN_HATCHED = 433;
+    public static final int SOUND_LAY_SPAWN = 434;
+    public static final int SOUND_FROGSPAWN_BREAK = 435;
+    public static final int SOUND_SONIC_BOOM = 436;
+    public static final int SOUND_SONIC_CHARGE = 437;
+    public static final int SOUND_ITEM_THROWN = 438;
+    public static final int SOUND_RECORD_5 = 439;
+    public static final int SOUND_CONVERT_TO_FROG = 440;
+    public static final int SOUND_RECORD_PLAYING = 441;
+    public static final int SOUND_UNDEFINED = 442;
 
     public int sound;
     public float x;
