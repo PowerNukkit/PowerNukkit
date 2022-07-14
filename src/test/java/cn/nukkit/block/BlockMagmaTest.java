@@ -51,8 +51,8 @@ class BlockMagmaTest {
     }
 
     @Test
-    void onEntityCollide_Player_Normal() {
-        magma.onEntityCollide(player);
+    void onEntityStep_Player_Normal() {
+        magma.onEntityStep(player);
         verify(player).attack(damageEventCaptor.capture());
         List<EntityDamageEvent> damages = damageEventCaptor.getAllValues();
         assertEquals(1, damages.size());
@@ -65,8 +65,8 @@ class BlockMagmaTest {
     }
 
     @Test
-    void onEntityCollide_Entity_Normal() {
-        magma.onEntityCollide(entity);
+    void onEntityStep_Entity_Normal() {
+        magma.onEntityStep(entity);
         verify(entity).attack(damageEventCaptor.capture());
         List<EntityDamageEvent> damages = damageEventCaptor.getAllValues();
         assertEquals(1, damages.size());
@@ -79,40 +79,40 @@ class BlockMagmaTest {
     }
 
     @Test
-    void onEntityCollide_Entity_FireResistanceEffect() {
+    void onEntityStep_Entity_FireResistanceEffect() {
         entity.addEffect(Effect.getEffect(Effect.FIRE_RESISTANCE));
-        magma.onEntityCollide(entity);
+        magma.onEntityStep(entity);
         verify(entity, times(0)).attack(any());
     }
 
     @Test
-    void onEntityCollide_Player_FrostWalker() {
+    void onEntityStep_Player_FrostWalker() {
         Item boots = Item.get(ItemID.GOLD_BOOTS);
         boots.addEnchantment(Enchantment.getEnchantment(Enchantment.ID_FROST_WALKER));
         player.getInventory().setBoots(boots);
 
-        magma.onEntityCollide(player);
+        magma.onEntityStep(player);
         verify(player, times(0)).attack(any());
     }
 
     @Test
-    void onEntityCollide_Player_Creative() {
+    void onEntityStep_Player_Creative() {
         player.setGamemode(Player.CREATIVE);
-        magma.onEntityCollide(player);
+        magma.onEntityStep(player);
         verify(player, times(0)).attack(any());
     }
 
     @Test
-    void onEntityCollide_Player_Spectator() {
+    void onEntityStep_Player_Spectator() {
         player.setGamemode(Player.SPECTATOR);
-        magma.onEntityCollide(player);
+        magma.onEntityStep(player);
         verify(player, times(0)).attack(any());
     }
 
     @Test
-    void onEntityCollide_Player_Sneaking() {
+    void onEntityStep_Player_Sneaking() {
         player.setSneaking(true);
-        magma.onEntityCollide(player);
+        magma.onEntityStep(player);
         verify(player, times(0)).attack(any());
     }
 }
