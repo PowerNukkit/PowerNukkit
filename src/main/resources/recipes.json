@@ -1,5 +1,5 @@
 {
-  "version": 527,
+  "version": 534,
   "recipes": [
     {
       "id": "minecraft:smithingtable_diamond_axe_to_netherite_axe",
@@ -25364,7 +25364,7 @@
       "output": [
         {
           "count": 3,
-          "blockState": "minecraft:mangrove_wood;pillar_axis=y;stripped_bit=0"
+          "blockState": "minecraft:stripped_mangrove_wood;pillar_axis=y"
         }
       ],
       "shape": [
