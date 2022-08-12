@@ -50,7 +50,7 @@ public class EntityPotionLingering extends EntityPotion {
                                 .add(new DoubleTag("", 0))
                                 .add(new DoubleTag("", 0))
                         )
-                        .putShort("PotionId", potionId)
+                        .putShort(NBT_POTION_ID, potionId)
         );
     
         Effect effect = Potion.getEffect(potionId, true);

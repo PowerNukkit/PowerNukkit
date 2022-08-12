@@ -2,14 +2,19 @@ package cn.nukkit.dispenser;
 
 import cn.nukkit.api.PowerNukkitDifference;
 import cn.nukkit.api.PowerNukkitOnly;
+import cn.nukkit.api.Since;
 import cn.nukkit.block.BlockDispenser;
 import cn.nukkit.entity.Entity;
+import cn.nukkit.entity.item.EntityPotion;
 import cn.nukkit.entity.projectile.EntityProjectile;
 import cn.nukkit.item.Item;
+import cn.nukkit.item.ItemID;
 import cn.nukkit.level.Sound;
 import cn.nukkit.math.BlockFace;
 import cn.nukkit.math.Vector3;
 import cn.nukkit.nbt.tag.CompoundTag;
+
+import javax.annotation.Nullable;
 
 /**
  * @author CreeperFace
@@ -28,7 +33,7 @@ public class ProjectileDispenseBehavior extends DefaultDispenseBehavior {
         Vector3 dispensePos = source.getDispensePosition();
 
         CompoundTag nbt = Entity.getDefaultNBT(dispensePos);
-        this.correctNBT(nbt);
+        this.correctNBT(nbt, item);
 
         Entity projectile = Entity.createEntity(getEntityType(), source.level.getChunk(dispensePos.getChunkX(), dispensePos.getChunkZ()), nbt);
 
@@ -71,6 +76,16 @@ public class ProjectileDispenseBehavior extends DefaultDispenseBehavior {
      * @param nbt tag
      */
     protected void correctNBT(CompoundTag nbt) {
+        this.correctNBT(nbt, null);
+    }
 
+    @PowerNukkitOnly
+    @Since("FUTURE")
+    protected void correctNBT(CompoundTag nbt, @Nullable Item item) {
+        if (item != null) {
+            if (item.getId() == ItemID.SPLASH_POTION || item.getId() == ItemID.LINGERING_POTION) {
+                nbt.putInt(EntityPotion.NBT_POTION_ID, item.getDamage());
+            }
+        }
     }
 }

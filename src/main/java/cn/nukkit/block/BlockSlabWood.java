@@ -31,7 +31,7 @@ public class BlockSlabWood extends BlockSlab {
 
     @Override
     public String getName() {
-        return (isOnTop()? "Upper " : "") + getSlabName() + " Wood Slab";
+        return (isOnTop() ? "Upper " : "") + getSlabName() + " Slab";
     }
 
     @PowerNukkitOnly

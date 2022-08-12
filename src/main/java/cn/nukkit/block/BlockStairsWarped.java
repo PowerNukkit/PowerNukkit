@@ -28,7 +28,7 @@ public class BlockStairsWarped extends BlockStairsWood {
 
     @Override
     public String getName() {
-        return "Warped Wood Stairs";
+        return "Warped Stairs";
     }
 
     @Override

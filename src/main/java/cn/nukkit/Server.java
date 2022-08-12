@@ -2418,6 +2418,12 @@ public class Server {
         return name != null && this.operators.exists(name, true);
     }
 
+    @PowerNukkitOnly
+    @Since("FUTURE")
+    public boolean isWaterdogCapable() {
+        return this.getConfig("settings.waterdogpe", false);
+    }
+
     public Config getWhitelist() {
         return whitelist;
     }

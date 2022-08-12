@@ -1,5 +1,5 @@
 {
-  "version": 527,
+  "version": 544,
   "recipes": [
     {
       "id": "minecraft:smithingtable_diamond_axe_to_netherite_axe",
@@ -15903,6 +15903,66 @@
       "priority": 0
     },
     {
+      "id": "minecraft:campfire_from_charcoal_mangrove_log",
+      "type": 1,
+      "input": {
+        "A": {
+          "id": "minecraft:stick",
+          "fuzzy": true
+        },
+        "B": {
+          "id": "minecraft:charcoal",
+          "fuzzy": true
+        },
+        "C": {
+          "fuzzy": true,
+          "blockState": "minecraft:mangrove_log"
+        }
+      },
+      "output": [
+        {
+          "id": "minecraft:campfire"
+        }
+      ],
+      "shape": [
+        " A ",
+        "ABA",
+        "CCC"
+      ],
+      "block": "crafting_table",
+      "priority": 2
+    },
+    {
+      "id": "minecraft:campfire_from_charcoal_mangrove_wood",
+      "type": 1,
+      "input": {
+        "A": {
+          "id": "minecraft:stick",
+          "fuzzy": true
+        },
+        "B": {
+          "id": "minecraft:charcoal",
+          "fuzzy": true
+        },
+        "C": {
+          "fuzzy": true,
+          "blockState": "minecraft:mangrove_wood"
+        }
+      },
+      "output": [
+        {
+          "id": "minecraft:campfire"
+        }
+      ],
+      "shape": [
+        " A ",
+        "ABA",
+        "CCC"
+      ],
+      "block": "crafting_table",
+      "priority": 2
+    },
+    {
       "id": "minecraft:campfire_from_charcoal_stripped_acacia_log",
       "type": 1,
       "input": {
@@ -16051,6 +16111,36 @@
       ],
       "block": "crafting_table",
       "priority": 0
+    },
+    {
+      "id": "minecraft:campfire_from_charcoal_stripped_mangrove_wood",
+      "type": 1,
+      "input": {
+        "A": {
+          "id": "minecraft:stick",
+          "fuzzy": true
+        },
+        "B": {
+          "id": "minecraft:charcoal",
+          "fuzzy": true
+        },
+        "C": {
+          "fuzzy": true,
+          "blockState": "minecraft:stripped_mangrove_wood"
+        }
+      },
+      "output": [
+        {
+          "id": "minecraft:campfire"
+        }
+      ],
+      "shape": [
+        " A ",
+        "ABA",
+        "CCC"
+      ],
+      "block": "crafting_table",
+      "priority": 2
     },
     {
       "id": "minecraft:campfire_from_charcoal_stripped_oak_log",
@@ -25364,7 +25454,7 @@
       "output": [
         {
           "count": 3,
-          "blockState": "minecraft:mangrove_wood;pillar_axis=y;stripped_bit=0"
+          "blockState": "minecraft:stripped_mangrove_wood;pillar_axis=y"
         }
       ],
       "shape": [
@@ -25753,7 +25843,7 @@
       ],
       "output": [
         {
-          "blockState": "minecraft:muddy_mangrove_roots"
+          "blockState": "minecraft:muddy_mangrove_roots;pillar_axis=y"
         }
       ],
       "block": "crafting_table",

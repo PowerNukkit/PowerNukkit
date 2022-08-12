@@ -322,7 +322,13 @@ public class CraftingManager {
                     "minecraft:deepslate",
                     "minecraft:copper",
                     "minecraft:raw_",
-                    "minecraft:pointed_dripstone"
+                    "minecraft:pointed_dripstone",
+                    "minecraft:mud_brick",
+                    "minecraft:mangrove",
+                    "minecraft:stripped_mangrove",
+                    "minecraft:lightning_rod",
+                    "minecraft:mud",
+                    "minecraft:packed_mud"
             ).anyMatch(blockStateId::startsWith)) {
                 return Item.get(BlockID.AIR);
             }

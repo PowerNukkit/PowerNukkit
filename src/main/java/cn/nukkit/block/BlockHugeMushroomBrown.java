@@ -7,10 +7,10 @@ import cn.nukkit.blockproperty.IntBlockProperty;
 import cn.nukkit.item.Item;
 import cn.nukkit.item.ItemBlock;
 import cn.nukkit.item.ItemTool;
-import cn.nukkit.math.NukkitRandom;
 import cn.nukkit.utils.BlockColor;
 
 import javax.annotation.Nonnull;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * @author Pub4Game
@@ -64,15 +64,14 @@ public class BlockHugeMushroomBrown extends BlockSolidMeta {
 
     @Override
     public double getResistance() {
-        return 1;
+        return 0.2;
     }
 
     @Override
     public Item[] getDrops(Item item) {
-        if (new NukkitRandom().nextRange(1, 20) == 0) {
-            return new Item[]{
-                    new ItemBlock(Block.get(BlockID.BROWN_MUSHROOM))
-            };
+        int count = Math.max(0, ThreadLocalRandom.current().nextInt(10) - 7);
+        if (count > 0) {
+            return new Item[]{ new ItemBlock(Block.get(BlockID.BROWN_MUSHROOM), 0, count) };
         } else {
             return Item.EMPTY_ARRAY;
         }

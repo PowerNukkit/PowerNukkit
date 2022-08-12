@@ -70,7 +70,7 @@ public abstract class Food {
             .addChanceEffect(0.8F, Effect.getEffect(Effect.HUNGER).setDuration(30 * 20))
             .addRelative(Item.ROTTEN_FLESH));
     public static final Food spider_eye = registerDefaultFood(new FoodEffective(2, 3.2F)
-            .addEffect(Effect.getEffect(Effect.POISON).setDuration(4 * 20))
+            .addEffect(Effect.getEffect(Effect.POISON).setDuration(5 * 20))
             .addRelative(Item.SPIDER_EYE));
     public static final Food steak = registerDefaultFood(new FoodNormal(8, 12.8F).addRelative(Item.COOKED_BEEF));
     //different kinds of fishes
