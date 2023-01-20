@@ -25,7 +25,7 @@ public enum DyeColor {
     LIGHT_BLUE(12, 3, 12, "Light Blue", BlockColor.LIGHT_BLUE_BLOCK_COLOR, new BlockColor(0x3AB3DA)),
     MAGENTA(13, 2, 13, "Magenta", BlockColor.MAGENTA_BLOCK_COLOR, new BlockColor(0xC74EBD)),
     ORANGE(14, 1, 14, "Orange", BlockColor.ORANGE_BLOCK_COLOR, new BlockColor(0xFF9801)),
-    WHITE(15, 0, 19, "White", "Bone Meal", BlockColor.WHITE_BLOCK_COLOR, new BlockColor(0xF0F0F0));
+    WHITE(15, 0, 19, "White", "White Dye", BlockColor.WHITE_BLOCK_COLOR, new BlockColor(0xF0F0F0));
 
 
     private int dyeColorMeta;
@@ -68,7 +68,7 @@ public enum DyeColor {
 
     /**
      * The {@code minecraft:dye} meta from `0-15` that represents the source of a dye. Includes
-     * ink_sac, bone_meal, cocoa_beans, and lapis_lazuli.
+     * ink_sac, cocoa_beans, and lapis_lazuli.
      */
     public int getDyeData() {
         return this.dyeColorMeta;
@@ -76,7 +76,7 @@ public enum DyeColor {
 
     /**
      * The {@code minecraft:dye} meta that actually represents the item dye for that color.
-     * Uses black_dye instead of ink_sac, white_dye instead of bone_meal, and so on.
+     * Uses black_dye instead of ink_sac and so on.
      */
     @PowerNukkitOnly
     @Since("1.4.0.0-PN")

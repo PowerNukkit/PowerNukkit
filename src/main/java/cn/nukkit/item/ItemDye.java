@@ -78,8 +78,9 @@ public class ItemDye extends Item {
     @Since("1.4.0.0-PN")
     @PowerNukkitOnly
     @Override
+    @Deprecated
     public boolean isFertilizer() {
-        return getId() == DYE && getDyeColor().equals(DyeColor.WHITE);
+        return false;
     }
     
     @Since("1.4.0.0-PN")
