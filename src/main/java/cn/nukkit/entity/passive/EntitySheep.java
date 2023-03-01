@@ -105,16 +105,13 @@ public class EntitySheep extends EntityAnimal {
         this.sheared = true;
         this.setDataFlag(DATA_FLAGS, DATA_FLAG_SHEARED, true);
 
-        this.level.dropItem(this, Item.get(Item.WOOL, getColor(), ThreadLocalRandom.current().nextInt(2) + 1));
+        this.level.dropItem(this, Item.get(Item.WOOL, getColor(), ThreadLocalRandom.current().nextInt(0, 3) + 1));
         return true;
     }
 
     @Override
     public Item[] getDrops() {
-        if (this.lastDamageCause instanceof EntityDamageByEntityEvent) {
-            return new Item[]{Item.get(((this.isOnFire()) ? Item.COOKED_MUTTON : Item.RAW_MUTTON)), Item.get(Item.WOOL, getColor(), 1)};
-        }
-        return Item.EMPTY_ARRAY;
+        return new Item[]{Item.get(((this.isOnFire()) ? Item.COOKED_MUTTON : Item.RAW_MUTTON)), Item.get(Item.WOOL, getColor(), !this.getDataFlag(DATA_FLAGS, DATA_FLAG_SHEARED) ? 1 : 0)};
     }
 
     public void setColor(int color) {
