@@ -59,7 +59,7 @@ public class ObjectSwampTree extends TreeGenerator {
                 BlockVector3 down = position.down();
                 int block = worldIn.getBlockIdAt(down.x, down.y, down.z);
 
-                if ((block == Block.GRASS || block == Block.DIRT) && position.getY() < 256 - i - 1) {
+                if ((block == BlockID.GRASS || block == BlockID.DIRT) && position.getY() < 256 - i - 1) {
                     this.setDirtAt(worldIn, down);
 
                     for (int k1 = position.getY() - 3 + i; k1 <= position.getY() + i; ++k1) {
@@ -76,7 +76,7 @@ public class ObjectSwampTree extends TreeGenerator {
                                     BlockVector3 blockpos = new BlockVector3(j3, k1, i4);
                                     int id = worldIn.getBlockIdAt(blockpos.x, blockpos.y, blockpos.z);
 
-                                    if (id == Block.AIR || id == Block.LEAVES || id == Block.VINE) {
+                                    if (id == BlockID.AIR || id == BlockID.LEAVES || id == BlockID.VINE) {
                                         this.setBlockAndNotifyAdequately(worldIn, blockpos, this.metaLeaves);
                                     }
                                 }
@@ -88,7 +88,7 @@ public class ObjectSwampTree extends TreeGenerator {
                         BlockVector3 up = position.up(l1);
                         int id = worldIn.getBlockIdAt(up.x, up.y, up.z);
 
-                        if (id == Block.AIR || id == Block.LEAVES || id == Block.WATER || id == Block.STILL_WATER) {
+                        if (id == BlockID.AIR || id == BlockID.LEAVES || id == BlockID.FLOWING_WATER || id == BlockID.STILL_WATER) {
                             this.setBlockAndNotifyAdequately(worldIn, up, this.metaWood);
                         }
                     }
@@ -102,25 +102,25 @@ public class ObjectSwampTree extends TreeGenerator {
                             for (int j4 = position.getZ() - i3; j4 <= position.getZ() + i3; ++j4) {
                                 pos2.setComponents(l3, i2, j4);
 
-                                if (worldIn.getBlockIdAt(pos2.x, pos2.y, pos2.z) == Block.LEAVES) {
+                                if (worldIn.getBlockIdAt(pos2.x, pos2.y, pos2.z) == BlockID.LEAVES) {
                                     BlockVector3 blockpos2 = pos2.west();
                                     BlockVector3 blockpos3 = pos2.east();
                                     BlockVector3 blockpos4 = pos2.north();
                                     BlockVector3 blockpos1 = pos2.south();
 
-                                    if (rand.nextBoundedInt(4) == 0 && worldIn.getBlockIdAt(blockpos2.x, blockpos2.y, blockpos2.z) == Block.AIR) {
+                                    if (rand.nextBoundedInt(4) == 0 && worldIn.getBlockIdAt(blockpos2.x, blockpos2.y, blockpos2.z) == BlockID.AIR) {
                                         this.addHangingVine(worldIn, blockpos2, 8);
                                     }
 
-                                    if (rand.nextBoundedInt(4) == 0 && worldIn.getBlockIdAt(blockpos3.x, blockpos3.y, blockpos3.z) == Block.AIR) {
+                                    if (rand.nextBoundedInt(4) == 0 && worldIn.getBlockIdAt(blockpos3.x, blockpos3.y, blockpos3.z) == BlockID.AIR) {
                                         this.addHangingVine(worldIn, blockpos3, 2);
                                     }
 
-                                    if (rand.nextBoundedInt(4) == 0 && worldIn.getBlockIdAt(blockpos4.x, blockpos4.y, blockpos4.z) == Block.AIR) {
+                                    if (rand.nextBoundedInt(4) == 0 && worldIn.getBlockIdAt(blockpos4.x, blockpos4.y, blockpos4.z) == BlockID.AIR) {
                                         this.addHangingVine(worldIn, blockpos4, 1);
                                     }
 
-                                    if (rand.nextBoundedInt(4) == 0 && worldIn.getBlockIdAt(blockpos1.x, blockpos1.y, blockpos1.z) == Block.AIR) {
+                                    if (rand.nextBoundedInt(4) == 0 && worldIn.getBlockIdAt(blockpos1.x, blockpos1.y, blockpos1.z) == BlockID.AIR) {
                                         this.addHangingVine(worldIn, blockpos1, 4);
                                     }
                                 }
@@ -145,7 +145,7 @@ public class ObjectSwampTree extends TreeGenerator {
         this.addVine(worldIn, pos, meta);
         int i = 4;
 
-        for (pos = pos.down(); i > 0 && worldIn.getBlockIdAt(pos.x, pos.y, pos.z) == Block.AIR; --i) {
+        for (pos = pos.down(); i > 0 && worldIn.getBlockIdAt(pos.x, pos.y, pos.z) == BlockID.AIR; --i) {
             this.addVine(worldIn, pos, meta);
             pos = pos.down();
         }

@@ -7,6 +7,7 @@ public class BlockBlueIce extends BlockIcePacked {
 
     @PowerNukkitOnly
     public BlockBlueIce() {
+        // Does nothing
     }
     
     @Override

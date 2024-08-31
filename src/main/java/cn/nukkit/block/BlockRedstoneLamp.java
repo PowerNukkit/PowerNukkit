@@ -21,6 +21,7 @@ import javax.annotation.Nullable;
 public class BlockRedstoneLamp extends BlockSolid implements RedstoneComponent {
 
     public BlockRedstoneLamp() {
+        // Does nothing
     }
 
     @Override

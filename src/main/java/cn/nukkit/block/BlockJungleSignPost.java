@@ -8,6 +8,7 @@ import cn.nukkit.item.ItemJungleSign;
 public class BlockJungleSignPost extends BlockSignPost {
     @PowerNukkitOnly
     public BlockJungleSignPost() {
+        // Does nothing
     }
 
     @PowerNukkitOnly

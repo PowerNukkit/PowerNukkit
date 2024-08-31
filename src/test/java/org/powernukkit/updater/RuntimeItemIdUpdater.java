@@ -76,7 +76,7 @@ public class RuntimeItemIdUpdater {
         }
 
         try (FileWriter writer = new FileWriter("src/main/resources/runtime_item_ids.json");
-            BufferedWriter bufferedWriter = new BufferedWriter(writer)
+             BufferedWriter bufferedWriter = new BufferedWriter(writer)
         ) {
             gson.toJson(runtimeItems, LIST, bufferedWriter);
         }

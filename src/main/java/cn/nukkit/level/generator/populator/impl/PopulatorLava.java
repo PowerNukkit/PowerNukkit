@@ -1,6 +1,7 @@
 package cn.nukkit.level.generator.populator.impl;
 
 import cn.nukkit.block.Block;
+import cn.nukkit.block.BlockID;
 import cn.nukkit.level.ChunkManager;
 import cn.nukkit.level.format.FullChunk;
 import cn.nukkit.level.generator.populator.type.Populator;
@@ -34,9 +35,9 @@ public class PopulatorLava extends Populator {
                 int x = random.nextRange(0, 15);
                 int z = random.nextRange(0, 15);
                 int y = this.getHighestWorkableBlock(chunk, x, z);
-                if (y != -1 && chunk.getBlockId(x, y, z) == Block.AIR) {
-                    chunk.setBlock(x, y, z, Block.LAVA);
-                    chunk.setBlockLight(x, y, z, Block.getLightLevel(Block.LAVA));
+                if (y != -1 && chunk.getBlockId(x, y, z) == BlockID.AIR) {
+                    chunk.setBlock(x, y, z, BlockID.LAVA);
+                    chunk.setBlockLight(x, y, z, Block.getLightLevel(BlockID.LAVA));
                     this.lavaSpread(bx + x, y, bz + z);
                 }
             }
@@ -83,7 +84,7 @@ public class PopulatorLava extends Populator {
                 if (decay < 0) {
                     this.level.setBlockAt(x, y, z, 0);
                 } else {
-                    this.level.setBlockAt(x, y, z, Block.LAVA, decay);
+                    this.level.setBlockAt(x, y, z, BlockID.FLOWING_LAVA, decay);
                     this.lavaSpread(x, y, z);
                     return;
                 }
@@ -120,15 +121,15 @@ public class PopulatorLava extends Populator {
     }
 
     private void flowIntoBlock(int x, int y, int z, int newFlowDecay) {
-        if (this.level.getBlockIdAt(x, y, z) == Block.AIR) {
-            this.level.setBlockAt(x, y, z, Block.LAVA, newFlowDecay);
+        if (this.level.getBlockIdAt(x, y, z) == BlockID.AIR) {
+            this.level.setBlockAt(x, y, z, BlockID.FLOWING_LAVA, newFlowDecay);
             this.lavaSpread(x, y, z);
         }
     }
 
     private boolean canFlowInto(int x, int y, int z) {
         int id = this.level.getBlockIdAt(x, y, z);
-        return id == Block.AIR || id == Block.LAVA || id == Block.STILL_LAVA;
+        return id == BlockID.AIR || id == BlockID.FLOWING_LAVA || id == BlockID.STILL_LAVA;
     }
 
     private int calculateFlowCost(int xx, int yy, int zz, int accumulatedCost, int previousDirection) {
@@ -221,7 +222,7 @@ public class PopulatorLava extends Populator {
         int y;
         for (y = 127; y >= 0; y--) {
             int b = chunk.getBlockId(x, y, z);
-            if (b == Block.AIR) {
+            if (b == BlockID.AIR) {
                 break;
             }
         }

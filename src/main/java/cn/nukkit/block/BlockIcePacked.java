@@ -12,6 +12,7 @@ import cn.nukkit.item.ItemTool;
 public class BlockIcePacked extends BlockIce {
 
     public BlockIcePacked() {
+        // Does nothing
     }
 
     @Override

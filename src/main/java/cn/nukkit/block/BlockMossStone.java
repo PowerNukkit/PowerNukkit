@@ -10,6 +10,7 @@ import cn.nukkit.item.ItemTool;
 public class BlockMossStone extends BlockSolid {
 
     public BlockMossStone() {
+        // Does nothing
     }
 
     @Override
@@ -19,7 +20,7 @@ public class BlockMossStone extends BlockSolid {
 
     @Override
     public int getId() {
-        return MOSS_STONE;
+        return MOSSY_COBBLESTONE;
     }
 
     @Override

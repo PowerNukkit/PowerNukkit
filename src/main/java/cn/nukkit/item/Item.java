@@ -35,6 +35,7 @@ import javax.annotation.Nonnull;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UncheckedIOException;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Modifier;
 import java.nio.ByteOrder;
 import java.util.*;
@@ -415,15 +416,34 @@ public class Item implements Cloneable, BlockID, ItemID {
             list[RECORD_PIGSTEP] = ItemRecordPigstep.class; //759
             list[NETHER_SPROUTS] = ItemNetherSprouts.class; //760
 
+            list[AMETHYST_SHARD] = ItemAmethystShard.class; //771
             list[SPYGLASS] = ItemSpyglass.class; //772
 
             list[SOUL_CAMPFIRE] = ItemCampfireSoul.class; //801
+
+            list[GLOW_ITEM_FRAME] = ItemItemFrameGlow.class; //850
 
             for (int i = 0; i < 256; ++i) {
                 if (Block.list[i] != null) {
                     list[i] = Block.list[i];
                 }
             }
+
+            RuntimeItemMapping runtimeMapping = RuntimeItems.getRuntimeMapping();
+            for (@SuppressWarnings("unchecked") Class<Item> aClass : list) {
+                if (!Item.class.equals(aClass)) {
+                    continue;
+                }
+                try {
+                    Constructor<Item> constructor = aClass.getConstructor();
+                    Item item = constructor.newInstance();
+                    runtimeMapping.registerNamespacedIdItem(item.getNamespaceId(), constructor);
+                } catch (Exception e) {
+                    log.warn("Failed to cache the namespaced id resolution of the item {}", aClass, e);
+                }
+            }
+
+            //runtimeMapping.registerNamespacedIdItem(ItemStringHere.class);
         }
 
         initCreativeItems();
@@ -471,7 +491,7 @@ public class Item implements Cloneable, BlockID, ItemID {
                     addCreativeItem(item);
                 }
             } catch (Exception e) {
-                log.error("Error while registering a creative item", e);
+                log.error("Error while registering a creative item {}", map, e);
             }
         }
     }
@@ -484,11 +504,23 @@ public class Item implements Cloneable, BlockID, ItemID {
             String blockStateId = data.get("blockState").toString();
             // TODO Remove this when the support is added to these blocks
             if (Stream.of(
-                    "minecraft:candle",
-                    "minecraft:deepslate",
-                    "minecraft:cracked_deepslate_bricks",
-                    "minecraft:cracked_deepslate_tiles",
-                    "minecraft:smooth_basalt"
+                    "minecraft:smooth_basalt",
+                    "minecraft:azalea_leaves",
+                    "minecraft:amethyst_cluster",
+                    "minecraft:moss_carpet",
+                    "minecraft:moss_block",
+                    "minecraft:pointed_dripstone",
+                    "minecraft:dirt_with_roots",
+                    "minecraft:small_dripleaf",
+                    "minecraft:big_dripleaf",
+                    "minecraft:spore_blossom",
+                    "minecraft:budding_amethyst",
+                    "minecraft:sculk_sensor",
+                    "minecraft:glow_lichen",
+                    "minecraft:small_amethyst_bud",
+                    "minecraft:medium_amethyst_bud",
+                    "minecraft:large_amethyst_bud",
+                    "minecraft:lightning_rod"
             ).anyMatch(blockStateId::startsWith)) {
                 return null;
             }
@@ -496,7 +528,7 @@ public class Item implements Cloneable, BlockID, ItemID {
                 // TODO Remove this when the support is added to these blocks
                 String[] stateParts = blockStateId.split(";", 2);
                 Integer blockId = BlockStateRegistry.getBlockId(stateParts[0]);
-                if (blockId != null && blockId > BlockID.QUARTZ_BRICKS) {
+                if (blockId != null && blockId > BlockID.INFESTED_DEEPSLATE) {
                     return Item.getBlock(BlockID.AIR);
                 }
 
@@ -530,10 +562,6 @@ public class Item implements Cloneable, BlockID, ItemID {
             int meta = Utils.toInt(data.get("damage"));
             item = fromString(id + ":" + meta);
         } else if (data.containsKey("blockRuntimeId")) {
-            Integer blockId = BlockStateRegistry.getBlockId(id);
-            if (blockId == null || blockId > BlockID.QUARTZ_BRICKS) { //TODO Remove this after the support is added
-                return null;
-            }
             int blockRuntimeId = -1;
             try {
                 blockRuntimeId = ((Number) data.get("blockRuntimeId")).intValue();
@@ -543,6 +571,8 @@ public class Item implements Cloneable, BlockID, ItemID {
                 } else {
                     log.warn("Block state not found for the creative item {} with runtimeId {}", id, blockRuntimeId);
                 }
+            } catch (BlockPropertyNotFoundException e) {
+                log.warn("The block {} (runtime id:{}) is not supported yet!", id, blockRuntimeId);
             } catch (Throwable e) {
                 log.error("Error loading the creative item {} with runtimeId {}", id, blockRuntimeId, e);
                 return null;
@@ -853,6 +883,18 @@ public class Item implements Cloneable, BlockID, ItemID {
 
     public boolean hasCompoundTag() {
         return this.tags != null && this.tags.length > 0;
+    }
+
+    @PowerNukkitOnly
+    @Since("FUTURE")
+    public boolean hasCustomCompoundTag() {
+        return hasCompoundTag();
+    }
+
+    @PowerNukkitOnly
+    @Since("FUTURE")
+    public byte[] getCustomCompoundTag() {
+        return getCompoundTag();
     }
 
     public boolean hasCustomBlockData() {
@@ -1261,7 +1303,7 @@ public class Item implements Cloneable, BlockID, ItemID {
     }
 
     public boolean isNull() {
-        return this.count <= 0 || this.id == AIR;
+        return this.count <= 0 || this.id == AIR || this.id == STRING_IDENTIFIED_ITEM && !(this instanceof StringItem);
     }
 
     final public String getName() {
@@ -1463,7 +1505,11 @@ public class Item implements Cloneable, BlockID, ItemID {
 
     @Override
     final public String toString() {
-        return "Item " + this.name + " (" + this.id + ":" + (!this.hasMeta ? "?" : this.meta) + ")x" + this.count + (this.hasCompoundTag() ? " tags:0x" + Binary.bytesToHexString(this.getCompoundTag()) : "");
+        return "Item " + this.name +
+                " (" + (this instanceof StringItem? this.getNamespaceId() :this.id)
+                + ":" + (!this.hasMeta ? "?" : this.meta)
+                + ")x" + this.count
+                + (this.hasCustomCompoundTag() ? " tags:0x" + Binary.bytesToHexString(this.getCustomCompoundTag()) : "");
     }
 
     public int getDestroySpeed(Block block, Player player) {

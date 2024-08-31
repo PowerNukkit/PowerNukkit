@@ -1,6 +1,7 @@
 package cn.nukkit.level.generator.populator.impl;
 
 import cn.nukkit.block.Block;
+import cn.nukkit.block.BlockID;
 import cn.nukkit.level.ChunkManager;
 import cn.nukkit.level.format.FullChunk;
 import cn.nukkit.level.generator.populator.type.Populator;
@@ -160,8 +161,8 @@ public class PopulatorRavines extends Populator {
                             continue;
                         if (localY < this.worldHeightCap) {
                             int materialAtPosition = generatingChunkBuffer.getBlockId(localX, localY, localZ);
-                            if (materialAtPosition == Block.WATER
-                                    || materialAtPosition == Block.STILL_WATER) {
+                            if (materialAtPosition == BlockID.FLOWING_WATER
+                                    || materialAtPosition == BlockID.STILL_WATER) {
                                 i4 = 1;
                             }
                             if ((localY != maxY - 1) && (localX != k) && (localX != m - 1) && (localZ != i2) && (localZ != i3 - 1))
@@ -182,11 +183,11 @@ public class PopulatorRavines extends Populator {
                             double d11 = ((localY - 1) + 0.5D - paramDouble2) / d4;
                             if ((d9 * d9 + d10 * d10) * this.a[localY - 1] + d11 * d11 / 6.0D < 1.0D) {
                                 int material = generatingChunkBuffer.getBlockId(localX, localY, localZ);
-                                if (material == Block.GRASS) {
+                                if (material == BlockID.GRASS) {
                                     if (localY - 1 < 10) {
-                                        generatingChunkBuffer.setBlock(localX, localY, localZ, Block.LAVA);
+                                        generatingChunkBuffer.setBlock(localX, localY, localZ, BlockID.FLOWING_LAVA);
                                     } else {
-                                        generatingChunkBuffer.setBlock(localX, localY, localZ, Block.AIR);
+                                        generatingChunkBuffer.setBlock(localX, localY, localZ, BlockID.AIR);
                                     }
                                 }
                             }

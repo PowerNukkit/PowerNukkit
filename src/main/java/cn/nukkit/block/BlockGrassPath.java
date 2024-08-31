@@ -20,6 +20,7 @@ import javax.annotation.Nonnull;
 public class BlockGrassPath extends BlockGrass {
 
     public BlockGrassPath() {
+        // Does nothing
     }
 
     @Override

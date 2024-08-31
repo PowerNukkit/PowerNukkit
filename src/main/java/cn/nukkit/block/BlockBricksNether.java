@@ -12,6 +12,7 @@ import cn.nukkit.utils.BlockColor;
 public class BlockBricksNether extends BlockSolid {
 
     public BlockBricksNether() {
+        // Does nothing
     }
 
     @Override
@@ -21,7 +22,7 @@ public class BlockBricksNether extends BlockSolid {
 
     @Override
     public int getId() {
-        return NETHER_BRICKS;
+        return NETHER_BRICK_BLOCK;
     }
 
     @Override

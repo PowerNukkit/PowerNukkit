@@ -9,6 +9,7 @@ import cn.nukkit.utils.BlockColor;
 public class BlockSnow extends BlockSolid {
 
     public BlockSnow() {
+        // Does nothing
     }
 
     @Override

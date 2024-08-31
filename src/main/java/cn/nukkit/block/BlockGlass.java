@@ -9,6 +9,7 @@ import cn.nukkit.utils.BlockColor;
 public class BlockGlass extends BlockTransparent {
 
     public BlockGlass() {
+        // Does nothing
     }
 
     @Override
@@ -23,7 +24,7 @@ public class BlockGlass extends BlockTransparent {
 
     @Override
     public double getResistance() {
-        return 1.5;
+        return 0.3;
     }
 
     @Override

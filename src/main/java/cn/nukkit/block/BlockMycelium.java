@@ -21,6 +21,7 @@ import javax.annotation.Nonnull;
 public class BlockMycelium extends BlockSolid {
 
     public BlockMycelium() {
+        // Does nothing
     }
 
     @Override

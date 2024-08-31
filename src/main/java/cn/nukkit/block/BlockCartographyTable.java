@@ -14,6 +14,7 @@ public class BlockCartographyTable extends BlockSolid {
 
     @PowerNukkitOnly
     public BlockCartographyTable() {
+        // Does nothing
     }
 
     @Override

@@ -13,6 +13,7 @@ import cn.nukkit.item.ItemTool;
 public class BlockObsidianGlowing extends BlockSolid {
 
     public BlockObsidianGlowing() {
+        // Does nothing
     }
 
     @Override

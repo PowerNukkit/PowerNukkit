@@ -11,6 +11,7 @@ import cn.nukkit.utils.BlockColor;
 public class BlockGlassPane extends BlockThin {
 
     public BlockGlassPane() {
+        // Does nothing
     }
     
     @Override

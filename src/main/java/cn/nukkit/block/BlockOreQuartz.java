@@ -16,6 +16,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class BlockOreQuartz extends BlockSolid {
 
     public BlockOreQuartz() {
+        // Does nothing
     }
 
     @Override

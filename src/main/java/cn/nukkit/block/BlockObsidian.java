@@ -13,6 +13,7 @@ import cn.nukkit.utils.BlockColor;
 public class BlockObsidian extends BlockSolid {
 
     public BlockObsidian() {
+        // Does nothing
     }
 
     @Override

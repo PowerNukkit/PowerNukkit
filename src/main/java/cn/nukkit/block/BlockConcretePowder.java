@@ -4,6 +4,7 @@ import cn.nukkit.Player;
 import cn.nukkit.api.PowerNukkitDifference;
 import cn.nukkit.api.PowerNukkitOnly;
 import cn.nukkit.api.Since;
+import cn.nukkit.block.BlockID;
 import cn.nukkit.blockproperty.BlockProperties;
 import cn.nukkit.blockproperty.CommonBlockProperties;
 import cn.nukkit.item.Item;
@@ -73,8 +74,8 @@ public class BlockConcretePowder extends BlockFallableMeta {
 
             for (int side = 1; side <= 5; side++) {
                 Block block = this.getSide(BlockFace.fromIndex(side));
-                if (block.getId() == Block.WATER || block.getId() == Block.STILL_WATER) {
-                    this.level.setBlock(this, Block.get(Block.CONCRETE, getDamage()), true, true);
+                if (block.getId() == BlockID.FLOWING_WATER || block.getId() == BlockID.STILL_WATER) {
+                    this.level.setBlock(this, Block.get(BlockID.CONCRETE, getDamage()), true, true);
                 }
             }
 
@@ -89,14 +90,14 @@ public class BlockConcretePowder extends BlockFallableMeta {
 
         for (int side = 1; side <= 5; side++) {
             Block block = this.getSide(BlockFace.fromIndex(side));
-            if (block.getId() == Block.WATER || block.getId() == Block.STILL_WATER) {
+            if (block.getId() == BlockID.FLOWING_WATER || block.getId() == BlockID.STILL_WATER) {
                 concrete = true;
                 break;
             }
         }
 
         if (concrete) {
-            this.level.setBlock(this, Block.get(Block.CONCRETE, this.getDamage()), true, true);
+            this.level.setBlock(this, Block.get(BlockID.CONCRETE, this.getDamage()), true, true);
         } else {
             this.level.setBlock(this, this, true, true);
         }

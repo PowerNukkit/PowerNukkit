@@ -12,7 +12,9 @@ import cn.nukkit.utils.BlockColor;
  */
 public class BlockAir extends BlockTransparent {
 
-    public BlockAir() {}
+    public BlockAir() {
+        // Does nothing
+    }
 
     @Override
     public int getId() {

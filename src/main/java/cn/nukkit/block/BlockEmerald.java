@@ -11,6 +11,7 @@ import cn.nukkit.utils.BlockColor;
 public class BlockEmerald extends BlockSolid {
 
     public BlockEmerald() {
+        // Does nothing
     }
 
     @Override

@@ -13,6 +13,7 @@ public class BlockNetherSprout extends BlockRoots {
     @PowerNukkitOnly
     @Since("1.4.0.0-PN")
     public BlockNetherSprout() {
+        // Does nothing
     }
 
     @Override

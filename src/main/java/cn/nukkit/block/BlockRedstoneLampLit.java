@@ -14,6 +14,7 @@ import cn.nukkit.utils.RedstoneComponent;
 public class BlockRedstoneLampLit extends BlockRedstoneLamp implements RedstoneComponent {
 
     public BlockRedstoneLampLit() {
+        // Does nothing
     }
 
     @Override

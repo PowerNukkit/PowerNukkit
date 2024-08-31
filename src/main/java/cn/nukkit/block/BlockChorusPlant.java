@@ -16,6 +16,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class BlockChorusPlant extends BlockTransparent {
 
     public BlockChorusPlant() {
+        // Does nothing
     }
 
     @Override

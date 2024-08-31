@@ -9,7 +9,7 @@ public class BlockHoneycombBlock extends BlockSolid {
 
     @PowerNukkitOnly
     public BlockHoneycombBlock() {
-
+        // Does nothing
     }
 
     @Override

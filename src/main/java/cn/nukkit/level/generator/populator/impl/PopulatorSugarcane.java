@@ -1,6 +1,7 @@
 package cn.nukkit.level.generator.populator.impl;
 
 import cn.nukkit.block.Block;
+import cn.nukkit.block.BlockID;
 import cn.nukkit.level.Level;
 import cn.nukkit.level.format.FullChunk;
 import cn.nukkit.level.generator.populator.helper.EnsureBelow;
@@ -19,7 +20,7 @@ public class PopulatorSugarcane extends PopulatorSurfaceBlock {
         for (int i = x - 4; i < (x + 4); i++) {
             for (int j = z - 4; j < (z + 4); j++) {
                 int b = level.getBlockIdAt(i, y, j);
-                if (b == Block.WATER || b == Block.STILL_WATER) {
+                if (b == BlockID.FLOWING_WATER || b == BlockID.STILL_WATER) {
                     count++;
                 }
                 if (count > 10) {
@@ -37,6 +38,6 @@ public class PopulatorSugarcane extends PopulatorSurfaceBlock {
 
     @Override
     protected int getBlockId(int x, int z, NukkitRandom random, FullChunk chunk) {
-        return (SUGARCANE_BLOCK << Block.DATA_BITS) | 1;
+        return (REEDS << Block.DATA_BITS) | 1;
     }
 }

@@ -11,6 +11,7 @@ public class BlockLapis extends BlockSolid {
 
 
     public BlockLapis() {
+        // Does nothing
     }
 
     @Override

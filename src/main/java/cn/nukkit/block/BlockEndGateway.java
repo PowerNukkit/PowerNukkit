@@ -10,6 +10,7 @@ import cn.nukkit.utils.BlockColor;
 public class BlockEndGateway extends BlockSolid {
 
     public BlockEndGateway() {
+        // Does nothing
     }
 
     @Override

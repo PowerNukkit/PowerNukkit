@@ -9,6 +9,7 @@ public class BlockFletchingTable extends BlockSolid {
 
     @PowerNukkitOnly
     public BlockFletchingTable() {
+        // Does nothing
     }
 
     @Override

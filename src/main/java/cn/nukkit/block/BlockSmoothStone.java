@@ -8,6 +8,7 @@ public class BlockSmoothStone extends BlockSolid {
 
     @PowerNukkitOnly
     public BlockSmoothStone() {
+        // Does nothing
     }
     
     @Override

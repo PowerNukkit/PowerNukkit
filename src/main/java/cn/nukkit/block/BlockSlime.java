@@ -11,6 +11,7 @@ import cn.nukkit.utils.BlockColor;
 public class BlockSlime extends BlockSolid {
 
     public BlockSlime() {
+        // Does nothing
     }
 
     @Override

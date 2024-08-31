@@ -8,6 +8,7 @@ import cn.nukkit.item.ItemSpruceSign;
 public class BlockSpruceSignPost extends BlockSignPost {
     @PowerNukkitOnly
     public BlockSpruceSignPost() {
+        // Does nothing
     }
 
     @PowerNukkitOnly

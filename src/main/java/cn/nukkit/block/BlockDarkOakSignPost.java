@@ -8,6 +8,7 @@ import cn.nukkit.item.ItemDarkOakSign;
 public class BlockDarkOakSignPost extends BlockSignPost {
     @PowerNukkitOnly
     public BlockDarkOakSignPost() {
+        // Does nothing
     }
 
     @PowerNukkitOnly

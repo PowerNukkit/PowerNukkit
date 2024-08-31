@@ -19,6 +19,7 @@ import static cn.nukkit.math.VectorMath.calculateFace;
 public abstract class BlockThin extends BlockTransparent implements BlockConnectable {
 
     protected BlockThin() {
+        // Does nothing
     }
 
     @Override

@@ -8,6 +8,7 @@ public class BlockDriedKelpBlock extends BlockSolid {
 
     @PowerNukkitOnly
     public BlockDriedKelpBlock() {
+        // Does nothing
     }
     
     @Override

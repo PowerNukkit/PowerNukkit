@@ -15,6 +15,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class BlockDragonEgg extends BlockFallable {
 
     public BlockDragonEgg() {
+        // Does nothing
     }
 
     @Override

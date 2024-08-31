@@ -11,6 +11,7 @@ public class BlockGold extends BlockSolid {
 
 
     public BlockGold() {
+        // Does nothing
     }
 
     @Override

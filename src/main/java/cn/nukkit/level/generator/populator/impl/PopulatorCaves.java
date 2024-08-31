@@ -1,6 +1,7 @@
 package cn.nukkit.level.generator.populator.impl;
 
 import cn.nukkit.block.Block;
+import cn.nukkit.block.BlockID;
 import cn.nukkit.level.ChunkManager;
 import cn.nukkit.level.biome.Biome;
 import cn.nukkit.level.biome.EnumBiome;
@@ -159,7 +160,7 @@ public class PopulatorCaves extends Populator {
                     for (int yy = yTo + 1; (!waterFound) && (yy >= yFrom - 1); yy--) {
                         if (yy >= 0 && yy < this.worldHeightCap) {
                             int block = chunk.getBlockId(xx, yy, zz);
-                            if (block == Block.WATER || block == Block.STILL_WATER) {
+                            if (block == BlockID.FLOWING_WATER || block == BlockID.STILL_WATER) {
                                 waterFound = true;
                             }
                             if ((yy != yFrom - 1) && (xx != xFrom) && (xx != xTo - 1) && (zz != zFrom) && (zz != zTo - 1))
@@ -191,20 +192,20 @@ public class PopulatorCaves extends Populator {
 
                                 int material = chunk.getBlockId(xx, yy, zz);
                                 int materialAbove = chunk.getBlockId(xx, yy + 1, zz);
-                                if (material == Block.GRASS || material == Block.MYCELIUM) {
+                                if (material == BlockID.GRASS || material == BlockID.MYCELIUM) {
                                     grassFound = true;
                                 }
                                 //TODO: check this
 //								if (this.isSuitableBlock(material, materialAbove, biome))
                                 {
                                     if (yy - 1 < 10) {
-                                        chunk.setBlock(xx, yy, zz, Block.LAVA);
+                                        chunk.setBlock(xx, yy, zz, BlockID.FLOWING_LAVA);
                                     } else {
-                                        chunk.setBlock(xx, yy, zz, Block.AIR);
+                                        chunk.setBlock(xx, yy, zz, BlockID.AIR);
 
                                         // If grass was just deleted, try to
                                         // move it down
-                                        if (grassFound && (chunk.getBlockId(xx, yy - 1, zz) == Block.DIRT)) {
+                                        if (grassFound && (chunk.getBlockId(xx, yy - 1, zz) == BlockID.DIRT)) {
                                             chunk.setFullBlockId(xx, yy - 1, zz, ((CoveredBiome) biome).getSurfaceId(xx, yy - 1, zz));
                                         }
                                     }

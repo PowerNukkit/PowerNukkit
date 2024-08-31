@@ -44,6 +44,7 @@ public class BlockTNT extends BlockSolid implements RedstoneComponent {
     public static final BlockProperties PROPERTIES = new BlockProperties(EXPLODE_ON_BREAK, ALLOW_UNDERWATER);
 
     public BlockTNT() {
+        // Does nothing
     }
 
     @Override

@@ -17,6 +17,7 @@ import java.util.Random;
 public class BlockMelon extends BlockSolid {
 
     public BlockMelon() {
+        // Does nothing
     }
 
     @Override

@@ -13,6 +13,7 @@ import cn.nukkit.utils.BlockColor;
 public class BlockIronBars extends BlockThin {
 
     public BlockIronBars() {
+        // Does nothing
     }
 
     @Override

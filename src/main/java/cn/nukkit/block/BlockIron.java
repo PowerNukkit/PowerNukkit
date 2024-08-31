@@ -11,6 +11,7 @@ public class BlockIron extends BlockSolid {
 
 
     public BlockIron() {
+        // Does nothing
     }
 
     @Override

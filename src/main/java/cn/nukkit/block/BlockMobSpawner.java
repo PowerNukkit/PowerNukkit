@@ -11,6 +11,7 @@ import cn.nukkit.item.ItemTool;
 public class BlockMobSpawner extends BlockSolid {
 
     public BlockMobSpawner() {
+        // Does nothing
     }
 
     @Override
@@ -20,7 +21,7 @@ public class BlockMobSpawner extends BlockSolid {
 
     @Override
     public int getId() {
-        return MONSTER_SPAWNER;
+        return MOB_SPAWNER;
     }
 
     @Override

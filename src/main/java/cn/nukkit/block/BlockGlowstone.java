@@ -14,6 +14,7 @@ import java.util.Random;
  */
 public class BlockGlowstone extends BlockTransparent {
     public BlockGlowstone() {
+        // Does nothing
     }
 
     @Override
@@ -23,7 +24,7 @@ public class BlockGlowstone extends BlockTransparent {
 
     @Override
     public int getId() {
-        return GLOWSTONE_BLOCK;
+        return GLOWSTONE;
     }
 
     @Override

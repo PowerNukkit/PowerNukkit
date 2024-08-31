@@ -14,6 +14,7 @@ import cn.nukkit.nbt.tag.*;
 public abstract class BlockFallable extends BlockSolid {
 
     protected BlockFallable() {
+        // Does nothing
     }
 
     @Override

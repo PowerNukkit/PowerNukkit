@@ -8,6 +8,7 @@ import cn.nukkit.item.ItemBirchSign;
 public class BlockBirchSignPost extends BlockSignPost {
     @PowerNukkitOnly
     public BlockBirchSignPost() {
+        // Does nothing
     }
 
     @PowerNukkitOnly

@@ -79,16 +79,16 @@
       "blockState": "minecraft:polished_blackstone_brick_wall"
     },
     {
-      "blockState": "minecraft:cobbled_deepslate_wall;wall_connection_type_east=none;wall_connection_type_north=none;wall_connection_type_south=none;wall_connection_type_west=none;wall_post_bit=0"
+      "blockState": "minecraft:cobbled_deepslate_wall"
     },
     {
-      "blockState": "minecraft:deepslate_tile_wall;wall_connection_type_east=none;wall_connection_type_north=none;wall_connection_type_south=none;wall_connection_type_west=none;wall_post_bit=0"
+      "blockState": "minecraft:deepslate_tile_wall"
     },
     {
-      "blockState": "minecraft:polished_deepslate_wall;wall_connection_type_east=none;wall_connection_type_north=none;wall_connection_type_south=none;wall_connection_type_west=none;wall_post_bit=0"
+      "blockState": "minecraft:polished_deepslate_wall"
     },
     {
-      "blockState": "minecraft:deepslate_brick_wall;wall_connection_type_east=none;wall_connection_type_north=none;wall_connection_type_south=none;wall_connection_type_west=none;wall_post_bit=0"
+      "blockState": "minecraft:deepslate_brick_wall"
     },
     {
       "blockState": "minecraft:mud_brick_wall;wall_connection_type_east=none;wall_connection_type_north=none;wall_connection_type_south=none;wall_connection_type_west=none;wall_post_bit=0"
@@ -262,40 +262,40 @@
       "blockState": "minecraft:polished_blackstone_brick_stairs"
     },
     {
-      "blockState": "minecraft:cut_copper_stairs;upside_down_bit=0;weirdo_direction=0"
+      "blockState": "minecraft:cut_copper_stairs"
     },
     {
-      "blockState": "minecraft:exposed_cut_copper_stairs;upside_down_bit=0;weirdo_direction=0"
+      "blockState": "minecraft:exposed_cut_copper_stairs"
     },
     {
-      "blockState": "minecraft:weathered_cut_copper_stairs;upside_down_bit=0;weirdo_direction=0"
+      "blockState": "minecraft:weathered_cut_copper_stairs"
     },
     {
-      "blockState": "minecraft:oxidized_cut_copper_stairs;upside_down_bit=0;weirdo_direction=0"
+      "blockState": "minecraft:oxidized_cut_copper_stairs"
     },
     {
-      "blockState": "minecraft:waxed_cut_copper_stairs;upside_down_bit=0;weirdo_direction=0"
+      "blockState": "minecraft:waxed_cut_copper_stairs"
     },
     {
-      "blockState": "minecraft:waxed_exposed_cut_copper_stairs;upside_down_bit=0;weirdo_direction=0"
+      "blockState": "minecraft:waxed_exposed_cut_copper_stairs"
     },
     {
-      "blockState": "minecraft:waxed_weathered_cut_copper_stairs;upside_down_bit=0;weirdo_direction=0"
+      "blockState": "minecraft:waxed_weathered_cut_copper_stairs"
     },
     {
-      "blockState": "minecraft:waxed_oxidized_cut_copper_stairs;upside_down_bit=0;weirdo_direction=0"
+      "blockState": "minecraft:waxed_oxidized_cut_copper_stairs"
     },
     {
-      "blockState": "minecraft:cobbled_deepslate_stairs;upside_down_bit=0;weirdo_direction=0"
+      "blockState": "minecraft:cobbled_deepslate_stairs"
     },
     {
-      "blockState": "minecraft:deepslate_tile_stairs;upside_down_bit=0;weirdo_direction=0"
+      "blockState": "minecraft:deepslate_tile_stairs"
     },
     {
-      "blockState": "minecraft:polished_deepslate_stairs;upside_down_bit=0;weirdo_direction=0"
+      "blockState": "minecraft:polished_deepslate_stairs"
     },
     {
-      "blockState": "minecraft:deepslate_brick_stairs;upside_down_bit=0;weirdo_direction=0"
+      "blockState": "minecraft:deepslate_brick_stairs"
     },
     {
       "blockState": "minecraft:mud_brick_stairs;upside_down_bit=0;weirdo_direction=0"
@@ -595,40 +595,40 @@
       "blockState": "minecraft:polished_blackstone_brick_slab"
     },
     {
-      "blockState": "minecraft:cut_copper_slab;top_slot_bit=0"
+      "blockState": "minecraft:cut_copper_slab"
     },
     {
-      "blockState": "minecraft:exposed_cut_copper_slab;top_slot_bit=0"
+      "blockState": "minecraft:exposed_cut_copper_slab"
     },
     {
-      "blockState": "minecraft:weathered_cut_copper_slab;top_slot_bit=0"
+      "blockState": "minecraft:weathered_cut_copper_slab"
     },
     {
-      "blockState": "minecraft:oxidized_cut_copper_slab;top_slot_bit=0"
+      "blockState": "minecraft:oxidized_cut_copper_slab"
     },
     {
-      "blockState": "minecraft:waxed_cut_copper_slab;top_slot_bit=0"
+      "blockState": "minecraft:waxed_cut_copper_slab"
     },
     {
-      "blockState": "minecraft:waxed_exposed_cut_copper_slab;top_slot_bit=0"
+      "blockState": "minecraft:waxed_exposed_cut_copper_slab"
     },
     {
-      "blockState": "minecraft:waxed_weathered_cut_copper_slab;top_slot_bit=0"
+      "blockState": "minecraft:waxed_weathered_cut_copper_slab"
     },
     {
-      "blockState": "minecraft:waxed_oxidized_cut_copper_slab;top_slot_bit=0"
+      "blockState": "minecraft:waxed_oxidized_cut_copper_slab"
     },
     {
-      "blockState": "minecraft:cobbled_deepslate_slab;top_slot_bit=0"
+      "blockState": "minecraft:cobbled_deepslate_slab"
     },
     {
-      "blockState": "minecraft:polished_deepslate_slab;top_slot_bit=0"
+      "blockState": "minecraft:polished_deepslate_slab"
     },
     {
-      "blockState": "minecraft:deepslate_tile_slab;top_slot_bit=0"
+      "blockState": "minecraft:deepslate_tile_slab"
     },
     {
-      "blockState": "minecraft:deepslate_brick_slab;top_slot_bit=0"
+      "blockState": "minecraft:deepslate_brick_slab"
     },
     {
       "blockState": "minecraft:mud_brick_slab;top_slot_bit=0"
@@ -1282,7 +1282,7 @@
       "blockState": "minecraft:blackstone"
     },
     {
-      "blockState": "minecraft:deepslate;pillar_axis=y"
+      "blockState": "minecraft:deepslate"
     },
     {
       "blockState": "minecraft:stone;stone_type=granite_smooth"
@@ -1927,7 +1927,7 @@
       "blockState": "minecraft:monster_egg;monster_egg_stone_type=chiseled_stone_brick"
     },
     {
-      "blockState": "minecraft:infested_deepslate;pillar_axis=y"
+      "blockState": "minecraft:infested_deepslate"
     },
     {
       "blockState": "minecraft:dragon_egg"
@@ -3323,55 +3323,55 @@
       "blockState": "minecraft:soul_lantern"
     },
     {
-      "blockState": "minecraft:candle;candles=0;lit=0"
+      "blockState": "minecraft:candle"
     },
     {
-      "blockState": "minecraft:white_candle;candles=0;lit=0"
+      "blockState": "minecraft:white_candle"
     },
     {
-      "blockState": "minecraft:orange_candle;candles=0;lit=0"
+      "blockState": "minecraft:orange_candle"
     },
     {
-      "blockState": "minecraft:magenta_candle;candles=0;lit=0"
+      "blockState": "minecraft:magenta_candle"
     },
     {
-      "blockState": "minecraft:light_blue_candle;candles=0;lit=0"
+      "blockState": "minecraft:light_blue_candle"
     },
     {
-      "blockState": "minecraft:yellow_candle;candles=0;lit=0"
+      "blockState": "minecraft:yellow_candle"
     },
     {
-      "blockState": "minecraft:lime_candle;candles=0;lit=0"
+      "blockState": "minecraft:lime_candle"
     },
     {
-      "blockState": "minecraft:pink_candle;candles=0;lit=0"
+      "blockState": "minecraft:pink_candle"
     },
     {
-      "blockState": "minecraft:gray_candle;candles=0;lit=0"
+      "blockState": "minecraft:gray_candle"
     },
     {
-      "blockState": "minecraft:light_gray_candle;candles=0;lit=0"
+      "blockState": "minecraft:light_gray_candle"
     },
     {
-      "blockState": "minecraft:cyan_candle;candles=0;lit=0"
+      "blockState": "minecraft:cyan_candle"
     },
     {
-      "blockState": "minecraft:purple_candle;candles=0;lit=0"
+      "blockState": "minecraft:purple_candle"
     },
     {
       "blockState": "minecraft:blue_candle"
     },
     {
-      "blockState": "minecraft:brown_candle;candles=0;lit=0"
+      "blockState": "minecraft:brown_candle"
     },
     {
-      "blockState": "minecraft:green_candle;candles=0;lit=0"
+      "blockState": "minecraft:green_candle"
     },
     {
-      "blockState": "minecraft:red_candle;candles=0;lit=0"
+      "blockState": "minecraft:red_candle"
     },
     {
-      "blockState": "minecraft:black_candle;candles=0;lit=0"
+      "blockState": "minecraft:black_candle"
     },
     {
       "blockState": "minecraft:crafting_table"
@@ -3602,7 +3602,7 @@
       "id": "minecraft:frame"
     },
     {
-      "blockState": "minecraft:glow_frame"
+      "id": "minecraft:glow_frame"
     },
     {
       "id": "minecraft:honey_bottle"

@@ -15,6 +15,7 @@ public class BlockSmithingTable extends BlockSolid {
 
     @PowerNukkitOnly
     public BlockSmithingTable() {
+        // Does nothing
     }
 
     @Override

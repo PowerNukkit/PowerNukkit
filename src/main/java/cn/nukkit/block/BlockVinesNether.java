@@ -35,6 +35,7 @@ public abstract class BlockVinesNether extends BlockTransparentMeta {
     @PowerNukkitOnly
     @Since("1.4.0.0-PN")
     public BlockVinesNether() {
+        // Does nothing
     }
 
     /**

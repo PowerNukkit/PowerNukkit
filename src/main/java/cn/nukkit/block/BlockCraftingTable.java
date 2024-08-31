@@ -15,6 +15,7 @@ import javax.annotation.Nullable;
  */
 public class BlockCraftingTable extends BlockSolid {
     public BlockCraftingTable() {
+        // Does nothing
     }
 
     @Override
@@ -24,7 +25,7 @@ public class BlockCraftingTable extends BlockSolid {
 
     @Override
     public int getId() {
-        return WORKBENCH;
+        return CRAFTING_TABLE;
     }
 
     @Override

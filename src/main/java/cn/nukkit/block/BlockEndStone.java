@@ -11,6 +11,7 @@ import cn.nukkit.utils.BlockColor;
 public class BlockEndStone extends BlockSolid {
 
     public BlockEndStone() {
+        // Does nothing
     }
 
     @Override

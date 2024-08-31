@@ -13,7 +13,7 @@ public abstract class BlockMeta extends Block {
      */
     @PowerNukkitOnly
     @Since("1.4.0.0-PN")
-    protected BlockMeta(){
+    protected BlockMeta() {
         // Does nothing
     }
 

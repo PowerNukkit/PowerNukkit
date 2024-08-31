@@ -13,6 +13,7 @@ public class BlockBarrier extends BlockSolid {
 
     @PowerNukkitOnly
     public BlockBarrier() {
+        // Does nothing
     }
 
     @Override

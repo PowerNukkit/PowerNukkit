@@ -20,6 +20,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class BlockNetherrack extends BlockSolid {
 
     public BlockNetherrack() {
+        // Does nothing
     }
 
     @Override

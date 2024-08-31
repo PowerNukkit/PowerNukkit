@@ -8,6 +8,7 @@ import cn.nukkit.item.ItemAcaciaSign;
 public class BlockAcaciaSignPost extends BlockSignPost {
     @PowerNukkitOnly
     public BlockAcaciaSignPost() {
+        // Does nothing
     }
 
     @PowerNukkitOnly

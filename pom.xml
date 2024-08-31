@@ -121,10 +121,14 @@
             </exclusions>
         </dependency>
         <dependency>
-            <groupId>org.powernukkit.fastutil</groupId>
-            <artifactId>fastutil-lite</artifactId>
-            <version>8.1.1</version>
-            <scope>compile</scope>
+            <groupId>it.unimi.dsi</groupId>
+            <artifactId>fastutil-core</artifactId>
+            <version>8.5.4</version>
+        </dependency>
+        <dependency>
+            <groupId>it.unimi.dsi</groupId>
+            <artifactId>fastutil-extra</artifactId>
+            <version>8.5.4</version>
         </dependency>
         <dependency>
             <groupId>org.powernukkit</groupId>
@@ -391,6 +395,7 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.22.2</version>
                 <configuration>
+                    <argLine>-Dfile.encoding=UTF-8</argLine>
                     <skipTests>${skipTests}</skipTests>
                     <trimStackTrace>false</trimStackTrace>
                 </configuration>
